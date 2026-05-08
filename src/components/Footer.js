@@ -1,5 +1,20 @@
 import React from 'react';
 
+const scrollTo = (e, id) => {
+  e.preventDefault();
+  const el = document.querySelector(id);
+  if (el) window.scrollTo({ top: el.offsetTop - 72, behavior: 'smooth' });
+};
+
+const quickLinks = [
+  ['#about',      'About'],
+  ['#experience', 'Experience'],
+  ['#projects',   'Projects'],
+  ['#patent',     'Achievements'],
+  ['#writing',    'Writing'],
+  ['#contact',    'Contact'],
+];
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -15,12 +30,11 @@ const Footer = () => {
           <div className="footer-links">
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="#about">About</a></li>
-              <li><a href="#experience">Experience</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#patent">Achievements</a></li>
-              <li><a href="#writing">Writing</a></li>
-              <li><a href="#contact">Contact</a></li>
+              {quickLinks.map(([id, label]) => (
+                <li key={id}>
+                  <a href={id} onClick={(e) => scrollTo(e, id)}>{label}</a>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="footer-social">
@@ -38,7 +52,7 @@ const Footer = () => {
               <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" aria-label="HuggingFace" style={{fontSize:'16px'}}>
                 🤗
               </a>
-              <a href="mailto:madbala@iu.edu" aria-label="Email" target="_blank" rel="noopener noreferrer">
+              <a href="mailto:madbala@iu.edu" aria-label="Email">
                 <i className="fas fa-envelope"></i>
               </a>
             </div>
@@ -54,4 +68,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

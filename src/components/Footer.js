@@ -3,7 +3,7 @@ import React from 'react';
 const scrollTo = (e, id) => {
   e.preventDefault();
   const el = document.querySelector(id);
-  if (el) window.scrollTo({ top: el.offsetTop - 72, behavior: 'smooth' });
+  if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
 };
 
 const quickLinks = [

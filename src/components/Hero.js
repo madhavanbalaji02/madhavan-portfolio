@@ -44,8 +44,12 @@ const Hero = () => (
               <i className="fab fa-github"></i> GitHub
             </a>
             <span className="hero-sep">·</span>
-            <a href="mailto:madbala@iu.edu" className="hero-link">
-              <i className="fas fa-envelope"></i> madbala@iu.edu
+            <a href="https://medium.com/@madhavanbalaji02" target="_blank" rel="noopener noreferrer" className="hero-link">
+              <i className="fab fa-medium"></i> Medium
+            </a>
+            <span className="hero-sep">·</span>
+            <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" className="hero-link">
+              🤗 HuggingFace
             </a>
             <span className="hero-location">Indianapolis, IN</span>
           </div>

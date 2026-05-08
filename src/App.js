@@ -5,6 +5,7 @@ import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Patent from './components/Patent';
+import Writing from './components/Writing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
@@ -53,6 +54,7 @@ function App() {
         <Experience />
         <Projects />
         <Patent />
+        <Writing />
         <Contact />
         <Footer />
         <BackToTop />

@@ -19,6 +19,7 @@ const Footer = () => {
               <li><a href="#experience">Experience</a></li>
               <li><a href="#projects">Projects</a></li>
               <li><a href="#patent">Achievements</a></li>
+              <li><a href="#writing">Writing</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
@@ -30,6 +31,12 @@ const Footer = () => {
               </a>
               <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <i className="fab fa-linkedin"></i>
+              </a>
+              <a href="https://medium.com/@madhavanbalaji02" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+                <i className="fab fa-medium"></i>
+              </a>
+              <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" aria-label="HuggingFace" style={{fontSize:'16px'}}>
+                🤗
               </a>
               <a href="mailto:madbala@iu.edu" aria-label="Email" target="_blank" rel="noopener noreferrer">
                 <i className="fas fa-envelope"></i>

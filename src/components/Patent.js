@@ -59,12 +59,6 @@ const Patent = () => {
                 <span>Automated Medication Management</span>
               </div>
             </div>
-            <div className="patent-actions">
-              <a href="https://github.com/madhavanbalaji02/madhavan-portfolio/blob/main/patent.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                <i className="fas fa-file-pdf"></i>
-                <span>View Patent Document</span>
-              </a>
-            </div>
           </div>
         </div>
       </div>

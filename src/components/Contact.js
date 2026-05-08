@@ -47,40 +47,40 @@ const Contact = () => {
             <h3>Let's Connect</h3>
             <p>Feel free to reach out through any of these channels. I typically respond within 24 hours.</p>
             <div className="contact-items">
-              <div className="contact-item">
+              <a className="contact-item" href="mailto:madbala@iu.edu" target="_blank" rel="noopener noreferrer">
                 <div className="contact-icon">
                   <i className="fas fa-envelope"></i>
                 </div>
                 <div className="contact-details">
                   <h4>Email</h4>
-                  <a href="mailto:madbala@iu.edu" target="_blank" rel="noopener noreferrer">madbala@iu.edu</a>
+                  <span>madbala@iu.edu</span>
                 </div>
-              </div>
-              <div className="contact-item">
+              </a>
+              <a className="contact-item" href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer">
                 <div className="contact-icon">
                   <i className="fab fa-linkedin"></i>
                 </div>
                 <div className="contact-details">
                   <h4>LinkedIn</h4>
-                  <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer">Connect with me</a>
+                  <span>Connect with me</span>
                 </div>
-              </div>
-              <div className="contact-item">
+              </a>
+              <a className="contact-item" href="https://github.com/madhavanbalaji02" target="_blank" rel="noopener noreferrer">
                 <div className="contact-icon">
                   <i className="fab fa-github"></i>
                 </div>
                 <div className="contact-details">
                   <h4>GitHub</h4>
-                  <a href="https://github.com/madhavanbalaji02" target="_blank" rel="noopener noreferrer">View my code</a>
+                  <span>View my code</span>
                 </div>
-              </div>
-              <div className="contact-item">
+              </a>
+              <a className="contact-item" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                 <div className="contact-icon">
                   <i className="fas fa-file-pdf"></i>
                 </div>
                 <div className="contact-details">
                   <h4>Resume</h4>
-                  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Download PDF</a>
+                  <span>Download PDF</span>
                 </div>
               </div>
             </div>

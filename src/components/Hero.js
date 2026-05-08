@@ -54,6 +54,7 @@ const Hero = () => (
         <div className="hero-profile">
           <div className="hero-img-wrap">
             <img src={process.env.PUBLIC_URL + '/profile.jpg'} alt="Madhavan Balaji" />
+            <div className="hero-img-badge">AI Engineer</div>
           </div>
           <div className="hero-stack">
             {['PyTorch','LangGraph','FastAPI','Docker','K8s','PostgreSQL'].map(t => (

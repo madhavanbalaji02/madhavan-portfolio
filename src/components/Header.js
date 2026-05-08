@@ -52,7 +52,13 @@ const Header = () => {
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container">
           <div className="navbar-brand">
-            <a href="#home" onClick={(e) => navTo(e, '#home')}>MB</a>
+            <a href="#home" onClick={(e) => navTo(e, '#home')} className="navbar-logo-link">
+              <img
+                src={process.env.PUBLIC_URL + '/favicon.svg'}
+                alt="Madhavan Balaji"
+                className="navbar-favicon"
+              />
+            </a>
           </div>
 
           <ul className="navbar-nav desktop-nav">

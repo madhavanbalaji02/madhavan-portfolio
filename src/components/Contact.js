@@ -82,7 +82,7 @@ const Contact = () => {
                   <h4>Resume</h4>
                   <span>Download PDF</span>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
           <div className="contact-form-wrapper fade-in-up">

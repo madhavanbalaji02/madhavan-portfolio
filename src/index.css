@@ -917,7 +917,7 @@ button { font-family: var(--font-body); cursor: pointer; }
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
-  height: 480px;
+  min-height: 320px;
   border: 1px solid var(--border);
 }
 .patent-img {
@@ -947,6 +947,55 @@ button { font-family: var(--font-body); cursor: pointer; }
   opacity: 1; background: rgba(1,22,29,0.6);
 }
 .patent-pdf-overlay i { font-size: 1.8rem; color: var(--gold); }
+
+.patent-pdf-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    background: linear-gradient(145deg, #0a1f2e 0%, #0d2633 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 40px 32px;
+}
+.patent-pdf-card:hover {
+    background: linear-gradient(145deg, #0d2633 0%, #14364a 100%);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-4px);
+}
+.patent-pdf-icon {
+    width: 80px; height: 80px;
+    background: var(--grad-gold);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; color: #01161d;
+}
+.patent-pdf-info {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px; text-align: center;
+}
+.patent-pdf-title {
+    font-size: 15px; font-weight: 700;
+    color: var(--text-primary); letter-spacing: 0.5px;
+}
+.patent-pdf-sub {
+    font-size: 12px; color: var(--text-muted);
+}
+.patent-pdf-cta {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 24px;
+    background: var(--grad-gold);
+    border-radius: 50px;
+    font-size: 13px; font-weight: 700;
+    color: #01161d;
+    margin-top: 8px;
+}
 
 .patent-badge {
   position: absolute; top: 14px; left: 14px;

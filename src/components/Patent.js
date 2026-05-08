@@ -15,17 +15,19 @@ const Patent = () => {
               href="https://github.com/madhavanbalaji02/madhavan-portfolio/blob/main/patent.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="patent-pdf-link"
+              className="patent-pdf-card"
             >
-              <iframe
-                src="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/madhavanbalaji02/madhavan-portfolio/main/patent.pdf&embedded=true"
-                title="Patent Document"
-                className="patent-pdf-embed"
-                frameBorder="0"
-              />
-              <div className="patent-pdf-overlay">
-                <i className="fas fa-external-link-alt"></i>
-                <span>Open Full PDF</span>
+              <div className="patent-pdf-icon">
+                <i className="fas fa-file-pdf"></i>
+              </div>
+              <div className="patent-pdf-info">
+                <span className="patent-pdf-title">Application No. 202341075614</span>
+                <span className="patent-pdf-sub">Government of India — Patent Office</span>
+                <span className="patent-pdf-sub">Filed: 2023 · Status: Published</span>
+              </div>
+              <div className="patent-pdf-cta">
+                <i className="fas fa-arrow-up-right-from-square"></i>
+                <span>Open PDF</span>
               </div>
             </a>
             <div className="patent-badge">

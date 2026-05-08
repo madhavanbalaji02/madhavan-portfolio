@@ -39,7 +39,7 @@ const Header = () => {
             <li><a href="#about" onClick={(e) => handleNavClick(e, '#about')}>About</a></li>
             <li><a href="#experience" onClick={(e) => handleNavClick(e, '#experience')}>Experience</a></li>
             <li><a href="#projects" onClick={(e) => handleNavClick(e, '#projects')}>Projects</a></li>
-            <li><a href="#stats" onClick={(e) => handleNavClick(e, '#stats')}>Achievements</a></li>
+            <li><a href="#patent" onClick={(e) => handleNavClick(e, '#patent')}>Achievements</a></li>
             <li><a href="#contact" onClick={(e) => handleNavClick(e, '#contact')}>Contact</a></li>
           </ul>
           <button

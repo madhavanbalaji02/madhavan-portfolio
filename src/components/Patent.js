@@ -12,7 +12,7 @@ const Patent = () => {
         <div className="patent fade-in-up">
           <div className="patent-image-wrapper">
             <a
-              href="https://github.com/madhavanbalaji02/madhavan-portfolio/blob/main/patent.pdf"
+              href="/patent.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="patent-pdf-card"

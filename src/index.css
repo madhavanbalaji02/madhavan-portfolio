@@ -247,7 +247,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .proj-card-header{height:auto;padding:clamp(14px,2vw,20px) clamp(14px,2vw,20px) 0;display:flex;justify-content:space-between;align-items:flex-start;background:none}
 .proj-cat-icon{font-size:18px;color:var(--t3);transition:color 0.2s}
 .proj-card:hover .proj-cat-icon{color:var(--gold)}
-.proj-lang-badge{position:static;font-family:var(--font-mono);font-size:10px;color:var(--t3);background:none;display:flex;align-items:center;gap:4px;border:1px solid var(--border);border-radius:3px;padding:2px 7px;white-space:nowrap}
+.proj-lang-badge{position:static;font-family:var(--font-mono);font-size:10px;color:var(--t1);background:rgba(255,255,255,0.06);display:flex;align-items:center;gap:4px;border:1px solid var(--border-hi);border-radius:3px;padding:2px 7px;white-space:nowrap}
 .proj-lang-badge i{font-size:9px}
 .proj-card-body{flex:1;padding:clamp(10px,1.5vw,14px) clamp(14px,2vw,20px) clamp(14px,2vw,20px);display:flex;flex-direction:column;gap:7px}
 .proj-title{font-size:clamp(12px,1.5vw,14px);font-weight:700;color:var(--t1);line-height:1.3}

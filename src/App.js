@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -10,40 +11,9 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import BackToTop from './components/BackToTop';
+import ProjectDetail from './components/ProjectDetail';
 
-function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    // Add smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    // Add page transition class
-    document.body.classList.add('page-transition');
-
-    // Performance optimization: Preload critical resources
-    const preloadLinks = [
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: true }
-    ];
-
-    preloadLinks.forEach(link => {
-      const linkElement = document.createElement('link');
-      Object.keys(link).forEach(key => {
-        linkElement[key] = link[key];
-      });
-      document.head.appendChild(linkElement);
-    });
-  }, []);
-
+function MainPage({ loading }) {
   return (
     <>
       {loading && <Loader />}
@@ -63,5 +33,27 @@ function App() {
   );
 }
 
-export default App;
+function App() {
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    document.body.classList.add('page-transition');
+  }, []);
+
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<MainPage loading={loading} />} />
+        <Route path="/project/:projectId" element={<ProjectDetail />} />
+      </Routes>
+    </HashRouter>
+  );
+}
+
+export default App;

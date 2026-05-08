@@ -33,7 +33,7 @@ const Header = () => {
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container">
           <div className="navbar-brand">
-            <a href="#home">Madhavan Balaji</a>
+            <a href="#home">mb<span style={{color:'var(--gold)'}}>.</span>dev</a>
           </div>
           <ul className={`navbar-nav ${isMenuOpen ? 'show' : ''}`} id="navbar-nav">
             <li><a href="#about" onClick={(e) => handleNavClick(e, '#about')}>About</a></li>

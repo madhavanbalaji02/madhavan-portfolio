@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Madhavan Balaji - Data Scientist, AI/ML Engineer, and IoT Developer. Explore innovative projects in machine learning, deep learning, and IoT solutions.">
+    <meta name="keywords" content="Data Scientist, Machine Learning, AI, Deep Learning, IoT, Python, Portfolio">
+    <meta name="author" content="Madhavan Balaji">
+    <title>Madhavan Balaji | Data Scientist & AI/ML Engineer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-inner"></div>
+            <div class="loader-text">Loading Portfolio...</div>
+        </div>
+    </div>
+    <!-- Top Bar with Social Icons -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="social-icons">
+                <a href="mailto:madbala@iu.edu" class="icon"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/your-linkedin-id" target="_blank" class="icon"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/madhavanbalaji02" target="_blank" class="icon"><i
+                        class="fab fa-github"></i></a>
+                <a href="Madhavan Resume.pdf" target="_blank" class="icon"><i class="fas fa-file"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="#">Madhavan Balaji</a>
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#stats">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">&#9776;</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-badge fade-in">
+                <span class="pulse-dot"></span>
+                <span>Available for new projects</span>
+            </div>
+            <h1 class="hero-title fade-in-up">
+                Building the <br>
+                <span class="text-gradient">Future of AI</span>
+            </h1>
+            <p class="hero-subtitle fade-in-up delay-1">
+                Madhavan Balaji &mdash; Data Scientist & AI/ML Engineer. <br>
+                Crafting intelligent solutions with deep learning and IoT.
+            </p>
+            <div class="hero-buttons fade-in-up delay-2">
+                <a href="#projects" class="btn btn-primary">
+                    View Work <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-tag">About Me</span>
+                <h2 class="section-title">Crafting <span class="text-gradient">Intelligence</span></h2>
+                <p class="section-subtitle">Passionate about leveraging data science and AI to create meaningful impact
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text glass-card fade-in-up">
+                    <h3>Who I Am</h3>
+                    <p>I'm <strong>Madhavan Balaji</strong>, a dedicated Data Scientist and AI/ML Engineer. My journey
+                        in technology is driven by a relentless curiosity to solve complex real-world challenges using
+                        the power of data.</p>
+                    <p>From healthcare diagnostics to smart agriculture, I build systems that don't just work—they
+                        think. My expertise spans the full AI lifecycle, from raw data to deployed intelligent systems.
+                    </p>
+
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">6+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Patent</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Tech Stack</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-wrapper fade-in-up delay-1">
+                    <div class="skill-card glass-card">
+                        <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                        <h4>AI & Deep Learning</h4>
+                        <p>TensorFlow, PyTorch, ViT, Scikit-learn</p>
+                    </div>
+                    <div class="skill-card glass-card">
+                        <div class="skill-icon"><i class="fas fa-server"></i></div>
+                        <h4>MLOps & Cloud</h4>
+                        <p>Docker, Kubernetes, GCP, Jenkins, ArgoCD</p>
+                    </div>
+                    <div class="skill-card glass-card">
+                        <div class="skill-icon"><i class="fas fa-database"></i></div>
+                        <h4>Data Engineering</h4>
+                        <p>SQL, PostgreSQL, Redis, Airflow, DVC</p>
+                    </div>
+                    <div class="skill-card glass-card">
+                        <div class="skill-icon"><i class="fas fa-code"></i></div>
+                        <h4>Development</h4>
+                        <p>Python, C/C++, FastAPI, Flask, Git</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Featured <span class="text-gradient">Innovations</span></h2>
+                <p class="section-subtitle">A showcase of technical excellence and creative problem solving</p>
+            </div>
+
+            <div class="project-filter fade-in-up">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ml">AI/ML</button>
+                <button class="filter-btn" data-filter="iot">IoT</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Project 1: Parkinson's (Large) -->
+                <div class="bento-item large fade-in-up" data-category="ml">
+                    <div class="bento-content">
+                        <div class="bento-image">
+                            <img src="par.jpeg" alt="Parkinson's Detection">
+                            <div class="bento-overlay">
+                                <div class="bento-text">
+                                    <h3>Parkinson's Detection AI</h3>
+                                    <p>Early diagnosis using Deep Learning</p>
+                                    <a href="#" class="btn-link">View Details <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Agriculture (Medium) -->
+                <div class="bento-item medium fade-in-up delay-1" data-category="iot">
+                    <div class="bento-content">
+                        <div class="bento-image">
+                            <img src="agri.jpg" alt="Smart Agriculture">
+                            <div class="bento-overlay">
+                                <div class="bento-text">
+                                    <h3>Smart Agriculture</h3>
+                                    <p>IoT & AI for sustainable farming</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Ambulance (Medium) -->
+                <div class="bento-item medium fade-in-up delay-2" data-category="web">
+                    <div class="bento-content">
+                        <div class="bento-image">
+                            <img src="ambu.jpg" alt="Ambulance Booking">
+                            <div class="bento-overlay">
+                                <div class="bento-text">
+                                    <h3>AMPCONEKT</h3>
+                                    <p>Emergency response platform</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Movie Rec (Small) -->
+                <div class="bento-item small fade-in-up" data-category="ml">
+                    <div class="bento-content">
+                        <div class="bento-image">
+                            <img src="movie.webp" alt="Movie Recommendation">
+                            <div class="bento-overlay">
+                                <div class="bento-text">
+                                    <h3>Movie Rec Engine</h3>
+                                    <p>Personalized suggestions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Waste (Small) -->
+                <div class="bento-item small fade-in-up delay-1" data-category="iot">
+                    <div class="bento-content">
+                        <div class="bento-image">
+                            <img src="waste.jpg" alt="Waste Management">
+                            <div class="bento-overlay">
+                                <div class="bento-text">
+                                    <h3>Smart Waste</h3>
+                                    <p>Automated segregation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: Care-Mate (Wide) -->
+                <div class="bento-item wide fade-in-up delay-2" data-category="iot">
+                    <div class="bento-content">
+                        <div class="bento-image">
+                            <img src="elder.jpg" alt="Care-Mate">
+                            <div class="bento-overlay">
+                                <div class="bento-text">
+                                    <h3>Care-Mate</h3>
+                                    <p>Elderly support companion with emotion detection</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Experience</span>
+                <h2 class="section-title">Professional Journey</h2>
+                <p class="section-subtitle">Building expertise through innovative projects and research</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <h3>Data Scientist & AI/ML Engineer</h3>
+                        <p class="timeline-company">Independent Projects & Research</p>
+                        <p>Leading development of innovative AI/ML solutions including healthcare diagnostics, smart
+                            agriculture systems, and IoT-based applications. Published research papers and secured
+                            patents for breakthrough technologies.</p>
+                        <ul class="timeline-skills">
+                            <li>Machine Learning</li>
+                            <li>Deep Learning</li>
+                            <li>IoT Development</li>
+                            <li>Research & Innovation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <h3>Project Development & Research</h3>
+                        <p class="timeline-company">Academic & Personal Projects</p>
+                        <p>Developed multiple full-stack applications and ML models, including ambulance booking
+                            systems, recommendation engines, and waste management solutions. Transformed research into
+                            published papers and patent applications.</p>
+                        <ul class="timeline-skills">
+                            <li>Full-Stack Development</li>
+                            <li>Data Science</li>
+                            <li>Python Programming</li>
+                            <li>System Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="section stats-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Achievements</span>
+                <h2 class="section-title">By The Numbers</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item fade-in-up">
+                    <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">Innovative Projects</div>
+                    <div class="stat-description">Completed with excellence</div>
+                </div>
+                <div class="stat-item fade-in-up">
+                    <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="stat-number" data-target="1">0</div>
+                    <div class="stat-label">Patents Filed</div>
+                    <div class="stat-description">Breakthrough innovations</div>
+                </div>
+                <div class="stat-item fade-in-up">
+                    <div class="stat-icon"><i class="fas fa-code"></i></div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Technologies Mastered</div>
+                    <div class="stat-description">Cutting-edge tools</div>
+                </div>
+                <div class="stat-item fade-in-up">
+                    <div class="stat-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Innovation Driven</div>
+                    <div class="stat-description">Always pushing boundaries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patent Section -->
+    <section id="patent" class="section patent-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Innovation</span>
+                <h2 class="section-title">Patent & Research</h2>
+                <p class="section-subtitle">Breakthrough solutions making a real impact</p>
+            </div>
+            <div class="patent fade-in-up">
+                <div class="patent-image-wrapper">
+                    <img src="elder.jpg" alt="Caremate - Integrated Elderly Support System" class="patent-img">
+                    <div class="patent-badge">
+                        <i class="fas fa-certificate"></i>
+                        <span>Patent Filed</span>
+                    </div>
+                </div>
+                <div class="patent-details">
+                    <h3>Caremate - Integrated Elderly Support System</h3>
+                    <p class="patent-description">A comprehensive IoT-based solution designed to enhance the quality of
+                        life for elderly individuals through intelligent health monitoring, emotion detection, and
+                        emotional support systems.</p>
+                    <div class="patent-features">
+                        <div class="feature-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Real-time Health Monitoring</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-smile"></i>
+                            <span>AI-Powered Emotion Detection</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-robot"></i>
+                            <span>Intelligent Support Chatbot</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-pills"></i>
+                            <span>Automated Medication Management</span>
+                        </div>
+                    </div>
+                    <div class="patent-actions">
+                        <a href="patent.pdf" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>View Patent Document</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-wrapper glass-card fade-in-up">
+                <div class="contact-content">
+                    <div class="section-header text-left">
+                        <span class="section-tag">Get In Touch</span>
+                        <h2 class="section-title">Let's Build the <span class="text-gradient">Future</span></h2>
+                        <p class="section-subtitle">Have a project in mind? Let's collaborate.</p>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email Me</h4>
+                                <a href="mailto:madbala@iu.edu">madbala@iu.edu</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                            <div>
+                                <h4>LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/your-linkedin-id" target="_blank">Connect with
+                                    me</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-github"></i></div>
+                            <div>
+                                <h4>GitHub</h4>
+                                <a href="https://github.com/madhavanbalaji02" target="_blank">View Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Madhavan Balaji</h3>
+                    <p>Data Scientist & AI/ML Engineer</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/madhavanbalaji02" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/your-linkedin-id" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="mailto:madbala@iu.edu"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2024</span> Madhavan Balaji. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

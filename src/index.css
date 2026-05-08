@@ -135,7 +135,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 /* ================================================================
    HERO
    ================================================================ */
-.hero-bento{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,10vw,120px) 0 clamp(60px,8vw,100px);position:relative;background:var(--bg);overflow:hidden}
+.hero-bento{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(72px,10vh,110px) 0 clamp(56px,8vw,96px);position:relative;background:var(--bg);overflow:hidden}
 .hero-bento::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
 .hero-bento::after{content:'';position:absolute;top:10%;right:0;width:1px;height:55%;background:linear-gradient(to bottom,transparent,var(--border-warm),transparent)}
 #particles-canvas{display:none}
@@ -418,7 +418,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .hamburger{display:flex}
   .desktop-nav{display:none}
 
-  .hero-bento{min-height:auto;padding-top:28px;padding-bottom:48px}
+  .hero-bento{min-height:auto;padding-top:24px;padding-bottom:40px}
   /* Photo hidden on mobile — user request */
   .hero-profile{display:none}
   .hero-content{order:1}

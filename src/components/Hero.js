@@ -64,6 +64,9 @@ const Hero = () => (
             <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" className="hero-link">
               <span>🤗</span><span>HF</span>
             </a>
+            <a href="mailto:madbala@iu.edu" className="hero-link">
+              <i className="fas fa-envelope"></i><span>Email</span>
+            </a>
             <span className="hero-location">Indianapolis, IN</span>
           </div>
         </div>

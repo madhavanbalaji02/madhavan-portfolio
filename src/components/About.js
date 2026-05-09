@@ -12,12 +12,6 @@ const facts = [
   { label: 'Projects',   value: '10+ shipped',            accent: false },
 ];
 
-const quickFacts = [
-  'Published patent holder — AI system for sustainable agriculture',
-  'Built AI systems for healthcare diagnostics & infrastructure automation',
-  'Technical Instructor @ Indiana University — 30+ students mentored',
-  'Passionate about production ML, not just prototypes',
-];
 
 const About = () => (
   <section id="about" className="section">
@@ -57,14 +51,7 @@ const About = () => (
                 </p>
               </div>
 
-              <div className="about-quick-facts">
-                <h3>Quick Facts</h3>
-                <ul>
-                  {quickFacts.map((fact, i) => (
-                    <li key={i}>{fact}</li>
-                  ))}
-                </ul>
-              </div>
+
             </div>
           </div>
 

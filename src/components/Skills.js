@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
 const skillCategories = [
   {
@@ -82,6 +83,30 @@ const SkillIcon = ({ skill }) => {
   return <span className="skill-badge">{skill.badge}</span>;
 };
 
+const SkillCategory = ({ category, delay }) => {
+  const ref = useRef(null);
+  const visible = useIntersectionObserver(ref, { threshold: 0.15 });
+  return (
+    <div
+      ref={ref}
+      className={`skill-category skill-category-animate${visible ? ' visible' : ''}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <h4 className="skill-category-title">
+        <i className={category.icon}></i> {category.title}
+      </h4>
+      <div className="skills-grid">
+        {category.skills.map((skill, si) => (
+          <div key={si} className="skill-item">
+            <SkillIcon skill={skill} />
+            <span className="skill-name">{skill.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Skills = () => (
   <div className="skills-section fade-in-up">
     <h3 className="skills-title">Technical Expertise</h3>
@@ -91,19 +116,7 @@ const Skills = () => (
 
     <div className="skill-categories-wrapper">
       {skillCategories.map((category, ci) => (
-        <div key={ci} className="skill-category">
-          <h4 className="skill-category-title">
-            <i className={category.icon}></i> {category.title}
-          </h4>
-          <div className="skills-grid">
-            {category.skills.map((skill, si) => (
-              <div key={si} className="skill-item">
-                <SkillIcon skill={skill} />
-                <span className="skill-name">{skill.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <SkillCategory key={ci} category={category} delay={ci * 80} />
       ))}
     </div>
   </div>

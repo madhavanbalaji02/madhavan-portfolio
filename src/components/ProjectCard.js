@@ -12,6 +12,9 @@ const langMeta = {
   'Jupyter Notebook': { icon: 'fas fa-book-open', color: '#DA5B0B' },
 };
 
+const flatTech = techStack =>
+  techStack ? techStack.flatMap(g => g.items).slice(0, 5) : [];
+
 const ProjectCard = ({ project, index }) => {
   const navigate  = useNavigate();
   const cat  = categoryMeta[project.category] || categoryMeta.ml;
@@ -33,10 +36,15 @@ const ProjectCard = ({ project, index }) => {
     >
       <div className="proj-card-header">
         <i className={`${cat.icon} proj-cat-icon`} style={{ color: cat.accent }}></i>
-        <span className="proj-lang-badge" style={{ borderColor: `${lang.color}44` }}>
-          <i className={lang.icon} style={{ color: lang.color }}></i>
-          {project.language}
-        </span>
+        <div className="proj-card-header-right">
+          {project.metric && (
+            <span className="proj-metric-badge">{project.metric}</span>
+          )}
+          <span className="proj-lang-badge" style={{ borderColor: `${lang.color}44` }}>
+            <i className={lang.icon} style={{ color: lang.color }}></i>
+            {project.language}
+          </span>
+        </div>
       </div>
 
       <div className="proj-card-body">
@@ -47,6 +55,13 @@ const ProjectCard = ({ project, index }) => {
             <span key={i} className="proj-tag">{tag}</span>
           ))}
         </div>
+        {project.techStack && (
+          <div className="proj-tech-pills">
+            {flatTech(project.techStack).map((t, i) => (
+              <span key={i} className="proj-tech-pill">{t}</span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="proj-card-footer">
@@ -61,7 +76,7 @@ const ProjectCard = ({ project, index }) => {
           rel="noopener noreferrer"
           className="proj-github-btn"
           onClick={handleGithubClick}
-          title="View on GitHub"
+          aria-label="View on GitHub"
         >
           <i className="fab fa-github"></i>
         </a>

@@ -29,7 +29,7 @@ const Hero = () => (
           <div className="hero-eyebrow">
             <span className="hero-status">
               <span className="hero-status-dot"></span>
-              Available for opportunities
+              Open to Full-Time AI/ML Roles — May 2025
             </span>
           </div>
 

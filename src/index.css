@@ -80,6 +80,10 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .desktop-nav a:hover{color:var(--t1)}
 .desktop-nav a:hover::after{width:100%}
 
+.nav-resume-btn{font-family:var(--font-mono);font-size:11px !important;color:var(--gold) !important;border:1px solid rgba(212,181,149,0.35);border-radius:4px;padding:5px 12px !important;transition:all 0.2s !important;}
+.nav-resume-btn::after{display:none !important}
+.nav-resume-btn:hover{background:var(--gold-dim) !important;border-color:var(--gold) !important}
+
 /* Hamburger — always z-index 1100, above drawer */
 .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;background:none;border:none;cursor:pointer;padding:4px;z-index:1100;position:relative;-webkit-tap-highlight-color:transparent;flex-shrink:0}
 .ham-line{display:block;width:22px;height:2px;background:var(--t1);border-radius:2px;transition:transform 0.25s var(--ease),opacity 0.25s ease;transform-origin:center}
@@ -186,6 +190,14 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .about-text h3{font-size:clamp(16px,2.5vw,20px);font-weight:700;color:var(--t1);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
 .about-text p{font-size:clamp(14px,1.8vw,15px);color:var(--t2);line-height:1.85;margin-bottom:14px}
 .about-text strong{color:var(--gold);font-weight:600}
+.about-currently{margin-top:28px;padding:16px 20px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.14);border-radius:6px}
+.about-currently h3{font-size:clamp(14px,2vw,16px);font-weight:700;color:var(--green);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(74,222,128,0.12)}
+.about-currently p{font-size:clamp(13px,1.7vw,14px);color:var(--t2);line-height:1.75;margin-bottom:0}
+.about-quick-facts{margin-top:24px}
+.about-quick-facts h3{font-size:clamp(14px,2vw,16px);font-weight:700;color:var(--t1);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.about-quick-facts ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.about-quick-facts li{font-size:clamp(13px,1.7vw,14px);color:var(--t2);padding-left:16px;position:relative;line-height:1.6}
+.about-quick-facts li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:11px}
 .about-facts{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;overflow:hidden;position:sticky;top:88px}
 .fact-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);transition:background 0.15s;gap:12px}
 .fact-row:last-child{border-bottom:none}
@@ -201,6 +213,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .skill-categories-wrapper{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(16px,2.5vw,28px)}
 .skill-category{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:clamp(14px,2vw,20px)}
 .skill-category:hover{border-color:var(--border-warm);transition:border-color 0.2s}
+.skill-category-animate{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s ease}
+.skill-category-animate.visible{opacity:1;transform:translateY(0)}
 .skill-category-title{font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:7px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .skill-category-title i{font-size:11px}
 .skills-grid{display:flex;flex-direction:column;gap:0}
@@ -271,6 +285,10 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .proj-card:hover .proj-details-arrow{opacity:1;transform:translateX(0)}
 .proj-github-btn{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:4px;border:1px solid var(--border);color:var(--t3);font-size:13px;background:transparent;transition:all 0.2s;flex-shrink:0;text-decoration:none}
 .proj-github-btn:hover{border-color:var(--border-warm);color:var(--gold);background:var(--gold-dim)}
+.proj-card-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.proj-metric-badge{font-family:var(--font-mono);font-size:10px;font-weight:600;color:#0b1519;background:var(--gold);border-radius:3px;padding:2px 7px;white-space:nowrap;letter-spacing:0.3px}
+.proj-tech-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.proj-tech-pill{font-family:var(--font-mono);font-size:10px;color:var(--t3);padding:2px 6px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px}
 
 /* Patent */
 .patent-section{background:var(--bg)}

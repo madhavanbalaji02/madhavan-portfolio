@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import BackToTop from './components/BackToTop';
-import ProjectDetail from './components/ProjectDetail';
+const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
 
 function MainPage({ loading }) {
   return (
@@ -50,7 +50,7 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<MainPage loading={loading} />} />
-        <Route path="/project/:projectId" element={<ProjectDetail />} />
+        <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail /></Suspense>} />
       </Routes>
     </HashRouter>
   );

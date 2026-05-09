@@ -11,6 +11,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
+    metric: '↓70% MTTD',
     tags: ['LangGraph', 'CrewAI', 'Ollama', 'ChromaDB'],
     background:
       "Production systems fail in unpredictable ways. Traditional SRE relies on human engineers on-call, following runbooks, and debugging under extreme pressure — an expensive, error-prone process at scale. Sovereign SRE explores whether multi-agent AI can autonomously handle this loop: detect → diagnose → fix → verify, with a human-in-the-loop approval gate that prevents unsafe automated deployments. The core insight is that most production incidents are variations of known failure patterns — and if you can embed codebase awareness into the agent's reasoning, you can generate context-appropriate fixes rather than generic remediation steps.",
@@ -68,6 +69,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
+    metric: '↑30% Recall',
     tags: ['Multi-Agent', 'RAG', 'LangGraph', 'CrewAI'],
     background:
       "Enterprise knowledge is trapped in PDFs, internal wikis, and siloed documentation systems. When engineers need answers, they spend hours manually searching across sources — and still miss crucial context. DocuMind replaces that with a multi-agent research platform that synthesizes across custom knowledge bases and produces structured, cited reports. The key architectural decision was hybrid retrieval: combining dense semantic search (FAISS) with sparse keyword matching (BM25) captures both conceptual relevance and precise terminology — something neither approach achieves alone.",
@@ -125,6 +127,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
+    metric: 'Zero-Shot',
     tags: ['CLIP', 'Zero-Shot', 'LanceDB', 'Edge AI'],
     background:
       "Workplace safety monitoring traditionally requires expensive labeled video datasets to train a custom detector for each violation type. If a new hazard emerges (a new machine, a new PPE requirement), you're back to data collection. VectorGaze eliminates this bottleneck by using CLIP's zero-shot visual-language alignment: instead of training a detector, you describe the violation in natural language, and CLIP finds frames that semantically match. This makes the system instantly configurable for any safety scenario without a single labeled example.",
@@ -182,6 +185,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
+    metric: '↓56–75% Faithful',
     tags: ['LLMs', 'NPO', 'NLP', 'Research'],
     background:
       "Chain-of-thought (CoT) prompting produces reasoning traces that look coherent — but are they causally connected to the model's final answer? Or are they post-hoc rationalizations of a decision made elsewhere in the model? This distinction matters enormously for AI safety and interpretability. If CoT is just a narrative layer, then 'reasoning-based' safety interventions are built on sand. This project investigates CoT faithfulness using causal intervention: does perturbing the reasoning trace change the model's output? And critically: does fine-tuning on high-quality CoT help or hurt?",
@@ -233,6 +237,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
+    metric: '0.1% Params',
     tags: ['BLIP-2', 'LoRA', 'Fine-tuning', 'Vision-Language'],
     background:
       "Standard image captioning systems describe the visual scene but ignore text visible within the image — charts, signs, slides, product labels. This creates a major gap for real-world applications: a model that describes 'a whiteboard' instead of reading the equations on it, or 'a sign' instead of reading what it says. OmniBridge bridges this gap by fine-tuning BLIP-2 on the TextCaps dataset using LoRA — a parameter-efficient technique that adapts a large pretrained model without retraining all parameters.",
@@ -284,6 +289,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
+    metric: 'TTFT Tracked',
     tags: ['PyTorch', 'FastAPI', 'Transformers', 'React'],
     background:
       "Most LLM APIs hide the mechanics: you set a temperature slider and get text back. But understanding what's happening in the logit space — how temperature reshapes the probability distribution, why top-K and nucleus sampling behave differently in edge cases — is essential for anyone building serious LLM applications. This playground was built as an educational tool to expose these mechanics explicitly: no HuggingFace generate() defaults, manual implementations of each sampling strategy, and live tracking of time-to-first-token (TTFT) and throughput.",
@@ -335,6 +341,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
+    metric: '400 Paintings',
     tags: ['GAN', 'Stable Diffusion', 'LoRA', 'CV'],
     background:
       "Neural style transfer has existed since 2015, but early GAN-based approaches struggle with identity preservation and style intensity control. This project combines two paradigms: classical GAN-based neural style transfer for precise feature-level stylization, and Stable Diffusion with a custom LoRA adapter for more fluid, diffusion-based style application. The Van Gogh LoRA was fine-tuned on 400 curated paintings from the artist's distinct periods — capturing brush stroke texture, color palette, and compositional patterns that generic artistic prompts miss.",
@@ -386,6 +393,7 @@ export const projectsData = [
     category: 'ml',
     categoryLabel: 'ML / MLOps',
     catIcon: 'fas fa-chart-line',
+    metric: '<60s Detection',
     tags: ['DuckDB', 'Evidently AI', 'Polars', 'Streamlit'],
     background:
       "Data drift is silent and deadly. Production ML models degrade gradually as input distributions shift — often with no visible errors until model accuracy has already collapsed. Most solutions detect drift after the fact; Aegis is designed to detect and repair drift automatically, keeping data pipelines healthy before downstream models are affected. The hybrid architecture (DuckDB for streaming analytics + Polars for batch processing) enables the system to scale from small cloud deployments to large on-premise datasets without architectural changes.",
@@ -443,6 +451,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
+    metric: '92.4% Accuracy',
     tags: ['ViT', 'Medical AI', 'FastAPI', 'React'],
     background:
       "Dental diagnostics are subjective, expensive, and inaccessible in underserved regions. A dentist's assessment of caries or gingivitis from an intraoral photo varies by experience and fatigue. DentaVision applies a pretrained Vision Transformer (ViT) to standardize and accelerate dental diagnosis — providing consistent, explainable classifications from dental images with sub-second inference via a clinical-ready API. The ViT architecture was chosen over CNNs for its global attention mechanism, which better captures the distributed visual patterns of dental pathology.",
@@ -496,6 +505,7 @@ export const projectsData = [
     category: 'ml',
     categoryLabel: 'ML / MLOps',
     catIcon: 'fas fa-chart-line',
+    metric: '<5min Deploy',
     tags: ['Recommender', 'Kubernetes', 'ArgoCD', 'MLOps'],
     background:
       "Recommender systems sit at the intersection of ML and production engineering — the model is only half the challenge. This project was built to practice the full MLOps lifecycle: developing a hybrid recommender (content-based + collaborative filtering), containerizing it, deploying it to Kubernetes, and establishing automated CI/CD pipelines. The hybrid approach was chosen because neither content-based (ignores user behavior) nor collaborative filtering alone (ignores item attributes) achieves the best recommendations — combining them captures both signal types.",

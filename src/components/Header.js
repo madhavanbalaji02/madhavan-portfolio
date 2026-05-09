@@ -67,6 +67,11 @@ const Header = () => {
                 <a href={id} onClick={(e) => navTo(e, id)}>{label}</a>
               </li>
             ))}
+            <li>
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="nav-resume-btn">
+                Resume ↗
+              </a>
+            </li>
           </ul>
 
           <button

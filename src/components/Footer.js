@@ -24,8 +24,8 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-brand">
             <h3>Madhavan Balaji</h3>
-            <p>AI Engineer</p>
-            <p className="footer-tagline">Transforming ideas into intelligent solutions</p>
+            <p>AI Engineer · MS CS @ Indiana University</p>
+            <p className="footer-tagline">Open to full-time AI/ML roles · madhavanbalaji.com</p>
           </div>
           <div className="footer-links">
             <h4>Quick Links</h4>

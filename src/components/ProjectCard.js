@@ -12,9 +12,6 @@ const langMeta = {
   'Jupyter Notebook': { icon: 'fas fa-book-open', color: '#DA5B0B' },
 };
 
-const flatTech = techStack =>
-  techStack ? techStack.flatMap(g => g.items).slice(0, 5) : [];
-
 const ProjectCard = ({ project, index }) => {
   const navigate  = useNavigate();
   const cat  = categoryMeta[project.category] || categoryMeta.ml;
@@ -55,13 +52,6 @@ const ProjectCard = ({ project, index }) => {
             <span key={i} className="proj-tag">{tag}</span>
           ))}
         </div>
-        {project.techStack && (
-          <div className="proj-tech-pills">
-            {flatTech(project.techStack).map((t, i) => (
-              <span key={i} className="proj-tech-pill">{t}</span>
-            ))}
-          </div>
-        )}
       </div>
 
       <div className="proj-card-footer">

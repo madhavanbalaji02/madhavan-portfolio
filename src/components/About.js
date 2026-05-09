@@ -6,7 +6,7 @@ const facts = [
   { label: 'University', value: 'Indiana University',     accent: false },
   { label: 'Location',   value: 'Indianapolis, IN',       accent: false },
   { label: 'Focus',      value: 'AI / ML Engineering',    accent: true  },
-  { label: 'Status',     value: 'Open to Roles — 2025',   accent: true  },
+  { label: 'Status',     value: 'Open to Roles — 2026',   accent: true  },
   { label: 'Patent',     value: 'Filed — Govt. of India', accent: false },
   { label: 'Teaching',   value: '30+ students mentored',  accent: false },
   { label: 'Projects',   value: '10+ shipped',            accent: false },
@@ -52,8 +52,8 @@ const About = () => (
               <div className="about-currently">
                 <h3>Currently</h3>
                 <p>
-                  Building production AI systems & conducting research at <strong>Indiana University</strong> ·
-                  Graduating <strong>May 2025</strong> · Open to full-time AI/ML roles
+                  Building production AI systems at <strong>Indiana University</strong> ·
+                  Graduating <strong>May 2026</strong> · Open to full-time AI/ML roles
                 </p>
               </div>
 

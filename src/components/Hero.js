@@ -1,5 +1,11 @@
 import React from 'react';
 
+const scrollTo = (e, id) => {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+};
+
 const Hero = () => (
   <header className="hero-bento" id="home">
     <div className="container">
@@ -39,7 +45,7 @@ const Hero = () => (
           </p>
 
           <div className="hero-actions">
-            <a href="#projects" className="btn btn-primary">View Work</a>
+            <a href="#projects" className="btn btn-primary" onClick={e => scrollTo(e, 'projects')}>View Work</a>
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
               Resume ↗
             </a>

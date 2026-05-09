@@ -111,5 +111,5 @@ The `build` folder contains static files that can be deployed to:
 
 ## License
 
-© 2024 Madhavan Balaji. All rights reserved.
+© 2026 Madhavan Balaji. All rights reserved.
 

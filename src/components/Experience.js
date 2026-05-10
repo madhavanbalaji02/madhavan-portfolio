@@ -10,16 +10,16 @@ const experiences = [
     icon: 'fas fa-chalkboard-teacher',
     bullets: [
       {
-        label: 'Education Contributions',
-        text: 'Designed and delivered weekly technical workshops on Algorithms & Optimization to 30+ students, breaking down complex logic (Dynamic Programming, Graph Theory) into intuitive visual explanations.',
+        label: 'Curriculum Design',
+        text: 'Students lacked structured resources for advanced algorithm topics — designed and delivered 20+ weekly workshops covering Dynamic Programming, Graph Theory, and Greedy algorithms, resulting in measurably improved problem-solving confidence across 30+ students.',
       },
       {
-        label: 'Mentorship',
-        text: 'Guided students in refactoring and optimal design patterns, mirroring Developer Relations (DevRel) responsibilities by debugging user issues and bridging knowledge gaps.',
+        label: 'Mentorship Impact',
+        text: 'Students repeatedly got stuck on the same debugging patterns with no clear path forward — held weekly 1:1 code review sessions, identifying root-cause misconceptions and prescribing targeted fixes, reducing repeated errors and accelerating progress.',
       },
       {
         label: 'Community Building',
-        text: 'Established a community-first mentorship and peer-review system to drive engagement, demonstrating the ability to build and sustain a technical community.',
+        text: 'Peer learning was fragmented and unsustained — built a structured peer-review and mentorship system from scratch, driving consistent engagement that outlasted individual sessions and created a self-reinforcing learning community.',
       },
     ],
     skills: ['Algorithms', 'Dynamic Programming', 'Graph Theory', 'Mentorship', 'Curriculum Design'],
@@ -33,16 +33,16 @@ const experiences = [
     icon: 'fas fa-chart-bar',
     bullets: [
       {
-        label: 'Inference Optimization',
-        text: 'Engineered feature extraction pipelines using advanced image processing, reducing latency by 30% for real-time computer vision performance.',
+        label: 'Latency Reduction',
+        text: 'Real-time CV pipeline was bottlenecked by slow feature extraction, causing unacceptable inference delays — re-engineered the image processing pipeline using optimized feature descriptors, cutting end-to-end latency by 30% and enabling true real-time performance.',
       },
       {
-        label: 'Model Development',
-        text: 'Developed an end-to-end visual retrieval system achieving 90% accuracy, effectively translating raw visual data into a functional visual search engine.',
+        label: 'Visual Retrieval System',
+        text: 'No scalable visual search capability existed for the product catalog — designed and trained an end-to-end visual retrieval model from data preprocessing through deployment, achieving 90% retrieval accuracy on an internal benchmark.',
       },
       {
-        label: 'Recommendations',
-        text: 'Built multi-label classifiers for 1,000+ distinct classes, optimizing personalized style recommendations through deep learning retrieval logic.',
+        label: 'Personalized Recommendations',
+        text: 'Style recommendations were generic and failed to account for the breadth of 1,000+ product classes — built multi-label deep learning classifiers with fine-grained retrieval logic, delivering personalized recommendations that matched user intent across the full catalog.',
       },
     ],
     skills: ['Python', 'Computer Vision', 'Image Processing', 'Deep Learning', 'Data Analysis'],
@@ -52,23 +52,23 @@ const experiences = [
 const teachingOutcomes = [
   {
     icon: 'fas fa-lightbulb',
-    title: 'Teaching DP exposed my own gaps',
-    text: 'Every time a student asked "but why does the subproblem boundary work here?", I had to rebuild my mental model from scratch — and came out sharper each time.',
+    title: 'Situation: Students hit DP walls',
+    text: 'Students repeatedly failed to generalize DP patterns beyond memorized templates — I had to rebuild my own mental model to explain the "why", and emerged with first-principles fluency I didn\'t have before.',
   },
   {
     icon: 'fas fa-project-diagram',
-    title: 'Graph Theory via whiteboard, not slides',
-    text: 'Drawing BFS/DFS live forced me to develop spatial intuition I never got from textbooks. Visual teaching is fundamentally different from visual learning.',
+    title: 'Task: Make Graph Theory stick',
+    text: 'Slides weren\'t working for graph traversal — I switched to live whiteboard BFS/DFS walkthroughs, which forced me to develop spatial intuition and dramatically improved student retention.',
   },
   {
     icon: 'fas fa-comments',
-    title: 'Diagnosing mental blockers',
-    text: "A student's confusion is a diagnostic signal — learning to read it made me a better debugger, interviewer, and communicator on engineering teams.",
+    title: 'Action: Treat confusion as a diagnostic',
+    text: 'Instead of re-explaining, I learned to identify the exact misconception behind each question — a skill that now makes me a faster debugger and clearer communicator on engineering teams.',
   },
   {
     icon: 'fas fa-rocket',
-    title: 'Weekly prep accelerated my fluency',
-    text: 'Preparing workshops 2–3x per week compounded — I solved more LeetCode problems in one semester of teaching than in any prior year of solo study.',
+    title: 'Result: Compounding technical fluency',
+    text: 'Preparing 2–3 workshops per week compounded rapidly — I solved more algorithmic problems in one semester of teaching than in any prior year of solo study.',
   },
 ];
 
@@ -143,29 +143,28 @@ const Experience = () => {
               <div className="teaching-callout">
                 <i className="fas fa-quote-left teaching-quote-icon"></i>
                 <p>
-                  Teaching is the most efficient form of learning I've encountered.
-                  Every whiteboard session — watching a student's face shift from
-                  confusion to clarity on dynamic programming — sharpened my own
-                  understanding in ways that hours of solo study never could.
+                  <strong>Situation:</strong> 30+ students needed to build algorithmic fluency
+                  under time pressure, with no existing visual curriculum for complex topics
+                  like DP and Graph Theory. I was handed the problem and a blank whiteboard.
                 </p>
               </div>
 
               <p className="teaching-body">
-                When I started leading weekly workshops on Algorithms & Optimization,
-                I assumed I was there to give knowledge. What I didn't expect was how
-                much I'd receive in return. Students ask the questions that textbooks
-                skip — the "but <em>why</em> does this work?" questions that expose
-                the gaps in your own mental model. Answering those questions live, at
-                the whiteboard, forced me to rebuild my understanding from first
-                principles. I stopped thinking in code and started thinking in structure.
+                <strong>Task:</strong> Design a repeatable weekly workshop format that could
+                take students from zero intuition to confident problem-solving on topics like
+                Dynamic Programming, BFS/DFS, and Greedy algorithms — without relying on
+                rote memorization. The constraint: each session had to stand alone, since
+                attendance varied week to week.
               </p>
 
               <p className="teaching-body">
-                Over dozens of sessions covering Graph Theory, DP, and Greedy algorithms,
-                I developed a discipline I now carry into every engineering context: the
-                ability to explain precisely — not approximately. That precision, earned
-                through teaching, makes me a better collaborator, a cleaner code reviewer,
-                and a sharper problem-solver.
+                <strong>Action → Result:</strong> I rebuilt every topic from first principles
+                using live whiteboard walkthroughs instead of slides, treating each student
+                question as a diagnostic signal rather than an interruption. Over 20+ sessions,
+                students stopped asking "what is the pattern?" and started asking "which
+                pattern fits here?" — a shift from recall to reasoning. As a side effect,
+                preparing 2–3 workshops per week compounded my own fluency faster than any
+                prior year of solo study.
               </p>
 
               <div className="teaching-outcomes-grid">

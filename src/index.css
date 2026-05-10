@@ -443,10 +443,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .hero-bento{min-height:auto;padding-top:24px;padding-bottom:40px}
   .hero-bento::after{display:none}
   .hero-marquee{display:none}
-  .hero-profile{order:1;flex-direction:column;align-items:center;gap:10px}
-  .hero-img-wrap{width:120px;height:150px;border-radius:12px}
-  .hero-stack{display:none}
-  .hero-content{order:2}
+  .hero-profile{display:none}
+  .hero-content{order:1}
   .hero-name{font-size:clamp(34px,9vw,52px)}
   .hero-links{gap:10px;margin-top:24px;padding-top:18px}
   .hero-location{margin-left:0;order:99;width:100%;margin-top:2px}

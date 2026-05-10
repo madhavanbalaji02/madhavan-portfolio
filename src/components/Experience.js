@@ -5,8 +5,8 @@ const experiences = [
     title: 'Technical Instructor & Curriculum Lead',
     company: 'Indiana University',
     location: 'Indianapolis, IN',
-    period: 'Aug 2025 – Present',
-    current: true,
+    period: 'Aug 2025 – Dec 2025',
+    current: false,
     icon: 'fas fa-chalkboard-teacher',
     bullets: [
       {

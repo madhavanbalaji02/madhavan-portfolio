@@ -8,7 +8,7 @@
   --cyan:#5ec4d4;--cyan-dim:rgba(94,196,212,0.08);
   --green:#4ade80;
   --t1:#f0f4f8;--t2:#8da0ab;--t3:#526670;
-  --font-body:'Space Grotesk',system-ui,sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Space Grotesk',system-ui,sans-serif;
   --font-mono:'JetBrains Mono','Fira Code',monospace;
   --ease:cubic-bezier(0.4,0,0.2,1);
   /* legacy */
@@ -25,7 +25,7 @@
   --transition:all 0.2s cubic-bezier(0.4,0,0.2,1);
   --border-radius:8px;--radius-sm:4px;--radius:8px;--radius-lg:12px;--radius-xl:20px;
   --gold-glow:rgba(212,181,149,.1);--cyan-glow:rgba(94,196,212,.1);
-  --font-heading:'Space Grotesk',system-ui,sans-serif;
+  --font-heading:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Space Grotesk',system-ui,sans-serif;
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -149,7 +149,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .hero-profile{order:2;display:flex;flex-direction:column;align-items:center;gap:14px}
 
 .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap}
-.hero-status{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:11px;color:var(--green);padding:5px 12px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.18);border-radius:50px;white-space:nowrap}
+.hero-status{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:11px;color:var(--green);padding:5px 12px;background:rgba(74,222,128,0.14);border:1px solid rgba(74,222,128,0.40);border-radius:50px;white-space:nowrap}
 .hero-status-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse-dot 2s ease infinite;flex-shrink:0}
 .hero-name{font-size:clamp(40px,8vw,88px);font-weight:700;color:var(--t1);letter-spacing:-2px;line-height:0.95;margin-bottom:clamp(16px,2.5vw,24px)}
 .hero-divider{width:40px;height:2px;background:var(--gold);margin-bottom:clamp(12px,2vw,20px)}
@@ -356,7 +356,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .contact-wrapper{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(32px,5vw,56px);align-items:start}
 .contact-info h3{font-size:clamp(16px,2.5vw,20px);font-weight:700;color:var(--t1);margin-bottom:8px}
 .contact-info > p{font-size:14px;color:var(--t3);margin-bottom:clamp(18px,3vw,28px);line-height:1.7}
-.availability-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.18);border-radius:50px;font-family:var(--font-mono);font-size:11px;color:var(--green);margin-bottom:20px}
+.availability-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:rgba(74,222,128,0.14);border:1px solid rgba(74,222,128,0.40);border-radius:50px;font-family:var(--font-mono);font-size:11px;color:var(--green);margin-bottom:20px}
 .availability-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse-dot 2s ease infinite;flex-shrink:0}
 .contact-items{display:flex;flex-direction:column;gap:8px}
 .contact-item{display:flex;gap:12px;padding:12px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;align-items:center;transition:border-color 0.2s,background 0.2s;min-height:52px;text-decoration:none;cursor:pointer}

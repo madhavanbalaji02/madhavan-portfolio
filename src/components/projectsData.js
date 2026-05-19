@@ -127,7 +127,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
-    metric: 'Zero-Shot',
+    metric: 'Zero-Shot (no labels)',
     tags: ['CLIP', 'Zero-Shot', 'LanceDB', 'Edge AI'],
     background:
       "Workplace safety monitoring traditionally requires expensive labeled video datasets to train a custom detector for each violation type. If a new hazard emerges (a new machine, a new PPE requirement), you're back to data collection. VectorGaze eliminates this bottleneck by using CLIP's zero-shot visual-language alignment: instead of training a detector, you describe the violation in natural language, and CLIP finds frames that semantically match. This makes the system instantly configurable for any safety scenario without a single labeled example.",
@@ -237,7 +237,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
-    metric: '0.1% Params',
+    metric: '0.1% Params vs full FT',
     tags: ['BLIP-2', 'LoRA', 'Fine-tuning', 'Vision-Language'],
     background:
       "Standard image captioning systems describe the visual scene but ignore text visible within the image — charts, signs, slides, product labels. This creates a major gap for real-world applications: a model that describes 'a whiteboard' instead of reading the equations on it, or 'a sign' instead of reading what it says. OmniBridge bridges this gap by fine-tuning BLIP-2 on the TextCaps dataset using LoRA — a parameter-efficient technique that adapts a large pretrained model without retraining all parameters.",
@@ -289,7 +289,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
-    metric: 'TTFT Tracked',
+    metric: '↓TTFT Tracked',
     tags: ['PyTorch', 'FastAPI', 'Transformers', 'React'],
     background:
       "Most LLM APIs hide the mechanics: you set a temperature slider and get text back. But understanding what's happening in the logit space — how temperature reshapes the probability distribution, why top-K and nucleus sampling behave differently in edge cases — is essential for anyone building serious LLM applications. This playground was built as an educational tool to expose these mechanics explicitly: no HuggingFace generate() defaults, manual implementations of each sampling strategy, and live tracking of time-to-first-token (TTFT) and throughput.",

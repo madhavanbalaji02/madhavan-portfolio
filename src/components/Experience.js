@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const experiences = [
   {
@@ -73,6 +73,7 @@ const teachingOutcomes = [
 ];
 
 const Experience = () => {
+  const [narrativeOpen, setNarrativeOpen] = useState(false);
   return (
     <section id="experience" className="section experience-section">
       <div className="container">
@@ -150,36 +151,46 @@ const Experience = () => {
                 </p>
               </div>
 
-              <p className="teaching-body">
-                When I started leading weekly workshops on Algorithms & Optimization,
-                I assumed I was there to give knowledge. What I didn't expect was how
-                much I'd receive in return. Students ask the questions that textbooks
-                skip — the "but <em>why</em> does this work?" questions that expose
-                the gaps in your own mental model. Answering those questions live, at
-                the whiteboard, forced me to rebuild my understanding from first
-                principles. I stopped thinking in code and started thinking in structure.
-              </p>
+              <button
+                className="teaching-toggle"
+                onClick={() => setNarrativeOpen(o => !o)}
+                aria-expanded={narrativeOpen}
+              >
+                {narrativeOpen ? 'Show less ←' : 'Read more →'}
+              </button>
 
-              <p className="teaching-body">
-                Over dozens of sessions covering Graph Theory, DP, and Greedy algorithms,
-                I developed a discipline I now carry into every engineering context: the
-                ability to explain precisely — not approximately. That precision, earned
-                through teaching, makes me a better collaborator, a cleaner code reviewer,
-                and a sharper problem-solver.
-              </p>
+              <div className={`teaching-expandable${narrativeOpen ? ' expanded' : ''}`}>
+                <p className="teaching-body">
+                  When I started leading weekly workshops on Algorithms & Optimization,
+                  I assumed I was there to give knowledge. What I didn't expect was how
+                  much I'd receive in return. Students ask the questions that textbooks
+                  skip — the "but <em>why</em> does this work?" questions that expose
+                  the gaps in your own mental model. Answering those questions live, at
+                  the whiteboard, forced me to rebuild my understanding from first
+                  principles. I stopped thinking in code and started thinking in structure.
+                </p>
 
-              <div className="teaching-outcomes-grid">
-                {teachingOutcomes.map((outcome, i) => (
-                  <div key={i} className="teaching-outcome-item">
-                    <div className="outcome-icon">
-                      <i className={outcome.icon}></i>
+                <p className="teaching-body">
+                  Over dozens of sessions covering Graph Theory, DP, and Greedy algorithms,
+                  I developed a discipline I now carry into every engineering context: the
+                  ability to explain precisely — not approximately. That precision, earned
+                  through teaching, makes me a better collaborator, a cleaner code reviewer,
+                  and a sharper problem-solver.
+                </p>
+
+                <div className="teaching-outcomes-grid">
+                  {teachingOutcomes.map((outcome, i) => (
+                    <div key={i} className="teaching-outcome-item">
+                      <div className="outcome-icon">
+                        <i className={outcome.icon}></i>
+                      </div>
+                      <div>
+                        <h4 className="outcome-title">{outcome.title}</h4>
+                        <p className="outcome-text">{outcome.text}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="outcome-title">{outcome.title}</h4>
-                      <p className="outcome-text">{outcome.text}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>

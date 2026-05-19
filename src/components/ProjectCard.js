@@ -1,5 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SovereignSreDiagram, DocuMindDiagram, VectorGazeDiagram } from './ProjectDiagrams';
+
+const diagrams = {
+  'sovereign-sre': SovereignSreDiagram,
+  'documind': DocuMindDiagram,
+  'vectorgaze': VectorGazeDiagram,
+};
 
 const categoryMeta = {
   ai: { icon: 'fas fa-brain',      accent: '#00f2ff' },
@@ -16,6 +23,8 @@ const ProjectCard = ({ project, index }) => {
   const navigate  = useNavigate();
   const cat  = categoryMeta[project.category] || categoryMeta.ml;
   const lang = langMeta[project.language]      || { icon: 'fas fa-code', color: '#555' };
+
+  const Diagram = diagrams[project.slug];
 
   const handleCardClick = () => {
     navigate(`/project/${project.slug}`);
@@ -43,6 +52,12 @@ const ProjectCard = ({ project, index }) => {
           </span>
         </div>
       </div>
+
+      {Diagram && (
+        <div className="proj-card-diagram">
+          <Diagram />
+        </div>
+      )}
 
       <div className="proj-card-body">
         <h3 className="proj-title">{project.title}</h3>

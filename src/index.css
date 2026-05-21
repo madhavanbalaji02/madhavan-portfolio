@@ -126,6 +126,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 /* Theme toggle button */
 .theme-toggle{width:34px;height:34px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--t2);font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s var(--ease);flex-shrink:0;padding:0}
 .theme-toggle:hover{border-color:var(--border-warm);color:var(--gold);background:var(--gold-dim)}
+.mobile-theme-toggle{display:none}
+.mobile-nav-controls{display:none;align-items:center;gap:6px}
 
 /* Hamburger — always z-index 1100, above drawer */
 .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;background:none;border:none;cursor:pointer;padding:4px;z-index:1100;position:relative;-webkit-tap-highlight-color:transparent;flex-shrink:0}
@@ -490,6 +492,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 @media(max-width:768px){
   .hamburger{display:flex}
   .desktop-nav{display:none}
+  .mobile-theme-toggle{display:flex}
+  .mobile-nav-controls{display:flex}
 
   .hero-bento{min-height:auto;padding-top:24px;padding-bottom:40px}
   .hero-bento::after{display:none}

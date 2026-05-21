@@ -79,16 +79,22 @@ const Header = ({ theme, toggleTheme }) => {
             </li>
           </ul>
 
-          <button
-            className={`hamburger ${isMenuOpen ? 'open' : ''}`}
-            onClick={() => setIsMenuOpen(v => !v)}
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMenuOpen}
-          >
-            <span className="ham-line"></span>
-            <span className="ham-line"></span>
-            <span className="ham-line"></span>
-          </button>
+          <div className="mobile-nav-controls">
+            <button className="theme-toggle mobile-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+              <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
+            </button>
+
+            <button
+              className={`hamburger ${isMenuOpen ? 'open' : ''}`}
+              onClick={() => setIsMenuOpen(v => !v)}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMenuOpen}
+            >
+              <span className="ham-line"></span>
+              <span className="ham-line"></span>
+              <span className="ham-line"></span>
+            </button>
+          </div>
         </div>
       </nav>
 

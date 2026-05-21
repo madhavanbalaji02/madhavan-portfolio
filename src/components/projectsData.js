@@ -495,6 +495,66 @@ export const projectsData = [
   },
   {
     id: 10,
+    slug: 'llm-eval-harness',
+    title: 'LLM Eval Harness',
+    tagline: 'Benchmark any LLM across latency, accuracy, hallucination, and cost — in one automated pipeline.',
+    description: 'Production-grade benchmarking framework that evaluates OpenAI, Anthropic, and Groq models simultaneously across latency (p50/p95/p99, TTFT), accuracy (semantic similarity, LLM-as-judge), hallucination (NLI cross-encoder), cost, and RAGAS metrics — with Rich terminal output, self-contained HTML reports, and a Streamlit comparison dashboard.',
+    language: 'Python',
+    langIcon: 'fab fa-python',
+    github: 'https://github.com/madhavanbalaji02/llm-eval-harness',
+    category: 'ai',
+    categoryLabel: 'AI / LLM',
+    catIcon: 'fas fa-brain',
+    metric: '6 Models · 5 Metrics',
+    tags: ['LLM Benchmarking', 'RAGAS', 'Streamlit', 'Async'],
+    background:
+      "Choosing an LLM for production is not just about accuracy — it's a multi-dimensional trade-off between latency, hallucination risk, and cost. Most evaluations are ad hoc: a few prompts, subjective scoring, no reproducibility. LLM Eval Harness replaces that with a fully automated, configurable pipeline that evaluates any combination of OpenAI, Anthropic, and Groq models in parallel against a structured JSONL dataset. The key architectural insight is that each evaluation dimension (latency, quality, hallucination, cost) requires a different measurement strategy — and fusing them into a single comparable report is what makes the framework useful for real deployment decisions. The NLI-based hallucination detector (deberta-v3-small cross-encoder) and RAGAS suite provide grounded, reproducible quality signals far beyond simple accuracy metrics.",
+    workflow: [
+      {
+        title: 'Dataset Ingestion',
+        text: 'A JSONL dataset of Q&A pairs (with id, question, ground_truth, context, and metadata fields) is loaded by the CLI entrypoint. The context field supports RAG-style evaluation where hallucination detection is grounded against retrieved passages.',
+      },
+      {
+        title: 'Parallel Model Runners',
+        text: 'asyncio-based runners for OpenAI (gpt-4o, gpt-4o-mini), Anthropic (claude-sonnet, claude-haiku), and Groq (llama-3.3-70b, llama-3.1-8b) execute concurrently with a configurable concurrency limit (default: 5). Each runner implements a shared BaseRunner interface, making new providers trivial to add.',
+      },
+      {
+        title: 'Metrics Engine',
+        text: 'After each model response is collected, the metrics engine computes five dimensions: (1) Latency — p50/p95/p99 percentiles, TTFT, and tokens/sec; (2) Accuracy — exact match and semantic similarity via sentence-transformers; (3) LLM-as-Judge — a secondary model scores responses 1–5 for quality; (4) Hallucination — a deberta-v3-small NLI cross-encoder checks whether model claims are entailed by the ground truth context; (5) Cost — tiktoken counts tokens and applies per-model pricing tables.',
+      },
+      {
+        title: 'RAGAS Evaluation',
+        text: 'The RAGAS library evaluates the full RAG quadrant: faithfulness (do claims follow from context?), answer relevancy, context precision, and context recall. These scores complement the NLI hallucination check with a semantically richer signal.',
+      },
+      {
+        title: 'Reporters & Dashboard',
+        text: 'Results are output as a Rich-formatted terminal table, a self-contained HTML report with Plotly visualizations, and a JSON export for programmatic use. A Streamlit dashboard enables multi-run comparison with KPI cards, latency bars, accuracy/hallucination/cost charts, a RAGAS radar plot, and CSV export.',
+      },
+    ],
+    results: [
+      'llama-3.3-70b achieves P50 latency of 1,956ms and TTFT of 245ms — 16× faster TTFT than llama-3.1-8b',
+      'llama-3.1-8b delivers comparable semantic similarity (0.852 vs 0.880) at 10× lower cost per query',
+      '0% hallucination rate on the AI/ML Q&A benchmark for both Groq models via NLI cross-encoder',
+      '95 automated tests across metrics, runners, and reporters ensure evaluation reproducibility',
+      'Docker + HuggingFace Spaces deployment allows the dashboard to run anywhere without local setup',
+    ],
+    highlights: [
+      'Async parallel evaluation across 6 models from 3 providers simultaneously',
+      'NLI cross-encoder (deberta-v3-small) for hallucination detection',
+      'RAGAS suite: faithfulness, relevancy, context precision & recall',
+      'Self-contained HTML reports with Plotly + Streamlit multi-run dashboard',
+      'BaseRunner interface makes new LLM providers a one-file addition',
+      '95 tests with pytest for reproducible, CI-ready benchmarking',
+    ],
+    techStack: [
+      { label: 'Evaluation', items: ['RAGAS', 'sentence-transformers', 'deberta-v3-small'] },
+      { label: 'LLM Clients', items: ['OpenAI SDK', 'Anthropic SDK', 'Groq SDK'] },
+      { label: 'Infrastructure', items: ['asyncio', 'Pydantic v2', 'tiktoken'] },
+      { label: 'Reporting', items: ['Streamlit', 'Plotly', 'Rich', 'Docker'] },
+    ],
+  },
+  {
+    id: 11,
     slug: 'hybrid-anime-recommender',
     title: 'Hybrid Anime Recommender',
     tagline: 'A production recommender system with full CI/CD, containerization, and K8s orchestration.',

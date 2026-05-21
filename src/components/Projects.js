@@ -23,7 +23,7 @@ const Projects = () => {
           <span className="section-tag">projects</span>
           <h2 className="section-title">Featured Work</h2>
           <p className="section-subtitle">
-            10 projects spanning autonomous agents, computer vision, and production ML
+            11 projects spanning autonomous agents, computer vision, and production ML
           </p>
         </div>
 

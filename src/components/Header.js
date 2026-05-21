@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ theme, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
   const navigate  = useNavigate();
@@ -68,6 +68,11 @@ const Header = () => {
               </li>
             ))}
             <li>
+              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+                <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
+              </button>
+            </li>
+            <li>
               <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="nav-resume-btn">
                 Resume ↗
               </a>
@@ -105,6 +110,9 @@ const Header = () => {
           <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
           <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer"><i className="fab fa-medium"></i></a>
           <a href="mailto:madbala@iu.edu"                        target="_blank" rel="noopener noreferrer"><i className="fas fa-envelope"></i></a>
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+            <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
+          </button>
         </div>
       </div>
     </>

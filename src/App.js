@@ -13,12 +13,12 @@ import Loader from './components/Loader';
 import BackToTop from './components/BackToTop';
 const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
 
-function MainPage({ loading }) {
+function MainPage({ loading, theme, toggleTheme }) {
   return (
     <>
       {loading && <Loader />}
       <div className="App">
-        <Header />
+        <Header theme={theme} toggleTheme={toggleTheme} />
         <Hero />
         <About />
         <Experience />
@@ -35,6 +35,7 @@ function MainPage({ loading }) {
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -46,11 +47,18 @@ function App() {
     document.body.classList.add('page-transition');
   }, []);
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
+
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<MainPage loading={loading} />} />
-        <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail /></Suspense>} />
+        <Route path="/" element={<MainPage loading={loading} theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
       </Routes>
     </HashRouter>
   );

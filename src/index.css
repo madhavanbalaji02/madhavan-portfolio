@@ -28,6 +28,45 @@
   --font-heading:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Space Grotesk',system-ui,sans-serif;
 }
 
+/* ================================================================
+   LIGHT MODE THEME
+   ================================================================ */
+[data-theme="light"] {
+  --bg:#f1f4f6;--bg-alt:#e6eaed;--bg-card:#ffffff;--bg-card-2:#f0f3f5;
+  --border:rgba(0,0,0,0.09);--border-warm:rgba(160,100,30,0.28);--border-hi:rgba(0,0,0,0.16);
+  --gold:#9e6820;--gold-dim:rgba(158,104,32,0.10);
+  --cyan:#0f80a0;--cyan-dim:rgba(15,128,160,0.09);
+  --green:#16a34a;
+  --t1:#0c1a21;--t2:#354f60;--t3:#6a8898;
+  --primary-color:#9e6820;--primary-dark:#7a5010;--secondary-color:#0f80a0;
+  --bg-body:#f1f4f6;--bg-dark:#e6eaed;--bg-light:#f0f3f5;--bg-card-hover:#f0f3f5;
+  --text-primary:#0c1a21;--text-secondary:#354f60;--text-muted:#6a8898;
+  --text-dark:#0c1a21;--text-light:#354f60;--text-accent:#9e6820;
+  --border-gold:rgba(158,104,32,0.28);--border-cyan:rgba(15,128,160,0.18);
+  --grad-gold:linear-gradient(135deg,#9e6820,#7a5010);--grad-card:#ffffff;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.12);--shadow-md:0 4px 20px rgba(0,0,0,.14);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.16);--shadow-xl:0 24px 60px rgba(0,0,0,.18);
+  --shadow-gold:0 4px 20px rgba(158,104,32,.15);
+  --gold-glow:rgba(158,104,32,.1);--cyan-glow:rgba(15,128,160,.1);
+}
+
+/* Hardcoded-dark overrides for light mode */
+[data-theme="light"] .navbar{background:rgba(241,244,246,0.92)}
+[data-theme="light"] .navbar.scrolled{background:rgba(241,244,246,0.98)}
+[data-theme="light"] .hero-bento::before{background-image:radial-gradient(rgba(0,0,0,0.04) 1px,transparent 1px)}
+[data-theme="light"] .hero-marquee{background:rgba(230,234,237,0.95)}
+[data-theme="light"] .hero-img-badge{background:rgba(241,244,246,0.92);border-color:var(--border-warm);color:var(--gold)}
+[data-theme="light"] .proj-lang-badge{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.13);color:var(--t2)}
+[data-theme="light"] .proj-tech-pill{background:rgba(0,0,0,0.04)}
+[data-theme="light"] .proj-card-footer{background:rgba(0,0,0,0.03)}
+[data-theme="light"] .skill-badge{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.12)}
+[data-theme="light"] .filter-btn.active{color:#fff}
+[data-theme="light"] .proj-metric-badge{color:#fff}
+[data-theme="light"] .patent-badge{color:#fff}
+[data-theme="light"] .pd-nav{background:rgba(241,244,246,0.95)}
+[data-theme="light"] .mobile-nav-drawer{box-shadow:-8px 0 40px rgba(0,0,0,.18)}
+[data-theme="light"] ::selection{color:#fff}
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
 body{font-family:var(--font-body);background:var(--bg);color:var(--t2);line-height:1.65;overflow-x:clip;-webkit-font-smoothing:antialiased;max-width:100%}
@@ -83,6 +122,10 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .nav-resume-btn{font-family:var(--font-mono);font-size:11px !important;color:var(--gold) !important;border:1px solid rgba(212,181,149,0.35);border-radius:4px;padding:5px 12px !important;transition:all 0.2s !important;}
 .nav-resume-btn::after{display:none !important}
 .nav-resume-btn:hover{background:var(--gold-dim) !important;border-color:var(--gold) !important}
+
+/* Theme toggle button */
+.theme-toggle{width:34px;height:34px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--t2);font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s var(--ease);flex-shrink:0;padding:0}
+.theme-toggle:hover{border-color:var(--border-warm);color:var(--gold);background:var(--gold-dim)}
 
 /* Hamburger — always z-index 1100, above drawer */
 .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;background:none;border:none;cursor:pointer;padding:4px;z-index:1100;position:relative;-webkit-tap-highlight-color:transparent;flex-shrink:0}
@@ -294,6 +337,11 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .proj-metric-badge{font-family:var(--font-mono);font-size:10px;font-weight:600;color:#0b1519;background:var(--gold);border-radius:3px;padding:2px 7px;white-space:nowrap;letter-spacing:0.3px}
 .proj-tech-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
 .proj-tech-pill{font-family:var(--font-mono);font-size:10px;color:var(--t3);padding:2px 6px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:3px}
+
+/* Show more / less toggle */
+.proj-toggle-wrap{display:flex;justify-content:center;margin-top:clamp(20px,3vw,28px)}
+.proj-toggle-btn{font-family:var(--font-mono);font-size:12px;color:var(--t3);background:transparent;border:1px solid var(--border-hi);border-radius:4px;padding:8px 28px;cursor:pointer;transition:all 0.2s var(--ease);min-height:38px;letter-spacing:0.5px}
+.proj-toggle-btn:hover{border-color:var(--border-warm);color:var(--gold);background:var(--gold-dim)}
 
 /* Patent */
 .patent-section{background:var(--bg)}
@@ -701,6 +749,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .pd-back-btn:hover{color:var(--t1)}
 .pd-back-btn i{font-size:11px}
 .pd-gh-btn{font-size:13px;padding:8px 16px}
+.pd-nav-right{display:flex;align-items:center;gap:10px}
 
 /* Hero block */
 .pd-container{

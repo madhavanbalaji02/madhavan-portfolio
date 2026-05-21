@@ -9,12 +9,24 @@ const filters = [
   { id: 'ml',  label: 'ML / MLOps' },
 ];
 
+const INITIAL_SHOWN = 6;
+
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
-  const filtered =
+  const [showAll, setShowAll] = useState(false);
+
+  const allFiltered =
     activeFilter === 'all'
       ? projectsData
       : projectsData.filter(p => p.category === activeFilter);
+
+  const visible = showAll ? allFiltered : allFiltered.slice(0, INITIAL_SHOWN);
+  const hasMore = allFiltered.length > INITIAL_SHOWN;
+
+  const handleFilter = (id) => {
+    setActiveFilter(id);
+    setShowAll(false);
+  };
 
   return (
     <section id="projects" className="section">
@@ -32,7 +44,7 @@ const Projects = () => {
             <button
               key={f.id}
               className={`filter-btn ${activeFilter === f.id ? 'active' : ''}`}
-              onClick={() => setActiveFilter(f.id)}
+              onClick={() => handleFilter(f.id)}
             >
               {f.label}
             </button>
@@ -40,10 +52,20 @@ const Projects = () => {
         </div>
 
         <div className="proj-grid">
-          {filtered.map((project, index) => (
+          {visible.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
+
+        {hasMore && (
+          <div className="proj-toggle-wrap">
+            <button className="proj-toggle-btn" onClick={() => setShowAll(v => !v)}>
+              {showAll
+                ? 'Show Less ↑'
+                : `Show More (${allFiltered.length - INITIAL_SHOWN} more) ↓`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

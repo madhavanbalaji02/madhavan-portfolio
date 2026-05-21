@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from './projectsData';
 
-const ProjectDetail = () => {
+const ProjectDetail = ({ theme, toggleTheme }) => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const project = projectsData.find(p => p.slug === projectId);
@@ -40,14 +40,19 @@ const ProjectDetail = () => {
             <i className="fas fa-arrow-left"></i>
             <span>All Projects</span>
           </button>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary pd-gh-btn"
-          >
-            <i className="fab fa-github"></i> View on GitHub
-          </a>
+          <div className="pd-nav-right">
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+              <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
+            </button>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary pd-gh-btn"
+            >
+              <i className="fab fa-github"></i> View on GitHub
+            </a>
+          </div>
         </div>
       </nav>
 

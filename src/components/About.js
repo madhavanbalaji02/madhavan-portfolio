@@ -47,7 +47,7 @@ const About = () => (
                 <h3>Currently</h3>
                 <p>
                   Building production AI systems at <strong>Indiana University</strong> ·
-                  Graduating <strong>May 2026</strong> · Open to full-time AI/ML roles
+                  Graduated <strong>May 2026</strong> · Open to full-time AI/ML roles
                 </p>
               </div>
 

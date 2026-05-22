@@ -1006,6 +1006,9 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   transition:background 0.2s,border-color 0.2s;
 }
 .pd-github-card:hover{background:var(--bg-card-2);border-color:var(--gold)}
+.pd-demo-card{border-color:rgba(94,196,212,0.3)}
+.pd-demo-card:hover{border-color:var(--cyan)}
+.pd-demo-card .pd-github-icon{color:var(--cyan)}
 .pd-github-icon{font-size:22px;color:var(--gold);flex-shrink:0}
 .pd-github-label{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:2px}
 .pd-github-sub{font-family:var(--font-mono);font-size:11px;color:var(--gold);margin:0}

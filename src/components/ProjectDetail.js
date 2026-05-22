@@ -44,6 +44,16 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
             <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
               <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
             </button>
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary pd-gh-btn"
+              >
+                <i className="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            )}
             <a
               href={project.github}
               target="_blank"
@@ -157,6 +167,22 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
                 ))}
               </ul>
             </div>
+
+            {/* Live Demo CTA */}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pd-github-card pd-demo-card"
+              >
+                <i className="fas fa-external-link-alt pd-github-icon"></i>
+                <div>
+                  <p className="pd-github-label">Live Demo</p>
+                  <p className="pd-github-sub">Open deployed app →</p>
+                </div>
+              </a>
+            )}
 
             {/* GitHub CTA */}
             <a

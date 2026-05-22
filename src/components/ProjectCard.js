@@ -34,6 +34,10 @@ const ProjectCard = ({ project, index }) => {
     e.stopPropagation();
   };
 
+  const handleDemoClick = e => {
+    e.stopPropagation();
+  };
+
   return (
     <div
       className="proj-card fade-in-up"
@@ -75,6 +79,18 @@ const ProjectCard = ({ project, index }) => {
           View Details
           <i className="fas fa-arrow-right proj-details-arrow"></i>
         </span>
+        {project.demo && (
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="proj-github-btn"
+            onClick={handleDemoClick}
+            aria-label="Live Demo"
+          >
+            <i className="fas fa-external-link-alt"></i>
+          </a>
+        )}
         <a
           href={project.github}
           target="_blank"

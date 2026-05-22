@@ -10,6 +10,7 @@ const skillCategories = [
       { name: 'Docker',      icon: '/assets/icons/docker.png' },
       { name: 'Jenkins',     icon: '/assets/icons/jenkins.png' },
       { name: 'ArgoCD',      icon: '/assets/icons/argo.png' },
+      { name: 'AWS',         icon: '/assets/icons/amazonaws.svg' },
       { name: 'GCP',         icon: '/assets/icons/googlecloud.png' },
       { name: 'Airflow',     icon: '/assets/icons/apacheairflow.png' },
     ],

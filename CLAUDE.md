@@ -22,6 +22,17 @@ git add docs/ && git commit -m "..." && git push origin fixes-only:main
 
 The `docs/` folder is what GitHub Pages serves. Always preserve `docs/CNAME` (`madhavanbalaji.com`). Push to `main` via `fixes-only:main` — the working branch is `fixes-only`.
 
+**Updating the resume:**
+`Madhavan Resume.pdf` in the repo root is the source of truth. When the user drops a new version there:
+```bash
+cp "Madhavan Resume.pdf" public/resume.pdf
+cp "Madhavan Resume.pdf" docs/resume.pdf
+file docs/resume.pdf   # must say "PDF document", not "HTML document"
+git add "Madhavan Resume.pdf" public/resume.pdf docs/resume.pdf
+git commit -m "Update resume" && git push origin fixes-only:main
+```
+Never download from a GitHub blob URL (`/blob/main/...`) — it returns HTML. Use the local file or `raw.githubusercontent.com`. Always verify with `file` before committing.
+
 ## Architecture
 
 **React 18 SPA with `HashRouter`** (required for GitHub Pages — no server-side routing). Routes:
@@ -49,7 +60,7 @@ The `docs/` folder is what GitHub Pages serves. Always preserve `docs/CNAME` (`m
 
 | What | Where |
 |---|---|
-| All 10 projects (full detail) | `src/components/projectsData.js` |
+| All 11 projects (full detail) | `src/components/projectsData.js` |
 | Skills grid (5 categories) | `src/components/Skills.js` |
 | Experience + teaching story | `src/components/Experience.js` |
 | Medium articles + HF Spaces | `src/components/Writing.js` |

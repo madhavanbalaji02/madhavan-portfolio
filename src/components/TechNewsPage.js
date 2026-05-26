@@ -309,15 +309,6 @@ export default function TechNewsPage() {
           Daily Tech Intel
           {meta?.stale && <span className="tnp-stale">stale</span>}
         </div>
-        <button
-          className={`tnp-refresh-btn${refreshing ? ' spinning' : ''}`}
-          onClick={handleRefresh}
-          disabled={refreshing || loading}
-          title="Force-refresh from RSS + Claude"
-        >
-          <i className="fa-solid fa-rotate-right" />
-          {refreshing ? 'Fetching…' : 'Refresh'}
-        </button>
       </header>
 
       {/* ── Tab bar ── */}

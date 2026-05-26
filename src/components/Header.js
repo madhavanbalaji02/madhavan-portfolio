@@ -85,6 +85,9 @@ const Header = ({ theme, toggleTheme }) => {
           </ul>
 
           <div className="mobile-nav-controls">
+            <a href="/#/tech-news" target="_blank" rel="noopener noreferrer" className="nav-tech-news-btn mobile-tech-news-btn">
+              Tech News ↗
+            </a>
             <button className="theme-toggle mobile-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
               <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
             </button>

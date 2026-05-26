@@ -174,7 +174,7 @@ RULES:
 
 // ── Route handlers ─────────────────────────────────────────────────────────────
 
-async function handleTechNews(request, env) {
+async function handleTechNews(request, env, ctx) {
   const forceRefresh = new URL(request.url).searchParams.get('refresh') === '1';
 
   if (!forceRefresh) {
@@ -182,16 +182,12 @@ async function handleTechNews(request, env) {
     if (cached) return Response.json({ ...cached, fromCache: true }, { headers: CORS_HEADERS });
   }
 
-  const articles = await fetchRSSFeeds();
-  if (articles.length === 0) {
-    return Response.json({ error: 'All RSS feeds failed.' }, { status: 503, headers: CORS_HEADERS });
-  }
-
-  const curated = await curateWithClaude(articles, env.ANTHROPIC_API_KEY);
-  const payload = { sections: curated, lastUpdated: new Date().toISOString(), fromCache: false };
-
-  await env.TECH_NEWS_CACHE.put(CACHE_KEY, JSON.stringify(payload), { expirationTtl: 86400 });
-  return Response.json(payload, { headers: CORS_HEADERS });
+  // Cache miss — kick off refresh in background, tell client to retry
+  ctx.waitUntil(refreshCache(env));
+  return Response.json(
+    { error: 'initializing', message: 'News is being fetched. Please refresh in 30 seconds.' },
+    { status: 503, headers: CORS_HEADERS }
+  );
 }
 
 async function handleAnalyze(request, env) {
@@ -250,8 +246,16 @@ RESPONSE FORMAT — return ONLY valid JSON, no markdown fences:
 
 // ── Entry point ────────────────────────────────────────────────────────────────
 
+async function refreshCache(env) {
+  const articles = await fetchRSSFeeds();
+  if (articles.length === 0) return;
+  const curated = await curateWithClaude(articles, env.ANTHROPIC_API_KEY);
+  const payload = { sections: curated, lastUpdated: new Date().toISOString(), fromCache: false };
+  await env.TECH_NEWS_CACHE.put(CACHE_KEY, JSON.stringify(payload), { expirationTtl: 90000 });
+}
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS_HEADERS });
     }
@@ -260,11 +264,15 @@ export default {
 
     try {
       if (path === '/api/tech-news/analyze') return handleAnalyze(request, env);
-      if (path === '/api/tech-news')         return handleTechNews(request, env);
+      if (path === '/api/tech-news')         return handleTechNews(request, env, ctx);
       if (path === '/health')                return Response.json({ status: 'ok' }, { headers: CORS_HEADERS });
       return new Response('Not found', { status: 404, headers: CORS_HEADERS });
     } catch (err) {
       return Response.json({ error: err.message }, { status: 500, headers: CORS_HEADERS });
     }
+  },
+
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(refreshCache(env));
   },
 };

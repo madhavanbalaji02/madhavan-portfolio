@@ -8,10 +8,12 @@ import Projects from './components/Projects';
 import Patent from './components/Patent';
 import Writing from './components/Writing';
 import Contact from './components/Contact';
+import TechNewsTeaser from './components/TechNewsTeaser';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import BackToTop from './components/BackToTop';
 const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
+const TechNewsPage  = lazy(() => import('./components/TechNewsPage'));
 
 function MainPage({ loading, theme, toggleTheme }) {
   return (
@@ -26,6 +28,7 @@ function MainPage({ loading, theme, toggleTheme }) {
         <Patent />
         <Writing />
         <Contact />
+        <TechNewsTeaser />
         <Footer />
         <BackToTop />
       </div>
@@ -59,6 +62,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage loading={loading} theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
+        <Route path="/tech-news" element={<Suspense fallback={<Loader />}><TechNewsPage /></Suspense>} />
       </Routes>
     </HashRouter>
   );

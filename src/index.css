@@ -60,6 +60,8 @@
 [data-theme="light"] .proj-tech-pill{background:rgba(0,0,0,0.04)}
 [data-theme="light"] .proj-card-footer{background:rgba(0,0,0,0.03)}
 [data-theme="light"] .skill-badge{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.12)}
+[data-theme="light"] .skill-icon{filter:grayscale(1) brightness(0);opacity:0.55}
+[data-theme="light"] .skill-icon-fa{color:var(--t2);opacity:0.65}
 [data-theme="light"] .filter-btn.active{color:#fff}
 [data-theme="light"] .proj-metric-badge{color:#fff}
 [data-theme="light"] .patent-badge{color:#fff}
@@ -122,6 +124,9 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .nav-resume-btn{font-family:var(--font-mono);font-size:11px !important;color:var(--gold) !important;border:1px solid rgba(212,181,149,0.35);border-radius:4px;padding:5px 12px !important;transition:all 0.2s !important;}
 .nav-resume-btn::after{display:none !important}
 .nav-resume-btn:hover{background:var(--gold-dim) !important;border-color:var(--gold) !important}
+.nav-tech-news-btn{font-family:var(--font-mono);font-size:11px !important;color:#a78bfa !important;border:1px solid rgba(167,139,250,0.3);border-radius:4px;padding:5px 12px !important;transition:all 0.2s !important;text-decoration:none;}
+.nav-tech-news-btn::after{display:none !important}
+.nav-tech-news-btn:hover{background:rgba(167,139,250,0.08) !important;border-color:rgba(167,139,250,0.55) !important}
 
 /* Theme toggle button */
 .theme-toggle{width:34px;height:34px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--t2);font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s var(--ease);flex-shrink:0;padding:0}

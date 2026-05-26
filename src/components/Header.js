@@ -68,6 +68,11 @@ const Header = ({ theme, toggleTheme }) => {
               </li>
             ))}
             <li>
+              <a href="/#/tech-news" target="_blank" rel="noopener noreferrer" className="nav-tech-news-btn">
+                Tech News ↗
+              </a>
+            </li>
+            <li>
               <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
                 <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
               </button>

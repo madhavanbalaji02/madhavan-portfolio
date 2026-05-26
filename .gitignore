@@ -1,7 +1,13 @@
 # Dependencies
+node_modules/
 /node_modules
 /.pnp
 .pnp.js
+
+# Secrets
+.env
+server/.env
+worker/.env
 
 # Testing
 /coverage

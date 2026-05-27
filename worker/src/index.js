@@ -180,14 +180,23 @@ async function handleTechNews(request, env, ctx) {
   if (!forceRefresh) {
     const cached = await env.TECH_NEWS_CACHE.get(CACHE_KEY, 'json');
     if (cached) return Response.json({ ...cached, fromCache: true }, { headers: CORS_HEADERS });
+    // Cache miss — background refresh + ask client to retry
+    ctx.waitUntil(refreshCache(env));
+    return Response.json(
+      { error: 'initializing', message: 'News is being fetched. Please refresh in 30 seconds.' },
+      { status: 503, headers: CORS_HEADERS }
+    );
   }
 
-  // Cache miss — kick off refresh in background, tell client to retry
-  ctx.waitUntil(refreshCache(env));
-  return Response.json(
-    { error: 'initializing', message: 'News is being fetched. Please refresh in 30 seconds.' },
-    { status: 503, headers: CORS_HEADERS }
-  );
+  // Force refresh — await fully so caller sees result or error
+  try {
+    await refreshCache(env);
+    const fresh = await env.TECH_NEWS_CACHE.get(CACHE_KEY, 'json');
+    if (fresh) return Response.json({ ...fresh, fromCache: false }, { headers: CORS_HEADERS });
+    return Response.json({ error: 'empty', message: 'Refresh ran but cache is still empty' }, { status: 500, headers: CORS_HEADERS });
+  } catch (err) {
+    return Response.json({ error: 'refresh-failed', message: err.message }, { status: 500, headers: CORS_HEADERS });
+  }
 }
 
 async function handleAnalyze(request, env) {

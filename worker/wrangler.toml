@@ -8,4 +8,4 @@ binding = "TECH_NEWS_CACHE"
 id = "f6b14e3952cc488fb049dd2266a45ff2"
 
 [triggers]
-crons = ["0 6 * * *"]
+crons = ["0 11 * * *"]

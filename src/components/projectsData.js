@@ -626,6 +626,7 @@ export const projectsData = [
     description: 'End-to-end LLM application: a Cloudflare Worker fetches 10 RSS feeds (including Japanese and German sources), passes 100+ articles through Claude for semantic curation into 3 personalized sections, and caches results in Cloudflare KV. On-demand deep analysis with 7-day per-article caching. Built into this portfolio.',
     language: 'JavaScript',
     langIcon: 'fab fa-js',
+    github: 'https://github.com/madhavanbalaji02/madhavan-portfolio',
     demo: '/#/tech-news',
     category: 'ai',
     categoryLabel: 'AI / LLM',

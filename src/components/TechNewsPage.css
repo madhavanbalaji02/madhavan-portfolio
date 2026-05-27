@@ -156,18 +156,21 @@
 .tnp-tab-label          { font-size: 13px; font-weight: 600; color: var(--t3); transition: color 0.2s; }
 .tnp-tab-sub            { font-family: var(--font-mono); font-size: 9px; color: var(--t3); opacity: 0.45; letter-spacing: 0.3px; transition: all 0.2s; }
 
-/* Underline tracks only the label width, not the full tab */
-.tnp-tab.active                 { border-bottom-color: transparent; }
-.tnp-tab.active::after {
+/* Underline slides in from the left on activation */
+.tnp-tab::after {
   content: '';
   position: absolute;
   bottom: -1px;
   left: 20px;
-  width: max-content;
+  width: calc(100% - 40px);
   height: 2px;
   background: var(--tab-accent, #a78bfa);
-  width: calc(100% - 40px);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s ease;
 }
+.tnp-tab.active                 { border-bottom-color: transparent; }
+.tnp-tab.active::after          { transform: scaleX(1); }
 .tnp-tab.active i               { color: var(--tab-accent, #a78bfa); }
 .tnp-tab.active .tnp-tab-label  { color: var(--t1); }
 .tnp-tab.active .tnp-tab-sub    { color: var(--t2); opacity: 1; }
@@ -222,7 +225,7 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease);
 }
 .tnp-card::before {
   content: '';
@@ -301,7 +304,7 @@
   font-size: clamp(11px, 1.1vw, 12px);
   color: var(--t2);
   line-height: 1.65;
-  max-height: calc(1.65em * 3);
+  min-height: calc(1.65em * 3);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

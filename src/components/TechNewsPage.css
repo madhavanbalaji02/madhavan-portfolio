@@ -288,11 +288,12 @@
   font-size: clamp(11px, 1.1vw, 12px);
   color: var(--t2);
   line-height: 1.7;
-  flex: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 /* ── Card footer ─────────────────────────────────────────────── */

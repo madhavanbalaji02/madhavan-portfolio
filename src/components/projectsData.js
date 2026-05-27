@@ -618,4 +618,64 @@ export const projectsData = [
       { label: 'Frontend', items: ['React', 'Tailwind CSS'] },
     ],
   },
+  {
+    id: 12,
+    slug: 'daily-tech-intel',
+    title: 'Daily Tech Intel',
+    tagline: '3-tier semantic pipeline that scrapes, translates, and summarizes 100+ global tech sources daily.',
+    description: 'End-to-end LLM application: a Cloudflare Worker fetches 10 RSS feeds (including Japanese and German sources), passes 100+ articles through Claude for semantic curation into 3 personalized sections, and caches results in Cloudflare KV. On-demand deep analysis with 7-day per-article caching. Built into this portfolio.',
+    language: 'JavaScript',
+    langIcon: 'fab fa-js',
+    demo: '/#/tech-news',
+    category: 'ai',
+    categoryLabel: 'AI / LLM',
+    catIcon: 'fas fa-newspaper',
+    metric: '100+ Sources Daily',
+    tags: ['Claude API', 'Cloudflare Workers', 'RAG', 'RSS'],
+    background:
+      "Keeping up with AI/ML research across English, Japanese, and German sources is a full-time job. Daily Tech Intel automates this: a Cloudflare Worker runs a 3-tier semantic pipeline — ingesting RSS feeds from 10 sources, passing 100+ raw articles to Claude for semantic filtering and summarization into 3 personalized sections (For You, My Stack, Around the World), and persisting results in Cloudflare KV with a 24-hour TTL. Non-English articles are translated to English in the same Claude pass. On-demand article analysis triggers a second Claude call for a 5–7 sentence deep-dive with key takeaways, cached per-article for 7 days. Prompt caching cuts input token costs ~90% on repeated section refreshes.",
+    workflow: [
+      {
+        title: 'RSS Ingestion Layer',
+        text: 'A Cloudflare Worker fetches 10 RSS feeds in parallel via Promise.allSettled — TechCrunch, The Verge, Hacker News, Ars Technica, HuggingFace Blog, ArXiv CS.AI/LG/CV, Gigazine (🇯🇵), and Golem.de (🇩🇪). Custom XML parser handles both RSS 2.0 and Atom formats with CDATA stripping.',
+      },
+      {
+        title: 'Semantic Curation via Claude',
+        text: 'All 100+ articles are batched into a single Claude claude-sonnet-4-6 call with a prompt-cached system block. Claude selects 12 articles per section — For You (broad AI/ML), My Stack (MLOps, alignment, vision, recsys), Around the World (global/translated) — and writes a 2-sentence summary per article.',
+      },
+      {
+        title: 'Translation Pipeline',
+        text: 'Japanese and German articles are translated to English inline during the curation pass — no separate translation call. Claude sets wasTranslated: true and countryFlag on each non-English article so the UI can surface the origin.',
+      },
+      {
+        title: 'KV Caching & Delivery',
+        text: 'Curated results are stored in Cloudflare KV with a 24-hour TTL. A daily Cron Trigger at 06:00 UTC pre-populates the cache so HTTP requests always read from KV instantly. A background refresh (ctx.waitUntil) handles cache misses without blocking the response.',
+      },
+      {
+        title: 'On-Demand Deep Analysis',
+        text: 'Clicking any article card triggers a second Claude call for a 5–7 sentence deep-dive and 4 key takeaways, targeted at ML practitioners. Results are cached per article URL for 7 days in KV — repeated clicks are instant.',
+      },
+    ],
+    results: [
+      '36 curated articles daily across 3 personalized sections from 100+ raw RSS entries',
+      'International sources (Japanese, German) translated to English in a single Claude pass',
+      'Prompt caching reduces input token cost ~90% on same-day cache refreshes',
+      'Per-article deep analysis cached 7 days — second click always instant',
+      'Zero cold-start: Cloudflare Cron Trigger pre-populates KV at 06:00 UTC daily',
+    ],
+    highlights: [
+      '10 RSS feeds: TechCrunch, The Verge, HN, Ars Technica, HuggingFace, ArXiv CS.AI/LG/CV, Gigazine 🇯🇵, Golem.de 🇩🇪',
+      'Single-pass semantic curation + translation via Claude claude-sonnet-4-6 with ephemeral prompt caching',
+      'Cloudflare Workers + KV: globally distributed, zero cold-start, free tier',
+      'Cron Trigger for daily pre-population; ctx.waitUntil for background cache-miss refresh',
+      '3-section personalization: For You / My Stack / Around the World',
+      'On-demand article deep-dive: 5–7 sentence analysis + 4 key takeaways, 7-day per-article cache',
+    ],
+    techStack: [
+      { label: 'AI', items: ['Claude claude-sonnet-4-6', 'Prompt Caching', 'On-demand Analysis'] },
+      { label: 'Infrastructure', items: ['Cloudflare Workers', 'Cloudflare KV', 'Cron Triggers'] },
+      { label: 'Data', items: ['RSS 2.0', 'Atom Feeds', 'Custom XML Parser', 'Multi-language Translation'] },
+      { label: 'Frontend', items: ['React 18', 'HashRouter', 'CSS Custom Properties'] },
+    ],
+  },
 ];

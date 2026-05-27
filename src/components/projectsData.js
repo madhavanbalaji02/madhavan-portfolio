@@ -358,6 +358,7 @@ export const projectsData = [
     language: 'Jupyter Notebook',
     langIcon: 'fas fa-book-open',
     github: 'https://github.com/raghuveer9303/DentaVision',
+    demo: 'https://dentalvision.onrender.com/',
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',

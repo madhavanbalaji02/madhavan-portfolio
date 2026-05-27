@@ -52,6 +52,7 @@
 
 /* Hardcoded-dark overrides for light mode */
 [data-theme="light"] .navbar{background:rgba(241,244,246,0.92)}
+[data-theme="light"] { --tnp-bar-bg: rgba(241,244,246,0.95); }
 [data-theme="light"] .navbar.scrolled{background:rgba(241,244,246,0.98)}
 [data-theme="light"] .hero-bento::before{background-image:radial-gradient(rgba(0,0,0,0.04) 1px,transparent 1px)}
 [data-theme="light"] .hero-marquee{background:rgba(230,234,237,0.95)}

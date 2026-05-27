@@ -34,9 +34,9 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   color: var(--t3);
   text-decoration: none;
   transition: color 0.15s;
@@ -49,8 +49,9 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.1px;
   color: var(--t1);
 }
 .tnp-brand-dot {
@@ -149,12 +150,24 @@
   transition: all 0.2s;
   white-space: nowrap;
   flex-shrink: 0;
+  position: relative;
 }
 .tnp-tab i              { font-size: 11px; color: var(--t3); margin-bottom: 2px; transition: color 0.2s; }
 .tnp-tab-label          { font-size: 13px; font-weight: 600; color: var(--t3); transition: color 0.2s; }
 .tnp-tab-sub            { font-family: var(--font-mono); font-size: 9px; color: var(--t3); opacity: 0.45; letter-spacing: 0.3px; transition: all 0.2s; }
 
-.tnp-tab.active                 { border-bottom-color: var(--tab-accent, #a78bfa); }
+/* Underline tracks only the label width, not the full tab */
+.tnp-tab.active                 { border-bottom-color: transparent; }
+.tnp-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 20px;
+  width: max-content;
+  height: 2px;
+  background: var(--tab-accent, #a78bfa);
+  width: calc(100% - 40px);
+}
 .tnp-tab.active i               { color: var(--tab-accent, #a78bfa); }
 .tnp-tab.active .tnp-tab-label  { color: var(--t1); }
 .tnp-tab.active .tnp-tab-sub    { color: var(--t2); opacity: 1; }
@@ -287,13 +300,12 @@
 .tnp-summary {
   font-size: clamp(11px, 1.1vw, 12px);
   color: var(--t2);
-  line-height: 1.7;
+  line-height: 1.65;
+  max-height: calc(1.65em * 3);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 /* ── Card footer ─────────────────────────────────────────────── */
@@ -309,20 +321,28 @@
 .tnp-source {
   font-family: var(--font-mono);
   font-size: 9px;
-  color: var(--t3);
-  font-weight: 600;
+  color: var(--t2);
+  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.3px;
 }
+.tnp-footer-sep {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--t3);
+  opacity: 0.35;
+  flex-shrink: 0;
+}
 .tnp-date {
   font-family: var(--font-mono);
   font-size: 9px;
   color: var(--t3);
-  opacity: 0.6;
+  opacity: 0.55;
   white-space: nowrap;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 /* ── AI label ────────────────────────────────────────────────── */

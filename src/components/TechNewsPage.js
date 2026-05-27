@@ -229,6 +229,7 @@ function ArticleCard({ article, accent, onClick }) {
 
       <footer className="tnp-card-footer">
         <span className="tnp-source">{article.source}</span>
+        <span className="tnp-footer-sep">·</span>
         <time className="tnp-date">{timeAgo(article.pubDate)}</time>
       </footer>
 

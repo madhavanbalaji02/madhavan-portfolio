@@ -62,7 +62,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage loading={loading} theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
-        <Route path="/tech-news" element={<Suspense fallback={<Loader />}><TechNewsPage /></Suspense>} />
+        <Route path="/tech-news" element={<Suspense fallback={<Loader />}><TechNewsPage theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
       </Routes>
     </HashRouter>
   );

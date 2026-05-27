@@ -76,6 +76,26 @@
   border-radius: 50px;
 }
 
+.tnp-theme-toggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--t2);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  flex-shrink: 0;
+}
+.tnp-theme-toggle:hover {
+  border-color: var(--border-warm);
+  color: var(--gold);
+}
+
 .tnp-refresh-btn {
   display: flex;
   align-items: center;

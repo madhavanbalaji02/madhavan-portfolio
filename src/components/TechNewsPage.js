@@ -242,7 +242,7 @@ function ArticleCard({ article, accent, onClick }) {
 
 // ── Main page ──────────────────────────────────────────────────────────────────
 
-export default function TechNewsPage() {
+export default function TechNewsPage({ theme, toggleTheme }) {
   const [sections,        setSections]        = useState(EMPTY_SECTIONS);
   const [loading,         setLoading]         = useState(true);
   const [error,           setError]           = useState(null);
@@ -304,6 +304,9 @@ export default function TechNewsPage() {
         <a href="/#/" className="tnp-back">
           <i className="fa-solid fa-arrow-left" /> Portfolio
         </a>
+        <button className="tnp-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+          <i className={theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun'} />
+        </button>
         <div className="tnp-brand">
           <span className="tnp-brand-dot" style={{ background: accent }} />
           Daily Tech Intel

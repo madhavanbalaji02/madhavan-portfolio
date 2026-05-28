@@ -8,7 +8,7 @@
   --cyan:#5ec4d4;--cyan-dim:rgba(94,196,212,0.08);
   --green:#4ade80;
   --t1:#f0f4f8;--t2:#8da0ab;--t3:#526670;
-  --font-body:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Space Grotesk',system-ui,sans-serif;
+  --font-body:'Space Grotesk',system-ui,sans-serif;
   --font-mono:'JetBrains Mono','Fira Code',monospace;
   --ease:cubic-bezier(0.4,0,0.2,1);
   /* legacy */

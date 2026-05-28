@@ -206,7 +206,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:clamp(16px,3vw,28px);flex-wrap:wrap}
 .hero-status{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:11px;color:var(--green);padding:5px 12px;background:rgba(74,222,128,0.14);border:1px solid rgba(74,222,128,0.40);border-radius:50px;white-space:nowrap;box-shadow:0 0 24px rgba(74,222,128,0.1)}
 .hero-status-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse-dot 2s ease infinite;flex-shrink:0}
-.hero-name{font-size:clamp(52px,10vw,100px);font-weight:700;letter-spacing:-3px;line-height:0.93;margin-bottom:clamp(16px,2.5vw,24px);background:linear-gradient(160deg,#f0f4f8 52%,rgba(212,181,149,0.75) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-name{font-size:clamp(52px,10vw,100px);font-weight:700;letter-spacing:-3px;line-height:0.93;margin-bottom:clamp(16px,2.5vw,24px);padding-bottom:0.12em;background:linear-gradient(160deg,#f0f4f8 52%,rgba(212,181,149,0.75) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-divider{width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:clamp(14px,2vw,22px)}
 .hero-role{font-family:var(--font-mono);font-size:clamp(11px,1.5vw,13px);color:var(--cyan);margin-bottom:clamp(10px,2vw,16px);letter-spacing:0.5px;text-shadow:0 0 24px rgba(94,196,212,0.4)}
 .hero-desc{font-size:clamp(14px,2vw,16px);color:var(--t2);line-height:1.8;max-width:520px;margin-bottom:clamp(22px,4vw,36px)}

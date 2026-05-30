@@ -78,7 +78,7 @@ const Header = ({ theme, toggleTheme }) => {
               </button>
             </li>
             <li>
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="nav-resume-btn">
+              <a href="/resume.html" target="_blank" rel="noopener noreferrer" className="nav-resume-btn">
                 Resume ↗
               </a>
             </li>

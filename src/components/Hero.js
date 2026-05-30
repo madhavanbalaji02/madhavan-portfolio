@@ -46,7 +46,7 @@ const Hero = () => (
 
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary" onClick={e => scrollTo(e, 'projects')}>View Work</a>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+            <a href="/resume.html" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
               Resume ↗
             </a>
           </div>

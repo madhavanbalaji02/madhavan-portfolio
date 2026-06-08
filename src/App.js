@@ -8,7 +8,7 @@ import Projects from './components/Projects';
 import Patent from './components/Patent';
 import Writing from './components/Writing';
 import Contact from './components/Contact';
-import TechNews from './components/TechNews';
+import TechNewsTeaser from './components/TechNewsTeaser';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import BackToTop from './components/BackToTop';
@@ -28,7 +28,7 @@ function MainPage({ loading, theme, toggleTheme }) {
         <Patent />
         <Writing />
         <Contact />
-        <TechNews />
+        <TechNewsTeaser />
         <Footer />
         <BackToTop />
       </div>

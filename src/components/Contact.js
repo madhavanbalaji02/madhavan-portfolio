@@ -19,7 +19,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const mailtoLink = `mailto:madbala@iu.edu?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    const mailtoLink = `mailto:madhavanbalaji02@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
     window.location.href = mailtoLink;
 
     setSubmitStatus('success');
@@ -47,13 +47,13 @@ const Contact = () => {
             <h3>Let's Connect</h3>
             <p>Feel free to reach out through any of these channels. I typically respond within 24 hours.</p>
             <div className="contact-items">
-              <a className="contact-item" href="mailto:madbala@iu.edu" target="_blank" rel="noopener noreferrer">
+              <a className="contact-item" href="mailto:madhavanbalaji02@gmail.com" target="_blank" rel="noopener noreferrer">
                 <div className="contact-icon">
                   <i className="fas fa-envelope"></i>
                 </div>
                 <div className="contact-details">
                   <h4>Email</h4>
-                  <span>madbala@iu.edu</span>
+                  <span>madhavanbalaji02@gmail.com</span>
                 </div>
               </a>
               <a className="contact-item" href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer">

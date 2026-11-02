@@ -123,7 +123,7 @@ const Header = ({ theme, toggleTheme }) => {
           <a href="https://github.com/madhavanbalaji02"         target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
           <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
           <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer"><i className="fab fa-medium"></i></a>
-          <a href="mailto:madbala@iu.edu"                        target="_blank" rel="noopener noreferrer"><i className="fas fa-envelope"></i></a>
+          <a href="mailto:madhavanbalaji02@gmail.com"                        target="_blank" rel="noopener noreferrer"><i className="fas fa-envelope"></i></a>
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
             <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
           </button>

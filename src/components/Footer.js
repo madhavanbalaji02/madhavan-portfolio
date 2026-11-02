@@ -52,7 +52,7 @@ const Footer = () => {
               <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" aria-label="HuggingFace" style={{fontSize:'16px'}}>
                 🤗
               </a>
-              <a href="mailto:madbala@iu.edu" aria-label="Email">
+              <a href="mailto:madhavanbalaji02@gmail.com" aria-label="Email">
                 <i className="fas fa-envelope"></i>
               </a>
             </div>

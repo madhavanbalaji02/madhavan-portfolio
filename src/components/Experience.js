@@ -2,6 +2,29 @@ import React, { useState } from 'react';
 
 const experiences = [
   {
+    title: 'Statistics Tutor (Statistics for AI)',
+    company: 'MAC IUI',
+    location: 'Indianapolis, IN',
+    period: 'Aug 2026 – Present',
+    current: true,
+    icon: 'fas fa-square-root-alt',
+    bullets: [
+      {
+        label: 'Statistical Foundations',
+        text: 'Teach statistics for AI, covering the statistical foundations behind machine learning: probability, distributions, hypothesis testing, confidence intervals, and regression.',
+      },
+      {
+        label: 'Concepts to AI Practice',
+        text: 'Connect each statistical concept to its AI use, such as regression as a predictive model and hypothesis tests and confidence intervals for judging model results.',
+      },
+      {
+        label: 'Communication',
+        text: "Explain quantitative concepts in clear written and verbal form, adjusting to each student's level.",
+      },
+    ],
+    skills: ['Statistics', 'Probability', 'Hypothesis Testing', 'Regression', 'Tutoring'],
+  },
+  {
     title: 'Technical Instructor & Curriculum Lead',
     company: 'Indiana University',
     location: 'Indianapolis, IN',
@@ -72,6 +95,49 @@ const teachingOutcomes = [
   },
 ];
 
+const ExpCard = ({ exp }) => (
+  <div className="exp-card fade-in-up">
+    <div className="exp-card-left">
+      <div className="exp-meta">
+        <span className="exp-period">
+          <i className="fas fa-calendar-alt"></i> {exp.period}
+        </span>
+        <span className="exp-location">
+          <i className="fas fa-map-marker-alt"></i> {exp.location}
+        </span>
+        {exp.current && <span className="exp-badge">● Current</span>}
+      </div>
+      <div className="exp-skill-tags">
+        {exp.skills.map((skill, i) => (
+          <span key={i} className="exp-skill-tag">{skill}</span>
+        ))}
+      </div>
+    </div>
+
+    <div className="exp-divider"></div>
+
+    <div className="exp-card-right">
+      <div className="exp-header">
+        <h3 className="exp-title">{exp.title}</h3>
+        <span className="exp-company">
+          <i className="fas fa-building"></i> {exp.company}
+        </span>
+      </div>
+      <ul className="exp-bullets">
+        {exp.bullets.map((b, i) => (
+          <li key={i} className="exp-bullet-item">
+            <span className="exp-bullet-dot"></span>
+            <p>
+              <strong className="exp-bullet-label">{b.label}:</strong>{' '}
+              <span className="exp-bullet-text">{b.text}</span>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
+
 const Experience = () => {
   const [narrativeOpen, setNarrativeOpen] = useState(false);
   return (
@@ -84,47 +150,11 @@ const Experience = () => {
         </div>
 
         <div className="exp-cards">
+          {/* Statistics Tutor card */}
+          <ExpCard exp={experiences[0]} />
+
           {/* Technical Instructor card */}
-          <div className="exp-card fade-in-up">
-            <div className="exp-card-left">
-              <div className="exp-meta">
-                <span className="exp-period">
-                  <i className="fas fa-calendar-alt"></i> {experiences[0].period}
-                </span>
-                <span className="exp-location">
-                  <i className="fas fa-map-marker-alt"></i> {experiences[0].location}
-                </span>
-                {experiences[0].current && <span className="exp-badge">● Current</span>}
-              </div>
-              <div className="exp-skill-tags">
-                {experiences[0].skills.map((skill, i) => (
-                  <span key={i} className="exp-skill-tag">{skill}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="exp-divider"></div>
-
-            <div className="exp-card-right">
-              <div className="exp-header">
-                <h3 className="exp-title">{experiences[0].title}</h3>
-                <span className="exp-company">
-                  <i className="fas fa-building"></i> {experiences[0].company}
-                </span>
-              </div>
-              <ul className="exp-bullets">
-                {experiences[0].bullets.map((b, i) => (
-                  <li key={i} className="exp-bullet-item">
-                    <span className="exp-bullet-dot"></span>
-                    <p>
-                      <strong className="exp-bullet-label">{b.label}:</strong>{' '}
-                      <span className="exp-bullet-text">{b.text}</span>
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <ExpCard exp={experiences[1]} />
 
           {/* Teaching Story Section */}
           <div className="teaching-story fade-in-up">
@@ -196,45 +226,7 @@ const Experience = () => {
           </div>
 
           {/* Data Analyst Intern card */}
-          <div className="exp-card fade-in-up">
-            <div className="exp-card-left">
-              <div className="exp-meta">
-                <span className="exp-period">
-                  <i className="fas fa-calendar-alt"></i> {experiences[1].period}
-                </span>
-                <span className="exp-location">
-                  <i className="fas fa-map-marker-alt"></i> {experiences[1].location}
-                </span>
-              </div>
-              <div className="exp-skill-tags">
-                {experiences[1].skills.map((skill, i) => (
-                  <span key={i} className="exp-skill-tag">{skill}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="exp-divider"></div>
-
-            <div className="exp-card-right">
-              <div className="exp-header">
-                <h3 className="exp-title">{experiences[1].title}</h3>
-                <span className="exp-company">
-                  <i className="fas fa-building"></i> {experiences[1].company}
-                </span>
-              </div>
-              <ul className="exp-bullets">
-                {experiences[1].bullets.map((b, i) => (
-                  <li key={i} className="exp-bullet-item">
-                    <span className="exp-bullet-dot"></span>
-                    <p>
-                      <strong className="exp-bullet-label">{b.label}:</strong>{' '}
-                      <span className="exp-bullet-text">{b.text}</span>
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <ExpCard exp={experiences[2]} />
         </div>
       </div>
     </section>

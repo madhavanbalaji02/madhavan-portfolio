@@ -6,7 +6,7 @@ const facts = [
   { label: 'University', value: 'Indiana University',     accent: false },
   { label: 'Location',   value: 'Indianapolis, IN',       accent: false },
   { label: 'Focus',      value: 'AI / ML Engineering',    accent: true  },
-  { label: 'Status',     value: 'Open to Roles in 2026',   accent: true  },
+  { label: 'Status',     value: 'Open to Full-Time Roles', accent: true  },
   { label: 'Patent',     value: 'Filed with Govt. of India', accent: false },
   { label: 'Teaching',   value: '30+ students mentored',  accent: false },
   { label: 'Projects',   value: '10+ shipped',            accent: false },
@@ -27,27 +27,26 @@ const About = () => (
             <div className="about-text">
               <h3>Background</h3>
               <p>
-                I'm <strong>Madhavan Balaji</strong>, a Master's student in Computer Science at Indiana University
-                and an AI Engineer driven by a passion for building intelligent systems that solve real-world
-                problems. My work sits at the intersection of machine learning, computer vision, and applied AI,
-                turning raw data into production-ready solutions.
+                I'm <strong>Madhavan Balaji</strong>, an AI Engineer with a Master's in Computer Science from
+                Indiana University. I build systems that solve real problems, working across machine learning,
+                computer vision, and applied AI to turn raw data into production-ready software.
               </p>
               <p>
                 From engineering high-accuracy visual retrieval systems and multi-label classifiers to designing
                 end-to-end ML pipelines, I bring both research depth and engineering discipline. I've published
-                findings, filed patents, and shipped systems that perform, not just in notebooks, but in the real world.
+                findings, filed a patent, and shipped systems that run in production, not just in notebooks.
               </p>
               <p>
                 Beyond building, I care deeply about <strong>knowledge transfer</strong>. As a Technical Instructor
-                at Indiana University, I've helped 30+ students unlock complex CS concepts through clear visual
-                explanations, hands-on mentorship, and a community-first approach.
+                at Indiana University, I helped 30+ students work through complex CS concepts with visual
+                explanations and hands-on mentorship. Today I tutor Statistics for AI at MAC IUI.
               </p>
 
               <div className="about-currently">
                 <h3>Currently</h3>
                 <p>
-                  Building production AI systems at <strong>Indiana University</strong> ·
-                  Graduated <strong>May 2026</strong> · Open to full-time AI/ML roles
+                  Statistics Tutor at <strong>MAC IUI</strong> ·
+                  MS CS, Indiana University, <strong>May 2026</strong> · Open to full-time AI/ML roles
                 </p>
               </div>
 

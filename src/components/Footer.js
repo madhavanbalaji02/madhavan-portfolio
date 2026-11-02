@@ -10,7 +10,7 @@ const quickLinks = [
   ['#about',      'About'],
   ['#experience', 'Experience'],
   ['#projects',   'Projects'],
-  ['#patent',     'Achievements'],
+  ['#patent',     'Patent'],
   ['#writing',    'Writing'],
   ['#contact',    'Contact'],
 ];
@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
         <div className="footer-bottom">
           <p>&copy; {currentYear} Madhavan Balaji. All rights reserved.</p>
-          <p className="footer-note">Built with passion and attention to detail</p>
+          <p className="footer-note">Built with React · Hosted on GitHub Pages</p>
         </div>
       </div>
     </footer>

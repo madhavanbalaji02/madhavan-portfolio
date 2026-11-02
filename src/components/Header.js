@@ -42,7 +42,7 @@ const Header = ({ theme, toggleTheme }) => {
     ['#about',      'About'],
     ['#experience', 'Experience'],
     ['#projects',   'Projects'],
-    ['#patent',     'Achievements'],
+    ['#patent',     'Patent'],
     ['#writing',    'Writing'],
     ['#contact',    'Contact'],
   ];

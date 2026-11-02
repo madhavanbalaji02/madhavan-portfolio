@@ -146,7 +146,7 @@ const Experience = () => {
         <div className="section-header">
           <span className="section-tag">Experience</span>
           <h2 className="section-title">Professional Journey</h2>
-          <p className="section-subtitle">Real-world impact through AI, data, and education</p>
+          <p className="section-subtitle">Teaching, tutoring, and applied ML work</p>
         </div>
 
         <div className="exp-cards">

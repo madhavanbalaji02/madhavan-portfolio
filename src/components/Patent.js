@@ -5,9 +5,9 @@ const Patent = () => {
     <section id="patent" className="section patent-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Innovation</span>
+          <span className="section-tag">Patent</span>
           <h2 className="section-title">Patent & Research</h2>
-          <p className="section-subtitle">Breakthrough solutions making a real impact</p>
+          <p className="section-subtitle">A filed patent for an IoT system that supports elderly care at home</p>
         </div>
         <div className="patent fade-in-up">
           <div className="patent-image-wrapper">

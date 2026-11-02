@@ -36,7 +36,7 @@ const Contact = () => {
         <div className="section-header">
           <span className="section-tag">Get In Touch</span>
           <h2 className="section-title">Let's Work Together</h2>
-          <p className="section-subtitle">I'm always open to discussing new projects, creative ideas, or opportunities</p>
+          <p className="section-subtitle">Hiring for an AI/ML role, or want to talk about a project? Send me a note.</p>
         </div>
         <div className="contact-wrapper">
           <div className="contact-info fade-in-up">
@@ -45,7 +45,7 @@ const Contact = () => {
               Available for opportunities
             </div>
             <h3>Let's Connect</h3>
-            <p>Feel free to reach out through any of these channels. I typically respond within 24 hours.</p>
+            <p>Email is the fastest way to reach me. I usually reply within a day.</p>
             <div className="contact-items">
               <a className="contact-item" href="mailto:madhavanbalaji02@gmail.com" target="_blank" rel="noopener noreferrer">
                 <div className="contact-icon">
@@ -139,11 +139,11 @@ const Contact = () => {
                 {submitStatus === 'success' ? (
                   <>
                     <i className="fas fa-check"></i>
-                    <span>Message Sent!</span>
+                    <span>Opening Your Email App</span>
                   </>
                 ) : (
                   <>
-                    <span>Send Message</span>
+                    <span>Email Me</span>
                     <i className="fas fa-paper-plane"></i>
                   </>
                 )}

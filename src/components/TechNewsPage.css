@@ -1,5 +1,5 @@
 /* ================================================================
-   TechNewsPage — Daily Tech Intel
+   TechNewsPage: Daily Tech Intel
    Uses portfolio CSS variables: --bg, --bg-card, --gold, --cyan, --green
    Per-tab accent: purple / green / blue (unique to this page)
    ================================================================ */
@@ -206,7 +206,7 @@
   margin: 0 auto;
 }
 
-/* ── Card grid — 4 columns for 12 articles ───────────────────── */
+/* ── Card grid: 4 columns for 12 articles ───────────────────── */
 .tnp-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -392,7 +392,7 @@
 .tnp-empty-msg   { font-family: var(--font-mono); font-size: 12px; color: var(--t3); max-width: 380px; line-height: 1.65; }
 
 /* ================================================================
-   Article Detail Modal — mirrors ProjectDetail design language
+   Article Detail Modal: mirrors ProjectDetail design language
    ================================================================ */
 .tnp-modal-overlay {
   position: fixed;

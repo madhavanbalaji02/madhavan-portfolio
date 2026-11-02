@@ -22,7 +22,7 @@ const Patent = () => {
               </div>
               <div className="patent-pdf-info">
                 <span className="patent-pdf-title">Application No. 202341075614</span>
-                <span className="patent-pdf-sub">Government of India — Patent Office</span>
+                <span className="patent-pdf-sub">Government of India, Patent Office</span>
                 <span className="patent-pdf-sub">Filed: 2023 · Status: Published</span>
               </div>
               <div className="patent-pdf-cta">

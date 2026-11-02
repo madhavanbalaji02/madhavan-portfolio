@@ -3,7 +3,7 @@ export const projectsData = [
     id: 1,
     slug: 'sovereign-sre',
     title: 'Sovereign SRE',
-    tagline: 'Detect → Diagnose → Fix → Deploy — all without paging anyone.',
+    tagline: 'Detect → Diagnose → Fix → Deploy, all without paging anyone.',
     description: 'Production-grade autonomous SRE platform on 13 AWS services. CloudWatch alarms trigger a LangGraph + CrewAI multi-agent pipeline that diagnoses incidents with codebase-aware RAG (pgvector), generates patches via Amazon Bedrock, and deploys only after human approval via Step Functions + SNS. Live on AWS Amplify.',
     language: 'Python',
     langIcon: 'fab fa-python',
@@ -15,7 +15,7 @@ export const projectsData = [
     metric: '13 AWS Services',
     tags: ['LangGraph', 'Amazon Bedrock', 'AWS', 'CrewAI'],
     background:
-      "Production systems fail in unpredictable ways. Traditional SRE relies on human engineers on-call, following runbooks, and debugging under extreme pressure — an expensive, error-prone process at scale. Sovereign SRE closes this loop autonomously: CloudWatch alarms route through EventBridge and Lambda into a LangGraph state machine, where CrewAI agents diagnose the incident using codebase embeddings stored in RDS pgvector, then Bedrock Claude Haiku generates a targeted code patch. The entire pipeline is orchestrated by Step Functions, which pauses for a mandatory human approval via SNS email before any fix is deployed. Every incident is fully auditable — diffs in S3, history in DynamoDB, cost metrics in CloudWatch.",
+      "Production systems fail in unpredictable ways. Traditional SRE relies on human engineers on-call, following runbooks, and debugging under extreme pressure, an expensive, error-prone process at scale. Sovereign SRE closes this loop autonomously: CloudWatch alarms route through EventBridge and Lambda into a LangGraph state machine, where CrewAI agents diagnose the incident using codebase embeddings stored in RDS pgvector, then Bedrock Claude Haiku generates a targeted code patch. The entire pipeline is orchestrated by Step Functions, which pauses for a mandatory human approval via SNS email before any fix is deployed. Every incident is fully auditable: diffs in S3, history in DynamoDB, cost metrics in CloudWatch.",
     workflow: [
       {
         title: 'Alarm Ingestion',
@@ -23,7 +23,7 @@ export const projectsData = [
       },
       {
         title: 'Step Functions Orchestration',
-        text: 'AWS Step Functions coordinates the full healing pipeline using a waitForTaskToken pattern — the workflow pauses at the approval gate and resumes only when the engineer responds via the SNS email link.',
+        text: 'AWS Step Functions coordinates the full healing pipeline using a waitForTaskToken pattern: the workflow pauses at the approval gate and resumes only when the engineer responds via the SNS email link.',
       },
       {
         title: 'Multi-Agent Root Cause Analysis',
@@ -42,14 +42,14 @@ export const projectsData = [
       'Full incident-to-fix pipeline runs on 13 AWS services across compute, storage, messaging, and AI inference',
       'Step Functions waitForTaskToken pattern ensures no autonomous deployment without engineer sign-off',
       'RDS pgvector RAG retrieves codebase context for accurate, targeted patch generation',
-      '31 passing tests with full AWS service mocking via moto — CI-ready from day one',
+      '31 passing tests with full AWS service mocking via moto, CI-ready from day one',
       'Live deployment: dashboard on AWS Amplify, API on EC2, vector DB on RDS (us-east-2)',
     ],
     highlights: [
       '13 AWS services: CloudWatch Logs/Alarms/Metrics, EventBridge, Lambda, Step Functions, SNS, Bedrock, RDS pgvector, DynamoDB, S3, SSM, EC2',
       'LangGraph state machine with CrewAI Senior SRE + System Researcher agents',
       'Amazon Bedrock (Claude Haiku) for patch generation; Groq Llama 3.3 fallback',
-      'Step Functions waitForTaskToken human approval gate — no autonomous deploys',
+      'Step Functions waitForTaskToken human approval gate, no autonomous deploys',
       'Real-time Next.js dashboard with WebSocket agent streaming',
       'GitHub API integration for automatic PR creation with diff previews',
     ],
@@ -64,8 +64,8 @@ export const projectsData = [
     id: 2,
     slug: 'llm-eval-harness',
     title: 'LLM Eval Harness',
-    tagline: 'Benchmark any LLM across latency, accuracy, hallucination, and cost — in one automated pipeline.',
-    description: 'Production-grade benchmarking framework that evaluates OpenAI, Anthropic, and Groq models simultaneously across latency (p50/p95/p99, TTFT), accuracy (semantic similarity, LLM-as-judge), hallucination (NLI cross-encoder), cost, and RAGAS metrics — with Rich terminal output, self-contained HTML reports, and a Streamlit comparison dashboard.',
+    tagline: 'Benchmark any LLM across latency, accuracy, hallucination, and cost, in one automated pipeline.',
+    description: 'Production-grade benchmarking framework that evaluates OpenAI, Anthropic, and Groq models simultaneously across latency (p50/p95/p99, TTFT), accuracy (semantic similarity, LLM-as-judge), hallucination (NLI cross-encoder), cost, and RAGAS metrics, with Rich terminal output, self-contained HTML reports, and a Streamlit comparison dashboard.',
     language: 'Python',
     langIcon: 'fab fa-python',
     github: 'https://github.com/madhavanbalaji02/llm-eval-harness',
@@ -75,7 +75,7 @@ export const projectsData = [
     metric: '6 Models · 5 Metrics',
     tags: ['LLM Benchmarking', 'RAGAS', 'Streamlit', 'Async'],
     background:
-      "Choosing an LLM for production is not just about accuracy — it's a multi-dimensional trade-off between latency, hallucination risk, and cost. Most evaluations are ad hoc: a few prompts, subjective scoring, no reproducibility. LLM Eval Harness replaces that with a fully automated, configurable pipeline that evaluates any combination of OpenAI, Anthropic, and Groq models in parallel against a structured JSONL dataset. The key architectural insight is that each evaluation dimension (latency, quality, hallucination, cost) requires a different measurement strategy — and fusing them into a single comparable report is what makes the framework useful for real deployment decisions. The NLI-based hallucination detector (deberta-v3-small cross-encoder) and RAGAS suite provide grounded, reproducible quality signals far beyond simple accuracy metrics.",
+      "Choosing an LLM for production is not just about accuracy. It's a multi-dimensional trade-off between latency, hallucination risk, and cost. Most evaluations are ad hoc: a few prompts, subjective scoring, no reproducibility. LLM Eval Harness replaces that with a fully automated, configurable pipeline that evaluates any combination of OpenAI, Anthropic, and Groq models in parallel against a structured JSONL dataset. The key architectural insight is that each evaluation dimension (latency, quality, hallucination, cost) requires a different measurement strategy, and fusing them into a single comparable report is what makes the framework useful for real deployment decisions. The NLI-based hallucination detector (deberta-v3-small cross-encoder) and RAGAS suite provide grounded, reproducible quality signals far beyond simple accuracy metrics.",
     workflow: [
       {
         title: 'Dataset Ingestion',
@@ -87,7 +87,7 @@ export const projectsData = [
       },
       {
         title: 'Metrics Engine',
-        text: 'After each model response is collected, the metrics engine computes five dimensions: (1) Latency — p50/p95/p99 percentiles, TTFT, and tokens/sec; (2) Accuracy — exact match and semantic similarity via sentence-transformers; (3) LLM-as-Judge — a secondary model scores responses 1–5 for quality; (4) Hallucination — a deberta-v3-small NLI cross-encoder checks whether model claims are entailed by the ground truth context; (5) Cost — tiktoken counts tokens and applies per-model pricing tables.',
+        text: 'After each model response is collected, the metrics engine computes five dimensions: (1) Latency: p50/p95/p99 percentiles, TTFT, and tokens/sec; (2) Accuracy: exact match and semantic similarity via sentence-transformers; (3) LLM-as-Judge: a secondary model scores responses 1–5 for quality; (4) Hallucination: a deberta-v3-small NLI cross-encoder checks whether model claims are entailed by the ground truth context; (5) Cost: tiktoken counts tokens and applies per-model pricing tables.',
       },
       {
         title: 'RAGAS Evaluation',
@@ -99,7 +99,7 @@ export const projectsData = [
       },
     ],
     results: [
-      'llama-3.3-70b achieves P50 latency of 1,956ms and TTFT of 245ms — 16× faster TTFT than llama-3.1-8b',
+      'llama-3.3-70b achieves P50 latency of 1,956ms and TTFT of 245ms, 16× faster TTFT than llama-3.1-8b',
       'llama-3.1-8b delivers comparable semantic similarity (0.852 vs 0.880) at 10× lower cost per query',
       '0% hallucination rate on the AI/ML Q&A benchmark for both Groq models via NLI cross-encoder',
       '95 automated tests across metrics, runners, and reporters ensure evaluation reproducibility',
@@ -124,7 +124,7 @@ export const projectsData = [
     id: 3,
     slug: 'documind',
     title: 'DocuMind',
-    tagline: 'Multi-agent research that reads your documents and writes cited reports — in seconds.',
+    tagline: 'Multi-agent research that reads your documents and writes cited reports, in seconds.',
     description: 'Enterprise-grade multi-agent RAG research platform on AWS. LangGraph orchestrates a 4-agent CrewAI pipeline (Researcher → Analyst → Writer → Critic) that produces fully cited reports using hybrid pgvector + BM25 retrieval with CrossEncoder reranking. Deployed on EC2 behind CloudFront with RDS PostgreSQL, Step Functions, Bedrock Claude Haiku, and Claude Desktop MCP integration.',
     language: 'Python',
     langIcon: 'fab fa-python',
@@ -136,15 +136,15 @@ export const projectsData = [
     metric: '15ms RAG · 400ms Ingest',
     tags: ['Multi-Agent', 'RAG', 'LangGraph', 'AWS Bedrock'],
     background:
-      "Enterprise knowledge is trapped in PDFs, internal wikis, and siloed documentation systems. When engineers need answers, they spend hours manually searching across sources — and still miss crucial context. DocuMind replaces that with an enterprise-grade multi-agent research platform deployed on AWS that synthesizes across custom knowledge bases and produces structured, cited reports. The key architectural decisions: hybrid retrieval combining pgvector dense search with BM25 sparse matching, fused via Reciprocal Rank Fusion (RRF k=60) and reranked with a CrossEncoder — achieving higher recall and precision than either approach alone. Document ingestion runs through an asynchronous AWS Step Functions pipeline (S3 → Lambda parse via Textract → Lambda embed via Bedrock Titan Embed v2 → Lambda store into pgvector), keeping the API non-blocking even for complex multi-page PDFs.",
+      "Enterprise knowledge is trapped in PDFs, internal wikis, and siloed documentation systems. When engineers need answers, they spend hours manually searching across sources, and still miss crucial context. DocuMind replaces that with an enterprise-grade multi-agent research platform deployed on AWS that synthesizes across custom knowledge bases and produces structured, cited reports. The key architectural decisions: hybrid retrieval combining pgvector dense search with BM25 sparse matching, fused via Reciprocal Rank Fusion (RRF k=60) and reranked with a CrossEncoder, achieving higher recall and precision than either approach alone. Document ingestion runs through an asynchronous AWS Step Functions pipeline (S3 → Lambda parse via Textract → Lambda embed via Bedrock Titan Embed v2 → Lambda store into pgvector), keeping the API non-blocking even for complex multi-page PDFs.",
     workflow: [
       {
         title: 'Document Ingestion Pipeline',
-        text: 'Users upload documents (PDF, DOCX) or provide URLs. An AWS Step Functions 3-stage pipeline handles ingestion asynchronously: Lambda parses content (pymupdf for PDFs, Amazon Textract for complex docs), Lambda embeds chunks using Bedrock Titan Embed v2 (1024-dim vectors), and Lambda stores into RDS pgvector with SHA-256 idempotent deduplication — typical ingest is 400–800ms.',
+        text: 'Users upload documents (PDF, DOCX) or provide URLs. An AWS Step Functions 3-stage pipeline handles ingestion asynchronously: Lambda parses content (pymupdf for PDFs, Amazon Textract for complex docs), Lambda embeds chunks using Bedrock Titan Embed v2 (1024-dim vectors), and Lambda stores into RDS pgvector with SHA-256 idempotent deduplication. Typical ingest is 400–800ms.',
       },
       {
         title: 'Hybrid RAG Retrieval',
-        text: 'On each query, pgvector retrieves semantically similar chunks via dense embedding search while BM25 retrieves keyword-matched chunks. Scores are fused using Reciprocal Rank Fusion (RRF k=60), then a CrossEncoder (ms-marco-MiniLM-L-6-v2) reranks the top candidates — ~15ms p50 retrieval latency.',
+        text: 'On each query, pgvector retrieves semantically similar chunks via dense embedding search while BM25 retrieves keyword-matched chunks. Scores are fused using Reciprocal Rank Fusion (RRF k=60), then a CrossEncoder (ms-marco-MiniLM-L-6-v2) reranks the top candidates, with ~15ms p50 retrieval latency.',
       },
       {
         title: '4-Agent Research Pipeline',
@@ -161,9 +161,9 @@ export const projectsData = [
     ],
     results: [
       'PDF ingestion: ~176ms for 15-page papers; full pipeline 400–800ms; 3.5s for complex arxiv PDFs',
-      'RAG retrieval at ~15ms p50 — pgvector dense + BM25 sparse fused via RRF with CrossEncoder reranking',
+      'RAG retrieval at ~15ms p50 using pgvector dense + BM25 sparse fused via RRF with CrossEncoder reranking',
       'Hybrid retrieval achieves higher recall than dense-only or sparse-only approaches on internal benchmarks',
-      'RAGAS evaluation integrated — faithfulness, answer relevancy, context precision & recall (target ≥0.60)',
+      'RAGAS evaluation integrated: faithfulness, answer relevancy, context precision & recall (target ≥0.60)',
       'Claude Desktop MCP integration enables DocuMind as a reusable research tool in AI workflows',
     ],
     highlights: [
@@ -171,7 +171,7 @@ export const projectsData = [
       'LangGraph state machine with 4-agent CrewAI crew: Researcher → Analyst → Writer → Critic',
       'AWS Step Functions ingestion: S3 → Textract → Bedrock Titan Embed v2 → pgvector',
       'Amazon Bedrock: Claude Haiku for agents + Titan Embed v2 (1024-dim) for embeddings',
-      'CloudFront → EC2 → RDS PostgreSQL 15 with pgvector — full AWS 3-tier deployment',
+      'CloudFront → EC2 → RDS PostgreSQL 15 with pgvector, full AWS 3-tier deployment',
       'Claude Desktop MCP tool integration + RAGAS evaluation pipeline',
     ],
     techStack: [
@@ -185,7 +185,7 @@ export const projectsData = [
     id: 4,
     slug: 'project-aegis',
     title: 'Project Aegis',
-    tagline: 'A self-healing data pipeline that detects drift and repairs itself — before your models silently fail.',
+    tagline: 'A self-healing data pipeline that detects drift and repairs itself, before your models silently fail.',
     description: 'Self-healing data quality system that automatically detects and repairs data drift using Evidently AI and DuckDB streaming. Scales from cloud (200MB) to local (100GB+) with a hybrid architecture and Streamlit dashboard.',
     language: 'Python',
     langIcon: 'fab fa-python',
@@ -196,7 +196,7 @@ export const projectsData = [
     metric: '<60s Detection',
     tags: ['DuckDB', 'Evidently AI', 'Polars', 'Streamlit'],
     background:
-      "Data drift is silent and deadly. Production ML models degrade gradually as input distributions shift — often with no visible errors until model accuracy has already collapsed. Most solutions detect drift after the fact; Aegis is designed to detect and repair drift automatically, keeping data pipelines healthy before downstream models are affected. The hybrid architecture (DuckDB for streaming analytics + Polars for batch processing) enables the system to scale from small cloud deployments to large on-premise datasets without architectural changes.",
+      "Data drift is silent and deadly. Production ML models degrade gradually as input distributions shift, often with no visible errors until model accuracy has already collapsed. Most solutions detect drift after the fact; Aegis is designed to detect and repair drift automatically, keeping data pipelines healthy before downstream models are affected. The hybrid architecture (DuckDB for streaming analytics + Polars for batch processing) enables the system to scale from small cloud deployments to large on-premise datasets without architectural changes.",
     workflow: [
       {
         title: 'Continuous Data Ingestion',
@@ -212,11 +212,11 @@ export const projectsData = [
       },
       {
         title: 'Polars Batch Processing',
-        text: 'Polars handles the high-throughput batch transformations needed for large-scale repair operations — significantly faster than Pandas for 100GB+ datasets.',
+        text: 'Polars handles the high-throughput batch transformations needed for large-scale repair operations, significantly faster than Pandas for 100GB+ datasets.',
       },
       {
         title: 'Streamlit Dashboard',
-        text: 'A real-time Streamlit dashboard visualizes drift metrics, repair actions taken, and pipeline health over time — giving data engineers full observability.',
+        text: 'A real-time Streamlit dashboard visualizes drift metrics, repair actions taken, and pipeline health over time, giving data engineers full observability.',
       },
     ],
     results: [
@@ -244,7 +244,7 @@ export const projectsData = [
     slug: 'chain-of-thought-faithfulness',
     title: 'Chain-of-Thought Faithfulness',
     tagline: 'Does your LLM\'s reasoning actually drive its answers? The data says: probably not.',
-    description: 'Research into whether LLM chain-of-thought reasoning actually influences predictions using Negative Preference Optimization. Found fine-tuning on high-quality CoT reduces faithfulness by 56–75% — a data curation problem, not training.',
+    description: 'Research into whether LLM chain-of-thought reasoning actually influences predictions using Negative Preference Optimization. Found fine-tuning on high-quality CoT reduces faithfulness by 56–75%, a data curation problem, not training.',
     language: 'Jupyter Notebook',
     langIcon: 'fas fa-book-open',
     github: 'https://github.com/madhavanbalaji02/Chain-of-Thought-Faithfulness',
@@ -254,7 +254,7 @@ export const projectsData = [
     metric: '↓56–75% Faithful',
     tags: ['LLMs', 'NPO', 'NLP', 'Research'],
     background:
-      "Chain-of-thought (CoT) prompting produces reasoning traces that look coherent — but are they causally connected to the model's final answer? Or are they post-hoc rationalizations of a decision made elsewhere in the model? This distinction matters enormously for AI safety and interpretability. If CoT is just a narrative layer, then 'reasoning-based' safety interventions are built on sand. This project investigates CoT faithfulness using causal intervention: does perturbing the reasoning trace change the model's output? And critically: does fine-tuning on high-quality CoT help or hurt?",
+      "Chain-of-thought (CoT) prompting produces reasoning traces that look coherent, but are they causally connected to the model's final answer? Or are they post-hoc rationalizations of a decision made elsewhere in the model? This distinction matters enormously for AI safety and interpretability. If CoT is just a narrative layer, then 'reasoning-based' safety interventions are built on sand. This project investigates CoT faithfulness using causal intervention: does perturbing the reasoning trace change the model's output? And critically: does fine-tuning on high-quality CoT help or hurt?",
     workflow: [
       {
         title: 'Faithfulness Measurement',
@@ -266,7 +266,7 @@ export const projectsData = [
       },
       {
         title: 'Fine-tuning Experiments',
-        text: 'Models were fine-tuned on curated high-quality CoT datasets and evaluated for faithfulness — isolating whether data quality or training objective is the bottleneck.',
+        text: 'Models were fine-tuned on curated high-quality CoT datasets and evaluated for faithfulness, isolating whether data quality or training objective is the bottleneck.',
       },
       {
         title: 'Causal Analysis',
@@ -274,8 +274,8 @@ export const projectsData = [
       },
     ],
     results: [
-      'Fine-tuning on high-quality CoT reduces faithfulness by 56–75% — counterintuitive but robust finding',
-      'The root cause is data curation, not the training objective — models learn to produce impressive reasoning without using it',
+      'Fine-tuning on high-quality CoT reduces faithfulness by 56–75%, a counterintuitive but robust finding',
+      'The root cause is data curation, not the training objective: models learn to produce impressive reasoning without using it',
       'NPO partially recovers faithfulness but is insufficient alone',
       'Findings suggest CoT-based safety interventions need structural changes, not just better data',
     ],
@@ -295,8 +295,8 @@ export const projectsData = [
     id: 6,
     slug: 'vectorgaze',
     title: 'VectorGaze',
-    tagline: 'Natural language safety queries on live video — zero training data required.',
-    description: 'Edge AI system detecting workplace safety violations from video using natural language queries — no training data required. Combines CLIP zero-shot embeddings, Moondream2 reasoning, and LanceDB vector search on Apple Silicon.',
+    tagline: 'Natural language safety queries on live video, zero training data required.',
+    description: 'Edge AI system detecting workplace safety violations from video using natural language queries, no training data required. Combines CLIP zero-shot embeddings, Moondream2 reasoning, and LanceDB vector search on Apple Silicon.',
     language: 'Python',
     langIcon: 'fab fa-python',
     github: 'https://github.com/madhavanbalaji02/VectorGaze',
@@ -326,14 +326,14 @@ export const projectsData = [
       },
       {
         title: 'Edge Deployment',
-        text: 'Entire pipeline runs on Apple Silicon (M-series) with Metal acceleration — no cloud calls, keeping footage private and latency sub-second.',
+        text: 'Entire pipeline runs on Apple Silicon (M-series) with Metal acceleration, no cloud calls, keeping footage private and latency sub-second.',
       },
     ],
     results: [
       'Zero-shot detection of arbitrary safety violations with no labeled training data',
       'LanceDB enables real-time vector search across thousands of frame embeddings',
       'Moondream2 reasoning step reduces false positive rate significantly',
-      'Fully on-device on Apple Silicon — no data leaves the local network',
+      'Fully on-device on Apple Silicon, so no data leaves the local network',
     ],
     highlights: [
       'Zero-shot: no training data or annotation required',
@@ -353,7 +353,7 @@ export const projectsData = [
     id: 7,
     slug: 'dentavision',
     title: 'DentaVision',
-    tagline: 'A Vision Transformer that diagnoses dental conditions at 92.4% accuracy — in under a second.',
+    tagline: 'A Vision Transformer that diagnoses dental conditions at 92.4% accuracy, in under a second.',
     description: 'AI diagnostic system classifying dental conditions (caries, gingivitis) at 92.4% accuracy using a pretrained Vision Transformer. FastAPI backend and React frontend deliver sub-second inference for clinical use.',
     language: 'Jupyter Notebook',
     langIcon: 'fas fa-book-open',
@@ -365,7 +365,7 @@ export const projectsData = [
     metric: '92.4% Accuracy',
     tags: ['ViT', 'Medical AI', 'FastAPI', 'React'],
     background:
-      "Dental diagnostics are subjective, expensive, and inaccessible in underserved regions. A dentist's assessment of caries or gingivitis from an intraoral photo varies by experience and fatigue. DentaVision applies a pretrained Vision Transformer (ViT) to standardize and accelerate dental diagnosis — providing consistent, explainable classifications from dental images with sub-second inference via a clinical-ready API. The ViT architecture was chosen over CNNs for its global attention mechanism, which better captures the distributed visual patterns of dental pathology.",
+      "Dental diagnostics are subjective, expensive, and inaccessible in underserved regions. A dentist's assessment of caries or gingivitis from an intraoral photo varies by experience and fatigue. DentaVision applies a pretrained Vision Transformer (ViT) to standardize and accelerate dental diagnosis, providing consistent, explainable classifications from dental images with sub-second inference via a clinical-ready API. The ViT architecture was chosen over CNNs for its global attention mechanism, which better captures the distributed visual patterns of dental pathology.",
     workflow: [
       {
         title: 'Vision Transformer Classification',
@@ -381,7 +381,7 @@ export const projectsData = [
       },
       {
         title: 'React Clinical Frontend',
-        text: 'A React interface allows clinicians to upload dental images and receive instant diagnosis with confidence breakdown — designed for low-friction clinical workflow integration.',
+        text: 'A React interface allows clinicians to upload dental images and receive instant diagnosis with confidence breakdown, designed for low-friction clinical workflow integration.',
       },
     ],
     results: [
@@ -392,7 +392,7 @@ export const projectsData = [
     ],
     highlights: [
       'Vision Transformer (ViT) with global attention for dental pathology',
-      '92.4% accuracy — competitive with trained human performance',
+      '92.4% accuracy, competitive with trained human performance',
       'FastAPI backend ready for clinical EMR integration',
       'React frontend designed for clinical workflow',
       'Interpretable attention maps for explainability',
@@ -419,7 +419,7 @@ export const projectsData = [
     metric: '<5min Deploy',
     tags: ['Recommender', 'Kubernetes', 'ArgoCD', 'MLOps'],
     background:
-      "Recommender systems sit at the intersection of ML and production engineering — the model is only half the challenge. This project was built to practice the full MLOps lifecycle: developing a hybrid recommender (content-based + collaborative filtering), containerizing it, deploying it to Kubernetes, and establishing automated CI/CD pipelines. The hybrid approach was chosen because neither content-based (ignores user behavior) nor collaborative filtering alone (ignores item attributes) achieves the best recommendations — combining them captures both signal types.",
+      "Recommender systems sit at the intersection of ML and production engineering. The model is only half the challenge. This project was built to practice the full MLOps lifecycle: developing a hybrid recommender (content-based + collaborative filtering), containerizing it, deploying it to Kubernetes, and establishing automated CI/CD pipelines. The hybrid approach was chosen because neither content-based (ignores user behavior) nor collaborative filtering alone (ignores item attributes) achieves the best recommendations. Combining them captures both signal types.",
     workflow: [
       {
         title: 'Content-Based Filtering',
@@ -427,7 +427,7 @@ export const projectsData = [
       },
       {
         title: 'Collaborative Filtering',
-        text: 'User-item interaction matrices are decomposed using matrix factorization. Latent factors capture behavioral patterns — users who liked similar anime are grouped, and their preferences propagate.',
+        text: 'User-item interaction matrices are decomposed using matrix factorization. Latent factors capture behavioral patterns: users who liked similar anime are grouped, and their preferences propagate.',
       },
       {
         title: 'Hybrid Score Fusion',
@@ -439,7 +439,7 @@ export const projectsData = [
       },
       {
         title: 'Jenkins + ArgoCD CI/CD',
-        text: 'Jenkins runs unit tests and builds Docker images on every commit. ArgoCD watches the Helm chart repository and auto-syncs Kubernetes deployments — full GitOps.',
+        text: 'Jenkins runs unit tests and builds Docker images on every commit. ArgoCD watches the Helm chart repository and auto-syncs Kubernetes deployments, full GitOps.',
       },
     ],
     results: [
@@ -466,7 +466,7 @@ export const projectsData = [
     id: 9,
     slug: 'multi-style-image-transfer',
     title: 'Multi-Style Image Transfer',
-    tagline: 'Transforms photos into Renaissance masterpieces, Van Gogh canvases, or Impressionist works — on demand.',
+    tagline: 'Transforms photos into Renaissance masterpieces, Van Gogh canvases, or Impressionist works, on demand.',
     description: 'Transforms photos into art using GAN-based neural style transfer and Stable Diffusion with a custom Van Gogh LoRA adapter fine-tuned on 400 paintings. Supports Renaissance, Impressionism, and more.',
     language: 'Python',
     langIcon: 'fab fa-python',
@@ -477,7 +477,7 @@ export const projectsData = [
     metric: '400 Paintings',
     tags: ['GAN', 'Stable Diffusion', 'LoRA', 'CV'],
     background:
-      "Neural style transfer has existed since 2015, but early GAN-based approaches struggle with identity preservation and style intensity control. This project combines two paradigms: classical GAN-based neural style transfer for precise feature-level stylization, and Stable Diffusion with a custom LoRA adapter for more fluid, diffusion-based style application. The Van Gogh LoRA was fine-tuned on 400 curated paintings from the artist's distinct periods — capturing brush stroke texture, color palette, and compositional patterns that generic artistic prompts miss.",
+      "Neural style transfer has existed since 2015, but early GAN-based approaches struggle with identity preservation and style intensity control. This project combines two paradigms: classical GAN-based neural style transfer for precise feature-level stylization, and Stable Diffusion with a custom LoRA adapter for more fluid, diffusion-based style application. The Van Gogh LoRA was fine-tuned on 400 curated paintings from the artist's distinct periods, capturing brush stroke texture, color palette, and compositional patterns that generic artistic prompts miss.",
     workflow: [
       {
         title: 'GAN-Based Style Transfer',
@@ -518,7 +518,7 @@ export const projectsData = [
     id: 10,
     slug: 'omnibridge',
     title: 'OmniBridge',
-    tagline: 'Image captions that actually read the text in the image — not just describe the scene.',
+    tagline: 'Image captions that actually read the text in the image, not just describe the scene.',
     description: 'Vision-language captioning system built on BLIP-2, fine-tuned with LoRA on TextCaps. Generates accurate captions that incorporate visible text within images for significantly enhanced quality on text-heavy content.',
     language: 'Python',
     langIcon: 'fab fa-python',
@@ -529,7 +529,7 @@ export const projectsData = [
     metric: '0.1% Params vs full FT',
     tags: ['BLIP-2', 'LoRA', 'Fine-tuning', 'Vision-Language'],
     background:
-      "Standard image captioning systems describe the visual scene but ignore text visible within the image — charts, signs, slides, product labels. This creates a major gap for real-world applications: a model that describes 'a whiteboard' instead of reading the equations on it, or 'a sign' instead of reading what it says. OmniBridge bridges this gap by fine-tuning BLIP-2 on the TextCaps dataset using LoRA — a parameter-efficient technique that adapts a large pretrained model without retraining all parameters.",
+      "Standard image captioning systems describe the visual scene but ignore text visible within the image: charts, signs, slides, product labels. This creates a major gap for real-world applications: a model that describes 'a whiteboard' instead of reading the equations on it, or 'a sign' instead of reading what it says. OmniBridge bridges this gap by fine-tuning BLIP-2 on the TextCaps dataset using LoRA, a parameter-efficient technique that adapts a large pretrained model without retraining all parameters.",
     workflow: [
       {
         title: 'Pretrained BLIP-2 Backbone',
@@ -537,7 +537,7 @@ export const projectsData = [
       },
       {
         title: 'LoRA Fine-Tuning',
-        text: 'Low-Rank Adaptation (LoRA) inserts small trainable matrices into BLIP-2\'s attention layers. This allows domain adaptation on TextCaps with minimal compute — only 0.1% of parameters are trained.',
+        text: 'Low-Rank Adaptation (LoRA) inserts small trainable matrices into BLIP-2\'s attention layers. This allows domain adaptation on TextCaps with minimal compute: only 0.1% of parameters are trained.',
       },
       {
         title: 'TextCaps Dataset Training',
@@ -545,7 +545,7 @@ export const projectsData = [
       },
       {
         title: 'Inference Pipeline',
-        text: 'At inference, OmniBridge produces captions that seamlessly integrate scene description with in-image text — far more useful for accessibility, document indexing, and multimodal search.',
+        text: 'At inference, OmniBridge produces captions that seamlessly integrate scene description with in-image text, far more useful for accessibility, document indexing, and multimodal search.',
       },
     ],
     results: [
@@ -557,7 +557,7 @@ export const projectsData = [
     highlights: [
       'BLIP-2 vision-language architecture with Q-Former bridge',
       'LoRA: only 0.1% of parameters fine-tuned, full-model quality gains',
-      'TextCaps dataset — captions grounded in in-image OCR text',
+      'TextCaps dataset with captions grounded in in-image OCR text',
       'Multimodal grounding: visual scene + readable text combined',
     ],
     techStack: [
@@ -571,7 +571,7 @@ export const projectsData = [
     slug: 'llm-inference-playground',
     title: 'LLM Inference Playground',
     tagline: 'A hands-on system that exposes what most LLM APIs deliberately hide.',
-    description: 'Educational system exposing explicit control over transformer logit space — manual temperature scaling, top-K, and nucleus sampling without HuggingFace defaults. Tracks TTFT and throughput with a FastAPI + React interface.',
+    description: 'Educational system exposing explicit control over transformer logit space: manual temperature scaling, top-K, and nucleus sampling without HuggingFace defaults. Tracks TTFT and throughput with a FastAPI + React interface.',
     language: 'Python',
     langIcon: 'fab fa-python',
     github: 'https://github.com/madhavanbalaji02/LLM-Inference-Education-Playground-',
@@ -581,11 +581,11 @@ export const projectsData = [
     metric: '↓TTFT Tracked',
     tags: ['PyTorch', 'FastAPI', 'Transformers', 'React'],
     background:
-      "Most LLM APIs hide the mechanics: you set a temperature slider and get text back. But understanding what's happening in the logit space — how temperature reshapes the probability distribution, why top-K and nucleus sampling behave differently in edge cases — is essential for anyone building serious LLM applications. This playground was built as an educational tool to expose these mechanics explicitly: no HuggingFace generate() defaults, manual implementations of each sampling strategy, and live tracking of time-to-first-token (TTFT) and throughput.",
+      "Most LLM APIs hide the mechanics: you set a temperature slider and get text back. But understanding what's happening in the logit space (how temperature reshapes the probability distribution, why top-K and nucleus sampling behave differently in edge cases) is essential for anyone building serious LLM applications. This playground was built as an educational tool to expose these mechanics explicitly: no HuggingFace generate() defaults, manual implementations of each sampling strategy, and live tracking of time-to-first-token (TTFT) and throughput.",
     workflow: [
       {
         title: 'Manual Logit Processing',
-        text: 'After the forward pass, raw logits are processed manually: temperature scaling, top-K filtering, and nucleus (top-p) sampling are implemented from scratch — not using library defaults.',
+        text: 'After the forward pass, raw logits are processed manually: temperature scaling, top-K filtering, and nucleus (top-p) sampling are implemented from scratch, not using library defaults.',
       },
       {
         title: 'Token Generation Loop',
@@ -593,7 +593,7 @@ export const projectsData = [
       },
       {
         title: 'FastAPI Backend',
-        text: 'A FastAPI server exposes endpoints for model loading, parameter configuration, and generation — allowing the React frontend to issue real-time inference requests.',
+        text: 'A FastAPI server exposes endpoints for model loading, parameter configuration, and generation, allowing the React frontend to issue real-time inference requests.',
       },
       {
         title: 'React Interface',
@@ -607,7 +607,7 @@ export const projectsData = [
       'React UI makes sampling strategies intuitively comparable through live parameter tuning',
     ],
     highlights: [
-      'Manual temperature / top-K / nucleus sampling — no library defaults',
+      'Manual temperature / top-K / nucleus sampling, no library defaults',
       'TTFT and throughput tracking at each generation step',
       'FastAPI backend with real-time inference endpoints',
       'React frontend with live parameter sliders and comparison',
@@ -634,19 +634,19 @@ export const projectsData = [
     metric: '100+ Sources Daily',
     tags: ['Claude API', 'Cloudflare Workers', 'RAG', 'RSS'],
     background:
-      "Keeping up with AI/ML research across English, Japanese, and German sources is a full-time job. Daily Tech Intel automates this: a Cloudflare Worker runs a 3-tier semantic pipeline — ingesting RSS feeds from 10 sources, passing 100+ raw articles to Claude for semantic filtering and summarization into 3 personalized sections (For You, My Stack, Around the World), and persisting results in Cloudflare KV with a 24-hour TTL. Non-English articles are translated to English in the same Claude pass. On-demand article analysis triggers a second Claude call for a 5–7 sentence deep-dive with key takeaways, cached per-article for 7 days. Prompt caching cuts input token costs ~90% on repeated section refreshes.",
+      "Keeping up with AI/ML research across English, Japanese, and German sources is a full-time job. Daily Tech Intel automates this: a Cloudflare Worker runs a 3-tier semantic pipeline, ingesting RSS feeds from 10 sources, passing 100+ raw articles to Claude for semantic filtering and summarization into 3 personalized sections (For You, My Stack, Around the World), and persisting results in Cloudflare KV with a 24-hour TTL. Non-English articles are translated to English in the same Claude pass. On-demand article analysis triggers a second Claude call for a 5–7 sentence deep-dive with key takeaways, cached per-article for 7 days. Prompt caching cuts input token costs ~90% on repeated section refreshes.",
     workflow: [
       {
         title: 'RSS Ingestion Layer',
-        text: 'A Cloudflare Worker fetches 10 RSS feeds in parallel via Promise.allSettled — TechCrunch, The Verge, Hacker News, Ars Technica, HuggingFace Blog, ArXiv CS.AI/LG/CV, Gigazine (🇯🇵), and Golem.de (🇩🇪). Custom XML parser handles both RSS 2.0 and Atom formats with CDATA stripping.',
+        text: 'A Cloudflare Worker fetches 10 RSS feeds in parallel via Promise.allSettled: TechCrunch, The Verge, Hacker News, Ars Technica, HuggingFace Blog, ArXiv CS.AI/LG/CV, Gigazine (🇯🇵), and Golem.de (🇩🇪). Custom XML parser handles both RSS 2.0 and Atom formats with CDATA stripping.',
       },
       {
         title: 'Semantic Curation via Claude',
-        text: 'All 100+ articles are batched into a single Claude claude-sonnet-4-6 call with a prompt-cached system block. Claude selects 12 articles per section — For You (broad AI/ML), My Stack (MLOps, alignment, vision, recsys), Around the World (global/translated) — and writes a 2-sentence summary per article.',
+        text: 'All 100+ articles are batched into a single Claude claude-sonnet-4-6 call with a prompt-cached system block. Claude selects 12 articles per section: For You (broad AI/ML), My Stack (MLOps, alignment, vision, recsys), Around the World (global/translated). It then writes a 2-sentence summary per article.',
       },
       {
         title: 'Translation Pipeline',
-        text: 'Japanese and German articles are translated to English inline during the curation pass — no separate translation call. Claude sets wasTranslated: true and countryFlag on each non-English article so the UI can surface the origin.',
+        text: 'Japanese and German articles are translated to English inline during the curation pass, no separate translation call. Claude sets wasTranslated: true and countryFlag on each non-English article so the UI can surface the origin.',
       },
       {
         title: 'KV Caching & Delivery',
@@ -654,14 +654,14 @@ export const projectsData = [
       },
       {
         title: 'On-Demand Deep Analysis',
-        text: 'Clicking any article card triggers a second Claude call for a 5–7 sentence deep-dive and 4 key takeaways, targeted at ML practitioners. Results are cached per article URL for 7 days in KV — repeated clicks are instant.',
+        text: 'Clicking any article card triggers a second Claude call for a 5–7 sentence deep-dive and 4 key takeaways, targeted at ML practitioners. Results are cached per article URL for 7 days in KV, so repeated clicks are instant.',
       },
     ],
     results: [
       '36 curated articles daily across 3 personalized sections from 100+ raw RSS entries',
       'International sources (Japanese, German) translated to English in a single Claude pass',
       'Prompt caching reduces input token cost ~90% on same-day cache refreshes',
-      'Per-article deep analysis cached 7 days — second click always instant',
+      'Per-article deep analysis cached 7 days, so the second click is always instant',
       'Zero cold-start: Cloudflare Cron Trigger pre-populates KV at 06:00 UTC daily',
     ],
     highlights: [

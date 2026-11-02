@@ -11,7 +11,7 @@ const Hero = () => (
     <div className="container">
       <div className="hero-inner">
 
-        {/* Photo — shown at top on mobile via CSS order */}
+        {/* Photo: shown at top on mobile via CSS order */}
         <div className="hero-profile">
           <div className="hero-img-wrap">
             <img src={process.env.PUBLIC_URL + '/profile.jpg'} alt="Madhavan Balaji" />
@@ -29,7 +29,7 @@ const Hero = () => (
           <div className="hero-eyebrow">
             <span className="hero-status">
               <span className="hero-status-dot"></span>
-              Open to Full-Time AI/ML Roles — May 2026
+              Open to Full-Time AI/ML Roles from May 2026
             </span>
           </div>
 
@@ -39,7 +39,7 @@ const Hero = () => (
           <p className="hero-role">AI Engineer · MS CS @ Indiana University</p>
 
           <p className="hero-desc">
-            I build production AI systems — LLM pipelines, computer vision models,
+            I build production AI systems: LLM pipelines, computer vision models,
             and the ML infrastructure that ships them at scale.
             Research-backed, engineering-disciplined.
           </p>

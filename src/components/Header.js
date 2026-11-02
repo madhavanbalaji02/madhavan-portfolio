@@ -30,7 +30,7 @@ const Header = ({ theme, toggleTheme }) => {
     };
 
     if (location.pathname !== '/') {
-      // On a project detail page — go home first, then scroll
+      // On a project detail page: go home first, then scroll
       navigate('/');
       setTimeout(doScroll, 250);
     } else {

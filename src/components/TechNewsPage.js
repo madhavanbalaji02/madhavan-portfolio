@@ -1,5 +1,5 @@
 /**
- * TechNewsPage — Daily Tech Intel (standalone page at /#/tech-news)
+ * TechNewsPage: Daily Tech Intel (standalone page at /#/tech-news)
  *
  * Architecture:
  *   Browser → GET /api/tech-news → Express (port 3001)
@@ -26,6 +26,16 @@ function timeAgo(dateString) {
   if (s < 3600)  return `${Math.floor(s / 60)}m ago`;
   if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
   return `${Math.floor(s / 86400)}d ago`;
+}
+
+// Swap em dashes in AI-written text for commas, recursing through arrays/objects
+function stripDashes(value) {
+  if (typeof value === 'string') return value.replace(/\s*—\s*/g, ', ');
+  if (Array.isArray(value)) return value.map(stripDashes);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, stripDashes(v)]));
+  }
+  return value;
 }
 
 const BADGE_CLASS = {
@@ -65,7 +75,7 @@ function ArticleDetailModal({ article, onClose }) {
       .then((r) => r.json())
       .then((data) => {
         if (data.error) throw new Error(data.error);
-        setAnalysis(data);
+        setAnalysis(stripDashes(data));
       })
       .catch((err) => setErrorAI(err.message))
       .finally(() => setLoadingAI(false));
@@ -97,7 +107,7 @@ function ArticleDetailModal({ article, onClose }) {
           <i className="fa-solid fa-xmark" />
         </button>
 
-        {/* Hero — mirrors pd-hero */}
+        {/* Hero: mirrors pd-hero */}
         <div className="tnp-modal-hero">
           <div className="tnp-modal-meta">
             <span className={`tnp-cat ${catClass}`}>{article.category}</span>
@@ -123,7 +133,7 @@ function ArticleDetailModal({ article, onClose }) {
         {/* Body */}
         <div className="tnp-modal-body">
 
-          {/* Quick summary — always shown */}
+          {/* Quick summary: always shown */}
           <div className="tnp-modal-section">
             <div className="tnp-modal-section-title">Overview</div>
             <p className="tnp-modal-full-summary">{article.summary}</p>
@@ -164,7 +174,7 @@ function ArticleDetailModal({ article, onClose }) {
 
         </div>
 
-        {/* Read original CTA — matches btn-primary in portfolio */}
+        {/* Read original CTA: matches btn-primary in portfolio */}
         <div className="tnp-modal-cta">
           <span className="tnp-modal-cta-note">Touch to go to source article</span>
           <a
@@ -266,7 +276,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
         throw new Error(body.error || `HTTP ${res.status}`);
       }
       const data = await res.json();
-      const s = data.sections ?? EMPTY_SECTIONS;
+      const s = stripDashes(data.sections ?? EMPTY_SECTIONS);
       setSections({ forYou: s.forYou ?? [], myStack: s.myStack ?? [], aroundTheWorld: s.aroundTheWorld ?? [] });
       setMeta({ lastUpdated: data.lastUpdated, fromCache: data.fromCache, stale: data.stale });
       setError(null);

@@ -16,7 +16,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = project ? `${project.title} — Madhavan Balaji` : 'Project — Madhavan Balaji';
+    document.title = project ? `${project.title} | Madhavan Balaji` : 'Project | Madhavan Balaji';
     return () => { document.title = 'Madhavan Balaji | AI Engineer'; };
   }, [project]);
 

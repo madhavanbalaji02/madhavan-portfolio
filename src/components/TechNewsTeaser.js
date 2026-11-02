@@ -16,7 +16,7 @@ export default function TechNewsTeaser() {
           <h2 className="tnt-headline">Daily Tech Intel</h2>
 
           <p className="tnt-desc">
-            A daily briefing spanning global AI research, industry moves, and world tech news —
+            A daily briefing spanning global AI research, industry moves, and world tech news,
             automatically filtered to your interests, stack, and research channels.
             International sources translated to English.
           </p>
@@ -59,7 +59,7 @@ export default function TechNewsTeaser() {
           </div>
           <div className="tnt-card tnt-card-3">
             <span className="tnt-cb tnt-cb-green">🇩🇪 Translated</span>
-            <span className="tnt-ct">EU AI Act Enforcement Begins — What Changes for Developers…</span>
+            <span className="tnt-ct">EU AI Act Enforcement Begins: What Changes for Developers…</span>
             <span className="tnt-cs">Golem.de · 5h ago</span>
           </div>
         </div>

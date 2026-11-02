@@ -53,7 +53,7 @@ const teachingOutcomes = [
   {
     icon: 'fas fa-lightbulb',
     title: 'Teaching DP exposed my own gaps',
-    text: 'Every time a student asked "but why does the subproblem boundary work here?", I had to rebuild my mental model from scratch — and came out sharper each time.',
+    text: 'Every time a student asked "but why does the subproblem boundary work here?", I had to rebuild my mental model from scratch, and came out sharper each time.',
   },
   {
     icon: 'fas fa-project-diagram',
@@ -63,12 +63,12 @@ const teachingOutcomes = [
   {
     icon: 'fas fa-comments',
     title: 'Diagnosing mental blockers',
-    text: "A student's confusion is a diagnostic signal — learning to read it made me a better debugger, interviewer, and communicator on engineering teams.",
+    text: "A student's confusion is a diagnostic signal. Learning to read it made me a better debugger, interviewer, and communicator on engineering teams.",
   },
   {
     icon: 'fas fa-rocket',
     title: 'Weekly prep accelerated my fluency',
-    text: 'Preparing workshops 2–3x per week compounded — I solved more LeetCode problems in one semester of teaching than in any prior year of solo study.',
+    text: 'Preparing workshops 2–3x per week compounded: I solved more LeetCode problems in one semester of teaching than in any prior year of solo study.',
   },
 ];
 
@@ -136,7 +136,7 @@ const Experience = () => {
               />
               <div className="teaching-photo-caption">
                 <i className="fas fa-chalkboard-teacher"></i>
-                <span>Weekly Algorithms workshop — Indiana University, 2025</span>
+                <span>Weekly Algorithms workshop · Indiana University, 2025</span>
               </div>
             </div>
 
@@ -145,8 +145,8 @@ const Experience = () => {
                 <i className="fas fa-quote-left teaching-quote-icon"></i>
                 <p>
                   Teaching is the most efficient form of learning I've encountered.
-                  Every whiteboard session — watching a student's face shift from
-                  confusion to clarity on dynamic programming — sharpened my own
+                  Every whiteboard session, watching a student's face shift from
+                  confusion to clarity on dynamic programming, sharpened my own
                   understanding in ways that hours of solo study never could.
                 </p>
               </div>
@@ -164,7 +164,7 @@ const Experience = () => {
                   When I started leading weekly workshops on Algorithms & Optimization,
                   I assumed I was there to give knowledge. What I didn't expect was how
                   much I'd receive in return. Students ask the questions that textbooks
-                  skip — the "but <em>why</em> does this work?" questions that expose
+                  skip: the "but <em>why</em> does this work?" questions that expose
                   the gaps in your own mental model. Answering those questions live, at
                   the whiteboard, forced me to rebuild my understanding from first
                   principles. I stopped thinking in code and started thinking in structure.
@@ -173,7 +173,7 @@ const Experience = () => {
                 <p className="teaching-body">
                   Over dozens of sessions covering Graph Theory, DP, and Greedy algorithms,
                   I developed a discipline I now carry into every engineering context: the
-                  ability to explain precisely — not approximately. That precision, earned
+                  ability to explain precisely, not approximately. That precision, earned
                   through teaching, makes me a better collaborator, a cleaner code reviewer,
                   and a sharper problem-solver.
                 </p>

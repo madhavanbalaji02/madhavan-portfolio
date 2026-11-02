@@ -1,9 +1,9 @@
 /* ================================================================
-   TECH NEWS SECTION — AI-Powered Daily Digest
+   TECH NEWS SECTION: AI-Powered Daily Digest
    Matches portfolio dark theme: --bg, --gold, --cyan, --green
    ================================================================ */
 
-/* Section background — alternates from Writing (bg-alt) above */
+/* Section background: alternates from Writing (bg-alt) above */
 #tech-news { background: var(--bg); }
 
 /* ── Grid layout ──────────────────────────────────────────────── */
@@ -46,7 +46,7 @@
   gap: 8px;
 }
 
-/* ── Category badges — pill-shaped, color-coded ─────────────── */
+/* ── Category badges: pill-shaped, color-coded ─────────────── */
 .tn-badge {
   display: inline-flex;
   align-items: center;
@@ -356,7 +356,7 @@
   .tn-controls { flex-direction: column; align-items: flex-start; }
 }
 
-/* Touch devices — disable hover lift */
+/* Touch devices: disable hover lift */
 @media (hover: none) and (pointer: coarse) {
   .tn-card:hover {
     transform: none;

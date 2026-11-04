@@ -520,10 +520,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .hero-bento{min-height:auto;padding-top:24px;padding-bottom:40px}
   .hero-bento::after{display:none}
   .hero-marquee{display:none}
-  .hero-profile{order:0}
-  .hero-img-wrap{width:96px;height:120px}
-  .hero-stack{display:none}
-  .hero-img-badge{display:none}
+  .hero-profile{display:none}
   .hero-content{order:1}
   .hero-name{font-size:clamp(34px,9vw,52px)}
   .hero-links{gap:10px;margin-top:24px;padding-top:18px}
@@ -1055,4 +1052,56 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 @media(max-width:640px){
   .pd-title{letter-spacing:-0.5px}
   .pd-step{padding:12px}
+}
+
+/* ================================================================
+   TABLET & PHONE POLISH
+   ================================================================ */
+
+/* Tablet: two-column hero with the photo on the right, no empty gap below */
+@media(min-width:769px) and (max-width:1024px){
+  .hero-bento{min-height:auto;padding-top:56px;padding-bottom:72px}
+  .hero-inner{grid-template-columns:1fr auto;gap:36px;align-items:center}
+  .hero-content{order:1}
+  .hero-profile{order:2;flex-direction:column;align-items:center;gap:12px}
+  .hero-img-wrap{width:210px;height:262px;border-radius:14px}
+  .hero-stack{display:none}
+}
+
+/* Tablet: 5 skill cards as 3 + 2 with the second row filling the width */
+@media(min-width:769px) and (max-width:1400px){
+  .skill-categories-wrapper{grid-template-columns:repeat(6,1fr)}
+  .skill-category{grid-column:span 2}
+  .skill-category:nth-child(4),.skill-category:nth-child(5){grid-column:span 3}
+}
+
+/* Single-column teaching story: shorter photo, no sticky */
+@media(max-width:1024px){
+  .teaching-photo-wrap{position:static}
+  .teaching-photo{aspect-ratio:16/9;max-height:380px}
+}
+
+/* Phone + small tablet: skills as compact chips instead of long lists */
+@media(max-width:768px){
+  .skill-categories-wrapper{grid-template-columns:1fr;gap:12px}
+  .skill-category{grid-column:auto}
+  .skills-grid{flex-direction:row;flex-wrap:wrap;gap:6px}
+  .skill-item,.skill-item:last-child{border:1px solid var(--border);border-radius:6px;padding:5px 10px;min-height:32px;gap:7px}
+  .skill-item:hover{padding-left:10px}
+  .skill-category-title{margin-bottom:12px}
+  .footer-links ul{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;column-gap:32px;row-gap:0}
+}
+
+/* Phone: drop unreadable mini diagrams, keep cards scannable */
+@media(max-width:640px){
+  .proj-card-diagram{display:none}
+  .proj-card .proj-desc,.proj-card:not(:has(.proj-card-diagram)) .proj-desc{-webkit-line-clamp:4}
+  .back-to-top{width:38px;height:38px;bottom:14px;right:14px}
+}
+
+/* Phone: social icons become proper tap targets */
+@media(max-width:480px){
+  .hero-links{gap:10px}
+  .hero-link{width:44px;height:44px;justify-content:center;border:1px solid var(--border-hi);border-radius:10px;padding:0}
+  .hero-link i{font-size:17px}
 }

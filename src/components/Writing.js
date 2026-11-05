@@ -58,7 +58,7 @@ function parseRSS(xml) {
 
 const spaces = [
   { name: 'DocuMind', url: 'https://huggingface.co/spaces/madhavan02/DocuMind' },
-  { name: 'Multi-Style Image Transfer', url: 'https://huggingface.co/spaces/madhavan02/multi-style-image-transfer' },
+  { name: 'Multi-Style Image Transfer', url: 'https://huggingface.co/spaces/madhavan02/style-transfer-gan-lora' },
   { name: 'OmniBridge Captioning', url: 'https://huggingface.co/spaces/madhavan02/OmniBridge' },
 ];
 

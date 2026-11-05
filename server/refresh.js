@@ -60,17 +60,17 @@ async function main() {
       type: 'text',
       text: `You are a personalized tech news curator for Madhavan Balaji, an AI/ML engineer whose research spans agentic AI systems, LLM reasoning, computer vision, and recommendation architectures.
 
-From a mixed list of articles — which may include ArXiv preprints, ML blogs, general tech news, and non-English sources (Japanese/German) — select and organize the best stories into exactly 3 sections. All content must be in English.
+From a mixed list of articles (which may include ArXiv preprints, ML blogs, general tech news, and non-English sources in Japanese/German), select and organize the best stories into exactly 3 sections. All content must be in English.
 
 SECTIONS (pick exactly 12 articles per section, no article may appear in more than one section):
 1. "forYou": Broad AI/ML news Madhavan would want to read (LLM releases, agentic AI, industry news, open-source)
 2. "myStack": Technical research matching Madhavan's work (MLOps, alignment, multimodal/vision, RecSys). Prefer ArXiv/HuggingFace.
-3. "aroundTheWorld": Global tech perspective. STRONGLY prefer Gigazine/Golem.de articles — aim for at least 4 translated.
+3. "aroundTheWorld": Global tech perspective. STRONGLY prefer Gigazine/Golem.de articles; aim for at least 4 translated.
 
-RESPONSE FORMAT — return ONLY valid JSON, no markdown fences:
+RESPONSE FORMAT: return ONLY valid JSON, no markdown fences:
 {"forYou":[{"title":"...","url":"...","source":"...","pubDate":"...","summary":"Two sentences: what happened + why it matters for AI/ML practitioners","category":"AI|Security|Gadgets|Software|Science","originalLanguage":"English","wasTranslated":false,"countryFlag":"🇺🇸"}],"myStack":[...],"aroundTheWorld":[...]}
 
-RULES: 36 total (12 per section). No duplicates. English only. wasTranslated:true for JP/DE. category exactly one of: AI, Security, Gadgets, Software, Science.`,
+RULES: 36 total (12 per section). No duplicates. English only. wasTranslated:true for JP/DE. category exactly one of: AI, Security, Gadgets, Software, Science. Never use em dashes (—) in titles or summaries; use commas, colons, or separate sentences.`,
       cache_control: { type: 'ephemeral' },
     }],
     messages: [{
@@ -81,7 +81,8 @@ RULES: 36 total (12 per section). No duplicates. English only. wasTranslated:tru
 
   const raw = response.content.find(b => b.type === 'text')?.text ?? '';
   const cleaned = raw.replace(/^```(?:json)?\n?/m, '').replace(/\n?```$/m, '').trim();
-  const sections = JSON.parse(cleaned);
+  // Em dashes read as AI-written; swap any that slip through for commas
+  const sections = JSON.parse(cleaned.replace(/\s*—\s*/g, ', '));
 
   const payload = {
     sections,
@@ -97,4 +98,4 @@ RULES: 36 total (12 per section). No duplicates. English only. wasTranslated:tru
   console.log(`  → lastUpdated: ${payload.lastUpdated}`);
 }
 
-main().catch(err => { console.error('[ERROR]', err.message); process.exit(1); });
+main().then(() => process.exit(0)).catch(err => { console.error('[ERROR]', err.message); process.exit(1); });

@@ -1,0 +1,57 @@
+name: Daily Tech News Refresh
+
+# 7 AM New York time, every day. GitHub cron is UTC-only, so both offsets are
+# scheduled and the job skips the one that doesn't match the current DST state.
+on:
+  schedule:
+    - cron: "0 11 * * *" # 7 AM EDT (summer)
+    - cron: "0 12 * * *" # 7 AM EST (winter)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Skip the off-season schedule
+        id: gate
+        run: |
+          offset=$(TZ=America/New_York date +%z)
+          schedule="${{ github.event.schedule }}"
+          run=true
+          if [ "$schedule" = "0 11 * * *" ] && [ "$offset" != "-0400" ]; then run=false; fi
+          if [ "$schedule" = "0 12 * * *" ] && [ "$offset" != "-0500" ]; then run=false; fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: "20"
+
+      - name: Fetch RSS and curate with Claude
+        if: steps.gate.outputs.run == 'true'
+        working-directory: server
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          npm ci --omit=dev
+          node refresh.js
+
+      - name: Push to Cloudflare KV
+        if: steps.gate.outputs.run == 'true'
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: e1f20a28914fdb268d4a4a4d0ddf7fab
+          KV_NAMESPACE: f6b14e3952cc488fb049dd2266a45ff2
+        run: |
+          curl -sf -X PUT \
+            "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/storage/kv/namespaces/$KV_NAMESPACE/values/tech-news-v4?expiration_ttl=90000" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/news-data.json

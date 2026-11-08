@@ -72,6 +72,7 @@
 [data-theme="light"] .hero-bento{background:var(--bg)}
 [data-theme="light"] .hero-name{background:none;-webkit-background-clip:unset;-webkit-text-fill-color:var(--t1);background-clip:unset}
 [data-theme="light"] .hero-img-wrap{animation:none;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+[data-theme="light"] .footer{background:var(--bg-dark)}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
@@ -464,7 +465,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .social-links a:hover{border-color:var(--border-warm);color:var(--gold)}
 .footer-bottom{text-align:center;padding-top:20px;border-top:1px solid var(--border)}
 .footer-bottom p{font-size:12px;color:var(--t3);margin-bottom:3px}
-.footer-note{font-size:11px;opacity:0.4}
+.footer-note{font-size:11px;opacity:0.7}
 
 /* Animations */
 @keyframes spin{to{transform:rotate(360deg)}}

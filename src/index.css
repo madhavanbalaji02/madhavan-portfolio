@@ -42,41 +42,67 @@
 }
 
 /* ================================================================
-   LIGHT MODE THEME
-   Only base tokens change; tints and aliases above derive from them.
-   All text colors meet WCAG AA (4.5:1) on --bg, --bg-alt and --bg-card.
+   LIGHT MODE THEME: SUNSET SKY
+   The page is one sky that runs the full scroll: clear blue at the top,
+   through lavender and pink, to peach, gold and a coral glow at the footer,
+   with soft lit clouds along the way. Sections are transparent, cards are
+   frosted glass. Every text color meets WCAG AA (>= 5.1:1) on the raw sky.
    ================================================================ */
 [data-theme="light"] {
-  --bg:#f1f4f6;--bg-alt:#e6eaed;--bg-card:#ffffff;--bg-card-2:#f0f3f5;
-  --border:rgba(0,0,0,0.09);--border-hi:rgba(0,0,0,0.16);
-  --gold:#8a5a12;--gold-2:#74490c;--gold-hi:#9c6716;--on-gold:#ffffff;
-  --cyan:#0a6a86;
-  --green:#12723a;
-  --t1:#0c1a21;--t2:#354f60;--t3:#4a6676;
+  --bg:#fdf1ea;--bg-alt:rgba(255,255,255,0.5);--bg-card:rgba(255,255,255,0.66);--bg-card-2:rgba(255,255,255,0.82);
+  --border:rgba(60,30,20,0.11);--border-hi:rgba(60,30,20,0.2);
+  --gold:#74480a;--gold-2:#5f3a07;--gold-hi:#86540d;--on-gold:#ffffff;
+  --cyan:#075468;
+  --green:#0d5a2d;
+  --t1:#0c1a21;--t2:#354f60;--t3:#3b5361;
   --border-warm:color-mix(in srgb,var(--gold) 30%,transparent);
-  --shadow-sm:0 1px 3px rgba(0,0,0,.12);--shadow-md:0 4px 20px rgba(0,0,0,.14);
-  --shadow-lg:0 12px 40px rgba(0,0,0,.16);--shadow-xl:0 24px 60px rgba(0,0,0,.18);
+  --shadow-sm:0 1px 3px rgba(110,50,30,.10);--shadow-md:0 4px 20px rgba(110,50,30,.12);
+  --shadow-lg:0 12px 40px rgba(110,50,30,.14);--shadow-xl:0 24px 60px rgba(110,50,30,.16);
+  --glass:rgba(255,250,246,0.62);
+  --tnp-bar-bg:var(--glass);
 }
 
-/* Hardcoded-dark overrides for light mode */
-[data-theme="light"] .navbar{background:rgba(241,244,246,0.92)}
-[data-theme="light"] { --tnp-bar-bg: rgba(241,244,246,0.95); }
-[data-theme="light"] .navbar.scrolled{background:rgba(241,244,246,0.98)}
-[data-theme="light"] .hero-bento::before{background-image:radial-gradient(rgba(0,0,0,0.04) 1px,transparent 1px)}
-[data-theme="light"] .hero-marquee{background:rgba(230,234,237,0.95)}
-[data-theme="light"] .hero-img-badge{background:rgba(241,244,246,0.92);border-color:var(--border-warm);color:var(--gold)}
-[data-theme="light"] .proj-lang-badge{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.13);color:var(--t2)}
-[data-theme="light"] .proj-tech-pill{background:rgba(0,0,0,0.04)}
-[data-theme="light"] .proj-card-footer{background:rgba(0,0,0,0.03)}
-[data-theme="light"] .skill-badge{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.12)}
+/* The sky: painted on the root, so it spans the whole document */
+html[data-theme="light"]{
+  min-height:100%;
+  background:
+    /* lit clouds: white tops with pink, gold and coral undersides */
+    radial-gradient(ellipse 42% 150px at 72% 4%,  rgba(255,255,255,.75),rgba(255,236,242,.35) 45%,transparent 72%),
+    radial-gradient(ellipse 34% 110px at 14% 10%, rgba(255,255,255,.7),transparent 70%),
+    radial-gradient(ellipse 46% 170px at 84% 19%, rgba(255,226,238,.7),rgba(246,214,240,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 40% 140px at 18% 28%, rgba(255,232,220,.75),transparent 70%),
+    radial-gradient(ellipse 50% 180px at 66% 38%, rgba(255,214,226,.7),rgba(255,228,214,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 38% 130px at 24% 49%, rgba(255,240,206,.8),transparent 70%),
+    radial-gradient(ellipse 48% 170px at 78% 59%, rgba(255,214,190,.75),rgba(255,206,214,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 42% 150px at 28% 70%, rgba(255,236,196,.8),rgba(255,214,190,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 50% 170px at 70% 81%, rgba(255,210,200,.75),rgba(255,226,206,.3) 50%,transparent 72%),
+    /* the low sun glowing behind the footer */
+    radial-gradient(ellipse 70% 520px at 50% 100%, rgba(255,240,200,.9),rgba(255,214,170,.45) 45%,transparent 75%),
+    linear-gradient(180deg,#c4e3f6 0%,#d8e8f4 12%,#e8dff0 26%,#f8d7e2 40%,#fcd8c6 54%,#fde6bb 68%,#fbd2b0 84%,#f8c6b6 100%);
+}
+[data-theme="light"] body{background:transparent}
+
+/* Sections let the sky through, so the page reads as one continuous sky */
+[data-theme="light"] :is(.hero-bento,#about,.experience-section,#projects,.patent-section,.writing-section,.contact-section,.footer,.pd-page,.pd-not-found,.tnp-root){background:transparent}
+
+/* Frosted glass for bars and overlays */
+[data-theme="light"] :is(.navbar,.pd-nav){background:var(--glass)}
+[data-theme="light"] .navbar.scrolled{background:rgba(255,250,246,0.78)}
+[data-theme="light"] .hero-marquee{background:rgba(255,255,255,0.38);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+[data-theme="light"] .mobile-nav-drawer{background:rgba(255,248,243,0.94);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:-8px 0 40px rgba(110,50,30,.18)}
+[data-theme="light"] .tnp-modal{background:#fffaf6}
+[data-theme="light"] .hero-img-badge{background:rgba(255,250,246,0.92);border-color:var(--border-warm);color:var(--gold)}
+[data-theme="light"] .hero-bento::before{background-image:radial-gradient(rgba(80,40,30,0.05) 1px,transparent 1px)}
+
+/* Small surfaces */
+[data-theme="light"] .proj-lang-badge{background:rgba(255,255,255,0.55);border-color:rgba(60,30,20,0.13);color:var(--t2)}
+[data-theme="light"] .proj-tech-pill{background:rgba(255,255,255,0.5)}
+[data-theme="light"] .proj-card-footer{background:rgba(255,255,255,0.35)}
+[data-theme="light"] .skill-badge{background:rgba(255,255,255,0.55);border-color:rgba(60,30,20,0.12)}
 [data-theme="light"] .skill-icon{filter:grayscale(1) brightness(0);opacity:0.55}
 [data-theme="light"] .skill-icon-fa{color:var(--t2);opacity:0.65}
-[data-theme="light"] .pd-nav{background:rgba(241,244,246,0.95)}
-[data-theme="light"] .mobile-nav-drawer{box-shadow:-8px 0 40px rgba(0,0,0,.18)}
-[data-theme="light"] .hero-bento{background:var(--bg)}
 [data-theme="light"] .hero-name{background:none;-webkit-background-clip:unset;-webkit-text-fill-color:var(--t1);background-clip:unset}
-[data-theme="light"] .hero-img-wrap{animation:none;box-shadow:0 4px 20px rgba(0,0,0,0.1)}
-[data-theme="light"] .footer{background:var(--bg-dark)}
+[data-theme="light"] .hero-img-wrap{animation:none;box-shadow:0 8px 28px rgba(110,50,30,0.16)}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline:2px solid var(--gold);outline-offset:3px}

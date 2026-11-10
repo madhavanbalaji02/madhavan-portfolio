@@ -43,13 +43,12 @@
 
 /* ================================================================
    LIGHT MODE THEME: SUNSET SKY
-   The page is one sky that runs the full scroll: clear blue at the top,
-   through lavender and pink, to peach, gold and a coral glow at the footer,
-   with soft lit clouds along the way. Sections are transparent, cards are
-   frosted glass. Every text color meets WCAG AA (>= 5.1:1) on the raw sky.
+   Scrolling moves through the sky: pale afternoon blue at the top, a golden
+   blush midway, a soft rose-and-peach sunset at the bottom. Sections are
+   transparent, cards are frosted glass. Every text color meets WCAG AA on the sky.
    ================================================================ */
 [data-theme="light"] {
-  --bg:#fdf1ea;--bg-alt:rgba(255,255,255,0.5);--bg-card:rgba(255,255,255,0.66);--bg-card-2:rgba(255,255,255,0.82);
+  --bg:#f5f7fa;--bg-alt:rgba(255,255,255,0.5);--bg-card:rgba(255,255,255,0.66);--bg-card-2:rgba(255,255,255,0.82);
   --border:rgba(60,30,20,0.11);--border-hi:rgba(60,30,20,0.2);
   --gold:#74480a;--gold-2:#5f3a07;--gold-hi:#86540d;--on-gold:#ffffff;
   --cyan:#075468;
@@ -62,25 +61,49 @@
   --tnp-bar-bg:var(--glass);
 }
 
-/* The sky: painted on the root, so it spans the whole document */
-html[data-theme="light"]{
-  min-height:100%;
-  background:
-    /* lit clouds: white tops with pink, gold and coral undersides */
-    radial-gradient(ellipse 42% 150px at 72% 4%,  rgba(255,255,255,.75),rgba(255,236,242,.35) 45%,transparent 72%),
-    radial-gradient(ellipse 34% 110px at 14% 10%, rgba(255,255,255,.7),transparent 70%),
-    radial-gradient(ellipse 46% 170px at 84% 19%, rgba(255,226,238,.7),rgba(246,214,240,.3) 50%,transparent 72%),
-    radial-gradient(ellipse 40% 140px at 18% 28%, rgba(255,232,220,.75),transparent 70%),
-    radial-gradient(ellipse 50% 180px at 66% 38%, rgba(255,214,226,.7),rgba(255,228,214,.3) 50%,transparent 72%),
-    radial-gradient(ellipse 38% 130px at 24% 49%, rgba(255,240,206,.8),transparent 70%),
-    radial-gradient(ellipse 48% 170px at 78% 59%, rgba(255,214,190,.75),rgba(255,206,214,.3) 50%,transparent 72%),
-    radial-gradient(ellipse 42% 150px at 28% 70%, rgba(255,236,196,.8),rgba(255,214,190,.3) 50%,transparent 72%),
-    radial-gradient(ellipse 50% 170px at 70% 81%, rgba(255,210,200,.75),rgba(255,226,206,.3) 50%,transparent 72%),
-    /* the low sun glowing behind the footer */
-    radial-gradient(ellipse 70% 520px at 50% 100%, rgba(255,240,200,.9),rgba(255,214,170,.45) 45%,transparent 75%),
-    linear-gradient(180deg,#c4e3f6 0%,#d8e8f4 12%,#e8dff0 26%,#f8d7e2 40%,#fcd8c6 54%,#fde6bb 68%,#fbd2b0 84%,#f8c6b6 100%);
-}
+/* The sky (src/components/Sky.js): a fixed backdrop that moves from a pale afternoon
+   to a soft sunset as you scroll. --p is scroll progress, 0 at the top to 1 at the bottom.
+   Kept very light so it reads as atmosphere, not decoration. */
+html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] body{background:transparent}
+.sky{display:none}
+[data-theme="light"] .sky{display:block;position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.sky-layer{position:absolute;inset:0;will-change:opacity}
+.sky-afternoon{background:linear-gradient(180deg,#dbeaf7 0%,#e8f1fa 45%,#f5f8fb 100%)}
+.sky-golden{
+  background:linear-gradient(180deg,#e4eaf7 0%,#f1edf5 40%,#fbf0e6 78%,#fdecdc 100%);
+  opacity:clamp(0,calc((var(--p,0) - 0.12) * 2.4),1);
+}
+.sky-sunset{
+  background:
+    radial-gradient(ellipse 85% 42% at 50% 108%,rgba(255,228,192,.9),rgba(255,214,204,.35) 50%,transparent 75%),
+    linear-gradient(180deg,#ebe5f3 0%,#f6e6ee 35%,#fde7e2 65%,#fee5d3 100%);
+  opacity:clamp(0,calc((var(--p,0) - 0.5) * 2.2),1);
+}
+/* Clouds sit on a strip three screens tall and rise at a slower pace than the page */
+.sky-clouds{position:absolute;left:-10%;width:120%;top:0;height:300vh;
+  transform:translate3d(0,calc(var(--p,0) * -200vh),0);will-change:transform,opacity}
+.sky-clouds-day{
+  opacity:calc(1 - var(--p,0) * 0.85);
+  background:
+    radial-gradient(ellipse 30% 90px at 22% 6%,rgba(255,255,255,.85),transparent 70%),
+    radial-gradient(ellipse 38% 120px at 74% 12%,rgba(255,255,255,.8),rgba(255,255,255,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 26% 70px at 48% 21%,rgba(255,255,255,.7),transparent 70%),
+    radial-gradient(ellipse 36% 110px at 16% 32%,rgba(255,255,255,.75),transparent 70%),
+    radial-gradient(ellipse 32% 100px at 82% 42%,rgba(255,255,255,.7),transparent 70%),
+    radial-gradient(ellipse 40% 120px at 36% 55%,rgba(255,255,255,.65),transparent 70%);
+}
+.sky-clouds-dusk{
+  opacity:clamp(0,calc(var(--p,0) * 1.6 - 0.2),1);
+  background:
+    radial-gradient(ellipse 34% 100px at 70% 40%,rgba(255,226,232,.8),transparent 70%),
+    radial-gradient(ellipse 40% 120px at 22% 50%,rgba(255,234,214,.8),rgba(255,224,226,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 30% 90px at 80% 61%,rgba(255,236,206,.85),transparent 70%),
+    radial-gradient(ellipse 44% 130px at 34% 71%,rgba(255,222,214,.8),rgba(255,236,214,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 36% 110px at 74% 82%,rgba(255,230,200,.85),transparent 70%),
+    radial-gradient(ellipse 42% 120px at 26% 92%,rgba(255,220,212,.8),transparent 70%);
+}
+@media (prefers-reduced-motion:reduce){.sky-clouds{transform:none}}
 
 /* Sections let the sky through, so the page reads as one continuous sky */
 [data-theme="light"] :is(.hero-bento,#about,.experience-section,#projects,.patent-section,.writing-section,.contact-section,.footer,.pd-page,.pd-not-found,.tnp-root){background:transparent}
@@ -542,7 +565,9 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .fade-in-up{animation:fadeInUp 0.5s var(--ease) forwards;opacity:0}
 .delay-1{animation-delay:0.1s}
 .delay-2{animation-delay:0.2s}
-.page-transition{animation:fadeInUp 0.4s ease-out}
+/* Opacity only: a transform on <body> would detach position:fixed layers (the sky) for the duration */
+.page-transition{animation:pageFadeIn 0.4s ease-out}
+@keyframes pageFadeIn{from{opacity:0}to{opacity:1}}
 
 @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms !important;transition-duration:0.01ms !important}}
 

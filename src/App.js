@@ -13,6 +13,7 @@ import TechNewsTeaser from './components/TechNewsTeaser';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import BackToTop from './components/BackToTop';
+import Sky from './components/Sky';
 const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
 const TechNewsPage  = lazy(() => import('./components/TechNewsPage'));
 
@@ -66,6 +67,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Sky />
       <Routes>
         <Route path="/" element={<MainPage theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail theme={theme} toggleTheme={toggleTheme} /></Suspense>} />

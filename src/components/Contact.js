@@ -34,7 +34,7 @@ const Contact = () => {
     <section id="contact" className="section contact-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Get In Touch</span>
+          <span className="section-tag">Get in touch</span>
           <h2 className="section-title">Let's Work Together</h2>
           <p className="section-subtitle">Hiring for an AI/ML role, or want to talk about a project? Send me a note.</p>
         </div>

@@ -151,7 +151,7 @@ export default function TechNews() {
       <div className="container">
 
         <div className="section-header">
-          <span className="section-tag">tech news</span>
+          <span className="section-tag">Tech news</span>
           <h2 className="section-title">Daily Tech Digest</h2>
           <p className="section-subtitle">
             AI-curated highlights from TechCrunch, The Verge, ArXiv, HuggingFace, and more,

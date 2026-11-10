@@ -50,10 +50,12 @@
 [data-theme="light"] {
   --bg:#f5f7fa;--bg-alt:rgba(255,255,255,0.5);--bg-card:rgba(255,255,255,0.66);--bg-card-2:rgba(255,255,255,0.82);
   --border:rgba(60,30,20,0.11);--border-hi:rgba(60,30,20,0.2);
-  --gold:#74480a;--gold-2:#5f3a07;--gold-hi:#86540d;--on-gold:#ffffff;
-  --cyan:#075468;
+  /* One accent (a deep sunset ember) for actions and links; everything else is neutral */
+  --gold:#a13d2d;--gold-2:#8c3326;--gold-hi:#b4483a;--on-gold:#ffffff;
+  --cyan:#424245;
   --green:#0d5a2d;
-  --t1:#0c1a21;--t2:#354f60;--t3:#3b5361;
+  --t1:#1d1d1f;--t2:#424245;--t3:#5c5c61;
+  --font-mono:var(--font-body);
   --border-warm:color-mix(in srgb,var(--gold) 30%,transparent);
   --shadow-sm:0 1px 3px rgba(110,50,30,.10);--shadow-md:0 4px 20px rgba(110,50,30,.12);
   --shadow-lg:0 12px 40px rgba(110,50,30,.14);--shadow-xl:0 24px 60px rgba(110,50,30,.16);
@@ -130,114 +132,104 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .hero-name{background:none;-webkit-background-clip:unset;-webkit-text-fill-color:var(--t1);background-clip:unset}
 [data-theme="light"] .hero-img-wrap{animation:none;box-shadow:0 8px 28px rgba(110,50,30,0.16)}
 
-/* ---------- Sky accents: the sunset carried into the details ----------
-   --sunset-ink: deep amber > terracotta > plum, for solid UI (white text >= 6.2:1).
-   --sunset-glow: the pastel sky itself, for decorative lines and the wordmark. */
+/* ---------- Apple-style refinement ----------
+   Two layers, as in Apple's Liquid Glass guidance: content is solid and quiet
+   (near-white cards, soft shadows, no rims); only navigation and controls are glass.
+   One accent, the ember above, for actions and links. Plain type, no monospace. */
 [data-theme="light"]{
-  --sunset-ink:linear-gradient(120deg,#6f4a0c 0%,#8a3d22 50%,#7a2f4a 100%);
-  --sunset-ink-hi:linear-gradient(120deg,#86580f 0%,#a04528 50%,#8e3a5c 100%);
-  --sunset-glow:linear-gradient(90deg,#8fbde6 0%,#c4a8e0 30%,#ee9fba 60%,#f6ac82 85%,#f2c46e 100%);
-  --sunset-shadow:rgba(196,96,90,.22);
-  caret-color:#a03e3a;
+  --glass-fill:linear-gradient(160deg,rgba(255,255,255,.7),rgba(255,255,255,.46));
+  --glass-fill-hi:linear-gradient(160deg,rgba(255,255,255,.86),rgba(255,255,255,.64));
+  --glass-rim:rgba(255,255,255,.75);
+  --glass-edge:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.2);
+  --glass-blur:blur(22px) saturate(180%);
+  --card:rgba(255,255,255,.9);
+  --card-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 28px rgba(0,0,0,.06);
+  --card-shadow-hi:0 2px 6px rgba(0,0,0,.05),0 18px 44px rgba(0,0,0,.1);
+  caret-color:var(--gold);
 }
+
 /* Selected text takes the color of the sky where you are: blue near the top, peach at sunset */
 [data-theme="light"] ::selection{background:#f6cfc2;color:var(--t1)}
 [data-theme="light"] ::selection{background:color-mix(in oklab,#bcdaf3,#f8c4b4 calc(var(--p,0) * 100%));color:var(--t1)}
-[data-theme="light"] *{-webkit-tap-highlight-color:rgba(238,159,186,.22)}
 
-/* Scrollbar: the sky from top to bottom */
-[data-theme="light"]{scrollbar-color:#e6a9bb transparent}
+/* Scrollbar: thin and neutral */
+[data-theme="light"]{scrollbar-color:rgba(0,0,0,.28) transparent}
 [data-theme="light"] ::-webkit-scrollbar-track{background:transparent}
-[data-theme="light"] ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8fbde6,#c4a8e0,#ee9fba,#f6ac82)}
+[data-theme="light"] ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.28)}
 
-/* Focus and inputs */
-[data-theme="light"] :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline-color:#8e3a5c}
-[data-theme="light"] .form-group input:focus,[data-theme="light"] .form-group textarea:focus{border-color:#c0607a;box-shadow:0 0 0 3px rgba(238,159,186,.28)}
-
-/* Primary actions glow like the sun going down */
-[data-theme="light"] :is(.btn-primary,.filter-btn.active,.tnt-cta,.proj-metric-badge){background:var(--sunset-ink);border-color:transparent;color:#fff}
-[data-theme="light"] .tnt-cta:hover{background:var(--sunset-ink-hi)}
-[data-theme="light"] .btn-primary{box-shadow:0 6px 22px var(--sunset-shadow)}
-[data-theme="light"] .btn-primary:hover{background:var(--sunset-ink-hi);box-shadow:0 10px 34px rgba(196,96,90,.32)}
-[data-theme="light"] .back-to-top:hover{background:var(--sunset-ink);color:#fff;border-color:transparent}
-
-/* Labels and lines */
-[data-theme="light"] :is(.section-tag,.footer-heading){background:var(--sunset-ink);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-[data-theme="light"] .footer-heading::before{-webkit-text-fill-color:#8a3d22}
-[data-theme="light"] .hero-divider{height:2px;border-radius:1px;background:var(--sunset-glow)}
-[data-theme="light"] .footer-wordmark{background:var(--sunset-glow);-webkit-background-clip:text;background-clip:text;opacity:.55}
-
-/* Cards lift into a warm glow instead of a grey shadow */
-[data-theme="light"] .proj-card:hover{box-shadow:0 22px 50px var(--sunset-shadow),0 0 0 1px rgba(224,140,130,.35);border-color:rgba(224,140,130,.35)}
-
-/* ---------- Liquid glass ----------
-   Every light-mode surface is a sheet of glass over the sky: translucent white with
-   a blur that picks up the colors behind it, a bright specular edge along the top,
-   a white rim instead of a grey border, a soft floating shadow, and rounder corners.
-   Controls become capsules. Blur runs on larger screens only, to keep phones smooth. */
-[data-theme="light"]{
-  --glass-fill:linear-gradient(155deg,rgba(255,255,255,.68) 0%,rgba(255,255,255,.4) 55%,rgba(255,255,255,.52) 100%);
-  --glass-fill-hi:linear-gradient(155deg,rgba(255,255,255,.82) 0%,rgba(255,255,255,.56) 55%,rgba(255,255,255,.68) 100%);
-  --glass-rim:rgba(255,255,255,.72);
-  --glass-edge:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.22),inset 1px 0 0 rgba(255,255,255,.3),inset -1px 0 0 rgba(255,255,255,.18);
-  --glass-drop:0 1px 2px rgba(90,60,90,.05),0 14px 34px -10px rgba(90,60,90,.16);
-  --glass-blur:blur(22px) saturate(175%);
-}
-
-/* Panels */
+/* ----- Content layer: solid cards ----- */
 [data-theme="light"] :is(.proj-card,.skill-category,.patent,.contact-form-wrapper,.about-facts,.pd-diagram,.pd-sidebar-card,.pd-workflow,.tnt-card,.tnp-card,.teaching-callout){
-  background:var(--glass-fill);border:1px solid var(--glass-rim);border-radius:22px;
-  box-shadow:var(--glass-edge),var(--glass-drop)}
-[data-theme="light"] .proj-card-footer{border-radius:0 0 22px 22px;border-top-color:rgba(255,255,255,.6)}
-[data-theme="light"] .teaching-callout{border-left:1px solid var(--glass-rim);box-shadow:var(--glass-edge),inset 3px 0 0 #d9879a,var(--glass-drop)}
-[data-theme="light"] :is(.hero-img-wrap,.teaching-photo){border:1px solid var(--glass-rim);border-radius:24px;box-shadow:var(--glass-edge),0 18px 44px -12px rgba(90,60,90,.28)}
-[data-theme="light"] .teaching-photo-caption{border-radius:0 0 24px 24px;background:var(--glass-fill-hi);border-color:var(--glass-rim)}
-[data-theme="light"] .tnp-modal{background:rgba(255,251,248,.9);border:1px solid var(--glass-rim);border-radius:26px;box-shadow:var(--glass-edge),0 30px 80px -20px rgba(90,60,90,.35)}
+  background:var(--card);border:1px solid transparent;border-radius:22px;box-shadow:var(--card-shadow)}
+[data-theme="light"] .proj-card:hover{background:#fff;border-color:transparent;box-shadow:var(--card-shadow-hi)}
+[data-theme="light"] .proj-card-footer{background:transparent;border-radius:0 0 22px 22px;border-top:1px solid rgba(0,0,0,.06)}
+[data-theme="light"] .teaching-callout{border-left:1px solid transparent}
+[data-theme="light"] :is(.hero-img-wrap,.teaching-photo){border:0;border-radius:24px;box-shadow:0 16px 40px -14px rgba(0,0,0,.28)}
+[data-theme="light"] .teaching-photo-caption{border:0;border-radius:0 0 24px 24px;background:#fff}
+[data-theme="light"] .tnp-modal{background:#fff;border:0;border-radius:26px;box-shadow:0 30px 80px -20px rgba(0,0,0,.3)}
+/* Tiles sitting on the sky */
+[data-theme="light"] :is(.contact-item,.teaching-outcome-item,.pd-result-item,.pd-github-card){
+  background:var(--card);border:1px solid transparent;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 14px rgba(0,0,0,.04)}
+[data-theme="light"] :is(.contact-item,.pd-github-card):hover{background:#fff}
+/* Tiles inside a card */
+[data-theme="light"] :is(.feature-item,.patent-pdf-card,.tnp-modal-point){background:#f5f5f7;border:1px solid transparent;border-radius:14px;box-shadow:none}
 
-/* Tiles inside panels */
-[data-theme="light"] :is(.contact-item,.teaching-outcome-item,.pd-result-item,.pd-github-card,.feature-item,.patent-pdf-card,.tnp-modal-point){
-  background:var(--glass-fill-hi);border:1px solid var(--glass-rim);border-radius:14px;box-shadow:var(--glass-edge),0 6px 18px -10px rgba(90,60,90,.18)}
-[data-theme="light"] :is(.contact-item,.pd-github-card,.patent-pdf-card):hover{background:rgba(255,255,255,.88)}
-
-/* Controls: glass capsules */
-[data-theme="light"] :is(.btn,.filter-btn,.proj-toggle-btn,.nav-resume-btn,.nav-tech-news-btn,.tnp-refresh-btn){
-  border-radius:999px;background:var(--glass-fill);border:1px solid var(--glass-rim);box-shadow:var(--glass-edge),0 4px 14px -6px rgba(90,60,90,.2)}
-[data-theme="light"] :is(.btn:not(.btn-primary),.filter-btn:not(.active),.proj-toggle-btn,.nav-resume-btn,.nav-tech-news-btn,.tnp-refresh-btn):hover{background:var(--glass-fill-hi)}
-[data-theme="light"] :is(.theme-toggle,.tnp-theme-toggle,.back-to-top,.footer-social-icon,.proj-github-btn,.mobile-nav-footer a,.tnp-modal-close){
-  border-radius:50%;background:var(--glass-fill-hi);border:1px solid var(--glass-rim);box-shadow:var(--glass-edge),0 4px 14px -6px rgba(90,60,90,.22)}
-/* Tinted glass for the primary actions: the sunset ink, with a specular edge */
-[data-theme="light"] :is(.btn-primary,.filter-btn.active,.tnt-cta,.proj-metric-badge){
-  border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 0 -1px 0 rgba(0,0,0,.12),0 8px 22px -6px var(--sunset-shadow)}
-[data-theme="light"] :is(.btn-primary,.tnt-cta){border-radius:999px}
-[data-theme="light"] .back-to-top:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.38),0 8px 22px -6px var(--sunset-shadow)}
-
-/* Tags: small glass pills */
-[data-theme="light"] :is(.hero-stack-tag,.skill-badge,.exp-skill-tag,.proj-lang-badge,.proj-tag,.proj-tech-pill,.article-tag,.pd-category-badge,.pd-lang-badge,.pd-tech-tag,.pd-section-num,.proj-metric-badge,.hero-img-badge){border-radius:999px}
-[data-theme="light"] :is(.hero-stack-tag,.skill-badge,.exp-skill-tag,.proj-lang-badge,.proj-tech-pill,.pd-lang-badge,.pd-tech-tag){
-  background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
-
-/* Inputs: recessed glass */
-[data-theme="light"] .form-group :is(input,textarea){background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.75);border-radius:14px;box-shadow:inset 0 1px 3px rgba(90,60,90,.1)}
-
-/* Bars: the navbar floats as a glass capsule; other bars are full-width glass */
+/* ----- Control layer: glass ----- */
 [data-theme="light"] :is(.navbar,.pd-nav){
   top:12px;margin:12px 16px 0;border-radius:22px;border:1px solid var(--glass-rim);
-  background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.44));
-  box-shadow:var(--glass-edge),0 10px 30px -12px rgba(90,60,90,.22)}
-[data-theme="light"] .navbar.scrolled{background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.58))}
+  background:linear-gradient(180deg,rgba(255,255,255,.68),rgba(255,255,255,.46));
+  box-shadow:var(--glass-edge),0 10px 30px -14px rgba(0,0,0,.2)}
+[data-theme="light"] .navbar.scrolled{background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,.6))}
 @media (max-width:480px){[data-theme="light"] :is(.navbar,.pd-nav){top:8px;margin:8px 8px 0;border-radius:18px}}
-
-/* Blur only where there's GPU headroom; phones get the same glass without it */
-@media (min-width:769px){
-  [data-theme="light"] :is(.proj-card,.skill-category,.patent,.contact-form-wrapper,.about-facts,.pd-diagram,.pd-sidebar-card,.pd-workflow,.tnt-card,.tnp-card,.teaching-callout,.btn,.filter-btn,.nav-resume-btn,.nav-tech-news-btn,.theme-toggle,.back-to-top){
-    -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
-}
+[data-theme="light"] :is(.btn,.filter-btn,.proj-toggle-btn,.nav-resume-btn,.nav-tech-news-btn,.tnp-refresh-btn){
+  border-radius:999px;background:var(--glass-fill);border:1px solid var(--glass-rim);box-shadow:var(--glass-edge),0 3px 12px -6px rgba(0,0,0,.18)}
+[data-theme="light"] :is(.btn:not(.btn-primary),.filter-btn:not(.active),.proj-toggle-btn,.nav-resume-btn,.nav-tech-news-btn,.tnp-refresh-btn):hover{background:var(--glass-fill-hi)}
+[data-theme="light"] :is(.theme-toggle,.tnp-theme-toggle,.back-to-top){
+  border-radius:50%;background:var(--glass-fill-hi);border:1px solid var(--glass-rim);box-shadow:var(--glass-edge),0 4px 14px -6px rgba(0,0,0,.2)}
 [data-theme="light"] :is(.navbar,.pd-nav,.tnp-topbar,.tnp-tabbar,.tnp-metabar){-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+@media (min-width:769px){
+  [data-theme="light"] :is(.btn,.filter-btn,.proj-toggle-btn,.nav-resume-btn,.nav-tech-news-btn,.theme-toggle,.back-to-top){-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+}
 
-/* Respect "Reduce transparency": frosted becomes solid */
+/* Primary actions: solid accent pills. Selected filter: dark pill. */
+[data-theme="light"] :is(.btn-primary,.tnt-cta){background:var(--gold);color:#fff;border:1px solid transparent;border-radius:999px;box-shadow:none}
+[data-theme="light"] :is(.btn-primary,.tnt-cta):hover{background:var(--gold-2);box-shadow:none;transform:none}
+[data-theme="light"] .filter-btn.active{background:var(--t1);color:#fff;border-color:transparent;box-shadow:none}
+[data-theme="light"] .back-to-top:hover{background:var(--t1);color:#fff;border-color:transparent}
+
+/* Small round icon buttons and tags: plain, no rims */
+[data-theme="light"] :is(.footer-social-icon,.proj-github-btn,.mobile-nav-footer a,.tnp-modal-close){border-radius:50%;background:rgba(0,0,0,.05);border-color:transparent;box-shadow:none}
+[data-theme="light"] :is(.hero-stack-tag,.skill-badge,.exp-skill-tag,.proj-tag,.article-tag,.pd-tech-tag,.pd-lang-badge,.pd-category-badge,.pd-section-num){
+  border-radius:999px;background:rgba(0,0,0,.045);border-color:transparent;box-shadow:none;color:var(--t2)}
+
+/* Inputs */
+[data-theme="light"] .form-group :is(input,textarea){background:#f5f5f7;border:1px solid transparent;border-radius:12px;box-shadow:none}
+[data-theme="light"] .form-group input:focus,[data-theme="light"] .form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(161,61,45,.14);background:#fff}
+
+/* ----- Type: plain labels, sentence case ----- */
+[data-theme="light"] .section-tag{font-size:17px;font-weight:600;letter-spacing:-0.01em;text-transform:none;color:var(--gold);margin-bottom:8px}
+[data-theme="light"] :is(.section-tag,.footer-heading)::before{content:none}
+[data-theme="light"] .footer-heading{font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--t1)}
+[data-theme="light"] :is(.fact-label,.skill-category-title,.pd-sidebar-title,.tnt-eyebrow){letter-spacing:0;text-transform:none;font-weight:600}
+[data-theme="light"] .hero-divider{background:rgba(0,0,0,.12)}
+
+/* ----- Project cards: title, one line, the result ----- */
+[data-theme="light"] :is(.proj-cat-icon,.proj-lang-badge,.proj-tags){display:none}
+[data-theme="light"] .proj-card-header{justify-content:flex-start}
+[data-theme="light"] .proj-card-header-right{align-items:flex-start}
+[data-theme="light"] .proj-metric-badge{background:none;border:0;padding:0;border-radius:0;box-shadow:none;color:var(--gold);font-size:13px;font-weight:600;letter-spacing:0}
+/* doubled class: outranks the base :not(:has()) rule that picks the long description */
+[data-theme="light"] .proj-card.proj-card .proj-desc-long{display:none}
+[data-theme="light"] .proj-card.proj-card .proj-desc-short{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ----- Fewer ornaments, more air ----- */
+[data-theme="light"] .hero-bento::before{display:none}
+[data-theme="light"] .hero-marquee{display:none}
+[data-theme="light"] .section{padding:clamp(72px,10vw,150px) 0}
+
+/* Respect "Reduce transparency": glass becomes solid */
 @media (prefers-reduced-transparency:reduce){
-  [data-theme="light"]{--glass-fill:#fbf9fa;--glass-fill-hi:#ffffff}
-  [data-theme="light"] :is(.navbar,.pd-nav,.navbar.scrolled){background:#fbf9fa}
+  [data-theme="light"]{--glass-fill:#fbfbfd;--glass-fill-hi:#ffffff;--card:#fff}
+  [data-theme="light"] :is(.navbar,.pd-nav,.navbar.scrolled){background:#fbfbfd}
   [data-theme="light"] *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 }
 

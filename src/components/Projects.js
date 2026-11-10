@@ -32,7 +32,7 @@ const Projects = () => {
     <section id="projects" className="section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">projects</span>
+          <span className="section-tag">Projects</span>
           <h2 className="section-title">Featured Work</h2>
           <p className="section-subtitle">
             {projectsData.length} projects spanning autonomous agents, computer vision, data pipelines, and production ML

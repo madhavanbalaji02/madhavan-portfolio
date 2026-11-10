@@ -80,9 +80,9 @@
   white-space: nowrap;
 }
 .tnt-pill i { font-size: 10px; }
-.tnt-pill-purple { background: rgba(94,196,212,0.08);  color: var(--cyan);  border-color: rgba(94,196,212,0.22); }
-.tnt-pill-green  { background: rgba(74,222,128,0.08);  color: var(--green); border-color: rgba(74,222,128,0.20); }
-.tnt-pill-blue   { background: rgba(212,181,149,0.08); color: var(--gold);  border-color: rgba(212,181,149,0.20); }
+.tnt-pill-purple { background: color-mix(in srgb,var(--cyan) 8%,transparent);  color: var(--cyan);  border-color: color-mix(in srgb,var(--cyan) 22%,transparent); }
+.tnt-pill-green  { background: color-mix(in srgb,var(--green) 8%,transparent);  color: var(--green); border-color: color-mix(in srgb,var(--green) 20%,transparent); }
+.tnt-pill-blue   { background: color-mix(in srgb,var(--gold) 8%,transparent); color: var(--gold);  border-color: color-mix(in srgb,var(--gold) 20%,transparent); }
 
 /* ── CTA ─────────────────────────────────────────────────────── */
 .tnt-cta {
@@ -103,7 +103,7 @@
 }
 .tnt-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(212,181,149,0.35);
+  box-shadow: 0 8px 28px color-mix(in srgb,var(--gold) 35%,transparent);
   background: #e0c4a8;
 }
 .tnt-cta-ext { font-size: 11px; opacity: 0.75; }
@@ -145,9 +145,9 @@
   border: 1px solid transparent;
   align-self: flex-start;
 }
-.tnt-cb-purple { background: rgba(94,196,212,0.10);  color: var(--cyan);  border-color: rgba(94,196,212,0.22); }
-.tnt-cb-blue   { background: rgba(212,181,149,0.10); color: var(--gold);  border-color: rgba(212,181,149,0.22); }
-.tnt-cb-green  { background: rgba(74,222,128,0.10);  color: var(--green); border-color: rgba(74,222,128,0.22); }
+.tnt-cb-purple { background: color-mix(in srgb,var(--cyan) 10%,transparent);  color: var(--cyan);  border-color: color-mix(in srgb,var(--cyan) 22%,transparent); }
+.tnt-cb-blue   { background: color-mix(in srgb,var(--gold) 10%,transparent); color: var(--gold);  border-color: color-mix(in srgb,var(--gold) 22%,transparent); }
+.tnt-cb-green  { background: color-mix(in srgb,var(--green) 10%,transparent);  color: var(--green); border-color: color-mix(in srgb,var(--green) 22%,transparent); }
 
 .tnt-ct {
   font-size: 13px;

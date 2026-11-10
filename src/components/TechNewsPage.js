@@ -47,9 +47,9 @@ const BADGE_CLASS = {
 };
 
 const TABS = [
-  { key: 'forYou',         label: 'For You',          icon: 'fa-solid fa-star',        sub: 'AI · Agents · LLMs · Industry', accent: '#a78bfa' },
-  { key: 'myStack',        label: 'My Stack',          icon: 'fa-solid fa-flask',       sub: 'MLOps · Alignment · Vision · Recsys', accent: '#4ade80' },
-  { key: 'aroundTheWorld', label: 'Around the World',  icon: 'fa-solid fa-globe',       sub: 'Global · 🇯🇵 🇩🇪 Translated', accent: '#60a5fa' },
+  { key: 'forYou',         label: 'For You',          icon: 'fa-solid fa-star',        sub: 'AI · Agents · LLMs · Industry', accent: 'var(--gold)' },
+  { key: 'myStack',        label: 'My Stack',          icon: 'fa-solid fa-flask',       sub: 'MLOps · Alignment · Vision · Recsys', accent: 'var(--cyan)' },
+  { key: 'aroundTheWorld', label: 'Around the World',  icon: 'fa-solid fa-globe',       sub: 'Global · 🇯🇵 🇩🇪 Translated', accent: 'var(--t2)' },
 ];
 
 const EMPTY_SECTIONS = { forYou: [], myStack: [], aroundTheWorld: [] };
@@ -298,7 +298,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
   }
 
   const activeTabMeta = TABS.find((t) => t.key === activeTab);
-  const accent        = activeTabMeta?.accent ?? '#a78bfa';
+  const accent        = activeTabMeta?.accent ?? 'var(--gold)';
   const articles      = sections[activeTab] ?? [];
 
   const cacheLabel = meta

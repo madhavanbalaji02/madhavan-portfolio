@@ -9,9 +9,9 @@ const diagrams = {
 };
 
 const categoryMeta = {
-  ai: { icon: 'fas fa-brain',      accent: '#00f2ff' },
-  cv: { icon: 'fas fa-eye',        accent: '#d4b595' },
-  ml: { icon: 'fas fa-chart-line', accent: '#4ade80' },
+  ai: { icon: 'fas fa-brain',      accent: 'var(--cyan)' },
+  cv: { icon: 'fas fa-eye',        accent: 'var(--gold)' },
+  ml: { icon: 'fas fa-chart-line', accent: 'var(--t2)' },
 };
 
 const langMeta = {

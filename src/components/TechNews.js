@@ -29,9 +29,9 @@ const CATEGORY_ICON = {
 };
 
 const TABS = [
-  { key: 'forYou',         label: 'For You',         icon: 'fa-solid fa-star',  accent: '#a78bfa' },
-  { key: 'myStack',        label: 'My Stack',         icon: 'fa-solid fa-flask', accent: '#4ade80' },
-  { key: 'aroundTheWorld', label: 'Around the World', icon: 'fa-solid fa-globe', accent: '#60a5fa' },
+  { key: 'forYou',         label: 'For You',         icon: 'fa-solid fa-star',  accent: 'var(--gold)' },
+  { key: 'myStack',        label: 'My Stack',         icon: 'fa-solid fa-flask', accent: 'var(--cyan)' },
+  { key: 'aroundTheWorld', label: 'Around the World', icon: 'fa-solid fa-globe', accent: 'var(--t2)' },
 ];
 
 const EMPTY_SECTIONS = { forYou: [], myStack: [], aroundTheWorld: [] };

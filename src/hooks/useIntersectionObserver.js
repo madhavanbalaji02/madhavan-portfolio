@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const useIntersectionObserver = (ref, options = {}) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,13 +11,15 @@ const useIntersectionObserver = (ref, options = {}) => {
       }
     }, options);
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    // Capture the node now: ref.current may point elsewhere by cleanup time
+    const node = ref.current;
+    if (node) {
+      observer.observe(node);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (node) {
+        observer.unobserve(node);
       }
     };
   }, [ref, options]);

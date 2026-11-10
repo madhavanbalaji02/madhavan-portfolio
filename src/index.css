@@ -79,6 +79,7 @@
 [data-theme="light"] .footer{background:var(--bg-dark)}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
 body{font-family:var(--font-body);background:var(--bg);color:var(--t2);line-height:1.65;overflow-x:clip;-webkit-font-smoothing:antialiased;max-width:100%}
 h1,h2,h3,h4,h5,h6{color:var(--t1);font-weight:700;line-height:1.2}
@@ -177,14 +178,17 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   z-index:1060;
   padding:72px 0 32px;
   transform:translateX(100%);
-  transition:transform 0.3s var(--ease);
+  /* visibility:hidden keeps the closed drawer out of Tab order and screen readers;
+     the delay lets the slide-out animation finish before it hides */
+  visibility:hidden;
+  transition:transform 0.3s var(--ease),visibility 0s linear 0.3s;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
   box-shadow:-8px 0 40px rgba(0,0,0,.6);
   display:flex;
   flex-direction:column;
 }
-.mobile-nav-drawer.show{transform:translateX(0)}
+.mobile-nav-drawer.show{transform:translateX(0);visibility:visible;transition:transform 0.3s var(--ease),visibility 0s}
 
 .mobile-nav-list{list-style:none;padding:0;flex:1}
 .mobile-nav-list li{border-bottom:1px solid var(--border);opacity:0}
@@ -454,7 +458,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .form-group label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3)}
 .form-group input,.form-group textarea{padding:clamp(9px,1.5vw,11px) 13px;background:var(--bg-alt);border:1px solid var(--border);border-radius:4px;font-family:var(--font-body);font-size:14px;color:var(--t1);transition:border-color 0.2s;width:100%;-webkit-appearance:none;appearance:none}
 .form-group input::placeholder,.form-group textarea::placeholder{color:var(--t3)}
-.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--border-warm)}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-dim)}
 .form-group textarea{resize:vertical;min-height:100px}
 
 /* Footer */
@@ -572,6 +576,10 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .hero-links{gap:12px}
   .section-title{font-size:clamp(20px,7vw,26px);letter-spacing:-0.5px}
   .filter-btn{font-size:12px;padding:5px 12px}
+  /* One swipeable row of chips instead of an orphaned wrap; bleeds to the screen edge */
+  .project-filter{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-16px;margin-right:-16px;padding:4px 16px;scroll-padding-inline:16px}
+  .project-filter::-webkit-scrollbar{display:none}
+  .project-filter .filter-btn{flex-shrink:0;white-space:nowrap}
   .exp-card{grid-template-columns:1fr}
   .footer-content{grid-template-columns:1fr}
 }
@@ -980,7 +988,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   transition:border-color 0.2s;
 }
 .pd-result-item:hover{border-color:var(--border-warm)}
-.pd-result-icon{color:var(--green);font-size:13px;flex-shrink:0;margin-top:2px}
+.pd-result-icon{color:var(--gold);font-size:13px;flex-shrink:0;margin-top:2px}
 .pd-result-item p{font-size:clamp(12px,1.6vw,13px);color:var(--t2);line-height:1.6;margin:0}
 
 /* Sidebar */

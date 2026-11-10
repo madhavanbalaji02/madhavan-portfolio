@@ -6,6 +6,7 @@ const categoryMeta = {
   ai: { icon: 'fas fa-brain',      accent: 'var(--cyan)' },
   cv: { icon: 'fas fa-eye',        accent: 'var(--gold)' },
   ml: { icon: 'fas fa-chart-line', accent: 'var(--t2)' },
+  data: { icon: 'fas fa-database', accent: 'var(--t2)' },
 };
 
 const langMeta = {
@@ -39,7 +40,7 @@ const ProjectCard = ({ project, index }) => {
       onClick={handleCardClick}
     >
       <div className="proj-card-header">
-        <i className={`${cat.icon} proj-cat-icon`} style={{ color: cat.accent }}></i>
+        <i className={`${project.catIcon || cat.icon} proj-cat-icon`} style={{ color: cat.accent }}></i>
         <div className="proj-card-header-right">
           {project.metric && (
             <span className="proj-metric-badge">{project.metric}</span>

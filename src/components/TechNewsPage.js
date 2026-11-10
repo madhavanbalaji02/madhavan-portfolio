@@ -264,7 +264,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
 
   useEffect(() => {
     document.title = 'Daily Tech Intel | Madhavan Balaji';
-    return () => { document.title = 'Madhavan Balaji'; };
+    return () => { document.title = 'Madhavan Balaji | AI Engineer'; };
   }, []);
 
   const fetchNews = useCallback(async (force = false) => {
@@ -361,16 +361,16 @@ export default function TechNewsPage({ theme, toggleTheme }) {
             <i className="fa-solid fa-triangle-exclamation tnp-empty-icon" />
             <div className="tnp-empty-title">Could not load news</div>
             <p className="tnp-empty-msg">{error}</p>
-            <button className="tnp-refresh-btn" onClick={handleRefresh}>
-              <i className="fa-solid fa-rotate-right" /> Try Again
+            <button className="tnp-refresh-btn" onClick={handleRefresh} disabled={refreshing}>
+              <i className={`fa-solid fa-rotate-right${refreshing ? ' fa-spin' : ''}`} /> {refreshing ? 'Refreshing…' : 'Try Again'}
             </button>
           </div>
         ) : articles.length === 0 ? (
           <div className="tnp-empty">
             <i className="fa-solid fa-newspaper tnp-empty-icon" />
             <div className="tnp-empty-title">No articles in this section</div>
-            <button className="tnp-refresh-btn" onClick={handleRefresh}>
-              <i className="fa-solid fa-rotate-right" /> Refresh
+            <button className="tnp-refresh-btn" onClick={handleRefresh} disabled={refreshing}>
+              <i className={`fa-solid fa-rotate-right${refreshing ? ' fa-spin' : ''}`} /> {refreshing ? 'Refreshing…' : 'Refresh'}
             </button>
           </div>
         ) : (

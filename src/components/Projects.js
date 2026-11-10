@@ -7,6 +7,7 @@ const filters = [
   { id: 'ai',  label: 'AI / LLM' },
   { id: 'cv',  label: 'Computer Vision' },
   { id: 'ml',  label: 'ML / MLOps' },
+  { id: 'data', label: 'Data Engineering' },
 ];
 
 const INITIAL_SHOWN = 6;
@@ -44,7 +45,11 @@ const Projects = () => {
             <button
               key={f.id}
               className={`filter-btn ${activeFilter === f.id ? 'active' : ''}`}
-              onClick={() => handleFilter(f.id)}
+              onClick={(e) => {
+                handleFilter(f.id);
+                // On phones the chips scroll sideways: bring the chosen one fully into view
+                e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+              }}
             >
               {f.label}
             </button>

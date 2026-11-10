@@ -69,7 +69,7 @@
 
 .tnp-stale {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   background: color-mix(in srgb,var(--gold) 10%,transparent);
   color: var(--gold);
   border: 1px solid color-mix(in srgb,var(--gold) 25%,transparent);
@@ -154,7 +154,7 @@
 }
 .tnp-tab i              { font-size: 11px; color: var(--t3); margin-bottom: 2px; transition: color 0.2s; }
 .tnp-tab-label          { font-size: 13px; font-weight: 600; color: var(--t3); transition: color 0.2s; }
-.tnp-tab-sub            { font-family: var(--font-mono); font-size: 9px; color: var(--t3); opacity: 0.45; letter-spacing: 0.3px; transition: all 0.2s; }
+.tnp-tab-sub            { font-family: var(--font-mono); font-size: 11px; color: var(--t3); letter-spacing: 0.3px; transition: all 0.2s; }
 
 /* Underline slides in from the left on activation */
 .tnp-tab::after {
@@ -183,7 +183,7 @@
   gap: 8px;
   padding: 7px clamp(16px, 4vw, 48px);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--t3);
   border-bottom: 1px solid var(--border);
   letter-spacing: 0.3px;
@@ -195,7 +195,7 @@
   animation: tnp-pulse 2.5s ease infinite;
 }
 @keyframes tnp-pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-.tnp-meta-ai { margin-left: auto; opacity: 0.5; }
+.tnp-meta-ai { margin-left: auto; }
 
 /* ── Main content ────────────────────────────────────────────── */
 .tnp-main {
@@ -255,7 +255,7 @@
 /* ── Category badge ──────────────────────────────────────────── */
 .tnp-cat {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -274,7 +274,7 @@
 .tnp-card-flags { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
 .tnp-translated {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--cyan);
   background: color-mix(in srgb,var(--cyan) 8%,transparent);
@@ -323,7 +323,7 @@
 }
 .tnp-source {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--t2);
   font-weight: 700;
   white-space: nowrap;
@@ -333,16 +333,15 @@
 }
 .tnp-footer-sep {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--t3);
   opacity: 0.35;
   flex-shrink: 0;
 }
 .tnp-date {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--t3);
-  opacity: 0.55;
   white-space: nowrap;
   flex-shrink: 0;
   margin-left: auto;
@@ -354,9 +353,8 @@
   align-items: center;
   gap: 5px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--t3);
-  opacity: 0.5;
   letter-spacing: 0.4px;
 }
 .tnp-ai-label i { color: var(--cyan); font-size: 9px; opacity: 0.7; }
@@ -558,9 +556,8 @@
 }
 .tnp-modal-cta-note {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--t3);
-  opacity: 0.6;
 }
 .tnp-modal-read-btn {
   display: inline-flex;

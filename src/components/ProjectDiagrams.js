@@ -15,7 +15,8 @@ const Marker = ({ id }) => (
   </marker>
 );
 
-// Monospace glyphs are ~0.6em wide; squeeze any label that would overflow its box
+// Monospace glyphs are ~0.6em wide. Boxes are sized to fit their labels;
+// this only squeezes text as a safety net if a label is later made longer.
 const FONT = 9;
 const fitLength = (label, w) => {
   const natural = label.length * FONT * 0.6;
@@ -58,19 +59,19 @@ export const SovereignSreDiagram = () => (
 );
 
 export const DocuMindDiagram = () => (
-  <svg viewBox="0 0 380 110" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 372 110" width="100%" xmlns="http://www.w3.org/2000/svg">
     <defs><Marker id="m-doc" /></defs>
-    <Node x={4} y={8} w={54} label="User Query" />
-    <Arr x1={58} y1={18} x2={78} y2={18} m="m-doc" />
-    <Node x={78} y={8} w={82} label="Hybrid RAG" />
-    <Arr x1={160} y1={18} x2={178} y2={18} m="m-doc" />
-    <Node x={178} y={8} w={108} label="LangGraph Agents" />
-    <Arr x1={286} y1={18} x2={304} y2={18} m="m-doc" />
-    <Node x={304} y={8} w={72} label="Cited Report" />
-    <Arr x1={112} y1={28} x2={90} y2={53} m="m-doc" />
-    <Arr x1={126} y1={28} x2={198} y2={53} m="m-doc" />
-    <Node x={48} y={55} w={84} label="Dense / ChromaDB" />
-    <Node x={158} y={55} w={82} label="Sparse / LanceDB" />
+    <Node x={4} y={8} w={66} label="User Query" />
+    <Arr x1={70} y1={18} x2={88} y2={18} m="m-doc" />
+    <Node x={88} y={8} w={66} label="Hybrid RAG" />
+    <Arr x1={154} y1={18} x2={172} y2={18} m="m-doc" />
+    <Node x={172} y={8} w={100} label="LangGraph Agents" />
+    <Arr x1={272} y1={18} x2={290} y2={18} m="m-doc" />
+    <Node x={290} y={8} w={78} label="Cited Report" />
+    <Arr x1={112} y1={28} x2={92} y2={53} m="m-doc" />
+    <Arr x1={130} y1={28} x2={204} y2={53} m="m-doc" />
+    <Node x={40} y={55} w={100} label="Dense / ChromaDB" />
+    <Node x={156} y={55} w={100} label="Sparse / LanceDB" />
     <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
       LangGraph · CrewAI · ChromaDB · LanceDB
     </text>
@@ -78,16 +79,16 @@ export const DocuMindDiagram = () => (
 );
 
 export const VectorGazeDiagram = () => (
-  <svg viewBox="0 0 348 110" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 340 110" width="100%" xmlns="http://www.w3.org/2000/svg">
     <defs><Marker id="m-vg" /></defs>
-    <Node x={4} y={8} w={62} label="Video Frame" />
-    <Arr x1={66} y1={18} x2={86} y2={18} m="m-vg" />
-    <Node x={86} y={8} w={82} label="CLIP Embed" />
-    <Arr x1={168} y1={18} x2={188} y2={18} m="m-vg" />
-    <Node x={188} y={8} w={88} label="LanceDB Search" />
-    <Arr x1={276} y1={18} x2={294} y2={18} m="m-vg" />
-    <Node x={294} y={8} w={50} label="Alert" />
-    <Node x={86} y={55} w={82} label="NL Query" />
+    <Node x={4} y={8} w={72} label="Video Frame" />
+    <Arr x1={76} y1={18} x2={94} y2={18} m="m-vg" />
+    <Node x={94} y={8} w={66} label="CLIP Embed" />
+    <Arr x1={160} y1={18} x2={178} y2={18} m="m-vg" />
+    <Node x={178} y={8} w={88} label="LanceDB Search" />
+    <Arr x1={266} y1={18} x2={284} y2={18} m="m-vg" />
+    <Node x={284} y={8} w={52} label="Alert" />
+    <Node x={94} y={55} w={66} label="NL Query" />
     <Arr x1={127} y1={55} x2={127} y2={30} m="m-vg" />
     <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
       Zero-Shot · Apple Silicon · Moondream2

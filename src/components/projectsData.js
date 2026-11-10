@@ -12,7 +12,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
-    metric: '13 AWS Services',
+    metric: 'Auto-Patch, Human Gate',
     tags: ['LangGraph', 'Amazon Bedrock', 'AWS', 'CrewAI'],
     background:
       "Production systems fail in unpredictable ways. Traditional SRE relies on human engineers on-call, following runbooks, and debugging under extreme pressure, an expensive, error-prone process at scale. Sovereign SRE closes this loop autonomously: CloudWatch alarms route through EventBridge and Lambda into a LangGraph state machine, where CrewAI agents diagnose the incident using codebase embeddings stored in RDS pgvector, then Bedrock Claude Haiku generates a targeted code patch. The entire pipeline is orchestrated by Step Functions, which pauses for a mandatory human approval via SNS email before any fix is deployed. Every incident is fully auditable: diffs in S3, history in DynamoDB, cost metrics in CloudWatch.",
@@ -72,7 +72,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
-    metric: '6 Models · 5 Metrics',
+    metric: 'Found 10× Cheaper Model',
     tags: ['LLM Benchmarking', 'RAGAS', 'Streamlit', 'Async'],
     background:
       "Choosing an LLM for production is not just about accuracy. It's a multi-dimensional trade-off between latency, hallucination risk, and cost. Most evaluations are ad hoc: a few prompts, subjective scoring, no reproducibility. LLM Eval Harness replaces that with a fully automated, configurable pipeline that evaluates any combination of OpenAI, Anthropic, and Groq models in parallel against a structured JSONL dataset. The key architectural insight is that each evaluation dimension (latency, quality, hallucination, cost) requires a different measurement strategy, and fusing them into a single comparable report is what makes the framework useful for real deployment decisions. The NLI-based hallucination detector (deberta-v3-small cross-encoder) and RAGAS suite provide grounded, reproducible quality signals far beyond simple accuracy metrics.",
@@ -133,7 +133,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
-    metric: '15ms RAG · 400ms Ingest',
+    metric: '15ms p50 Retrieval',
     tags: ['Multi-Agent', 'RAG', 'LangGraph', 'AWS Bedrock'],
     background:
       "Enterprise knowledge is trapped in PDFs, internal wikis, and siloed documentation systems. When engineers need answers, they spend hours manually searching across sources, and still miss crucial context. DocuMind replaces that with an enterprise-grade multi-agent research platform deployed on AWS that synthesizes across custom knowledge bases and produces structured, cited reports. The key architectural decisions: hybrid retrieval combining pgvector dense search with BM25 sparse matching, fused via Reciprocal Rank Fusion (RRF k=60) and reranked with a CrossEncoder, achieving higher recall and precision than either approach alone. Document ingestion runs through an asynchronous AWS Step Functions pipeline (S3 → Lambda parse via Textract → Lambda embed via Bedrock Titan Embed v2 → Lambda store into pgvector), keeping the API non-blocking even for complex multi-page PDFs.",
@@ -193,7 +193,7 @@ export const projectsData = [
     category: 'ml',
     categoryLabel: 'ML / MLOps',
     catIcon: 'fas fa-chart-line',
-    metric: '<60s Detection',
+    metric: '<60s Drift Detection',
     tags: ['DuckDB', 'Evidently AI', 'Polars', 'Streamlit'],
     background:
       "Data drift is silent and deadly. Production ML models degrade gradually as input distributions shift, often with no visible errors until model accuracy has already collapsed. Most solutions detect drift after the fact; Aegis is designed to detect and repair drift automatically, keeping data pipelines healthy before downstream models are affected. The hybrid architecture (DuckDB for streaming analytics + Polars for batch processing) enables the system to scale from small cloud deployments to large on-premise datasets without architectural changes.",
@@ -251,7 +251,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
-    metric: '↓56–75% Faithful',
+    metric: '56–75% Faithfulness Drop',
     tags: ['LLMs', 'NPO', 'NLP', 'Research'],
     background:
       "Chain-of-thought (CoT) prompting produces reasoning traces that look coherent, but are they causally connected to the model's final answer? Or are they post-hoc rationalizations of a decision made elsewhere in the model? This distinction matters enormously for AI safety and interpretability. If CoT is just a narrative layer, then 'reasoning-based' safety interventions are built on sand. This project investigates CoT faithfulness using causal intervention: does perturbing the reasoning trace change the model's output? And critically: does fine-tuning on high-quality CoT help or hurt?",
@@ -303,7 +303,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
-    metric: 'Zero-Shot (no labels)',
+    metric: 'Zero Training Labels',
     tags: ['CLIP', 'Zero-Shot', 'LanceDB', 'Edge AI'],
     background:
       "Workplace safety monitoring traditionally requires expensive labeled video datasets to train a custom detector for each violation type. If a new hazard emerges (a new machine, a new PPE requirement), you're back to data collection. VectorGaze eliminates this bottleneck by using CLIP's zero-shot visual-language alignment: instead of training a detector, you describe the violation in natural language, and CLIP finds frames that semantically match. This makes the system instantly configurable for any safety scenario without a single labeled example.",
@@ -359,9 +359,9 @@ export const projectsData = [
     langIcon: 'fab fa-python',
     github: 'https://github.com/madhavanbalaji02/RiceFlow',
     demo: 'https://d35x4x7bn6ghj.cloudfront.net/',
-    category: 'ml',
-    categoryLabel: 'ML / MLOps',
-    catIcon: 'fas fa-dna',
+    category: 'data',
+    categoryLabel: 'Data Engineering',
+    catIcon: 'fas fa-database',
     metric: '80/80 Artifacts Verified',
     tags: ['Nextflow', 'PLINK 2', 'AWS Batch', 'Terraform'],
     background:
@@ -419,10 +419,10 @@ export const projectsData = [
     langIcon: 'fab fa-python',
     github: 'https://github.com/madhavanbalaji02/StreamCart',
     demo: 'https://streamcart.streamlit.app/',
-    category: 'ml',
-    categoryLabel: 'ML / MLOps',
-    catIcon: 'fas fa-cart-shopping',
-    metric: 'Exactly-Once Ingest',
+    category: 'data',
+    categoryLabel: 'Data Engineering',
+    catIcon: 'fas fa-database',
+    metric: 'Exactly-Once Verified',
     tags: ['Kafka', 'Spark', 'Delta Lake', 'Airflow'],
     background:
       "Most retail data stacks keep behavior and transactions apart. What shoppers did (page views, cart adds, sessions) lives in an event stream, and what they bought lives in the checkout database. Analysts stitch the two together late and inconsistently, yet that gap is exactly where the important questions live: conversion funnels, cart abandonment, and revenue by browsing behavior. StreamCart treats both as first-class inputs to one governed pipeline. Clickstream events arrive in near real time through Kafka and Spark Structured Streaming, orders arrive through scheduled batch extracts from Postgres, and both are conformed into a single Delta Lake medallion architecture with a shared star schema. One dashboard query can then answer \"what's our conversion rate by category this week\" with no ad hoc joining.",
@@ -536,7 +536,7 @@ export const projectsData = [
     category: 'ml',
     categoryLabel: 'ML / MLOps',
     catIcon: 'fas fa-chart-line',
-    metric: '<5min Deploy',
+    metric: '<5 min Push to Prod',
     tags: ['Recommender', 'Kubernetes', 'ArgoCD', 'MLOps'],
     background:
       "Recommender systems sit at the intersection of ML and production engineering. The model is only half the challenge. This project was built to practice the full MLOps lifecycle: developing a hybrid recommender (content-based + collaborative filtering), containerizing it, deploying it to Kubernetes, and establishing automated CI/CD pipelines. The hybrid approach was chosen because neither content-based (ignores user behavior) nor collaborative filtering alone (ignores item attributes) achieves the best recommendations. Combining them captures both signal types.",
@@ -594,7 +594,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
-    metric: '400 Paintings',
+    metric: 'Beats Prompt-Only Styling',
     tags: ['GAN', 'Stable Diffusion', 'LoRA', 'CV'],
     background:
       "Neural style transfer has existed since 2015, but early GAN-based approaches struggle with identity preservation and style intensity control. This project combines two paradigms: classical GAN-based neural style transfer for precise feature-level stylization, and Stable Diffusion with a custom LoRA adapter for more fluid, diffusion-based style application. The Van Gogh LoRA was fine-tuned on 400 curated paintings from the artist's distinct periods, capturing brush stroke texture, color palette, and compositional patterns that generic artistic prompts miss.",
@@ -646,7 +646,7 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
-    metric: '0.1% Params vs full FT',
+    metric: 'Trains 0.1% of Params',
     tags: ['BLIP-2', 'LoRA', 'Fine-tuning', 'Vision-Language'],
     background:
       "Standard image captioning systems describe the visual scene but ignore text visible within the image: charts, signs, slides, product labels. This creates a major gap for real-world applications: a model that describes 'a whiteboard' instead of reading the equations on it, or 'a sign' instead of reading what it says. OmniBridge bridges this gap by fine-tuning BLIP-2 on the TextCaps dataset using LoRA, a parameter-efficient technique that adapts a large pretrained model without retraining all parameters.",
@@ -698,7 +698,7 @@ export const projectsData = [
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',
-    metric: '↓TTFT Tracked',
+    metric: 'Used in Classroom Teaching',
     tags: ['PyTorch', 'FastAPI', 'Transformers', 'React'],
     background:
       "Most LLM APIs hide the mechanics: you set a temperature slider and get text back. But understanding what's happening in the logit space (how temperature reshapes the probability distribution, why top-K and nucleus sampling behave differently in edge cases) is essential for anyone building serious LLM applications. This playground was built as an educational tool to expose these mechanics explicitly: no HuggingFace generate() defaults, manual implementations of each sampling strategy, and live tracking of time-to-first-token (TTFT) and throughput.",
@@ -750,8 +750,8 @@ export const projectsData = [
     demo: '/#/tech-news',
     category: 'ai',
     categoryLabel: 'AI / LLM',
-    catIcon: 'fas fa-newspaper',
-    metric: '100+ Sources Daily',
+    catIcon: 'fas fa-brain',
+    metric: '~90% Lower Token Cost',
     tags: ['Claude API', 'Cloudflare Workers', 'RAG', 'RSS'],
     background:
       "Keeping up with AI/ML research across English, Japanese, and German sources is a full-time job. Daily Tech Intel automates this: a Cloudflare Worker runs a 3-tier semantic pipeline, ingesting RSS feeds from 10 sources, passing 100+ raw articles to Claude for semantic filtering and summarization into 3 personalized sections (For You, My Stack, Around the World), and persisting results in Cloudflare KV with a 24-hour TTL. Non-English articles are translated to English in the same Claude pass. On-demand article analysis triggers a second Claude call for a 5–7 sentence deep-dive with key takeaways, cached per-article for 7 days. Prompt caching cuts input token costs ~90% on repeated section refreshes.",

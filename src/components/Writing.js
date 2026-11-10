@@ -58,20 +58,20 @@ const Writing = () => {
 
             <div className="article-list">
               {ARTICLES.map((a, i) => (
-                  <a
-                    key={i}
-                    href={a.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="article-row"
-                  >
-                    <div className="article-meta">
-                      <span className="article-date">{a.date}</span>
-                      <span className="article-readtime">{a.readTime}</span>
-                    </div>
-                    <p className="article-title">{a.title}</p>
-                    <span className="article-arrow">Read →</span>
-                  </a>
+                <a
+                  key={i}
+                  href={a.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="article-row"
+                >
+                  <div className="article-meta">
+                    <span className="article-date">{a.date}</span>
+                    <span className="article-readtime">{a.readTime}</span>
+                  </div>
+                  <p className="article-title">{a.title}</p>
+                  <span className="article-arrow">Read →</span>
+                </a>
               ))}
             </div>
           </div>

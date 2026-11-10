@@ -42,6 +42,9 @@ jobs:
         env:
           CI: false # Prevents build failure on lint warnings
 
+      - name: Keep previous deploys' JS/CSS online (avoids unstyled pages from cached HTML)
+        run: node scripts/keep-previous-assets.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

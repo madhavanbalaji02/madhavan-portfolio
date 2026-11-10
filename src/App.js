@@ -60,6 +60,8 @@ function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    // Browser UI (mobile address bar) matches the top of the sky in light mode
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#dbeaf7' : '#0b1519');
     localStorage.setItem('theme', theme);
   }, [theme]);
 

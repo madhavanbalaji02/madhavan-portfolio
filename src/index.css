@@ -130,6 +130,46 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .hero-name{background:none;-webkit-background-clip:unset;-webkit-text-fill-color:var(--t1);background-clip:unset}
 [data-theme="light"] .hero-img-wrap{animation:none;box-shadow:0 8px 28px rgba(110,50,30,0.16)}
 
+/* ---------- Sky accents: the sunset carried into the details ----------
+   --sunset-ink: deep amber > terracotta > plum, for solid UI (white text >= 6.2:1).
+   --sunset-glow: the pastel sky itself, for decorative lines and the wordmark. */
+[data-theme="light"]{
+  --sunset-ink:linear-gradient(120deg,#6f4a0c 0%,#8a3d22 50%,#7a2f4a 100%);
+  --sunset-ink-hi:linear-gradient(120deg,#86580f 0%,#a04528 50%,#8e3a5c 100%);
+  --sunset-glow:linear-gradient(90deg,#8fbde6 0%,#c4a8e0 30%,#ee9fba 60%,#f6ac82 85%,#f2c46e 100%);
+  --sunset-shadow:rgba(196,96,90,.22);
+  caret-color:#a03e3a;
+}
+/* Selected text takes the color of the sky where you are: blue near the top, peach at sunset */
+[data-theme="light"] ::selection{background:#f6cfc2;color:var(--t1)}
+[data-theme="light"] ::selection{background:color-mix(in oklab,#bcdaf3,#f8c4b4 calc(var(--p,0) * 100%));color:var(--t1)}
+[data-theme="light"] *{-webkit-tap-highlight-color:rgba(238,159,186,.22)}
+
+/* Scrollbar: the sky from top to bottom */
+[data-theme="light"]{scrollbar-color:#e6a9bb transparent}
+[data-theme="light"] ::-webkit-scrollbar-track{background:transparent}
+[data-theme="light"] ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8fbde6,#c4a8e0,#ee9fba,#f6ac82)}
+
+/* Focus and inputs */
+[data-theme="light"] :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline-color:#8e3a5c}
+[data-theme="light"] .form-group input:focus,[data-theme="light"] .form-group textarea:focus{border-color:#c0607a;box-shadow:0 0 0 3px rgba(238,159,186,.28)}
+
+/* Primary actions glow like the sun going down */
+[data-theme="light"] :is(.btn-primary,.filter-btn.active,.tnt-cta,.proj-metric-badge){background:var(--sunset-ink);border-color:transparent;color:#fff}
+[data-theme="light"] .tnt-cta:hover{background:var(--sunset-ink-hi)}
+[data-theme="light"] .btn-primary{box-shadow:0 6px 22px var(--sunset-shadow)}
+[data-theme="light"] .btn-primary:hover{background:var(--sunset-ink-hi);box-shadow:0 10px 34px rgba(196,96,90,.32)}
+[data-theme="light"] .back-to-top:hover{background:var(--sunset-ink);color:#fff;border-color:transparent}
+
+/* Labels and lines */
+[data-theme="light"] :is(.section-tag,.footer-heading){background:var(--sunset-ink);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+[data-theme="light"] .footer-heading::before{-webkit-text-fill-color:#8a3d22}
+[data-theme="light"] .hero-divider{height:2px;border-radius:1px;background:var(--sunset-glow)}
+[data-theme="light"] .footer-wordmark{background:var(--sunset-glow);-webkit-background-clip:text;background-clip:text;opacity:.55}
+
+/* Cards lift into a warm glow instead of a grey shadow */
+[data-theme="light"] .proj-card:hover{box-shadow:0 22px 50px var(--sunset-shadow),0 0 0 1px rgba(224,140,130,.35);border-color:rgba(224,140,130,.35)}
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}

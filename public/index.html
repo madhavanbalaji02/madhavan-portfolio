@@ -32,10 +32,14 @@
   <meta name="twitter:image"       content="https://madhavanbalaji.com/og-image.png" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="64x64" href="%PUBLIC_URL%/favicon-64.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
+  <!-- favicon.ico at the root is what Bing, Yahoo, DuckDuckGo and Brave fetch first;
+       Google prefers a square icon in a multiple of 48px -->
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon-64.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/favicon-96.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="%PUBLIC_URL%/favicon-48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
   <meta name="theme-color" content="#0b1519" />
 
   <!-- Fonts: SF Pro + SF Mono (system fonts, no external load) -->

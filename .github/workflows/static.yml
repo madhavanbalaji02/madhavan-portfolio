@@ -54,3 +54,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Notify search engines (IndexNow)
+        run: node scripts/indexnow.mjs
+        continue-on-error: true

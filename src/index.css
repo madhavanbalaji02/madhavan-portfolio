@@ -106,7 +106,10 @@ html[data-theme="light"]{background:#f3f6fa}
 @media (prefers-reduced-motion:reduce){.sky-clouds{transform:none}}
 
 /* Sections let the sky through, so the page reads as one continuous sky */
-[data-theme="light"] :is(.hero-bento,#about,.experience-section,#projects,.patent-section,.writing-section,.contact-section,.footer,.pd-page,.pd-not-found,.tnp-root){background:transparent}
+[data-theme="light"] :is(.hero-bento,#about,.experience-section,#projects,.patent-section,.writing-section,.contact-section,.tnt-section,.footer,.pd-page,.pd-not-found,.tnp-root){background:transparent}
+/* No hard seams between sections: the sky itself carries the transitions */
+[data-theme="light"] .tnt-section{border-top:0}
+[data-theme="light"] .footer::before,[data-theme="light"] .footer::after{display:none}
 
 /* Frosted glass for bars and overlays */
 [data-theme="light"] :is(.navbar,.pd-nav){background:var(--glass)}

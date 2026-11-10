@@ -1,12 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SovereignSreDiagram, DocuMindDiagram, VectorGazeDiagram } from './ProjectDiagrams';
-
-const diagrams = {
-  'sovereign-sre': SovereignSreDiagram,
-  'documind': DocuMindDiagram,
-  'vectorgaze': VectorGazeDiagram,
-};
+import { diagramsBySlug } from './ProjectDiagrams';
 
 const categoryMeta = {
   ai: { icon: 'fas fa-brain',      accent: 'var(--cyan)' },
@@ -24,7 +18,7 @@ const ProjectCard = ({ project, index }) => {
   const cat  = categoryMeta[project.category] || categoryMeta.ml;
   const lang = langMeta[project.language]      || { icon: 'fas fa-code', color: '#555' };
 
-  const Diagram = diagrams[project.slug];
+  const Diagram = diagramsBySlug[project.slug];
 
   const handleCardClick = () => {
     navigate(`/project/${project.slug}`);
@@ -65,7 +59,9 @@ const ProjectCard = ({ project, index }) => {
 
       <div className="proj-card-body">
         <h3 className="proj-title">{project.title}</h3>
-        <p className="proj-desc">{project.description}</p>
+        {/* Short tagline on diagram cards and phones; full description elsewhere (CSS picks one) */}
+        <p className="proj-desc proj-desc-short">{project.tagline || project.description}</p>
+        <p className="proj-desc proj-desc-long">{project.description}</p>
         <div className="proj-tags">
           {project.tags.map((tag, i) => (
             <span key={i} className="proj-tag">{tag}</span>

@@ -1,29 +1,42 @@
 import React from 'react';
 
+// Theme-aware colors. CSS variables only resolve inside `style`, not SVG attributes.
 const C = {
-  node: '#1a2d35',
-  border: '#2a4a58',
-  text: '#94b8c4',
-  arrow: '#2a6a7a',
-  label: '#526670',
+  node: 'var(--bg-card-2)',
+  border: 'color-mix(in srgb, var(--cyan) 30%, var(--border-hi))',
+  text: 'var(--t2)',
+  arrow: 'color-mix(in srgb, var(--cyan) 55%, transparent)',
+  label: 'var(--t3)',
 };
 
 const Marker = ({ id }) => (
   <marker id={id} markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
-    <polygon points="0 0, 6 3, 0 6" fill={C.arrow} />
+    <polygon points="0 0, 6 3, 0 6" style={{ fill: C.arrow }} />
   </marker>
 );
 
-const Node = ({ x, y, w, h = 20, label }) => (
-  <>
-    <rect x={x} y={y} width={w} height={h} rx="3" fill={C.node} stroke={C.border} strokeWidth="1" />
-    <text x={x + w / 2} y={y + h / 2} textAnchor="middle" dominantBaseline="central"
-      fill={C.text} fontFamily="monospace" fontSize="9">{label}</text>
-  </>
-);
+// Monospace glyphs are ~0.6em wide; squeeze any label that would overflow its box
+const FONT = 9;
+const fitLength = (label, w) => {
+  const natural = label.length * FONT * 0.6;
+  const room = w - 8;
+  return natural > room ? room : undefined;
+};
+
+const Node = ({ x, y, w, h = 20, label }) => {
+  const textLength = fitLength(label, w);
+  return (
+    <>
+      <rect x={x} y={y} width={w} height={h} rx="3" strokeWidth="1" style={{ fill: C.node, stroke: C.border }} />
+      <text x={x + w / 2} y={y + h / 2} textAnchor="middle" dominantBaseline="central"
+        fontFamily="monospace" fontSize={FONT} style={{ fill: C.text }}
+        textLength={textLength} lengthAdjust={textLength ? 'spacingAndGlyphs' : undefined}>{label}</text>
+    </>
+  );
+};
 
 const Arr = ({ x1, y1, x2, y2, m }) => (
-  <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.arrow} strokeWidth="1.5" markerEnd={`url(#${m})`} />
+  <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="1.5" style={{ stroke: C.arrow }} markerEnd={`url(#${m})`} />
 );
 
 export const SovereignSreDiagram = () => (
@@ -38,7 +51,7 @@ export const SovereignSreDiagram = () => (
     <Node x={84} y={58} w={88} label="Human Gate" />
     <Arr x1={172} y1={68} x2={192} y2={68} m="m-sre" />
     <Node x={192} y={58} w={78} label="Fix Deploy" />
-    <text x={4} y={104} fill={C.label} fontFamily="monospace" fontSize="8">
+    <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
       Prometheus · LangGraph · CrewAI · ArgoCD
     </text>
   </svg>
@@ -58,7 +71,7 @@ export const DocuMindDiagram = () => (
     <Arr x1={126} y1={28} x2={198} y2={53} m="m-doc" />
     <Node x={48} y={55} w={84} label="Dense / ChromaDB" />
     <Node x={158} y={55} w={82} label="Sparse / LanceDB" />
-    <text x={4} y={104} fill={C.label} fontFamily="monospace" fontSize="8">
+    <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
       LangGraph · CrewAI · ChromaDB · LanceDB
     </text>
   </svg>
@@ -76,8 +89,15 @@ export const VectorGazeDiagram = () => (
     <Node x={294} y={8} w={50} label="Alert" />
     <Node x={86} y={55} w={82} label="NL Query" />
     <Arr x1={127} y1={55} x2={127} y2={30} m="m-vg" />
-    <text x={4} y={104} fill={C.label} fontFamily="monospace" fontSize="8">
+    <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
       Zero-Shot · Apple Silicon · Moondream2
     </text>
   </svg>
 );
+
+// Slug → architecture diagram, shared by project cards and detail pages
+export const diagramsBySlug = {
+  'sovereign-sre': SovereignSreDiagram,
+  'documind': DocuMindDiagram,
+  'vectorgaze': VectorGazeDiagram,
+};

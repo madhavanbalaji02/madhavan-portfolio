@@ -60,7 +60,7 @@ Never download from a GitHub blob URL (`/blob/main/...`) — it returns HTML. Us
 
 | What | Where |
 |---|---|
-| All 11 projects (full detail) | `src/components/projectsData.js` |
+| All projects (full detail) | `src/components/projectsData.js` |
 | Skills grid (5 categories) | `src/components/Skills.js` |
 | Experience + teaching story | `src/components/Experience.js` |
 | Medium articles + HF Spaces | `src/components/Writing.js` |

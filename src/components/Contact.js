@@ -47,7 +47,7 @@ const Contact = () => {
             <h3>Let's Connect</h3>
             <p>Email is the fastest way to reach me. I usually reply within a day.</p>
             <div className="contact-items">
-              <a className="contact-item" href="mailto:madhavanbalaji02@gmail.com" target="_blank" rel="noopener noreferrer">
+              <a className="contact-item" href="mailto:madhavanbalaji02@gmail.com">
                 <div className="contact-icon">
                   <i className="fas fa-envelope"></i>
                 </div>

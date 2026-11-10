@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from './projectsData';
+import { diagramsBySlug } from './ProjectDiagrams';
 
 const ProjectDetail = ({ theme, toggleTheme }) => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const project = projectsData.find(p => p.slug === projectId);
+  const Diagram = project ? diagramsBySlug[project.slug] : null;
 
   const goBackToProjects = () => {
     navigate('/');
@@ -85,6 +87,14 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
             {project.tags.map((t, i) => <span key={i} className="proj-tag">{t}</span>)}
           </div>
         </div>
+
+        {/* Architecture diagram (when one exists for this project) */}
+        {Diagram && (
+          <figure className="pd-diagram">
+            <Diagram />
+            <figcaption className="pd-diagram-caption">System architecture</figcaption>
+          </figure>
+        )}
 
         {/* Main grid */}
         <div className="pd-grid">

@@ -14,7 +14,10 @@ const Hero = () => (
         {/* Photo: shown at top on mobile via CSS order */}
         <div className="hero-profile">
           <div className="hero-img-wrap">
-            <img src={process.env.PUBLIC_URL + '/profile.jpg'} alt="Madhavan Balaji" />
+            <picture>
+              <source srcSet={process.env.PUBLIC_URL + '/profile.webp'} type="image/webp" />
+              <img src={process.env.PUBLIC_URL + '/profile.jpg'} alt="Madhavan Balaji" width="600" height="800" />
+            </picture>
             <div className="hero-img-badge">AI Engineer</div>
           </div>
           <div className="hero-stack">

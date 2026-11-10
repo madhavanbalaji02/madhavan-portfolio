@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -15,10 +15,9 @@ import BackToTop from './components/BackToTop';
 const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
 const TechNewsPage  = lazy(() => import('./components/TechNewsPage'));
 
-function MainPage({ loading, theme, toggleTheme }) {
+function MainPage({ theme, toggleTheme }) {
   return (
     <>
-      {loading && <Loader />}
       <div className="App">
         <Header theme={theme} toggleTheme={toggleTheme} />
         <Hero />
@@ -36,14 +35,19 @@ function MainPage({ loading, theme, toggleTheme }) {
   );
 }
 
-function App() {
-  const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+function NotFound() {
+  return (
+    <main className="not-found">
+      <span className="section-tag">404</span>
+      <h1 className="not-found-title">This page doesn't exist.</h1>
+      <p className="not-found-text">The link may be broken, or the page may have moved.</p>
+      <Link to="/" className="btn btn-primary">Back to home</Link>
+    </main>
+  );
+}
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -60,9 +64,10 @@ function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<MainPage loading={loading} theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="/" element={<MainPage theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
         <Route path="/tech-news" element={<Suspense fallback={<Loader />}><TechNewsPage theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </HashRouter>
   );

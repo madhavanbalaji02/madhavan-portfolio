@@ -120,10 +120,10 @@ const Header = ({ theme, toggleTheme }) => {
         </ul>
 
         <div className="mobile-nav-footer">
-          <a href="https://github.com/madhavanbalaji02"         target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-          <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer"><i className="fab fa-medium"></i></a>
-          <a href="mailto:madhavanbalaji02@gmail.com"                        target="_blank" rel="noopener noreferrer"><i className="fas fa-envelope"></i></a>
+          <a href="https://github.com/madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
+          <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="Medium"><i className="fab fa-medium"></i></a>
+          <a href="mailto:madhavanbalaji02@gmail.com" aria-label="Email"><i className="fas fa-envelope"></i></a>
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
             <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
           </button>

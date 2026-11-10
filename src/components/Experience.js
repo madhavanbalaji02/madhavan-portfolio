@@ -159,11 +159,18 @@ const Experience = () => {
           {/* Teaching Story Section */}
           <div className="teaching-story fade-in-up">
             <div className="teaching-photo-wrap">
-              <img
-                src={process.env.PUBLIC_URL + '/teaching.jpg'}
-                alt="Madhavan teaching at an Algorithms workshop, LeetCode problem projected on screen"
-                className="teaching-photo"
-              />
+              <picture>
+                <source srcSet={process.env.PUBLIC_URL + '/teaching.webp'} type="image/webp" />
+                <img
+                  src={process.env.PUBLIC_URL + '/teaching.jpg'}
+                  alt="Madhavan teaching at an Algorithms workshop, LeetCode problem projected on screen"
+                  className="teaching-photo"
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
               <div className="teaching-photo-caption">
                 <i className="fas fa-chalkboard-teacher"></i>
                 <span>Weekly Algorithms workshop · Indiana University, 2025</span>

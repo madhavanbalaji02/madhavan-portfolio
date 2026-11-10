@@ -49,7 +49,7 @@ const Footer = () => {
               <a href="https://medium.com/@madhavanbalaji02" target="_blank" rel="noopener noreferrer" aria-label="Medium">
                 <i className="fab fa-medium"></i>
               </a>
-              <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" aria-label="HuggingFace" style={{fontSize:'16px'}}>
+              <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" aria-label="Hugging Face" style={{fontSize:'16px'}}>
                 🤗
               </a>
               <a href="mailto:madhavanbalaji02@gmail.com" aria-label="Email">

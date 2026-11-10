@@ -474,7 +474,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 /* Soft warm glow behind the brand block */
 .footer::after{content:'';position:absolute;top:-180px;left:8%;width:520px;height:360px;background:radial-gradient(closest-side,color-mix(in srgb,var(--gold) 9%,transparent),transparent);pointer-events:none}
 .footer .container{position:relative;z-index:1}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(24px,5vw,64px);align-items:start}
 
 .footer-mark{width:40px;height:40px;border-radius:10px;display:block;margin-bottom:18px;box-shadow:0 0 0 1px var(--border-warm),0 8px 24px rgba(0,0,0,.35)}
 .footer-name{font-size:clamp(20px,2.4vw,24px);font-weight:700;color:var(--t1);letter-spacing:-0.5px;margin-bottom:4px}
@@ -1175,11 +1175,23 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 @media(max-width:1240px){
   .footer{padding-bottom:84px}
 }
-@media(max-width:900px){
-  .footer-grid{grid-template-columns:1fr 1fr}
+/* Tablets (iPad portrait ~768-820px) keep the three-column layout */
+@media(max-width:700px){
+  .footer-grid{grid-template-columns:1fr 1fr;row-gap:36px}
   .footer-brand{grid-column:1/-1}
 }
+/* Phones: brand on top, then Explore and Connect side by side (one column each) */
 @media(max-width:480px){
-  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .footer-grid{column-gap:20px}
+  .footer-explore{grid-template-columns:1fr}
+  .footer-social a{gap:10px}
   .footer-bottom{flex-direction:column-reverse;align-items:flex-start;gap:6px}
+}
+/* Fingers need ~44px targets; mouse users keep the tighter rhythm */
+@media(pointer:coarse){
+  .footer-explore a,.footer-social a{min-height:44px}
+  .footer-explore{row-gap:0}
+  .footer-social{gap:0}
+  .footer-status{position:relative}
+  .footer-status::before{content:'';position:absolute;inset:-6px -2px}
 }

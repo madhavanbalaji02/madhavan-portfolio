@@ -185,7 +185,7 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] :is(.btn:not(.btn-primary),.filter-btn:not(.active),.proj-toggle-btn,.nav-resume-btn,.nav-tech-news-btn,.tnp-refresh-btn):hover{background:var(--glass-fill-hi)}
 [data-theme="light"] :is(.theme-toggle,.tnp-theme-toggle,.back-to-top){
   border-radius:50%;background:var(--glass-fill-hi);border:1px solid var(--glass-rim);box-shadow:var(--glass-edge),0 4px 14px -6px rgba(0,0,0,.2)}
-[data-theme="light"] :is(.navbar,.pd-nav,.tnp-topbar,.tnp-tabbar,.tnp-metabar){-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+[data-theme="light"] :is(.navbar,.pd-nav,.tnp-topbar,.tnp-tabbar){-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
 @media (min-width:769px){
   [data-theme="light"] :is(.btn,.filter-btn,.proj-toggle-btn,.nav-resume-btn,.nav-tech-news-btn,.theme-toggle,.back-to-top){-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
 }
@@ -225,6 +225,39 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .hero-bento::before{display:none}
 [data-theme="light"] .hero-marquee{display:none}
 [data-theme="light"] .section{padding:clamp(72px,10vw,150px) 0}
+
+/* ----- Daily Tech Intel (/tech-news/) and its homepage teaser -----
+   Its stylesheet is a lazy chunk that loads after this one, so these rules are scoped
+   through .tnp-root / .tnt-section to win on specificity rather than on order. */
+/* One floating glass header instead of three stacked bars */
+[data-theme="light"] .tnp-root .tnp-topbar{
+  top:12px;margin:12px 16px 0;height:56px;border-radius:22px;border:1px solid var(--glass-rim);
+  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.48));box-shadow:var(--glass-edge),0 10px 30px -14px rgba(0,0,0,.2)}
+@media (max-width:480px){[data-theme="light"] .tnp-root .tnp-topbar{top:8px;margin:8px 8px 0;border-radius:18px}}
+/* Tabs: a segmented control */
+[data-theme="light"] .tnp-root .tnp-tabbar{
+  top:80px;align-self:center;width:max-content;max-width:calc(100% - 32px);margin:16px auto 0;padding:4px;gap:2px;
+  border-radius:999px;border:1px solid var(--glass-rim);background:var(--glass-fill);box-shadow:var(--glass-edge),0 6px 20px -10px rgba(0,0,0,.2)}
+[data-theme="light"] .tnp-root .tnp-tab{flex-direction:row;align-items:center;gap:7px;padding:8px 18px;border:0;border-radius:999px}
+[data-theme="light"] .tnp-root .tnp-tab::after,[data-theme="light"] .tnp-root .tnp-tab-sub{display:none}
+[data-theme="light"] .tnp-root .tnp-tab i{margin:0;font-size:12px}
+[data-theme="light"] .tnp-root .tnp-tab-label{font-size:14px;font-weight:500;color:var(--t2)}
+[data-theme="light"] .tnp-root .tnp-tab.active{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1),0 4px 12px -4px rgba(0,0,0,.12)}
+[data-theme="light"] .tnp-root .tnp-tab.active .tnp-tab-label{color:var(--t1);font-weight:600}
+[data-theme="light"] .tnp-root .tnp-tab.active i{color:var(--gold)}
+@media (max-width:480px){[data-theme="light"] .tnp-root .tnp-tab{padding:8px 13px}[data-theme="light"] .tnp-root .tnp-tab i{display:none}[data-theme="light"] .tnp-root .tnp-tabbar{top:72px}}
+/* Status line: plain small text, no band */
+[data-theme="light"] .tnp-root .tnp-metabar{border:0;background:none;justify-content:center;gap:8px;padding:12px 16px 0;font-size:12px;letter-spacing:0}
+[data-theme="light"] .tnp-root .tnp-meta-ai{margin-left:12px}
+/* Categories: quiet grey labels instead of colored pills */
+[data-theme="light"] :is(.tnp-root .tnp-cat,.tnt-section .tnt-cb){background:none;border:0;padding:0;color:var(--t3);font-size:11px;font-weight:600;letter-spacing:.06em}
+[data-theme="light"] :is(.tnp-root .tnp-translated,.tnt-section .tnt-pill){background:rgba(0,0,0,.045);border-color:transparent;color:var(--t2);letter-spacing:0}
+[data-theme="light"] .tnp-root .tnp-card:hover{background:#fff;border-color:transparent;box-shadow:var(--card-shadow-hi)}
+/* Article window */
+[data-theme="light"] .tnp-modal-overlay{background:rgba(40,30,45,.22);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%)}
+[data-theme="light"] .tnp-modal .tnp-modal-section-title{font-size:15px;font-weight:600;letter-spacing:-0.01em;text-transform:none;color:var(--t1)}
+[data-theme="light"] .tnp-modal .tnp-modal-section-title::before{content:none}
+[data-theme="light"] .tnp-modal .tnp-modal-read-btn{background:var(--gold);color:#fff;border-radius:999px;border-color:transparent}
 
 /* Respect "Reduce transparency": glass becomes solid */
 @media (prefers-reduced-transparency:reduce){

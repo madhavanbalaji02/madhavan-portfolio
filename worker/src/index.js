@@ -210,7 +210,12 @@ async function handleAnalyze(request, env) {
     return Response.json({ error: 'url and title are required' }, { status: 400, headers: CORS_HEADERS });
   }
 
-  const cacheKey = `analyze-${btoa(encodeURIComponent(articleUrl)).slice(0, 48)}`;
+  // Key on a hash of the FULL url. (The old key was a 48-char prefix of its base64,
+  // so every article from the same site path, e.g. all of gigazine.net/news/, collided
+  // and got the first article's analysis.) "v2" also leaves the bad entries unused.
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(articleUrl));
+  const urlHash = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+  const cacheKey = `analyze-v2-${urlHash}`;
   const cached = await env.TECH_NEWS_CACHE.get(cacheKey, 'json');
   if (cached) return Response.json({ ...cached, fromCache: true }, { headers: CORS_HEADERS });
 

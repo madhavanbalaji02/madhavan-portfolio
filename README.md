@@ -66,22 +66,17 @@ A React single-page app that is **prerendered to static HTML** at build time, so
 ## Architecture
 
 ```mermaid
-flowchart LR
-  subgraph Build["GitHub Actions: push to main"]
-    A[React build] --> B[Prerender every route<br/>headless Chromium]
-    B --> C[sitemap.xml · 404.html]
-    C --> D[Keep previous JS/CSS]
-    D --> E[Deploy to GitHub Pages]
-    E --> F[Notify IndexNow]
+flowchart TB
+  subgraph Build["On every push to main · GitHub Actions"]
+    direction LR
+    A[React build] --> B[Prerender every route] --> C[Keep previous JS/CSS] --> D[Deploy to GitHub Pages] --> E[Notify IndexNow]
   end
-  subgraph News["GitHub Actions: daily, 7 AM ET"]
-    G[10 RSS feeds<br/>EN · JP · DE] --> H[Claude curates<br/>3 sections + translation]
-    H --> I[(Cloudflare KV)]
+  subgraph News["Daily at 7 AM ET · GitHub Actions"]
+    direction LR
+    F[10 RSS feeds<br/>EN · JP · DE] --> G[Claude curates<br/>and translates] --> H[(Cloudflare KV)] --> I[Cloudflare Worker<br/>/api/tech-news]
   end
-  I --> J[Cloudflare Worker<br/>/api/tech-news]
-  J --> K[Daily Tech Intel page]
-  E --> L((madhavanbalaji.com))
-  K --> L
+  D --> Site((madhavanbalaji.com))
+  I --> Site
 ```
 
 ### Prerendering

@@ -1,5 +1,5 @@
 /**
- * TechNewsPage: Daily Tech Intel (standalone page at /#/tech-news)
+ * TechNewsPage: Daily Tech Intel (standalone page at /tech-news/)
  *
  * Architecture:
  *   Browser → GET /api/tech-news → Express (port 3001)
@@ -14,6 +14,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './TechNewsPage.css';
+import { useSeo } from '../seo';
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -262,10 +263,14 @@ export default function TechNewsPage({ theme, toggleTheme }) {
   const [refreshing,      setRefreshing]      = useState(false);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  useEffect(() => {
-    document.title = 'Daily Tech Intel | Madhavan Balaji';
-    return () => { document.title = 'Madhavan Balaji | AI Engineer'; };
-  }, []);
+  // Aggregated third-party headlines: useful to visitors, but thin/duplicate content
+  // for search engines, so keep it out of the index while still following links.
+  useSeo({
+    title: 'Daily Tech Intel | Madhavan Balaji',
+    description: 'A daily AI-curated briefing of global AI research and tech news, built by Madhavan Balaji.',
+    path: '/tech-news/',
+    noindex: true,
+  });
 
   const fetchNews = useCallback(async (force = false) => {
     const url = force ? `${API_BASE}/api/tech-news?refresh=1` : `${API_BASE}/api/tech-news`;
@@ -312,7 +317,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
 
       {/* ── Top bar ── */}
       <header className="tnp-topbar">
-        <a href="/#/" className="tnp-back">
+        <a href="/" className="tnp-back">
           <i className="fa-solid fa-arrow-left" /> Portfolio
         </a>
         <div className="tnp-brand">

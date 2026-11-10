@@ -228,7 +228,7 @@ export default function TechNews() {
         {!loading && !error && articles.length > 0 && (
           <div className="tn-view-all-row">
             <a
-              href="/#/tech-news"
+              href="/tech-news/"
               className="tn-view-all"
               target="_blank"
               rel="noopener noreferrer"

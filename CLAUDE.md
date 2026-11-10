@@ -6,42 +6,39 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm start          # dev server at http://localhost:3000
-npm run build      # production build → build/
+npm run build      # react-scripts build + scripts/prerender.mjs → build/ (needs Playwright Chromium)
+npm run build:spa  # React build only, no prerender
 ```
 
-**Deploying to madhavanbalaji.com (GitHub Pages):**
-```bash
-npm run build
-cp docs/CNAME build/CNAME
-rm -rf docs/asset-manifest.json docs/assets docs/image1.jpg docs/index.html \
-       docs/profile.jpg docs/resume.pdf docs/static docs/favicon*.* \
-       docs/patent.pdf docs/teaching.jpg
-cp -r build/. docs/
-git add docs/ && git commit -m "..." && git push origin fixes-only:main
-```
-
-The `docs/` folder is what GitHub Pages serves. Always preserve `docs/CNAME` (`madhavanbalaji.com`). Push to `main` via `fixes-only:main` — the working branch is `fixes-only`.
+**Deploying to madhavanbalaji.com:** push to `main` (from the working branch: `git push origin fixes-only:main`). GitHub Pages is configured to deploy from **GitHub Actions** (`.github/workflows/static.yml`), which installs Chromium, runs `npm run build` (including the prerender) and publishes `build/`. The custom domain is set in the Pages settings. The `docs/` folder is a leftover from the old branch-folder setup and is **not** served.
 
 **Updating the resume:**
 `Madhavan Resume.pdf` in the repo root is the source of truth. When the user drops a new version there:
 ```bash
 cp "Madhavan Resume.pdf" public/resume.pdf
-cp "Madhavan Resume.pdf" docs/resume.pdf
-file docs/resume.pdf   # must say "PDF document", not "HTML document"
-git add "Madhavan Resume.pdf" public/resume.pdf docs/resume.pdf
+file public/resume.pdf   # must say "PDF document", not "HTML document"
+git add "Madhavan Resume.pdf" public/resume.pdf
 git commit -m "Update resume" && git push origin fixes-only:main
 ```
 Never download from a GitHub blob URL (`/blob/main/...`) — it returns HTML. Use the local file or `raw.githubusercontent.com`. Always verify with `file` before committing.
 
 ## Architecture
 
-**React 18 SPA with `HashRouter`** (required for GitHub Pages — no server-side routing). Routes:
-- `/#/` → full portfolio (main page)
-- `/#/project/:slug` → project detail page (`ProjectDetail.js`)
+**React 18 SPA with `BrowserRouter`, prerendered to static HTML for SEO.** Routes:
+- `/` → full portfolio (main page)
+- `/project/:slug/` → project detail page (`ProjectDetail.js`); always link with the trailing slash (GitHub Pages 301s the slashless form)
+- `/tech-news/` → Daily Tech Intel (`TechNewsPage.js`), `noindex` (aggregated third-party headlines)
+- anything else → `404.html` (GitHub Pages returns it with a 404 status) → the app's `NotFound`
 
-`HashRouter` is the reason all in-page anchor navigation uses `e.preventDefault()` + manual `scrollTo` instead of plain `<a href="#section">` links. The `Header.js` and `Footer.js` both implement this scroll pattern. Never replace these with bare anchor tags.
+Old hash links (`/#/project/x`) are rewritten to real paths in `src/index.js` before the router starts.
 
-**Single source of truth for projects:** `src/components/projectsData.js` — used by both `Projects.js` (card grid) and `ProjectDetail.js` (full detail page). Each entry needs `id`, `slug` (URL param), `category` (`ai`/`cv`/`ml`), and all detail fields (`background`, `workflow[]`, `results[]`, `techStack[]`, `highlights[]`).
+**Prerender (`scripts/prerender.mjs`)** runs after the React build: it serves `build/`, renders `/` and every project route in headless Chromium, and writes the HTML to `build/<route>/index.html`, plus `sitemap.xml`, `404.html` and `tech-news/index.html`. Project routes come from the `slug:` lines in `projectsData.js`, so new projects are picked up automatically. The build fails if a page renders without its heading.
+
+**Per-page SEO (`src/seo.js`):** every page calls `useSeo({ title, description, path, noindex, jsonLd })`, which sets the title, meta description, robots, canonical URL, Open Graph/Twitter tags and page JSON-LD. The prerender captures these into the static HTML. The site-wide `Person` and `WebSite` JSON-LD live in `public/index.html`; `public/robots.txt` points to the sitemap.
+
+In-page section links (`#about`, `#projects`…) use `e.preventDefault()` + manual `scrollTo` (in `Header.js`, `Footer.js`) so they offset for the fixed navbar and work from detail pages (navigate home first, then scroll). Keep that pattern.
+
+**Single source of truth for projects:** `src/components/projectsData.js` — used by both `Projects.js` (card grid) and `ProjectDetail.js` (full detail page). Each entry needs `id`, `slug` (URL param), `category` (`ai`/`cv`/`ml`/`data`), and all detail fields (`background`, `workflow[]`, `results[]`, `techStack[]`, `highlights[]`).
 
 **All styles live in one file:** `src/index.css` — CSS custom properties at `:root`, then component styles in section order, then responsive breakpoints at the bottom. No CSS modules or styled-components.
 

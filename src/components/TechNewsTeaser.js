@@ -35,7 +35,7 @@ export default function TechNewsTeaser() {
 
           <a
             className="tnt-cta"
-            href="/#/tech-news"
+            href="/tech-news/"
             target="_blank"
             rel="noopener noreferrer"
           >

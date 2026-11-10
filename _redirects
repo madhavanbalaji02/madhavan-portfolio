@@ -1,0 +1,4 @@
+# Cloudflare Pages (madhavan-portfolio.pages.dev) serves this repo root as-is.
+# Send everything there to the real site with a permanent redirect.
+# GitHub Pages builds from src/ + public/ and never reads this file.
+/*  https://madhavanbalaji.com/  301

@@ -36,7 +36,7 @@ const Hero = () => (
             </span>
           </div>
 
-          <h1 className="hero-name">Madhavan<br />Balaji.</h1>
+          <h1 className="hero-name">Madhavan{' '}<br />Balaji.</h1>
           <div className="hero-divider"></div>
 
           <p className="hero-role">AI Engineer · MS CS @ Indiana University</p>

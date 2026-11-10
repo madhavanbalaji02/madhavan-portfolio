@@ -1,5 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { HashRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { useSeo, DEFAULT_SEO } from './seo';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -16,6 +17,7 @@ const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
 const TechNewsPage  = lazy(() => import('./components/TechNewsPage'));
 
 function MainPage({ theme, toggleTheme }) {
+  useSeo(DEFAULT_SEO);
   return (
     <>
       <div className="App">
@@ -36,6 +38,7 @@ function MainPage({ theme, toggleTheme }) {
 }
 
 function NotFound() {
+  useSeo({ title: 'Page not found | Madhavan Balaji', path: '/404', noindex: true });
   return (
     <main className="not-found">
       <span className="section-tag">404</span>
@@ -62,14 +65,14 @@ function App() {
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/project/:projectId" element={<Suspense fallback={<Loader />}><ProjectDetail theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
         <Route path="/tech-news" element={<Suspense fallback={<Loader />}><TechNewsPage theme={theme} toggleTheme={toggleTheme} /></Suspense>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

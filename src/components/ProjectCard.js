@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { diagramsBySlug } from './ProjectDiagrams';
 
 const categoryMeta = {
@@ -22,7 +22,7 @@ const ProjectCard = ({ project, index }) => {
   const Diagram = diagramsBySlug[project.slug];
 
   const handleCardClick = () => {
-    navigate(`/project/${project.slug}`);
+    navigate(`/project/${project.slug}/`);
   };
 
   const handleGithubClick = e => {
@@ -71,11 +71,16 @@ const ProjectCard = ({ project, index }) => {
       </div>
 
       <div className="proj-card-footer">
-        <span className="proj-details-link">
+        <Link
+          to={`/project/${project.slug}/`}
+          className="proj-details-link"
+          onClick={e => e.stopPropagation()}
+        >
           <i className="fas fa-layer-group"></i>
           View Details
+          <span className="sr-only"> about {project.title}</span>
           <i className="fas fa-arrow-right proj-details-arrow"></i>
-        </span>
+        </Link>
         {project.demo && (
           <a
             href={project.demo}

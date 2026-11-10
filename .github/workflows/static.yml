@@ -33,7 +33,10 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build Project
+      - name: Install Chromium for prerendering
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Project (React build + static prerender of every page)
         run: npm run build
         env:
           CI: false # Prevents build failure on lint warnings

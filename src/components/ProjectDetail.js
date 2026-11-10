@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from './projectsData';
 import { diagramsBySlug } from './ProjectDiagrams';
+import { useSeo, fitDescription, SITE_URL } from '../seo';
 
 const ProjectDetail = ({ theme, toggleTheme }) => {
   const { projectId } = useParams();
@@ -18,9 +19,39 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = project ? `${project.title} | Madhavan Balaji` : 'Project | Madhavan Balaji';
-    return () => { document.title = 'Madhavan Balaji | AI Engineer'; };
   }, [project]);
+
+  const path = project ? `/project/${project.slug}/` : `/project/${projectId}/`;
+  useSeo(project ? {
+    title: `${project.title} | ${project.categoryLabel.replace(/ \/ /g, "/")} Project by Madhavan Balaji`,
+    description: fitDescription(project.description, project.tagline),
+    path,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'SoftwareSourceCode',
+          name: project.title,
+          headline: project.tagline,
+          description: project.description,
+          url: SITE_URL + path,
+          codeRepository: project.github,
+          programmingLanguage: project.language,
+          keywords: [...project.tags, ...project.techStack.flatMap(g => g.items)].join(', '),
+          author: { '@type': 'Person', name: 'Madhavan Balaji', url: SITE_URL + '/' },
+          ...(project.demo && project.demo.startsWith('http') ? { sameAs: project.demo } : {}),
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Madhavan Balaji', item: SITE_URL + '/' },
+            { '@type': 'ListItem', position: 2, name: 'Projects', item: SITE_URL + '/#projects' },
+            { '@type': 'ListItem', position: 3, name: project.title, item: SITE_URL + path },
+          ],
+        },
+      ],
+    },
+  } : { title: 'Project not found | Madhavan Balaji', path, noindex: true });
 
   if (!project) {
     return (

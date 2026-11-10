@@ -747,7 +747,7 @@ export const projectsData = [
     language: 'JavaScript',
     langIcon: 'fab fa-js',
     github: 'https://github.com/madhavanbalaji02/madhavan-portfolio',
-    demo: '/#/tech-news',
+    demo: '/tech-news/',
     category: 'ai',
     categoryLabel: 'AI / LLM',
     catIcon: 'fas fa-brain',

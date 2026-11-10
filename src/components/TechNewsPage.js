@@ -325,7 +325,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
             <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'} />
           </button>
           <span className="tnp-brand-dot" style={{ background: accent }} />
-          Daily Tech Intel
+          <h1 className="tnp-brand-title">Daily Tech Intel</h1>
           {meta?.stale && <span className="tnp-stale">stale</span>}
         </div>
       </header>

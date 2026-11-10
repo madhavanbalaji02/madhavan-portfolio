@@ -69,10 +69,14 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
       {/* Top nav */}
       <nav className="pd-nav">
         <div className="container pd-nav-inner">
-          <button className="pd-back-btn" onClick={() => goBackToProjects()}>
+          <a
+            href="/#projects"
+            className="pd-back-btn"
+            onClick={(e) => { e.preventDefault(); goBackToProjects(); }}
+          >
             <i className="fas fa-arrow-left"></i>
             <span>All Projects</span>
-          </button>
+          </a>
           <div className="pd-nav-right">
             <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
               <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>

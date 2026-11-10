@@ -5,6 +5,18 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Progressive enhancement: only browsers that can run the app get the "js" class.
+       Old browsers (KaiOS feature phones, Opera Mini, very old Safari/Firefox) keep the
+       prerendered static page fully visible, with JS-only controls hidden.
+       ES5 on purpose so it runs everywhere. -->
+  <script>
+    (function (w, d) {
+      var ok = 'IntersectionObserver' in w && 'Promise' in w && 'fetch' in w &&
+               !!(w.CSS && w.CSS.supports && w.CSS.supports('display', 'grid')) &&
+               typeof Object.assign === 'function' && !!Array.prototype.includes;
+      if (ok) d.documentElement.className += ' js';
+    })(window, document);
+  </script>
 
   <!-- Primary meta -->
   <title>Madhavan Balaji | AI Engineer</title>
@@ -90,7 +102,7 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root"><p style="padding:24px 16px;font-family:system-ui,sans-serif">This page needs a newer browser. <a href="/">Go to the homepage</a></p></div>
 </body>
 
 </html>

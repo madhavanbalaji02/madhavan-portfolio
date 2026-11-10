@@ -599,3 +599,6 @@
 @media (hover: none) and (pointer: coarse) {
   .tnp-card:hover { transform: none; box-shadow: none; border-color: var(--border); background: var(--bg-card); }
 }
+
+/* The page title is a real <h1> for screen readers, styled like the surrounding brand text */
+.tnp-brand-title { font: inherit; color: inherit; margin: 0; line-height: inherit; letter-spacing: inherit; }

@@ -80,6 +80,7 @@ async function main() {
       const html = '<!DOCTYPE html>' + await page.evaluate(() => {
         // Runtime-only state that shouldn't be frozen into the static file
         document.documentElement.removeAttribute('style');
+        document.documentElement.classList.remove('js');
         document.body.removeAttribute('style');
         return document.documentElement.outerHTML;
       });

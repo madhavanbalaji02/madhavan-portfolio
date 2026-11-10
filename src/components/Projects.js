@@ -21,7 +21,6 @@ const Projects = () => {
       ? projectsData
       : projectsData.filter(p => p.category === activeFilter);
 
-  const visible = showAll ? allFiltered : allFiltered.slice(0, INITIAL_SHOWN);
   const hasMore = allFiltered.length > INITIAL_SHOWN;
 
   const handleFilter = (id) => {
@@ -57,8 +56,15 @@ const Projects = () => {
         </div>
 
         <div className="proj-grid">
-          {visible.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+          {/* All cards are rendered (so the static page and crawlers get every project);
+              the collapsed ones are hidden with CSS while the app is running */}
+          {allFiltered.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              collapsed={!showAll && index >= INITIAL_SHOWN}
+            />
           ))}
         </div>
 

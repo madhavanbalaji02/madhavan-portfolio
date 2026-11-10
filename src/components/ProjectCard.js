@@ -14,7 +14,7 @@ const langMeta = {
   'Jupyter Notebook': { icon: 'fas fa-book-open', color: '#DA5B0B' },
 };
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, collapsed = false }) => {
   const navigate  = useNavigate();
   const cat  = categoryMeta[project.category] || categoryMeta.ml;
   const lang = langMeta[project.language]      || { icon: 'fas fa-code', color: '#555' };
@@ -35,7 +35,7 @@ const ProjectCard = ({ project, index }) => {
 
   return (
     <div
-      className="proj-card fade-in-up"
+      className={`proj-card fade-in-up${collapsed ? ' is-collapsed' : ''}`}
       style={{ animationDelay: `${index * 0.08}s` }}
       onClick={handleCardClick}
     >

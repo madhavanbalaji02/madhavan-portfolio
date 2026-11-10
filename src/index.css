@@ -281,8 +281,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .skill-category{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:clamp(14px,2vw,20px)}
 .skill-category:hover{border-color:var(--border-warm);transition:border-color 0.2s}
 .skill-category{border-top:2px solid color-mix(in srgb,var(--gold) 45%,transparent)}
-.skill-category-animate{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s ease}
-.skill-category-animate.visible{opacity:1;transform:translateY(0)}
+.js .skill-category-animate{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s ease}
+.js .skill-category-animate.visible{opacity:1;transform:translateY(0)}
 .skill-category-title{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:7px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .skill-category-title i{font-size:11px}
 .skills-grid{display:flex;flex-direction:column;gap:0}
@@ -338,7 +338,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .filter-btn{padding:6px 16px;border:1px solid var(--border);background:transparent;color:var(--t3);border-radius:3px;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;min-height:36px;touch-action:manipulation}
 .filter-btn:hover{border-color:var(--border-hi);color:var(--t2)}
 .filter-btn.active{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);background:transparent;border:none;border-radius:0;overflow:visible}
+.proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,20px);background:transparent;border:none;border-radius:0;overflow:visible}
 .proj-card{display:flex;flex-direction:column;background:var(--bg-card);cursor:pointer;transition:transform 0.35s var(--ease),box-shadow 0.35s var(--ease),border-color 0.3s,background 0.25s;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,0.3);user-select:none}
 .proj-card:hover{background:var(--bg-card-2);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,0.55),0 0 0 1px color-mix(in srgb,var(--gold) 22%,transparent);border-color:color-mix(in srgb,var(--gold) 22%,transparent)}
 .proj-card-header{height:auto;padding:clamp(14px,2vw,20px) clamp(14px,2vw,20px) 0;display:flex;justify-content:space-between;align-items:flex-start;background:none}
@@ -440,7 +440,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 
 /* Contact */
 .contact-section{background:var(--bg)}
-.contact-wrapper{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(32px,5vw,56px);align-items:start}
+.contact-wrapper{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:clamp(32px,5vw,56px);align-items:start}
 .contact-info h3{font-size:clamp(16px,2.5vw,20px);font-weight:700;color:var(--t1);margin-bottom:8px}
 .contact-info > p{font-size:14px;color:var(--t3);margin-bottom:clamp(18px,3vw,28px);line-height:1.7}
 .availability-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;background:color-mix(in srgb,var(--green) 14%,transparent);border:1px solid color-mix(in srgb,var(--green) 40%,transparent);border-radius:50px;font-family:var(--font-mono);font-size:11px;color:var(--green);margin-bottom:20px}
@@ -450,7 +450,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .contact-item:hover{border-color:var(--border-warm)}
 .contact-icon{width:36px;height:36px;background:var(--gold-dim);border:1px solid var(--border-warm);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:14px;flex-shrink:0}
 .contact-details h4{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:1px}
-.contact-details a,.contact-details span{font-size:13px;color:var(--t3)}
+.contact-details{min-width:0}
+.contact-details a,.contact-details span{font-size:13px;color:var(--t3);overflow-wrap:anywhere}
 .contact-item:hover{border-color:var(--border-warm);background:var(--bg-card-2)}
 .contact-item:hover .contact-details span,.contact-item:hover .contact-details a{color:var(--gold)}
 .contact-form-wrapper{background:var(--bg-card);border:1px solid var(--border);padding:clamp(20px,4vw,32px);border-radius:8px}
@@ -499,7 +500,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .footer-social a:hover .footer-social-arrow{opacity:1;transform:translate(0,0)}
 
 /* Oversized signature name: gradient that dissolves into the background */
-.footer-wordmark{margin:clamp(40px,6vw,72px) 0 clamp(8px,1.5vw,16px);font-size:clamp(44px,10.2vw,140px);font-weight:700;letter-spacing:-0.045em;line-height:1.05;padding-bottom:0.14em;white-space:nowrap;text-align:center;background:linear-gradient(180deg,color-mix(in srgb,var(--t1) 22%,transparent) 0%,color-mix(in srgb,var(--gold) 16%,transparent) 62%,color-mix(in srgb,var(--gold) 5%,transparent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;user-select:none}
+.footer-wordmark{margin:clamp(40px,6vw,72px) 0 clamp(8px,1.5vw,16px);font-size:clamp(24px,10.2vw,140px);font-weight:700;letter-spacing:-0.045em;line-height:1.05;padding-bottom:0.14em;white-space:nowrap;text-align:center;background:linear-gradient(180deg,color-mix(in srgb,var(--t1) 22%,transparent) 0%,color-mix(in srgb,var(--gold) 16%,transparent) 62%,color-mix(in srgb,var(--gold) 5%,transparent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;user-select:none}
 
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:clamp(16px,2.5vw,22px);border-top:1px solid var(--border)}
 .footer-bottom p{font-size:12px;color:var(--t3)}
@@ -543,9 +544,9 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .skill-categories-wrapper{grid-template-columns:repeat(3,1fr);gap:14px}
   .skill-category{padding:12px}
   .exp-cards{max-width:100%}
-  .proj-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .proj-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
   .writing-grid{grid-template-columns:1fr;gap:40px}
-  .contact-wrapper{grid-template-columns:1fr;gap:36px}
+  .contact-wrapper{grid-template-columns:minmax(0,1fr);gap:36px}
   .patent{grid-template-columns:1fr;gap:28px}
 }
 
@@ -573,7 +574,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .exp-card::before{display:none}
   .hero-name{letter-spacing:-2px}
 
-  .proj-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .proj-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .patent{padding:20px}
   .patent-features{grid-template-columns:1fr 1fr}
   .contact-form-wrapper{padding:20px}
@@ -583,7 +584,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 
 /* 640px */
 @media(max-width:640px){
-  .proj-grid{grid-template-columns:1fr;gap:10px}
+  .proj-grid{grid-template-columns:minmax(0,1fr);gap:10px}
   .hero-name{font-size:clamp(30px,10vw,44px)}
   .hero-actions{flex-direction:column;align-items:stretch;gap:10px}
   .hero-actions .btn{width:100%;justify-content:center}
@@ -1181,6 +1182,23 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 /* Fold cover / 320px: keep all five hero icons on one row by spacing them out evenly */
 @media(max-width:360px){
   .hero-links{gap:0;row-gap:10px;justify-content:space-between}
+}
+
+/* Static mode (old browsers / no JS): hide controls that need the app, show everything */
+html:not(.js) .project-filter,html:not(.js) .proj-toggle-wrap,html:not(.js) .theme-toggle,
+html:not(.js) .hamburger,html:not(.js) .mobile-nav-drawer,html:not(.js) .mobile-nav-overlay,
+html:not(.js) .back-to-top{display:none}
+.js .proj-card.is-collapsed{display:none}
+
+/* Feature phones (240px, e.g. JioPhone, Nokia 2720 Flip / 8000 4G) */
+@media(max-width:260px){
+  .proj-card-header-right{min-width:0;flex-wrap:wrap;justify-content:flex-end}
+  .proj-metric-badge{white-space:normal;text-align:right;max-width:100%}
+  /* Project page top bar: keep the arrow, hide the label visually (screen readers still read it) */
+  .pd-back-btn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .pd-back-btn{min-width:44px;min-height:44px}
+  .hero-link{width:38px;height:38px}
+  .hero-link i{font-size:15px}
 }
 
 /* Footer responsive */

@@ -55,19 +55,19 @@ const Hero = () => (
           </div>
 
           <div className="hero-links">
-            <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" className="hero-link">
+            <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" className="hero-link" aria-label="LinkedIn">
               <i className="fab fa-linkedin"></i><span>LinkedIn</span>
             </a>
-            <a href="https://github.com/madhavanbalaji02" target="_blank" rel="noopener noreferrer" className="hero-link">
+            <a href="https://github.com/madhavanbalaji02" target="_blank" rel="noopener noreferrer" className="hero-link" aria-label="GitHub">
               <i className="fab fa-github"></i><span>GitHub</span>
             </a>
-            <a href="https://medium.com/@madhavanbalaji02" target="_blank" rel="noopener noreferrer" className="hero-link">
+            <a href="https://medium.com/@madhavanbalaji02" target="_blank" rel="noopener noreferrer" className="hero-link" aria-label="Medium">
               <i className="fab fa-medium"></i><span>Medium</span>
             </a>
-            <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" className="hero-link">
+            <a href="https://huggingface.co/madhavan02" target="_blank" rel="noopener noreferrer" className="hero-link" aria-label="Hugging Face">
               <span>🤗</span><span>HF</span>
             </a>
-            <a href="mailto:madhavanbalaji02@gmail.com" className="hero-link">
+            <a href="mailto:madhavanbalaji02@gmail.com" className="hero-link" aria-label="Email">
               <i className="fas fa-envelope"></i><span>Email</span>
             </a>
             <span className="hero-location">Indianapolis, IN</span>

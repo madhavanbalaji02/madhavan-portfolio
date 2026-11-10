@@ -83,8 +83,10 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary pd-gh-btn"
+                aria-label="Live Demo"
               >
-                <i className="fas fa-external-link-alt"></i> Live Demo
+                <i className="fas fa-external-link-alt" aria-hidden="true"></i>
+                <span className="pd-btn-label">Live Demo</span>
               </a>
             )}
             <a
@@ -92,8 +94,10 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary pd-gh-btn"
+              aria-label="View on GitHub"
             >
-              <i className="fab fa-github"></i> View on GitHub
+              <i className="fab fa-github" aria-hidden="true"></i>
+              <span className="pd-btn-label">View on GitHub</span>
             </a>
           </div>
         </div>

@@ -206,12 +206,12 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 /* ================================================================
    HERO
    ================================================================ */
-.hero-bento{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(28px,3vh,44px) 0 clamp(48px,6vw,80px);position:relative;background:radial-gradient(ellipse 900px 600px at 15% 50%,color-mix(in srgb,var(--cyan) 4%,transparent),transparent 80%),radial-gradient(ellipse 700px 500px at 85% 15%,color-mix(in srgb,var(--gold) 5%,transparent),transparent 80%),var(--bg);overflow:hidden}
+.hero-bento{min-height:min(100svh,960px);display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(28px,3vh,44px) 0 clamp(48px,6vw,80px);position:relative;background:radial-gradient(ellipse 900px 600px at 15% 50%,color-mix(in srgb,var(--cyan) 4%,transparent),transparent 80%),radial-gradient(ellipse 700px 500px at 85% 15%,color-mix(in srgb,var(--gold) 5%,transparent),transparent 80%),var(--bg);overflow:hidden}
 .hero-bento::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;max-width:100%}
 .hero-bento::after{content:'';position:absolute;top:10%;right:0;width:1px;height:55%;background:linear-gradient(to bottom,transparent,var(--border-warm),transparent)}
 #particles-canvas{display:none}
 
-.hero-inner{display:grid;grid-template-columns:1fr 320px;gap:clamp(32px,5vw,64px);align-items:center;position:relative;z-index:2}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(32px,5vw,64px);align-items:center;position:relative;z-index:2}
 .hero-content{order:1}
 .hero-profile{order:2;display:flex;flex-direction:column;align-items:center;gap:14px}
 
@@ -531,7 +531,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 
 /* 1024px */
 @media(max-width:1024px){
-  .hero-inner{grid-template-columns:1fr;gap:24px}
+  .hero-inner{grid-template-columns:minmax(0,1fr);gap:24px}
   .hero-profile{order:1;flex-direction:row;align-items:flex-end;justify-content:flex-start;gap:18px}
   .hero-content{order:2}
   .hero-img-wrap{width:130px;height:162px;border-radius:12px}
@@ -1124,7 +1124,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 /* Tablet: two-column hero with the photo on the right, no empty gap below */
 @media(min-width:769px) and (max-width:1024px){
   .hero-bento{min-height:auto;padding-top:56px;padding-bottom:72px}
-  .hero-inner{grid-template-columns:1fr auto;gap:36px;align-items:center}
+  .hero-inner{grid-template-columns:minmax(0,1fr) auto;gap:36px;align-items:center}
   .hero-content{order:1}
   .hero-profile{order:2;flex-direction:column;align-items:center;gap:12px}
   .hero-img-wrap{width:210px;height:262px;border-radius:14px}
@@ -1168,6 +1168,19 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .hero-links{gap:10px}
   .hero-link{width:44px;height:44px;justify-content:center;border:1px solid var(--border-hi);border-radius:10px;padding:0}
   .hero-link i{font-size:17px}
+}
+
+/* Very narrow screens: Galaxy Fold cover screens (280-344px), small phones */
+@media(max-width:400px){
+  .hero-status{white-space:normal;line-height:1.45;border-radius:12px;align-items:flex-start}
+  .hero-status-dot{margin-top:5px}
+  .pd-btn-label{display:none}
+  .pd-gh-btn{width:44px;height:44px;min-height:44px;padding:0;gap:0}
+  .pd-back-btn{white-space:nowrap}
+}
+/* Fold cover / 320px: keep all five hero icons on one row by spacing them out evenly */
+@media(max-width:360px){
+  .hero-links{gap:0;row-gap:10px;justify-content:space-between}
 }
 
 /* Footer responsive */

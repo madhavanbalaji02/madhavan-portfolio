@@ -253,32 +253,129 @@ function ArticleCard({ article, accent, onClick }) {
 }
 
 // ── Tab bar ────────────────────────────────────────────────────────────────────
-// In light mode the selected tab sits on a glass "lens" that can be dragged across
-// the bar, like the iOS 26 tab bar: press and slide, it lifts and follows the finger,
-// and it snaps to the tab you release over. A plain tap still just selects the tab.
+// In light mode the selection is a Liquid Glass "lens", modelled on the iOS 26 tab bar.
+// Press anywhere on the bar and slide: the lens lifts, turns to clear glass, follows the
+// finger on a spring, stretches with speed and magnifies the tab beneath it; release and
+// it springs onto that tab. Taps slide it across with the same physics.
+// The animation runs on requestAnimationFrame and writes styles directly, so dragging
+// never re-renders React. The lens holds a copy of the tabs in their selected style,
+// which it scales with itself, giving the magnified, tinted look through the glass.
+
+const LIFT = 1.2;
+const SPRINGS = {
+  follow: { k: 1500, c: 70 },   // tracks the finger: fast, barely any lag
+  settle: { k: 420,  c: 26 },   // snaps onto a tab with a small overshoot
+  scale:  { k: 520,  c: 22 },   // lift and land, a little jelly
+};
 
 function TabBar({ tabs, active, onChange, draggable }) {
-  const barRef  = useRef(null);
-  const tabRefs = useRef({});
-  const drag    = useRef(null);
-  const [lens, setLens]       = useState(null);   // { x, w } in px
-  const [dragging, setDragging] = useState(false);
-  const [hoverKey, setHoverKey] = useState(null);
+  const barRef     = useRef(null);
+  const lensRef    = useRef(null);
+  const contentRef = useRef(null);
+  const tabRefs    = useRef({});
+  const ghostRefs  = useRef({});
+  const drag       = useRef(null);
+  const fromDrag   = useRef(false);
+  const anim = useRef({
+    x: 0, w: 0, s: 1, vx: 0, vw: 0, vs: 0, tx: 0, tw: 0, ts: 1,
+    spring: SPRINGS.settle, raf: 0, last: 0, ready: false,
+  });
+
+  const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   const rectOf = useCallback((key) => {
     const el = tabRefs.current[key];
-    return el ? { x: el.offsetLeft, w: el.offsetWidth } : null;
+    return el ? { x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight } : null;
   }, []);
 
-  // Keep the lens on the active tab (and in place when the bar resizes)
+  const paint = useCallback(() => {
+    const a = anim.current, lens = lensRef.current, content = contentRef.current;
+    if (!lens || !content) return;
+    // Speed stretches the glass along the direction of travel and thins it a touch
+    const stretch = Math.min(0.22, Math.abs(a.vx) / 2600);
+    const sx = a.s * (1 + stretch), sy = a.s * (1 - stretch * 0.45);
+    lens.style.width = `${a.w}px`;
+    lens.style.transform = `translate3d(${a.x}px,0,0) scale(${sx},${sy})`;
+    content.style.transform = `translate3d(${-a.x}px,${-lens.offsetTop}px,0)`;
+  }, []);
+
+  const tick = useCallback((t) => {
+    const a = anim.current;
+    const dt = Math.min(1 / 30, a.last ? (t - a.last) / 1000 : 1 / 60);
+    a.last = t;
+    const steps = 4, h = dt / steps;
+    for (let i = 0; i < steps; i++) {
+      const { k, c } = a.spring;
+      a.vx += (-k * (a.x - a.tx) - c * a.vx) * h; a.x += a.vx * h;
+      a.vw += (-k * (a.w - a.tw) - c * a.vw) * h; a.w += a.vw * h;
+      const S = SPRINGS.scale;
+      a.vs += (-S.k * (a.s - a.ts) - S.c * a.vs) * h; a.s += a.vs * h;
+    }
+    const still = Math.abs(a.x - a.tx) < 0.05 && Math.abs(a.vx) < 0.5
+      && Math.abs(a.w - a.tw) < 0.05 && Math.abs(a.vw) < 0.5
+      && Math.abs(a.s - a.ts) < 0.001 && Math.abs(a.vs) < 0.01;
+    if (still) {
+      Object.assign(a, { x: a.tx, w: a.tw, s: a.ts, vx: 0, vw: 0, vs: 0, raf: 0, last: 0 });
+      if (!drag.current?.moved) barRef.current?.classList.remove('is-lifted');
+    } else {
+      a.raf = requestAnimationFrame(tick);
+    }
+    paint();
+  }, [paint]);
+
+  const animateTo = useCallback((x, w, s, spring) => {
+    const a = anim.current;
+    Object.assign(a, { tx: x, tw: w, ts: reduced() ? 1 : s, spring });
+    if (reduced()) { Object.assign(a, { x, w, s: 1, vx: 0, vw: 0, vs: 0 }); paint(); return; }
+    if (!a.raf) { a.last = 0; a.raf = requestAnimationFrame(tick); }
+  }, [paint, tick]);
+
+  // Place the copies inside the lens exactly over the real tabs
+  const layoutGhosts = useCallback(() => {
+    for (const t of tabs) {
+      const r = rectOf(t.key), g = ghostRefs.current[t.key];
+      if (!r || !g) continue;
+      Object.assign(g.style, { left: `${r.x}px`, top: `${r.y}px`, width: `${r.w}px`, height: `${r.h}px` });
+    }
+  }, [tabs, rectOf]);
+
+  // Follow the active tab
   useLayoutEffect(() => {
-    if (dragging) return undefined;
-    const place = () => setLens(rectOf(active));
-    place();
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(place) : null;
-    if (ro && barRef.current) ro.observe(barRef.current);
-    return () => ro?.disconnect();
-  }, [active, dragging, rectOf]);
+    if (!draggable) return;
+    const a = anim.current, r = rectOf(active);
+    if (!r) return;
+    layoutGhosts();
+    if (!a.ready) {
+      Object.assign(a, { x: r.x, w: r.w, tx: r.x, tw: r.w, ready: true });
+      paint();
+      return;
+    }
+    if (drag.current?.moved) return;
+    if (fromDrag.current) { fromDrag.current = false; animateTo(r.x, r.w, 1, SPRINGS.settle); return; }
+    // A tap: lift briefly while it travels, like iOS
+    barRef.current?.classList.add('is-lifted');
+    animateTo(r.x, r.w, 1.12, SPRINGS.settle);
+    const id = setTimeout(() => animateTo(r.x, r.w, 1, SPRINGS.settle), 170);
+    return () => clearTimeout(id);
+  }, [active, draggable, rectOf, layoutGhosts, animateTo, paint]);
+
+  // Keep it in place when the bar resizes (fonts loading, rotation)
+  useEffect(() => {
+    if (!draggable || typeof ResizeObserver === 'undefined' || !barRef.current) return undefined;
+    const ro = new ResizeObserver(() => {
+      if (drag.current?.moved) return;
+      const r = rectOf(active);
+      if (!r) return;
+      layoutGhosts();
+      const a = anim.current;
+      Object.assign(a, { x: r.x, w: r.w, tx: r.x, tw: r.w, vx: 0, vw: 0 });
+      paint();
+    });
+    ro.observe(barRef.current);
+    return () => ro.disconnect();
+  }, [active, draggable, rectOf, layoutGhosts, paint]);
+
+  useEffect(() => () => cancelAnimationFrame(anim.current.raf), []);
 
   const nearestTab = (centre) => {
     let best = active, bestD = Infinity;
@@ -292,30 +389,30 @@ function TabBar({ tabs, active, onChange, draggable }) {
   };
 
   const onPointerDown = (e) => {
-    if (!draggable || !lens || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    if (!draggable || (e.pointerType === 'mouse' && e.button !== 0)) return;
     const barX = barRef.current.getBoundingClientRect().left;
-    const px = e.clientX - barX;
-    // Only the selected tab can be picked up, as in iOS
-    if (px < lens.x || px > lens.x + lens.w) return;
-    drag.current = { id: e.pointerId, startX: e.clientX, grab: px - lens.x, w: lens.w, moved: false, barX };
+    drag.current = { id: e.pointerId, startX: e.clientX, startY: e.clientY, barX, moved: false, key: active };
   };
 
   const onPointerMove = (e) => {
     const d = drag.current;
     if (!d || d.id !== e.pointerId) return;
+    const a = anim.current;
     if (!d.moved) {
-      if (Math.abs(e.clientX - d.startX) < 6) return;
+      const dx = Math.abs(e.clientX - d.startX), dy = Math.abs(e.clientY - d.startY);
+      if (dx < 5) { if (dy > 8) drag.current = null; return; }
       d.moved = true;
+      // Picked up on the lens: keep the grab point. Elsewhere: the lens jumps to the finger.
+      const px = d.startX - d.barX;
+      d.grab = px >= a.x && px <= a.x + a.w ? px - (a.x + a.w / 2) : 0;
       barRef.current.setPointerCapture?.(e.pointerId);
-      setDragging(true);
+      barRef.current.classList.add('is-lifted', 'is-dragging');
     }
-    // The lens centre follows the finger; its width morphs to the tab beneath it
-    const centre = e.clientX - d.barX - d.grab + d.w / 2;
-    const key = nearestTab(centre);
-    const w = rectOf(key)?.w ?? d.w;
+    const centre = e.clientX - d.barX - d.grab;
+    d.key = nearestTab(centre);
+    const w = rectOf(d.key)?.w ?? a.w;
     const max = barRef.current.clientWidth - w - 2;
-    setLens({ x: Math.min(max, Math.max(2, centre - w / 2)), w });
-    setHoverKey(key);
+    animateTo(Math.min(max, Math.max(2, centre - w / 2)), w, LIFT, SPRINGS.follow);
   };
 
   const endDrag = (e) => {
@@ -323,41 +420,30 @@ function TabBar({ tabs, active, onChange, draggable }) {
     if (!d || d.id !== e.pointerId) return;
     drag.current = null;
     if (!d.moved) return;
-    d.suppressClick = true;
-    const target = hoverKey || active;
-    setDragging(false);
-    setHoverKey(null);
-    if (target !== active) onChange(target);
-    else setLens(rectOf(active));
-    // The release fires a click on whatever tab is under the pointer; ignore it
+    barRef.current.classList.remove('is-dragging');
+    const r = rectOf(d.key);
+    if (d.key !== active) { fromDrag.current = true; onChange(d.key); }
+    if (r) animateTo(r.x, r.w, 1, SPRINGS.settle);
+    // The release also fires a click on the tab under the pointer; swallow it
     const block = (ev) => { ev.stopPropagation(); ev.preventDefault(); };
     window.addEventListener('click', block, { capture: true, once: true });
-    setTimeout(() => window.removeEventListener('click', block, { capture: true }), 0);
+    setTimeout(() => window.removeEventListener('click', block, { capture: true }), 50);
   };
-
-  const shown = dragging ? hoverKey : active;
 
   return (
     <nav
       ref={barRef}
-      className={`tnp-tabbar${dragging ? ' is-dragging' : ''}`}
+      className="tnp-tabbar"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
     >
-      {draggable && lens && (
-        <span
-          className="tnp-tab-lens"
-          aria-hidden="true"
-          style={{ width: lens.w, transform: `translateX(${lens.x}px)` }}
-        />
-      )}
       {tabs.map((tab) => (
         <button
           key={tab.key}
           ref={(el) => { tabRefs.current[tab.key] = el; }}
-          className={`tnp-tab${active === tab.key ? ' active' : ''}${shown === tab.key ? ' lensed' : ''}`}
+          className={`tnp-tab${active === tab.key ? ' active' : ''}`}
           onClick={() => onChange(tab.key)}
           style={active === tab.key ? { '--tab-accent': tab.accent } : {}}
           aria-pressed={active === tab.key}
@@ -367,6 +453,18 @@ function TabBar({ tabs, active, onChange, draggable }) {
           <span className="tnp-tab-sub">{tab.sub}</span>
         </button>
       ))}
+      {draggable && (
+        <span className="tnp-tab-lens" ref={lensRef} aria-hidden="true">
+          <span className="tnp-tab-lens-content" ref={contentRef}>
+            {tabs.map((tab) => (
+              <span key={tab.key} ref={(el) => { ghostRefs.current[tab.key] = el; }} className="tnp-tab tnp-tab-ghost">
+                <i className={tab.icon} />
+                <span className="tnp-tab-label">{tab.label}</span>
+              </span>
+            ))}
+          </span>
+        </span>
+      )}
     </nav>
   );
 }

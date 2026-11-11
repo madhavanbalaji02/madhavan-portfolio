@@ -259,13 +259,19 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .glass-bar.is-lifted .glass-lens .glass-lens-content{visibility:visible}
 [data-theme="light"] .glass-lens{position:absolute;left:0;top:0;z-index:0;overflow:hidden;border-radius:999px;pointer-events:none;
   transform-origin:50% 50%;will-change:transform,width;isolation:isolate;
-  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1),0 4px 12px -4px rgba(0,0,0,.12);
+  /* Resting glass: a translucent, softly lit capsule rather than a flat white chip */
+  background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.5));
+  -webkit-backdrop-filter:blur(6px) saturate(1.6);backdrop-filter:blur(6px) saturate(1.6);
+  box-shadow:inset 0 1px .5px rgba(255,255,255,.95),inset 0 0 0 .5px rgba(255,255,255,.7),
+             0 1px 2px rgba(20,30,50,.06),0 6px 16px -6px rgba(20,30,50,.18);
   transition:background .28s ease,box-shadow .28s ease,opacity .25s ease}
 [data-theme="light"] .glass-bar.lens-off .glass-lens{opacity:0}
 [data-theme="light"] .glass-lens-content{position:absolute;left:0;top:0}
 [data-theme="light"] .glass-bar .glass-lens .glass-ghost{position:absolute;z-index:auto;display:flex;align-items:center;justify-content:center;margin:0;box-sizing:border-box}
 /* Specular sheen and rim light, shown when the glass lifts */
 [data-theme="light"] .glass-lens::before,[data-theme="light"] .glass-lens::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .28s ease;z-index:1}
+/* A faint rim light even at rest; full sheen once lifted */
+[data-theme="light"] .glass-lens::after{opacity:.55}
 [data-theme="light"] .glass-lens::before{
   background:radial-gradient(120% 90% at 28% -10%,rgba(255,255,255,.75),rgba(255,255,255,0) 52%),
              radial-gradient(90% 70% at 75% 115%,rgba(255,255,255,.55),rgba(255,255,255,0) 55%)}
@@ -328,6 +334,7 @@ html[data-theme="light"]{background:#f3f6fa}
   [data-theme="light"]{--glass-fill:#fbfbfd;--glass-fill-hi:#ffffff;--card:#fff}
   [data-theme="light"] :is(.navbar,.pd-nav,.navbar.scrolled){background:#fbfbfd}
   [data-theme="light"] *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  [data-theme="light"] .glass-lens,[data-theme="light"] .glass-bar.is-lifted .glass-lens{background:#fff}
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}

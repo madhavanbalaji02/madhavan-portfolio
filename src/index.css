@@ -242,9 +242,25 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .tnp-root .tnp-tab::after,[data-theme="light"] .tnp-root .tnp-tab-sub{display:none}
 [data-theme="light"] .tnp-root .tnp-tab i{margin:0;font-size:12px}
 [data-theme="light"] .tnp-root .tnp-tab-label{font-size:14px;font-weight:500;color:var(--t2)}
-[data-theme="light"] .tnp-root .tnp-tab.active{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1),0 4px 12px -4px rgba(0,0,0,.12)}
-[data-theme="light"] .tnp-root .tnp-tab.active .tnp-tab-label{color:var(--t1);font-weight:600}
-[data-theme="light"] .tnp-root .tnp-tab.active i{color:var(--gold)}
+/* The selection is a draggable glass lens behind the tabs (TabBar in TechNewsPage.js) */
+[data-theme="light"] .tnp-root .tnp-tabbar{position:sticky;overflow:visible;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+[data-theme="light"] .tnp-root .tnp-tab{position:relative;z-index:1;background:transparent;-webkit-tap-highlight-color:transparent;transition:color .2s}
+[data-theme="light"] .tnp-root .tnp-tab.active{background:transparent;box-shadow:none;cursor:grab}
+[data-theme="light"] .tnp-root .tnp-tabbar.is-dragging .tnp-tab{cursor:grabbing}
+[data-theme="light"] .tnp-root .tnp-tab-lens{position:absolute;top:4px;bottom:4px;left:0;z-index:0;border-radius:999px;pointer-events:none;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1),0 4px 12px -4px rgba(0,0,0,.12);
+  transition:transform .45s cubic-bezier(.3,1.35,.5,1),width .45s cubic-bezier(.3,1.35,.5,1),background .25s,box-shadow .25s,scale .25s cubic-bezier(.3,1.5,.5,1);will-change:transform}
+/* Picked up: the lens lifts, swells and turns to clear glass, following the finger */
+[data-theme="light"] .tnp-root .tnp-tabbar.is-dragging .tnp-tab-lens{
+  transition:width .22s ease-out,background .25s,box-shadow .25s,scale .25s cubic-bezier(.3,1.5,.5,1);scale:1.14 1.22;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.18));
+  -webkit-backdrop-filter:blur(2px) saturate(1.8) brightness(1.06);backdrop-filter:blur(2px) saturate(1.8) brightness(1.06);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 2px rgba(255,255,255,.5),inset 0 0 0 1px rgba(255,255,255,.6),0 10px 28px -8px rgba(0,0,0,.28),0 2px 6px rgba(0,0,0,.08)}
+[data-theme="light"] .tnp-root .tnp-tab .tnp-tab-label{color:var(--t2)}
+[data-theme="light"] .tnp-root .tnp-tab i{color:var(--t3)}
+[data-theme="light"] .tnp-root .tnp-tab.lensed .tnp-tab-label{color:var(--t1)}
+[data-theme="light"] .tnp-root .tnp-tab.lensed i{color:var(--gold)}
+@media (prefers-reduced-motion:reduce){[data-theme="light"] .tnp-root .tnp-tabbar.is-dragging .tnp-tab-lens{scale:none}}
 @media (max-width:480px){[data-theme="light"] .tnp-root .tnp-tab{padding:8px 13px}[data-theme="light"] .tnp-root .tnp-tab i{display:none}[data-theme="light"] .tnp-root .tnp-tabbar{top:72px}}
 /* Status line: plain small text, no band */
 [data-theme="light"] .tnp-root .tnp-metabar{border:0;background:none;justify-content:center;gap:8px;padding:12px 16px 0;font-size:12px;letter-spacing:0}

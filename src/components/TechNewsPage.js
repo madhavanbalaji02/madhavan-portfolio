@@ -12,7 +12,7 @@
  *   4 key takeaways (cached per-article for 7 days).
  */
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback, useRef } from 'react';
 import './TechNewsPage.css';
 import { useSeo } from '../seo';
 
@@ -252,6 +252,125 @@ function ArticleCard({ article, accent, onClick }) {
   );
 }
 
+// ── Tab bar ────────────────────────────────────────────────────────────────────
+// In light mode the selected tab sits on a glass "lens" that can be dragged across
+// the bar, like the iOS 26 tab bar: press and slide, it lifts and follows the finger,
+// and it snaps to the tab you release over. A plain tap still just selects the tab.
+
+function TabBar({ tabs, active, onChange, draggable }) {
+  const barRef  = useRef(null);
+  const tabRefs = useRef({});
+  const drag    = useRef(null);
+  const [lens, setLens]       = useState(null);   // { x, w } in px
+  const [dragging, setDragging] = useState(false);
+  const [hoverKey, setHoverKey] = useState(null);
+
+  const rectOf = useCallback((key) => {
+    const el = tabRefs.current[key];
+    return el ? { x: el.offsetLeft, w: el.offsetWidth } : null;
+  }, []);
+
+  // Keep the lens on the active tab (and in place when the bar resizes)
+  useLayoutEffect(() => {
+    if (dragging) return undefined;
+    const place = () => setLens(rectOf(active));
+    place();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(place) : null;
+    if (ro && barRef.current) ro.observe(barRef.current);
+    return () => ro?.disconnect();
+  }, [active, dragging, rectOf]);
+
+  const nearestTab = (centre) => {
+    let best = active, bestD = Infinity;
+    for (const t of tabs) {
+      const r = rectOf(t.key);
+      if (!r) continue;
+      const d = Math.abs(r.x + r.w / 2 - centre);
+      if (d < bestD) { bestD = d; best = t.key; }
+    }
+    return best;
+  };
+
+  const onPointerDown = (e) => {
+    if (!draggable || !lens || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    const barX = barRef.current.getBoundingClientRect().left;
+    const px = e.clientX - barX;
+    // Only the selected tab can be picked up, as in iOS
+    if (px < lens.x || px > lens.x + lens.w) return;
+    drag.current = { id: e.pointerId, startX: e.clientX, grab: px - lens.x, w: lens.w, moved: false, barX };
+  };
+
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (!d || d.id !== e.pointerId) return;
+    if (!d.moved) {
+      if (Math.abs(e.clientX - d.startX) < 6) return;
+      d.moved = true;
+      barRef.current.setPointerCapture?.(e.pointerId);
+      setDragging(true);
+    }
+    // The lens centre follows the finger; its width morphs to the tab beneath it
+    const centre = e.clientX - d.barX - d.grab + d.w / 2;
+    const key = nearestTab(centre);
+    const w = rectOf(key)?.w ?? d.w;
+    const max = barRef.current.clientWidth - w - 2;
+    setLens({ x: Math.min(max, Math.max(2, centre - w / 2)), w });
+    setHoverKey(key);
+  };
+
+  const endDrag = (e) => {
+    const d = drag.current;
+    if (!d || d.id !== e.pointerId) return;
+    drag.current = null;
+    if (!d.moved) return;
+    d.suppressClick = true;
+    const target = hoverKey || active;
+    setDragging(false);
+    setHoverKey(null);
+    if (target !== active) onChange(target);
+    else setLens(rectOf(active));
+    // The release fires a click on whatever tab is under the pointer; ignore it
+    const block = (ev) => { ev.stopPropagation(); ev.preventDefault(); };
+    window.addEventListener('click', block, { capture: true, once: true });
+    setTimeout(() => window.removeEventListener('click', block, { capture: true }), 0);
+  };
+
+  const shown = dragging ? hoverKey : active;
+
+  return (
+    <nav
+      ref={barRef}
+      className={`tnp-tabbar${dragging ? ' is-dragging' : ''}`}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+    >
+      {draggable && lens && (
+        <span
+          className="tnp-tab-lens"
+          aria-hidden="true"
+          style={{ width: lens.w, transform: `translateX(${lens.x}px)` }}
+        />
+      )}
+      {tabs.map((tab) => (
+        <button
+          key={tab.key}
+          ref={(el) => { tabRefs.current[tab.key] = el; }}
+          className={`tnp-tab${active === tab.key ? ' active' : ''}${shown === tab.key ? ' lensed' : ''}`}
+          onClick={() => onChange(tab.key)}
+          style={active === tab.key ? { '--tab-accent': tab.accent } : {}}
+          aria-pressed={active === tab.key}
+        >
+          <i className={tab.icon} />
+          <span className="tnp-tab-label">{tab.label}</span>
+          <span className="tnp-tab-sub">{tab.sub}</span>
+        </button>
+      ))}
+    </nav>
+  );
+}
+
 // ── Main page ──────────────────────────────────────────────────────────────────
 
 export default function TechNewsPage({ theme, toggleTheme }) {
@@ -331,20 +450,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
       </header>
 
       {/* ── Tab bar ── */}
-      <nav className="tnp-tabbar">
-        {TABS.map((tab) => (
-          <button
-            key={tab.key}
-            className={`tnp-tab${activeTab === tab.key ? ' active' : ''}`}
-            onClick={() => setActiveTab(tab.key)}
-            style={activeTab === tab.key ? { '--tab-accent': tab.accent } : {}}
-          >
-            <i className={tab.icon} />
-            <span className="tnp-tab-label">{tab.label}</span>
-            <span className="tnp-tab-sub">{tab.sub}</span>
-          </button>
-        ))}
-      </nav>
+      <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} draggable={theme === 'light'} />
 
       {/* ── Meta bar ── */}
       {!loading && meta?.lastUpdated && (

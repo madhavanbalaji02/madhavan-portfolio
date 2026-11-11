@@ -78,7 +78,9 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     const x = a.c - a.w / 2;
     lens.style.width = `${a.w}px`;
     lens.style.transform = `translate3d(${x}px,0,0) scale(${sx},${sy})`;
-    content.style.transform = `translate3d(${-x}px,${-lens.offsetTop}px,0)`;
+    // A plain 2D translate keeps the copy painted inside the lens's own layer; a separate
+    // composited child inside a rounded, clipped box can vanish in iOS Safari.
+    content.style.transform = `translate(${-x}px,${-lens.offsetTop}px)`;
   }, []);
 
   const tick = useCallback((t) => {

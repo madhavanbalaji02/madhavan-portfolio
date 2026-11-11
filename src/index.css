@@ -250,14 +250,20 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .glass-bar{touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 [data-theme="light"] .glass-bar > *{-webkit-tap-highlight-color:transparent}
 [data-theme="light"] .glass-bar.is-dragging,[data-theme="light"] .glass-bar.is-dragging *{cursor:grabbing}
-/* At rest: a solid white pill (top, height, width and position come from JS) */
-[data-theme="light"] .glass-lens{position:absolute;left:0;top:0;z-index:2;overflow:hidden;border-radius:999px;pointer-events:none;
+/* At rest: a solid white pill behind the items, whose own text shows the selection.
+   (top, height, width and position come from JS) */
+[data-theme="light"] .glass-bar > :not(.glass-lens){position:relative;z-index:1}
+/* Lifted: the glass rises above the items and shows its magnified copy instead */
+[data-theme="light"] .glass-bar.is-lifted .glass-lens{z-index:2}
+[data-theme="light"] .glass-lens .glass-lens-content{visibility:hidden}
+[data-theme="light"] .glass-bar.is-lifted .glass-lens .glass-lens-content{visibility:visible}
+[data-theme="light"] .glass-lens{position:absolute;left:0;top:0;z-index:0;overflow:hidden;border-radius:999px;pointer-events:none;
   transform-origin:50% 50%;will-change:transform,width;isolation:isolate;
   background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1),0 4px 12px -4px rgba(0,0,0,.12);
   transition:background .28s ease,box-shadow .28s ease,opacity .25s ease}
 [data-theme="light"] .glass-bar.lens-off .glass-lens{opacity:0}
-[data-theme="light"] .glass-lens-content{position:absolute;left:0;top:0;will-change:transform}
-[data-theme="light"] .glass-lens .glass-ghost{position:absolute;display:flex;align-items:center;justify-content:center;margin:0;box-sizing:border-box}
+[data-theme="light"] .glass-lens-content{position:absolute;left:0;top:0}
+[data-theme="light"] .glass-bar .glass-lens .glass-ghost{position:absolute;z-index:auto;display:flex;align-items:center;justify-content:center;margin:0;box-sizing:border-box}
 /* Specular sheen and rim light, shown when the glass lifts */
 [data-theme="light"] .glass-lens::before,[data-theme="light"] .glass-lens::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .28s ease;z-index:1}
 [data-theme="light"] .glass-lens::before{
@@ -284,6 +290,7 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .navbar .nav-seg > a,[data-theme="light"] .navbar .nav-seg-ghost{font-size:13px;font-weight:500;letter-spacing:0;padding:7px 14px;border-radius:999px;line-height:1.2}
 [data-theme="light"] .navbar .nav-seg > a{position:relative;color:var(--t2);transition:color .2s ease,background-color .2s ease}
 [data-theme="light"] .navbar .nav-seg > a::after{display:none}
+[data-theme="light"] .navbar .nav-seg > a.active{color:var(--t1)}
 [data-theme="light"] .navbar .nav-seg > a:not(.active):hover{color:var(--t1);background:rgba(255,255,255,.5)}
 [data-theme="light"] .navbar .nav-seg-ghost{color:var(--t1);white-space:nowrap}
 @media (max-width:1100px){[data-theme="light"] .navbar .nav-seg > a,[data-theme="light"] .navbar .nav-seg-ghost{padding:7px 10px;font-size:12.5px}}
@@ -295,6 +302,9 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .tnp-root .tnp-tab.active{background:transparent;box-shadow:none}
 [data-theme="light"] .tnp-root .tnp-tab .tnp-tab-label{color:var(--t2)}
 [data-theme="light"] .tnp-root .tnp-tab i{color:var(--t3)}
+[data-theme="light"] .tnp-root .tnp-tab.active .tnp-tab-label{color:var(--t1)}
+[data-theme="light"] .tnp-root .tnp-tab.active i{color:var(--gold)}
+[data-theme="light"] .tnp-root .glass-lens .glass-ghost,[data-theme="light"] .tnp-root .glass-lens .glass-ghost *{line-height:normal}  /* match the buttons, which don't inherit it */
 [data-theme="light"] .tnp-root .glass-lens .glass-ghost .tnp-tab-label{color:var(--t1)}
 [data-theme="light"] .tnp-root .glass-lens .glass-ghost i{color:var(--gold)}
 @media (max-width:480px){[data-theme="light"] .tnp-root .tnp-tab{padding:8px 13px}[data-theme="light"] .tnp-root .tnp-tab i{display:none}[data-theme="light"] .tnp-root .tnp-tabbar{top:72px}}

@@ -107,6 +107,7 @@
   background: #e0c4a8;
 }
 .tnt-cta-ext { font-size: 11px; opacity: 0.75; }
+@media (max-width: 768px) { .tnt-cta-ext { display: none; } } /* opens in place on phones */
 
 /* ── Preview cards (decorative) ──────────────────────────────── */
 .tnt-preview {

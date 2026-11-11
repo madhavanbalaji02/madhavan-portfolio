@@ -1,7 +1,9 @@
 import React from 'react';
 import './TechNewsTeaser.css';
+import useTechNewsLink from './useTechNewsLink';
 
 export default function TechNewsTeaser() {
+  const openTechNews = useTechNewsLink();
   return (
     <section className="tnt-section">
       <div className="container tnt-inner">
@@ -38,6 +40,7 @@ export default function TechNewsTeaser() {
             href="/tech-news/"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={openTechNews}
           >
             <i className="fa-solid fa-newspaper" />
             Open Tech News

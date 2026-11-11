@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import useTechNewsLink from './useTechNewsLink';
 
 const Header = ({ theme, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
   const navigate  = useNavigate();
   const location  = useLocation();
+  const openTechNews = useTechNewsLink();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -68,7 +70,7 @@ const Header = ({ theme, toggleTheme }) => {
               </li>
             ))}
             <li>
-              <a href="/tech-news/" target="_blank" rel="noopener noreferrer" className="nav-tech-news-btn">
+              <a href="/tech-news/" target="_blank" rel="noopener noreferrer" onClick={openTechNews} className="nav-tech-news-btn">
                 Tech News ↗
               </a>
             </li>
@@ -85,8 +87,8 @@ const Header = ({ theme, toggleTheme }) => {
           </ul>
 
           <div className="mobile-nav-controls">
-            <a href="/tech-news/" target="_blank" rel="noopener noreferrer" className="nav-tech-news-btn mobile-tech-news-btn">
-              Tech News ↗
+            <a href="/tech-news/" onClick={openTechNews} className="nav-tech-news-btn mobile-tech-news-btn">
+              Tech News
             </a>
             <button className="theme-toggle mobile-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
               <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>

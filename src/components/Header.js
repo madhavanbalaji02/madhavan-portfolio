@@ -59,7 +59,8 @@ const Header = ({ theme, toggleTheme }) => {
   const spyLock = useRef({ on: false, timer: 0 });
 
   const readSection = () => {
-    if (window.location.pathname !== '/') return null;
+    // The section links only show on wider screens; phones skip the work while scrolling
+    if (window.location.pathname !== '/' || !window.matchMedia('(min-width: 769px)').matches) return null;
     const doc = document.documentElement;
     if (window.scrollY + window.innerHeight >= doc.scrollHeight - 4) return '#contact';
     let current = null;

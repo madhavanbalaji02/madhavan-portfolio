@@ -69,7 +69,8 @@
 html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] body{background:transparent}
 .sky{display:none}
-[data-theme="light"] .sky{display:block;position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+/* Sized to the large viewport so it never resizes (and repaints) as a phone's toolbar hides */
+[data-theme="light"] .sky{display:block;position:fixed;top:0;left:0;right:0;height:100vh;height:100lvh;z-index:-1;overflow:hidden;pointer-events:none;contain:strict}
 .sky-layer{position:absolute;inset:0;will-change:opacity}
 .sky-afternoon{background:linear-gradient(180deg,#dbeaf7 0%,#e8f1fa 45%,#f5f8fb 100%)}
 .sky-golden{
@@ -105,6 +106,8 @@ html[data-theme="light"]{background:#f3f6fa}
     radial-gradient(ellipse 36% 110px at 74% 82%,rgba(255,230,200,.85),transparent 70%),
     radial-gradient(ellipse 42% 120px at 26% 92%,rgba(255,220,212,.8),transparent 70%);
 }
+/* Phones: a shorter cloud strip that drifts less, so the moving layer stays small in GPU memory */
+@media (max-width:768px){.sky-clouds{height:150vh;transform:translate3d(0,calc(var(--p,0) * -50vh),0)}}
 @media (prefers-reduced-motion:reduce){.sky-clouds{transform:none}}
 
 /* Sections let the sky through, so the page reads as one continuous sky */

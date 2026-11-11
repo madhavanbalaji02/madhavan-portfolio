@@ -51,7 +51,10 @@ function NotFound() {
 }
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const [theme, setTheme] = useState(() => {
+    // Light is the primary theme; dark is used only when a visitor has chosen it
+    try { return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch { return 'light'; }
+  });
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';

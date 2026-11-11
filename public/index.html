@@ -52,7 +52,18 @@
   <link rel="icon" type="image/png" sizes="48x48" href="%PUBLIC_URL%/favicon-48.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
   <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-  <meta name="theme-color" content="#0b1519" />
+  <meta name="theme-color" content="#dbeaf7" />
+  <!-- Light is the default theme. Apply a visitor's saved choice before first paint so
+       anyone who picked dark never sees a flash of light (App.js keeps it in sync). -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0b1519');
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Fonts: SF Pro + SF Mono (system fonts, no external load) -->
 

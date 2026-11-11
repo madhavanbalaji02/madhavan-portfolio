@@ -48,6 +48,8 @@ In-page section links (`#about`, `#projects`…) use `e.preventDefault()` + manu
 
 ## Design System
 
+**Light is the default theme** (`App.js`, plus an inline script in `public/index.html` that applies a saved `dark` choice before first paint). Light-mode rules live at the top of `src/index.css` under `[data-theme="light"]`; the values below are the dark theme.
+
 - **Colors:** `--bg:#0b1519` (dark teal), `--gold:#d4b595`, `--cyan:#5ec4d4`, `--green:#4ade80`
 - **Fonts:** Space Grotesk (headings/body), JetBrains Mono (code, labels, mono elements)
 - **Section tags** render as `// EXPERIENCE` via `section-tag::before { content: '// ' }`

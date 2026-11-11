@@ -271,9 +271,15 @@ html[data-theme="light"]{background:#f3f6fa}
              inset 0 0 0 .5px rgba(0,0,0,.1),inset 0 0 14px rgba(110,150,190,.22)}
 /* Lifted: clear glass that softens what is underneath and shows the magnified copy */
 [data-theme="light"] .tnp-root .tnp-tabbar.is-lifted .tnp-tab-lens{
-  background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.22) 50%,rgba(255,255,255,.34));
-  -webkit-backdrop-filter:blur(8px) saturate(1.9) brightness(1.08);backdrop-filter:blur(8px) saturate(1.9) brightness(1.08);
+  background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.42) 50%,rgba(255,255,255,.52));
+  -webkit-backdrop-filter:blur(10px) saturate(1.9) brightness(1.08);backdrop-filter:blur(10px) saturate(1.9) brightness(1.08);
   box-shadow:0 14px 34px -10px rgba(20,30,50,.32),0 3px 8px rgba(20,30,50,.1)}
+/* Smallest phones: tighten the tabs so all three fit inside the bar */
+@media (max-width:360px){[data-theme="light"] .tnp-root .tnp-tabbar{max-width:calc(100% - 16px)}[data-theme="light"] .tnp-root .tnp-tab{padding:8px 8px}[data-theme="light"] .tnp-root .tnp-tab-label{font-size:13px}}
+/* Keyboard focus: the lens covers the selected tab, so it carries the focus ring */
+[data-theme="light"] .tnp-root .tnp-tab:focus-visible{outline:none}
+[data-theme="light"] .tnp-root .tnp-tabbar:has(.tnp-tab.active:focus-visible) .tnp-tab-lens{outline:2px solid var(--gold);outline-offset:2px}
+[data-theme="light"] .tnp-root .tnp-tabbar:has(.tnp-tab:not(.active):focus-visible) .tnp-tab:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 [data-theme="light"] .tnp-root .tnp-tabbar.is-lifted .tnp-tab-lens::before,[data-theme="light"] .tnp-root .tnp-tabbar.is-lifted .tnp-tab-lens::after{opacity:1}
 @media (max-width:480px){[data-theme="light"] .tnp-root .tnp-tab{padding:8px 13px}[data-theme="light"] .tnp-root .tnp-tab i{display:none}[data-theme="light"] .tnp-root .tnp-tabbar{top:72px}}
 /* Status line: plain small text, no band */

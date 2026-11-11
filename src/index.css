@@ -242,46 +242,61 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .tnp-root .tnp-tab::after,[data-theme="light"] .tnp-root .tnp-tab-sub{display:none}
 [data-theme="light"] .tnp-root .tnp-tab i{margin:0;font-size:12px}
 [data-theme="light"] .tnp-root .tnp-tab-label{font-size:14px;font-weight:500;color:var(--t2)}
-/* The selection is a draggable Liquid Glass lens over the tabs (TabBar in TechNewsPage.js).
-   It is moved by a spring animation in JS; CSS only styles its two states. */
-[data-theme="light"] .tnp-root .tnp-tabbar{position:sticky;overflow:visible;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-[data-theme="light"] .tnp-root .tnp-tab{position:relative;background:transparent;-webkit-tap-highlight-color:transparent;cursor:pointer}
-[data-theme="light"] .tnp-root .tnp-tab.active{background:transparent;box-shadow:none}
-[data-theme="light"] .tnp-root .tnp-tabbar.is-dragging,[data-theme="light"] .tnp-root .tnp-tabbar.is-dragging .tnp-tab{cursor:grabbing}
-[data-theme="light"] .tnp-root .tnp-tab .tnp-tab-label{color:var(--t2)}
-[data-theme="light"] .tnp-root .tnp-tab i{color:var(--t3)}
-/* At rest: a solid white pill */
-[data-theme="light"] .tnp-root .tnp-tab-lens{position:absolute;top:4px;bottom:4px;left:0;z-index:2;overflow:hidden;border-radius:999px;pointer-events:none;
+/* Liquid Glass selection lens (useGlassLens.js), shared by the Tech News tabs and the
+   navbar. It is moved by a spring animation in JS; CSS only styles its states. */
+[data-theme="light"] .glass-bar{touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+[data-theme="light"] .glass-bar > *{-webkit-tap-highlight-color:transparent}
+[data-theme="light"] .glass-bar.is-dragging,[data-theme="light"] .glass-bar.is-dragging *{cursor:grabbing}
+/* At rest: a solid white pill (top, height, width and position come from JS) */
+[data-theme="light"] .glass-lens{position:absolute;left:0;top:0;z-index:2;overflow:hidden;border-radius:999px;pointer-events:none;
   transform-origin:50% 50%;will-change:transform,width;isolation:isolate;
   background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1),0 4px 12px -4px rgba(0,0,0,.12);
-  transition:background .28s ease,box-shadow .28s ease}
-[data-theme="light"] .tnp-root .tnp-tab-lens-content{position:absolute;left:0;top:0;will-change:transform}
-/* The copy seen through the lens is in the selected style */
-[data-theme="light"] .tnp-root .tnp-tab-lens .tnp-tab-ghost{position:absolute;display:flex;justify-content:center;margin:0;box-sizing:border-box}
-[data-theme="light"] .tnp-root .tnp-tab-lens .tnp-tab-ghost .tnp-tab-label{color:var(--t1)}
-[data-theme="light"] .tnp-root .tnp-tab-lens .tnp-tab-ghost i{color:var(--gold)}
+  transition:background .28s ease,box-shadow .28s ease,opacity .25s ease}
+[data-theme="light"] .glass-bar.lens-off .glass-lens{opacity:0}
+[data-theme="light"] .glass-lens-content{position:absolute;left:0;top:0;will-change:transform}
+[data-theme="light"] .glass-lens .glass-ghost{position:absolute;display:flex;align-items:center;justify-content:center;margin:0;box-sizing:border-box}
 /* Specular sheen and rim light, shown when the glass lifts */
-[data-theme="light"] .tnp-root .tnp-tab-lens::before,[data-theme="light"] .tnp-root .tnp-tab-lens::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .28s ease;z-index:1}
-[data-theme="light"] .tnp-root .tnp-tab-lens::before{
+[data-theme="light"] .glass-lens::before,[data-theme="light"] .glass-lens::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .28s ease;z-index:1}
+[data-theme="light"] .glass-lens::before{
   background:radial-gradient(120% 90% at 28% -10%,rgba(255,255,255,.75),rgba(255,255,255,0) 52%),
              radial-gradient(90% 70% at 75% 115%,rgba(255,255,255,.55),rgba(255,255,255,0) 55%)}
-[data-theme="light"] .tnp-root .tnp-tab-lens::after{
+[data-theme="light"] .glass-lens::after{
   box-shadow:inset 0 1.5px .5px rgba(255,255,255,1),inset 0 -1px 1px rgba(255,255,255,.8),
              inset 2px 0 3px -1px rgba(255,255,255,.7),inset -2px 0 3px -1px rgba(255,255,255,.7),
              inset 0 0 0 .5px rgba(0,0,0,.1),inset 0 0 14px rgba(110,150,190,.22)}
 /* Lifted: clear glass that softens what is underneath and shows the magnified copy */
-[data-theme="light"] .tnp-root .tnp-tabbar.is-lifted .tnp-tab-lens{
+[data-theme="light"] .glass-bar.is-lifted .glass-lens{
   background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.42) 50%,rgba(255,255,255,.52));
   -webkit-backdrop-filter:blur(10px) saturate(1.9) brightness(1.08);backdrop-filter:blur(10px) saturate(1.9) brightness(1.08);
   box-shadow:0 14px 34px -10px rgba(20,30,50,.32),0 3px 8px rgba(20,30,50,.1)}
+[data-theme="light"] .glass-bar.is-lifted .glass-lens::before,[data-theme="light"] .glass-bar.is-lifted .glass-lens::after{opacity:1}
+/* Keyboard focus: the lens covers the selected item, so it carries the focus ring */
+[data-theme="light"] .glass-bar > :focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+[data-theme="light"] .glass-bar > .active:focus-visible{outline:none}
+[data-theme="light"] .glass-bar:has(> .active:focus-visible) .glass-lens{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Navbar section links: a glass segmented control whose lens marks the current section */
+[data-theme="light"] .navbar .nav-seg{position:relative;gap:2px;padding:4px;border-radius:999px;
+  background:rgba(255,255,255,.38);border:1px solid var(--glass-rim);box-shadow:var(--glass-edge)}
+[data-theme="light"] .navbar .nav-seg > a,[data-theme="light"] .navbar .nav-seg-ghost{font-size:13px;font-weight:500;letter-spacing:0;padding:7px 14px;border-radius:999px;line-height:1.2}
+[data-theme="light"] .navbar .nav-seg > a{position:relative;color:var(--t2);transition:color .2s ease,background-color .2s ease}
+[data-theme="light"] .navbar .nav-seg > a::after{display:none}
+[data-theme="light"] .navbar .nav-seg > a:not(.active):hover{color:var(--t1);background:rgba(255,255,255,.5)}
+[data-theme="light"] .navbar .nav-seg-ghost{color:var(--t1);white-space:nowrap}
+@media (max-width:1100px){[data-theme="light"] .navbar .nav-seg > a,[data-theme="light"] .navbar .nav-seg-ghost{padding:7px 10px;font-size:12.5px}}
+@media (max-width:1000px){[data-theme="light"] .desktop-nav{gap:10px}[data-theme="light"] .navbar .nav-seg > a,[data-theme="light"] .navbar .nav-seg-ghost{padding:7px 8px;font-size:12px}}
+
+/* Tech News tabs */
+[data-theme="light"] .tnp-root .tnp-tabbar{position:sticky;overflow:visible}
+[data-theme="light"] .tnp-root .tnp-tab{position:relative;background:transparent;cursor:pointer}
+[data-theme="light"] .tnp-root .tnp-tab.active{background:transparent;box-shadow:none}
+[data-theme="light"] .tnp-root .tnp-tab .tnp-tab-label{color:var(--t2)}
+[data-theme="light"] .tnp-root .tnp-tab i{color:var(--t3)}
+[data-theme="light"] .tnp-root .glass-lens .glass-ghost .tnp-tab-label{color:var(--t1)}
+[data-theme="light"] .tnp-root .glass-lens .glass-ghost i{color:var(--gold)}
+@media (max-width:480px){[data-theme="light"] .tnp-root .tnp-tab{padding:8px 13px}[data-theme="light"] .tnp-root .tnp-tab i{display:none}[data-theme="light"] .tnp-root .tnp-tabbar{top:72px}}
 /* Smallest phones: tighten the tabs so all three fit inside the bar */
 @media (max-width:360px){[data-theme="light"] .tnp-root .tnp-tabbar{max-width:calc(100% - 16px)}[data-theme="light"] .tnp-root .tnp-tab{padding:8px 8px}[data-theme="light"] .tnp-root .tnp-tab-label{font-size:13px}}
-/* Keyboard focus: the lens covers the selected tab, so it carries the focus ring */
-[data-theme="light"] .tnp-root .tnp-tab:focus-visible{outline:none}
-[data-theme="light"] .tnp-root .tnp-tabbar:has(.tnp-tab.active:focus-visible) .tnp-tab-lens{outline:2px solid var(--gold);outline-offset:2px}
-[data-theme="light"] .tnp-root .tnp-tabbar:has(.tnp-tab:not(.active):focus-visible) .tnp-tab:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
-[data-theme="light"] .tnp-root .tnp-tabbar.is-lifted .tnp-tab-lens::before,[data-theme="light"] .tnp-root .tnp-tabbar.is-lifted .tnp-tab-lens::after{opacity:1}
-@media (max-width:480px){[data-theme="light"] .tnp-root .tnp-tab{padding:8px 13px}[data-theme="light"] .tnp-root .tnp-tab i{display:none}[data-theme="light"] .tnp-root .tnp-tabbar{top:72px}}
 /* Status line: plain small text, no band */
 [data-theme="light"] .tnp-root .tnp-metabar{border:0;background:none;justify-content:center;gap:8px;padding:12px 16px 0;font-size:12px;letter-spacing:0}
 [data-theme="light"] .tnp-root .tnp-meta-ai{margin-left:12px}
@@ -354,6 +369,10 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .desktop-nav a::after{content:'';position:absolute;width:0;height:1px;bottom:0;left:0;background:var(--gold);transition:width 0.2s ease}
 .desktop-nav a:hover{color:var(--t1)}
 .desktop-nav a:hover::after{width:100%}
+.nav-seg-li{display:flex}
+.nav-seg{display:flex;align-items:center;gap:clamp(20px,3vw,36px)}
+.nav-seg a.active{color:var(--t1)}
+.nav-tech-news-btn,.nav-resume-btn{white-space:nowrap}
 
 .nav-resume-btn{font-family:var(--font-mono);font-size:11px !important;color:var(--gold) !important;border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);border-radius:4px;padding:5px 12px !important;transition:all 0.2s !important;}
 .nav-resume-btn::after{display:none !important}

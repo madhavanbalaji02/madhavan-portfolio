@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useTechNewsLink from './useTechNewsLink';
+import useGlassLens from './useGlassLens';
 
 const Header = ({ theme, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,8 +24,9 @@ const Header = ({ theme, toggleTheme }) => {
   const close = () => setIsMenuOpen(false);
 
   const navTo = (e, id) => {
-    e.preventDefault();
+    e?.preventDefault();
     close();
+    selectSection(id);
 
     const doScroll = () => {
       const el = document.querySelector(id);
@@ -49,6 +51,70 @@ const Header = ({ theme, toggleTheme }) => {
     ['#contact',    'Contact'],
   ];
 
+  // ── Current section (scroll-spy), shown by the navbar's glass lens in light mode ──
+  // Clicking or dragging to a section selects it straight away and pauses the
+  // scroll-spy until the smooth scroll ends, so the lens doesn't hop through every
+  // section on the way.
+  const [section, setSection] = useState(null);
+  const spyLock = useRef({ on: false, timer: 0 });
+
+  const readSection = () => {
+    if (window.location.pathname !== '/') return null;
+    const doc = document.documentElement;
+    if (window.scrollY + window.innerHeight >= doc.scrollHeight - 4) return '#contact';
+    let current = null;
+    for (const [id] of navLinks) {
+      const el = document.querySelector(id);
+      if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) current = id;
+    }
+    return current;
+  };
+
+  const selectSection = (id) => {
+    const lock = spyLock.current;
+    setSection(id === '#home' ? null : id);
+    lock.on = true;
+    clearTimeout(lock.timer);
+    lock.timer = setTimeout(() => { lock.on = false; setSection(readSection()); }, 700);
+  };
+
+  useEffect(() => {
+    const lock = spyLock.current;
+    let frame = 0;
+    const update = () => { frame = 0; if (!lock.on) setSection(readSection()); };
+    const onScroll = () => {
+      if (lock.on) {
+        // Still scrolling to the chosen section: release the lock once it settles
+        clearTimeout(lock.timer);
+        lock.timer = setTimeout(() => { lock.on = false; update(); }, 160);
+        return;
+      }
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    // Sections move when images and lazy content load, without any scroll
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => { if (!lock.on && !frame) frame = requestAnimationFrame(update); }) : null;
+    ro?.observe(document.body);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(frame);
+      clearTimeout(lock.timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const glass = theme === 'light';
+  const lens = useGlassLens({
+    keys: navLinks.map(([id]) => id),
+    active: section,
+    onSelect: (id) => navTo(null, id),
+    enabled: glass,
+  });
+
   return (
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -64,11 +130,32 @@ const Header = ({ theme, toggleTheme }) => {
           </div>
 
           <ul className="navbar-nav desktop-nav">
-            {navLinks.map(([id, label]) => (
-              <li key={id}>
-                <a href={id} onClick={(e) => navTo(e, id)}>{label}</a>
-              </li>
-            ))}
+            <li className="nav-seg-li">
+              <div className="nav-seg glass-bar" {...lens.barProps}>
+                {navLinks.map(([id, label]) => (
+                  <a
+                    key={id}
+                    ref={lens.itemRef(id)}
+                    href={id}
+                    onClick={(e) => navTo(e, id)}
+                    className={section === id ? 'active' : undefined}
+                    aria-current={section === id ? 'location' : undefined}
+                    draggable="false"
+                  >
+                    {label}
+                  </a>
+                ))}
+                {glass && (
+                  <span className="glass-lens" ref={lens.lensRef} aria-hidden="true">
+                    <span className="glass-lens-content" ref={lens.contentRef}>
+                      {navLinks.map(([id, label]) => (
+                        <span key={id} ref={lens.ghostRef(id)} className="nav-seg-ghost glass-ghost">{label}</span>
+                      ))}
+                    </span>
+                  </span>
+                )}
+              </div>
+            </li>
             <li>
               <a href="/tech-news/" target="_blank" rel="noopener noreferrer" onClick={openTechNews} className="nav-tech-news-btn">
                 Tech News ↗

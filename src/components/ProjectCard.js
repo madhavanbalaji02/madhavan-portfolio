@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { diagramsBySlug } from './ProjectDiagrams';
 
 const categoryMeta = {
   ai: { icon: 'fas fa-brain',      accent: 'var(--cyan)' },
@@ -18,8 +17,6 @@ const ProjectCard = ({ project, index, collapsed = false }) => {
   const navigate  = useNavigate();
   const cat  = categoryMeta[project.category] || categoryMeta.ml;
   const lang = langMeta[project.language]      || { icon: 'fas fa-code', color: '#555' };
-
-  const Diagram = diagramsBySlug[project.slug];
 
   const handleCardClick = () => {
     navigate(`/project/${project.slug}/`);
@@ -52,15 +49,9 @@ const ProjectCard = ({ project, index, collapsed = false }) => {
         </div>
       </div>
 
-      {Diagram && (
-        <div className="proj-card-diagram">
-          <Diagram />
-        </div>
-      )}
-
       <div className="proj-card-body">
         <h3 className="proj-title">{project.title}</h3>
-        {/* Short tagline on diagram cards and phones; full description elsewhere (CSS picks one) */}
+        {/* The grid shows the one-line tagline; the full description is on the detail page */}
         <p className="proj-desc proj-desc-short">{project.tagline || project.description}</p>
         <p className="proj-desc proj-desc-long">{project.description}</p>
         <div className="proj-tags">

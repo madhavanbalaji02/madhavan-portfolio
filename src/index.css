@@ -345,6 +345,28 @@ html[data-theme="light"]{background:#f3f6fa}
 @media (max-width:1100px){[data-theme] .navbar .nav-seg > a,[data-theme] .navbar .nav-seg-ghost{padding:7px 10px;font-size:12.5px}}
 @media (max-width:1000px){[data-theme] .desktop-nav{gap:10px}[data-theme] .navbar .nav-seg > a,[data-theme] .navbar .nav-seg-ghost{padding:7px 8px;font-size:12px}}
 
+/* Project filters: a glass segmented control whose lens marks the selected filter */
+[data-theme] .project-filter.proj-seg{position:relative;display:flex;width:max-content;max-width:100%;flex-wrap:nowrap;gap:2px;padding:4px;
+  overflow:visible;border-radius:999px;background:var(--seg-fill);border:1px solid var(--glass-rim);box-shadow:var(--glass-edge)}
+[data-theme] .proj-seg > .filter-btn,[data-theme] .proj-seg > .filter-btn:hover,[data-theme] .proj-seg > .filter-btn.active,
+[data-theme] .proj-seg-ghost{min-height:0;padding:8px 16px;border:0;border-radius:999px;font-size:14px;font-weight:500;letter-spacing:0;line-height:normal;white-space:nowrap}
+[data-theme] .proj-seg > .filter-btn,[data-theme] .proj-seg > .filter-btn:hover,[data-theme] .proj-seg > .filter-btn.active{
+  background:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--t2);transition:color .2s ease,background-color .2s ease}
+[data-theme] .proj-seg > .filter-btn.active{color:var(--t1)}
+[data-theme] .proj-seg > .filter-btn:not(.active):hover{color:var(--t1);background:var(--seg-hover)}
+[data-theme] .proj-seg-ghost{color:var(--t1)}
+.seg-short{display:none}
+@media (max-width:480px){
+  .seg-full{display:none}.seg-short{display:inline}
+  [data-theme] .project-filter.proj-seg{margin-left:0;margin-right:0;padding:4px;overflow:visible}
+  [data-theme] .proj-seg > .filter-btn,[data-theme] .proj-seg > .filter-btn:hover,[data-theme] .proj-seg > .filter-btn.active,
+  [data-theme] .proj-seg-ghost{padding:8px 12px;font-size:13px}
+}
+@media (max-width:360px){
+  [data-theme] .proj-seg > .filter-btn,[data-theme] .proj-seg > .filter-btn:hover,[data-theme] .proj-seg > .filter-btn.active,
+  [data-theme] .proj-seg-ghost{padding:8px 9px}
+}
+
 /* Tech News tabs */
 [data-theme] .tnp-root .tnp-tabbar{position:sticky;overflow:visible}
 [data-theme] .tnp-root .tnp-tab{position:relative;background:transparent;cursor:pointer}

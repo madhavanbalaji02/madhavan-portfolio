@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { projectsData } from './projectsData';
+import useGlassLens from './useGlassLens';
 
+// `short` is shown on small phones so all five fit in one glass segmented control
 const filters = [
-  { id: 'all', label: 'All' },
-  { id: 'ai',  label: 'AI / LLM' },
-  { id: 'cv',  label: 'Computer Vision' },
-  { id: 'ml',  label: 'ML / MLOps' },
-  { id: 'data', label: 'Data Engineering' },
+  { id: 'all',  label: 'All',              short: 'All' },
+  { id: 'ai',   label: 'AI / LLM',         short: 'AI' },
+  { id: 'cv',   label: 'Computer Vision',  short: 'Vision' },
+  { id: 'ml',   label: 'ML / MLOps',       short: 'MLOps' },
+  { id: 'data', label: 'Data Engineering', short: 'Data' },
 ];
+
+const FilterLabel = ({ f }) => (
+  <>
+    <span className="seg-full">{f.label}</span>
+    <span className="seg-short" aria-hidden="true">{f.short}</span>
+  </>
+);
 
 const INITIAL_SHOWN = 6;
 
@@ -28,6 +37,9 @@ const Projects = () => {
     setShowAll(false);
   };
 
+  // The filters are a Liquid Glass segmented control (useGlassLens.js), in both themes
+  const lens = useGlassLens({ keys: filters.map((f) => f.id), active: activeFilter, onSelect: handleFilter, enabled: true });
+
   return (
     <section id="projects" className="section">
       <div className="container">
@@ -39,20 +51,26 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="project-filter fade-in-up">
+        <div className="project-filter proj-seg glass-bar fade-in-up" role="group" aria-label="Filter projects" {...lens.barProps}>
           {filters.map(f => (
             <button
               key={f.id}
+              ref={lens.itemRef(f.id)}
               className={`filter-btn ${activeFilter === f.id ? 'active' : ''}`}
-              onClick={(e) => {
-                handleFilter(f.id);
-                // On phones the chips scroll sideways: bring the chosen one fully into view
-                e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
-              }}
+              aria-pressed={activeFilter === f.id}
+              aria-label={f.label}
+              onClick={() => handleFilter(f.id)}
             >
-              {f.label}
+              <FilterLabel f={f} />
             </button>
           ))}
+          <span className="glass-lens" ref={lens.lensRef} aria-hidden="true">
+            <span className="glass-lens-content" ref={lens.contentRef}>
+              {filters.map(f => (
+                <span key={f.id} ref={lens.ghostRef(f.id)} className="proj-seg-ghost glass-ghost"><FilterLabel f={f} /></span>
+              ))}
+            </span>
+          </span>
         </div>
 
         <div className="proj-grid">

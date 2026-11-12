@@ -290,6 +290,22 @@ function TabBar({ tabs, active, onChange, draggable }) {
   );
 }
 
+// ── Dateline ───────────────────────────────────────────────────────────────────
+// The briefing's date, like a newspaper dateline. It is shown in the visitor's own
+// time zone (so the day is right for them) but always in English, to match the page.
+// If the briefing isn't from the visitor's today, it says so rather than implying
+// the news is current: "Briefing from Wednesday, November 11".
+function formatDateline(iso, now = new Date()) {
+  const d = iso ? new Date(iso) : null;
+  if (!d || Number.isNaN(d.getTime())) return null;
+  const sameYear = d.getFullYear() === now.getFullYear();
+  const label = d.toLocaleDateString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric', ...(sameYear ? {} : { year: 'numeric' }),
+  });
+  const isToday = d.toDateString() === now.toDateString();
+  return isToday ? label : `Briefing from ${label}`;
+}
+
 // ── Main page ──────────────────────────────────────────────────────────────────
 
 export default function TechNewsPage({ theme, toggleTheme }) {
@@ -344,11 +360,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
   const accent        = activeTabMeta?.accent ?? 'var(--gold)';
   const articles      = sections[activeTab] ?? [];
 
-  // The briefing's date, like a newspaper dateline ("Wednesday, November 11")
-  const issued   = meta?.lastUpdated ? new Date(meta.lastUpdated) : null;
-  const dateline = issued && !Number.isNaN(issued.getTime())
-    ? issued.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })
-    : null;
+  const dateline = formatDateline(meta?.lastUpdated);
 
   const skeletonCount = 12;
 

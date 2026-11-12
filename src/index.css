@@ -371,12 +371,10 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme] .tnp-modal .tnp-modal-section-title::before{content:none}
 [data-theme] .tnp-modal .tnp-modal-read-btn{background:var(--gold);color:var(--on-gold);border-radius:999px;border-color:transparent}
 
-/* Justified paragraphs for long-form prose, with hyphenation so spacing stays even.
-   Phones keep left alignment: at that width justified lines open up wide gaps. */
-@media (min-width:600px){
-  :is(.about-text p,.hero-desc,.teaching-body,.teaching-callout p,.exp-bullet-item p,.patent-description,.pd-body,.pd-step-text,.outcome-text,.tnt-desc,.tnp-modal-full-summary){
-    text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:7 3 3}
-}
+/* Justified paragraphs for long-form prose, at every screen size. Hyphenation keeps
+   the word spacing even, which matters most on narrow phone columns. */
+:is(.about-text p,.hero-desc,.teaching-body,.teaching-callout p,.exp-bullet-item p,.patent-description,.pd-body,.pd-step-text,.outcome-text,.tnt-desc,.tnp-modal-full-summary){
+  text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:6 3 2}
 
 /* Respect "Reduce transparency": glass becomes solid */
 @media (prefers-reduced-transparency:reduce){

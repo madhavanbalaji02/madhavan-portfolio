@@ -601,6 +601,19 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 [data-theme] .ptab > a{color:var(--t2);transition:color .2s ease}
 [data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:17px;line-height:1}
 [data-theme] .ptab > a.active,[data-theme] .ptab-ghost{color:var(--gold)}
+/* Light mode: the tab bar takes its colour from the sky behind it, like Liquid Glass.
+   --p (scroll progress, 0 → 1, set by Sky.js) moves both tints from afternoon blue,
+   through dusk violet, to sunset red-brown; the colour glides between steps.
+   Every tint keeps at least 4.5:1 contrast on the frosted bar. */
+[data-theme="light"] .ptab{
+  --sky-dusk:clamp(0%,calc(var(--p,0) * 200%),100%);
+  --sky-sunset:clamp(0%,calc((var(--p,0) - .5) * 200%),100%);
+  --tab-ink:color-mix(in oklab,color-mix(in oklab,#2f4a66,#4e4170 var(--sky-dusk)),#7a3f30 var(--sky-sunset));
+  --tab-tint:color-mix(in oklab,color-mix(in oklab,#1f6cb0,#7148a6 var(--sky-dusk)),#b8452a var(--sky-sunset));
+}
+[data-theme="light"] .ptab > a{color:var(--tab-ink);transition:color .7s ease}
+[data-theme="light"] .ptab > a.active,[data-theme="light"] .ptab-ghost{color:var(--tab-tint);transition:color .7s ease}
+
 /* Phones on their side: a slim, centred, icon-only bar so the page keeps the screen */
 @media (max-width:768px) and (max-height:500px){
   .ptab-wrap{max-width:340px;bottom:max(6px,env(safe-area-inset-bottom))}

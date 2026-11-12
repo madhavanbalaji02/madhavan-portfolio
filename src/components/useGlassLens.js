@@ -1,4 +1,5 @@
 import { useRef, useCallback, useEffect, useLayoutEffect } from 'react';
+import haptic from './haptics';
 
 // A Liquid Glass selection "lens", modelled on the iOS 26 tab bar, shared by the
 // Tech News tabs and the navbar. Touch the selected item and it lifts into clear glass
@@ -17,6 +18,8 @@ import { useRef, useCallback, useEffect, useLayoutEffect } from 'react';
 //  - Dragging past either end rubber-bands with UIScrollView's formula
 //    (1 − 1 / (x·0.55 / d + 1)) · d, with d = 22 px so it never leaves the bar.
 //  - The spring keeps the gesture's velocity on release, so there is no hitch.
+//  - On touch screens a light haptic tick marks each item the glass passes over
+//    (Android; iOS 18+ Safari; see haptics.js).
 // (Apple doesn't publish the tab bar's own tuning; these are its standard curves.)
 //
 // It runs on requestAnimationFrame and writes styles directly; dragging never
@@ -212,6 +215,7 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     drag.current = {
       id: e.pointerId, startX: e.clientX, startY: e.clientY, barX, moved: false,
       grab: onLens ? px - a.c : 0, samples: [{ t: e.timeStamp, x: e.clientX }],
+      touch: e.pointerType === 'touch', over: activeRef.current,
     };
     // Touching the selected item lifts the glass straight away, as in iOS
     if (onLens && !reduced()) { lift(true); animateTo(a.tc, a.tw, LIFT, SPRING.settle); }
@@ -236,6 +240,8 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     const first = rectOf(keys[0]), last = rectOf(keys[keys.length - 1]);
     let centre = e.clientX - d.barX - d.grab;
     const hit = nearest(centre);
+    // A light haptic tick each time the glass passes onto another item (touch only)
+    if (hit.key !== d.over) { d.over = hit.key; if (d.touch) haptic(); }
     // Past either end, resist like a scroll view
     if (centre < first.c) centre = first.c + rubberBand(centre - first.c, RUBBER_BAND);
     else if (centre > last.c) centre = last.c + rubberBand(centre - last.c, RUBBER_BAND);
@@ -257,6 +263,8 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     const v = recent.length > 1 && s1.t > s0.t ? ((s1.x - s0.x) / (s1.t - s0.t)) * 1000 : 0;
     const target = nearest(e.clientX - d.barX - d.grab + project(v));
     animateTo(target.r.c, target.r.w, 1, SPRING.settle);
+    // ...and one as it settles, unless it lands on the item it was already over
+    if (d.touch && target.key !== d.over) haptic();
     if (target.key !== activeRef.current) { fromDrag.current = true; onSelect(target.key); }
 
     // The release may also fire a click on the item under the pointer; swallow it

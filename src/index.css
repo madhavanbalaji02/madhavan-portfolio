@@ -152,6 +152,7 @@ html[data-theme="light"]{background:#f3f6fa}
   --scroll-thumb:rgba(0,0,0,.28);
   --skill-icon-filter:grayscale(1) brightness(0);--skill-icon-opacity:.55;
   --drawer:rgba(255,248,243,0.94);
+  --sheet:rgba(250,250,252,0.9);
   caret-color:var(--gold);
 }
 [data-theme="dark"]{
@@ -186,6 +187,7 @@ html[data-theme="light"]{background:#f3f6fa}
   --scroll-thumb:rgba(255,255,255,.22);
   --skill-icon-filter:grayscale(1) brightness(0) invert(1);--skill-icon-opacity:.72;
   --drawer:rgba(11,21,25,0.94);
+  --sheet:rgba(11,21,25,0.9);
   caret-color:var(--gold);
 }
 
@@ -195,7 +197,6 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme] .footer::before,[data-theme] .footer::after{display:none}
 
 /* Overlays */
-[data-theme] .mobile-nav-drawer{background:var(--drawer);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:-8px 0 40px rgba(0,0,0,.25)}
 [data-theme] .hero-name{background:none;-webkit-background-clip:unset;-webkit-text-fill-color:var(--t1);background-clip:unset}
 [data-theme] .hero-img-wrap{animation:none}
 [data-theme] .skill-icon{filter:var(--skill-icon-filter);opacity:var(--skill-icon-opacity)}
@@ -252,7 +253,7 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme] .back-to-top:hover{background:var(--t1);color:var(--on-t1);border-color:transparent}
 
 /* Small round icon buttons and tags: plain, no rims */
-[data-theme] :is(.footer-social-icon,.proj-github-btn,.mobile-nav-footer a,.tnp-modal-close){border-radius:50%;background:var(--chip);border-color:transparent;box-shadow:none}
+[data-theme] :is(.footer-social-icon,.proj-github-btn,.tnp-modal-close){border-radius:50%;background:var(--chip);border-color:transparent;box-shadow:none}
 [data-theme] :is(.hero-stack-tag,.skill-badge,.exp-skill-tag,.proj-tag,.article-tag,.pd-tech-tag,.pd-lang-badge,.pd-category-badge,.pd-section-num){
   border-radius:999px;background:var(--chip);border-color:transparent;box-shadow:none;color:var(--t2)}
 
@@ -518,53 +519,93 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* Mobile nav overlay: hidden by default, shown via .show */
-.mobile-nav-overlay{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,0.65);
-  z-index:1050;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity 0.3s ease,visibility 0.3s ease;
-  cursor:pointer;
+/* Phone menu (Header.js): a full-screen frosted sheet that sits under the navbar.
+   Large-title section links, a grouped card, then social links; Apple's ease-out curve. */
+.mnav{display:none}
+@media (max-width:768px){
+  .mnav{
+    display:block;position:fixed;inset:0;z-index:990;
+    padding:calc(var(--mnav-top,76px) + 18px) 24px calc(28px + env(safe-area-inset-bottom));
+    background:var(--sheet);
+    -webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);
+    overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+    opacity:0;visibility:hidden;
+    transition:opacity .22s ease,visibility 0s linear .22s;
+  }
+  .mnav.show{opacity:1;visibility:visible;transition:opacity .36s cubic-bezier(.32,.72,0,1),visibility 0s}
 }
-.mobile-nav-overlay.show{opacity:1;visibility:visible}
-
-/* Mobile nav drawer: off-screen right by default */
-.mobile-nav-drawer{
-  position:fixed;
-  top:0;right:0;
-  width:min(300px,82vw);
-  height:100%;
-  background:var(--bg-card);
-  border-left:1px solid var(--border-warm);
-  z-index:1060;
-  padding:72px 0 32px;
-  transform:translateX(100%);
-  /* visibility:hidden keeps the closed drawer out of Tab order and screen readers;
-     the delay lets the slide-out animation finish before it hides */
-  visibility:hidden;
-  transition:transform 0.3s var(--ease),visibility 0s linear 0.3s;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-  box-shadow:-8px 0 40px rgba(0,0,0,.6);
-  display:flex;
-  flex-direction:column;
+.mnav-inner{max-width:560px;margin:0 auto}
+.mnav-item{opacity:0;translate:0 -12px;transition:opacity .12s ease,translate 0s linear .22s}
+.mnav.show .mnav-item{
+  opacity:1;translate:none;
+  transition:opacity .42s cubic-bezier(.32,.72,0,1) calc(var(--i) * 28ms + 40ms),
+             translate .6s cubic-bezier(.32,.72,0,1) calc(var(--i) * 28ms + 40ms);
 }
-.mobile-nav-drawer.show{transform:translateX(0);visibility:visible;transition:transform 0.3s var(--ease),visibility 0s}
+.mnav-list{list-style:none;margin:0;padding:0}
+.mnav-list a{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:9px 2px;min-height:52px;
+  font-family:var(--font-body);font-size:clamp(28px,8vw,34px);font-weight:600;letter-spacing:-.028em;line-height:1.12;
+  color:var(--t1);text-decoration:none;-webkit-tap-highlight-color:transparent;
+  transition:opacity .15s ease;
+}
+.mnav-list a i{font-size:14px;color:var(--t3);opacity:.45;transition:translate .2s ease}
+.mnav-list a.is-current{color:var(--gold)}
+.mnav-list a.is-current i{color:var(--gold);opacity:.8}
+.mnav-list a:active{opacity:.45}
+.mnav-list a:active i{translate:3px 0}
+.mnav-group{margin-top:30px;border-radius:18px;background:var(--chip);overflow:hidden}
+.mnav-group a{
+  position:relative;display:flex;align-items:center;gap:14px;
+  padding:12px 16px;min-height:56px;font-size:17px;font-weight:500;letter-spacing:-.01em;
+  color:var(--t1);text-decoration:none;-webkit-tap-highlight-color:transparent;transition:background .15s ease;
+}
+.mnav-group a + a::before{content:'';position:absolute;top:0;right:0;left:60px;border-top:.5px solid var(--divider)}
+.mnav-group a:active{background:var(--chip)}
+.mnav-ic{width:30px;height:30px;flex:none;border-radius:8px;display:grid;place-items:center;background:var(--gold);color:var(--on-gold);font-size:14px}
+.mnav-gl{flex:1}
+.mnav-trail{font-size:13px;color:var(--t3);opacity:.55}
+.mnav-social{display:flex;gap:12px;margin-top:22px}
+.mnav-social a{
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:var(--chip);color:var(--t2);font-size:19px;text-decoration:none;
+  -webkit-tap-highlight-color:transparent;transition:scale .15s ease,color .15s ease;
+}
+.mnav-social a:active{scale:.92;color:var(--t1)}
+/* Phone tab bar (Header.js): the navbar's glass lens as a floating iOS-style tab bar */
+.ptab-wrap{display:none}
+@media (max-width:768px){
+  .ptab-wrap{
+    display:block;position:fixed;z-index:995;
+    left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));
+    bottom:max(10px,env(safe-area-inset-bottom));
+    max-width:520px;margin:0 auto;
+    transition:opacity .25s ease,translate .35s cubic-bezier(.32,.72,0,1);
+  }
+  .App{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  .back-to-top{bottom:calc(86px + env(safe-area-inset-bottom)) !important}
+  html.menu-open .ptab-wrap{opacity:0;translate:0 16px;pointer-events:none}
+}
+[data-theme] .ptab{
+  position:relative;display:flex;align-items:stretch;padding:4px;height:62px;box-sizing:border-box;border-radius:31px;
+  background:var(--bar-fill-scrolled,var(--bar-fill));
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-rim);box-shadow:var(--bar-shadow),var(--glass-edge);
+}
+[data-theme] .ptab > a,[data-theme] .ptab-ghost{
+  flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  border-radius:27px;font-family:var(--font-body);font-size:10px;font-weight:600;letter-spacing:.01em;line-height:1;
+  white-space:nowrap;text-decoration:none;
+}
+[data-theme] .ptab > a{color:var(--t2);transition:color .2s ease}
+[data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:17px;line-height:1}
+[data-theme] .ptab > a.active,[data-theme] .ptab-ghost{color:var(--gold)}
+@media (max-width:340px){[data-theme] .ptab > a,[data-theme] .ptab-ghost{font-size:9px}[data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:15px}}
 
-.mobile-nav-list{list-style:none;padding:0;flex:1}
-.mobile-nav-list li{border-bottom:1px solid var(--border);opacity:0}
-.mobile-nav-drawer.show .mobile-nav-list li{animation:slideInRight 0.3s var(--ease) forwards}
-.mobile-nav-list li a{display:flex;align-items:center;gap:16px;padding:16px 28px;font-size:16px;font-weight:600;color:var(--t2);transition:background 0.15s,color 0.15s;min-height:56px;-webkit-tap-highlight-color:transparent}
-.mobile-nav-list li a:active{background:var(--bg-card-2);color:var(--t1)}
-.mn-num{font-family:var(--font-mono);font-size:11px;color:var(--gold);opacity:0.8;min-width:22px}
+/* Nothing floats over the open menu */
+html.menu-open .back-to-top{opacity:0;visibility:hidden;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.mnav-item,.mnav.show .mnav-item{translate:none;transition:opacity .2s ease}}
 
-.mobile-nav-footer{display:flex;gap:10px;padding:20px 28px;border-top:1px solid var(--border);margin-top:auto}
-.mobile-nav-footer a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;color:var(--t2);font-size:18px;transition:all 0.15s;-webkit-tap-highlight-color:transparent}
-.mobile-nav-footer a:active{background:var(--gold-dim);color:var(--gold);border-color:var(--border-warm)}
-
-@keyframes slideInRight{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
 
 /* ================================================================
    HERO
@@ -987,7 +1028,6 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
   .contact-item:hover{border-color:var(--border)}
   .fact-row:hover{background:transparent}
   .filter-btn:active{opacity:0.8}
-  .mobile-nav-list li a:active{background:var(--bg-card-2);color:var(--t1)}
 }
 
 /* Landscape phone */
@@ -1552,7 +1592,7 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 
 /* Static mode (old browsers / no JS): hide controls that need the app, show everything */
 html:not(.js) .project-filter,html:not(.js) .proj-toggle-wrap,html:not(.js) .theme-toggle,
-html:not(.js) .hamburger,html:not(.js) .mobile-nav-drawer,html:not(.js) .mobile-nav-overlay,
+html:not(.js) .hamburger,html:not(.js) .mnav,html:not(.js) .ptab-wrap,
 html:not(.js) .back-to-top{display:none}
 .js .proj-card.is-collapsed{display:none}
 

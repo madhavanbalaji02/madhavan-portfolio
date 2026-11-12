@@ -27,10 +27,32 @@ const Header = ({ theme, toggleTheme }) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // While the menu is open: the page stays still, Escape closes it, the sheet starts
+  // just under the navbar, and the section you were reading is marked.
+  const [menuSection, setMenuSection] = useState(null);
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen]);
+    const root = document.documentElement;
+    root.classList.toggle('menu-open', isMenuOpen);
+    if (!isMenuOpen) return undefined;
+    const nav = document.querySelector('.navbar');
+    const navBottom = nav ? nav.getBoundingClientRect().bottom : 72;
+    root.style.setProperty('--mnav-top', `${Math.round(navBottom)}px`);
+    let current = null;
+    document.querySelectorAll('main .section[id], .section[id]').forEach((el) => {
+      if (navLinks.some(([id]) => id === `#${el.id}`) && el.getBoundingClientRect().top <= navBottom + 120) current = `#${el.id}`;
+    });
+    setMenuSection(current);
+    // Lock scrolling on <html>, not <body>: <html> clips horizontally, so a hidden
+    // <body> would become its own scroller and the sticky navbar would jump away.
+    root.style.overflow = 'hidden';
+    const onKey = (e) => { if (e.key === 'Escape') setIsMenuOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      root.style.overflow = '';
+      root.classList.remove('menu-open');
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [isMenuOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const close = () => setIsMenuOpen(false);
 
@@ -67,8 +89,7 @@ const Header = ({ theme, toggleTheme }) => {
   const spyLock = useRef({ on: false, timer: 0 });
 
   const readSection = () => {
-    // The section links only show on wider screens; phones skip the work while scrolling
-    if (window.location.pathname !== '/' || !window.matchMedia('(min-width: 769px)').matches) return null;
+    if (window.location.pathname !== '/') return null;
     const doc = document.documentElement;
     if (window.scrollY + window.innerHeight >= doc.scrollHeight - 4) return '#contact';
     let current = null;
@@ -122,6 +143,23 @@ const Header = ({ theme, toggleTheme }) => {
     active: section,
     onSelect: (id) => navTo(null, id),
     enabled: glass,
+  });
+
+  // Phones: the same glass, as an iOS-style tab bar floating at the bottom of the screen
+  const tabs = [
+    ['#about',      'About',    'fa-solid fa-user'],
+    ['#experience', 'Work',     'fa-solid fa-briefcase'],
+    ['#projects',   'Projects', 'fa-solid fa-layer-group'],
+    ['#patent',     'Patent',   'fa-solid fa-lightbulb'],
+    ['#writing',    'Writing',  'fa-solid fa-pen-nib'],
+    ['#contact',    'Contact',  'fa-solid fa-paper-plane'],
+  ];
+  const fullName = Object.fromEntries(navLinks);
+  const tabLens = useGlassLens({
+    keys: tabs.map(([id]) => id),
+    active: section,
+    onSelect: (id) => navTo(null, id),
+    enabled: true,
   });
 
   return (
@@ -192,6 +230,7 @@ const Header = ({ theme, toggleTheme }) => {
               onClick={() => setIsMenuOpen(v => !v)}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               <span className="ham-line"></span>
               <span className="ham-line"></span>
@@ -201,26 +240,84 @@ const Header = ({ theme, toggleTheme }) => {
         </div>
       </nav>
 
-      <div className={`mobile-nav-overlay ${isMenuOpen ? 'show' : ''}`} onClick={close} />
-      <div className={`mobile-nav-drawer ${isMenuOpen ? 'show' : ''}`}>
-        <ul className="mobile-nav-list">
-          {navLinks.map(([id, label], i) => (
-            <li key={id} style={{ animationDelay: `${i * 0.04}s` }}>
-              <a href={id} onClick={(e) => navTo(e, id)}>
-                <span className="mn-num">0{i + 1}</span>
-                {label}
-              </a>
-            </li>
+      <nav className="ptab-wrap" aria-label="Sections">
+        <div className="ptab glass-bar" {...tabLens.barProps}>
+          {tabs.map(([id, label, icon]) => (
+            <a
+              key={id}
+              ref={tabLens.itemRef(id)}
+              href={id}
+              onClick={(e) => navTo(e, id)}
+              className={section === id ? 'active' : undefined}
+              aria-current={section === id ? 'location' : undefined}
+              aria-label={fullName[id]}
+              draggable="false"
+            >
+              <i className={icon} aria-hidden="true" />
+              <span>{label}</span>
+            </a>
           ))}
-        </ul>
-
-        <div className="mobile-nav-footer">
-          <a href="https://github.com/madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
-          <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="Medium"><i className="fab fa-medium"></i></a>
-          <a href="mailto:madhavanbalaji02@gmail.com" aria-label="Email"><i className="fas fa-envelope"></i></a>
-          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+          <span className="glass-lens" ref={tabLens.lensRef} aria-hidden="true">
+            <span className="glass-lens-content" ref={tabLens.contentRef}>
+              {tabs.map(([id, label, icon]) => (
+                <span key={id} ref={tabLens.ghostRef(id)} className="ptab-ghost glass-ghost">
+                  <i className={icon} />
+                  <span>{label}</span>
+                </span>
+              ))}
+            </span>
+          </span>
+          {tabLens.hapticLayer}
         </div>
+      </nav>
+
+      {/* Phone menu: a full-screen frosted sheet under the navbar (the ☰ becomes ✕),
+          in the manner of Apple's own mobile menu */}
+      <div
+        id="mobile-menu"
+        className={`mnav ${isMenuOpen ? 'show' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        aria-hidden={!isMenuOpen}
+        onClick={(e) => { if (e.target === e.currentTarget) close(); }}
+      >
+        <nav className="mnav-inner" aria-label="Sections">
+          <ul className="mnav-list">
+            {navLinks.map(([id, label], i) => (
+              <li key={id} className="mnav-item" style={{ '--i': i }}>
+                <a
+                  href={id}
+                  onClick={(e) => navTo(e, id)}
+                  className={menuSection === id ? 'is-current' : undefined}
+                  aria-current={menuSection === id ? 'location' : undefined}
+                >
+                  <span>{label}</span>
+                  <i className="fas fa-chevron-right" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mnav-group mnav-item" style={{ '--i': navLinks.length }}>
+            <a href="/resume.html" target="_blank" rel="noopener noreferrer" onClick={close}>
+              <span className="mnav-ic"><i className="fas fa-file-lines" aria-hidden="true" /></span>
+              <span className="mnav-gl">Résumé</span>
+              <i className="fas fa-arrow-up-right-from-square mnav-trail" aria-hidden="true" />
+            </a>
+            <a href="mailto:madhavanbalaji02@gmail.com" onClick={close}>
+              <span className="mnav-ic"><i className="fas fa-envelope" aria-hidden="true" /></span>
+              <span className="mnav-gl">Email me</span>
+              <i className="fas fa-chevron-right mnav-trail" aria-hidden="true" />
+            </a>
+          </div>
+
+          <div className="mnav-social mnav-item" style={{ '--i': navLinks.length + 1 }}>
+            <a href="https://github.com/madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
+            <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="Medium"><i className="fab fa-medium"></i></a>
+          </div>
+        </nav>
       </div>
     </>
   );

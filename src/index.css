@@ -362,7 +362,8 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme] .proj-seg > .filter-btn:not(.active):hover{color:var(--t1);background:var(--seg-hover)}
 [data-theme] .proj-seg-ghost{color:var(--t1)}
 .seg-short{display:none}
-@media (max-width:480px){
+/* Short labels wherever the full ones would overflow (below ~600px: phones, either way up) */
+@media (max-width:599px){
   .seg-full{display:none}.seg-short{display:inline}
   [data-theme] .project-filter.proj-seg{margin-left:0;margin-right:0;padding:4px;overflow:visible}
   [data-theme] .proj-seg > .filter-btn,[data-theme] .proj-seg > .filter-btn:hover,[data-theme] .proj-seg > .filter-btn.active,
@@ -600,6 +601,17 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 [data-theme] .ptab > a{color:var(--t2);transition:color .2s ease}
 [data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:17px;line-height:1}
 [data-theme] .ptab > a.active,[data-theme] .ptab-ghost{color:var(--gold)}
+/* Phones on their side: a slim, centred, icon-only bar so the page keeps the screen */
+@media (max-width:768px) and (max-height:500px){
+  .ptab-wrap{max-width:340px;bottom:max(6px,env(safe-area-inset-bottom))}
+  [data-theme] .ptab{height:44px;padding:3px;border-radius:22px}
+  [data-theme] .ptab > a,[data-theme] .ptab-ghost{border-radius:19px}
+  [data-theme] .ptab > a span,[data-theme] .ptab-ghost span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  [data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:16px}
+  .App{padding-bottom:calc(60px + env(safe-area-inset-bottom))}
+  .back-to-top{bottom:calc(58px + env(safe-area-inset-bottom)) !important}
+  [data-theme] .navbar{padding-top:6px;padding-bottom:6px}
+}
 @media (max-width:340px){[data-theme] .ptab > a,[data-theme] .ptab-ghost{font-size:9px}[data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:15px}}
 
 /* Nothing floats over the open menu */

@@ -614,6 +614,22 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 [data-theme="light"] .ptab > a{color:var(--tab-ink);transition:color .7s ease}
 [data-theme="light"] .ptab > a.active,[data-theme="light"] .ptab-ghost{color:var(--tab-tint);transition:color .7s ease}
 
+/* Exact sky colour: --sky-here is the sky's measured colour just behind the bar, set on
+   <html> by Sky.js as you scroll. Icons take that exact hue, kept bright and saturated
+   (a darkened peach or cream reads as brown): sky blue, then amber, then coral. Icons
+   are graphics, so they keep 3:1 on the glass; the small labels stay neutral for
+   reading, as in Apple's tab bars. The selected tab is a deeper shade of the same hue. */
+@supports (color: oklch(from red l c h)){
+  [data-theme="light"] .ptab{
+    --tab-icon:oklch(from var(--sky-here,#f4f8fb) .64 clamp(.13,calc(c * 10),.19) h);
+    --tab-tint:oklch(from var(--sky-here,#f4f8fb) .56 clamp(.15,calc(c * 11),.2) h);
+  }
+  [data-theme="light"] .ptab > a{color:#48484c}
+  [data-theme="light"] .ptab > a i{color:var(--tab-icon);transition:color .7s ease}
+  [data-theme="light"] .ptab > a.active,[data-theme="light"] .ptab > a.active i,
+  [data-theme="light"] .ptab-ghost,[data-theme="light"] .ptab-ghost i{color:var(--tab-tint)}
+}
+
 /* Phones on their side: a slim, centred, icon-only bar so the page keeps the screen */
 @media (max-width:768px) and (max-height:500px){
   .ptab-wrap{max-width:340px;bottom:max(6px,env(safe-area-inset-bottom))}

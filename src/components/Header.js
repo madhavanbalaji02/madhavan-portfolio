@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useTechNewsLink from './useTechNewsLink';
 import useGlassLens from './useGlassLens';
+import ThemeToggle from './ThemeToggle';
 import scrollToSection from '../scrollToSection';
 
 const Header = ({ theme, toggleTheme }) => {
@@ -171,9 +172,7 @@ const Header = ({ theme, toggleTheme }) => {
               </a>
             </li>
             <li>
-              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-                <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
-              </button>
+              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             </li>
             <li>
               <a href="/resume.html" target="_blank" rel="noopener noreferrer" className="nav-resume-btn">
@@ -186,9 +185,7 @@ const Header = ({ theme, toggleTheme }) => {
             <a href="/tech-news/" onClick={openTechNews} className="nav-tech-news-btn mobile-tech-news-btn">
               Tech News
             </a>
-            <button className="theme-toggle mobile-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-              <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
-            </button>
+            <ThemeToggle className="theme-toggle mobile-theme-toggle" theme={theme} toggleTheme={toggleTheme} />
 
             <button
               className={`hamburger ${isMenuOpen ? 'open' : ''}`}
@@ -222,9 +219,7 @@ const Header = ({ theme, toggleTheme }) => {
           <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
           <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="Medium"><i className="fab fa-medium"></i></a>
           <a href="mailto:madhavanbalaji02@gmail.com" aria-label="Email"><i className="fas fa-envelope"></i></a>
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
-          </button>
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         </div>
       </div>
     </>

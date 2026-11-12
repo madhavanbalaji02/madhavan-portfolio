@@ -505,6 +505,9 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 /* Theme toggle button */
 .theme-toggle{width:34px;height:34px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--t2);font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s var(--ease);flex-shrink:0;padding:0}
 .theme-toggle:hover{border-color:var(--border-warm);color:var(--gold);background:var(--gold-dim)}
+.theme-switch{position:relative}
+.theme-switch input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.theme-switch:has(input:focus-visible){outline:2px solid var(--t1);outline-offset:2px}
 .mobile-theme-toggle{display:none}
 .mobile-nav-controls{display:none;align-items:center;gap:6px}
 

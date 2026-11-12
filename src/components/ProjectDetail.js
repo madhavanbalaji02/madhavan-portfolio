@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from './projectsData';
 import { diagramsBySlug } from './ProjectDiagrams';
 import useTechNewsLink from './useTechNewsLink';
+import ThemeToggle from './ThemeToggle';
 import scrollToSection from '../scrollToSection';
 import { useSeo, fitDescription, SITE_URL } from '../seo';
 
@@ -81,9 +82,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
             <span>All Projects</span>
           </a>
           <div className="pd-nav-right">
-            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-              <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'}></i>
-            </button>
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             {project.demo && (
               <a
                 href={project.demo}

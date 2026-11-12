@@ -16,6 +16,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './TechNewsPage.css';
 import { useSeo } from '../seo';
 import useGlassLens from './useGlassLens';
+import ThemeToggle from './ThemeToggle';
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -374,9 +375,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
           <i className="fa-solid fa-arrow-left" /> Portfolio
         </a>
         <div className="tnp-brand">
-          <button className="tnp-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            <i className={theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'} />
-          </button>
+          <ThemeToggle className="tnp-theme-toggle" theme={theme} toggleTheme={toggleTheme} />
           <span className="tnp-brand-dot" style={{ background: accent }} />
           <h1 className="tnp-brand-title">Daily Tech Intel</h1>
         </div>

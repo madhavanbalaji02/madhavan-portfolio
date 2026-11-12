@@ -7,7 +7,7 @@ const facts = [
   { label: 'Location',   value: 'Indianapolis, IN',       accent: false },
   { label: 'Focus',      value: 'AI / ML Engineering',    accent: true  },
   { label: 'Status',     value: 'Open to Full-Time Roles', accent: true  },
-  { label: 'Patent',     value: 'Filed with Govt. of India', accent: false },
+  { label: 'Patent',     value: 'Published application, 2024', accent: false },
   { label: 'Teaching',   value: '30+ students mentored',  accent: false },
   { label: 'Projects',   value: '10+ shipped',            accent: false },
 ];

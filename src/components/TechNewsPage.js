@@ -127,8 +127,6 @@ function ArticleDetailModal({ article, onClose }) {
             <span>{article.source}</span>
             <span className="tnp-modal-source-dot">·</span>
             <span>{timeAgo(article.pubDate)}</span>
-            <span className="tnp-modal-source-dot">·</span>
-            <span>✨ Deep Analysis</span>
           </div>
         </div>
 
@@ -224,7 +222,15 @@ function ArticleCard({ article, accent, onClick }) {
   const catClass = BADGE_CLASS[article.category] || 'tnp-cat-ai';
 
   return (
-    <article className="tnp-card" style={{ '--card-accent': accent }} onClick={onClick}>
+    <article
+      className="tnp-card"
+      style={{ '--card-accent': accent }}
+      onClick={onClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }}
+      role="button"
+      tabIndex={0}
+      aria-label={`${article.title}. ${article.source}. Open analysis`}
+    >
       <div className="tnp-card-top">
         <span className={`tnp-cat ${catClass}`}>{article.category}</span>
         <div className="tnp-card-flags">
@@ -241,14 +247,8 @@ function ArticleCard({ article, accent, onClick }) {
 
       <footer className="tnp-card-footer">
         <span className="tnp-source">{article.source}</span>
-        <span className="tnp-footer-sep">·</span>
         <time className="tnp-date">{timeAgo(article.pubDate)}</time>
       </footer>
-
-      <div className="tnp-ai-label">
-        <i className="fa-solid fa-wand-magic-sparkles" />
-        AI Summary · Click for deep analysis
-      </div>
     </article>
   );
 }
@@ -344,8 +344,10 @@ export default function TechNewsPage({ theme, toggleTheme }) {
   const accent        = activeTabMeta?.accent ?? 'var(--gold)';
   const articles      = sections[activeTab] ?? [];
 
-  const cacheLabel = meta
-    ? meta.stale ? 'stale cache' : meta.fromCache ? 'cached · refreshes daily' : 'just fetched'
+  // The briefing's date, like a newspaper dateline ("Wednesday, November 11")
+  const issued   = meta?.lastUpdated ? new Date(meta.lastUpdated) : null;
+  const dateline = issued && !Number.isNaN(issued.getTime())
+    ? issued.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })
     : null;
 
   const skeletonCount = 12;
@@ -364,21 +366,14 @@ export default function TechNewsPage({ theme, toggleTheme }) {
           </button>
           <span className="tnp-brand-dot" style={{ background: accent }} />
           <h1 className="tnp-brand-title">Daily Tech Intel</h1>
-          {meta?.stale && <span className="tnp-stale">stale</span>}
         </div>
       </header>
 
       {/* ── Tab bar ── */}
-      <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} draggable={theme === 'light'} />
+      <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} draggable />
 
-      {/* ── Meta bar ── */}
-      {!loading && meta?.lastUpdated && (
-        <div className="tnp-metabar">
-          <span className="tnp-meta-dot" style={{ background: meta.stale ? 'var(--gold)' : 'var(--green)' }} />
-          {cacheLabel}
-          <span className="tnp-meta-ai">✨ AI-analyzed</span>
-        </div>
-      )}
+      {/* ── Dateline ── */}
+      {!loading && dateline && <p className="tnp-dateline">{dateline}</p>}
 
       {/* ── Content ── */}
       <main className="tnp-main">

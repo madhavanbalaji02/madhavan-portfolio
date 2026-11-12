@@ -42,8 +42,8 @@ const Hero = () => (
           <p className="hero-role">AI Engineer · MS CS @ Indiana University</p>
 
           <p className="hero-desc">
-            I build production AI systems: LLM pipelines, computer vision models,
-            and the ML infrastructure that ships them at scale.
+            I build and ship production AI systems: LLM pipelines, computer vision
+            models, and the ML infrastructure that runs them at scale.
             Research-backed, engineering-disciplined.
           </p>
 

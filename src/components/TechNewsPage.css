@@ -67,15 +67,6 @@
   50%       { box-shadow: 0 0 8px 2px currentColor; }
 }
 
-.tnp-stale {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  background: color-mix(in srgb,var(--gold) 10%,transparent);
-  color: var(--gold);
-  border: 1px solid color-mix(in srgb,var(--gold) 25%,transparent);
-  padding: 2px 8px;
-  border-radius: 50px;
-}
 
 .tnp-theme-toggle {
   width: 34px;
@@ -176,26 +167,15 @@
 .tnp-tab.active .tnp-tab-sub    { color: var(--t2); opacity: 1; }
 .tnp-tab:hover:not(.active) .tnp-tab-label { color: var(--t2); }
 
-/* ── Meta bar ────────────────────────────────────────────────── */
-.tnp-metabar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px clamp(16px, 4vw, 48px);
-  font-family: var(--font-mono);
-  font-size: 11px;
+/* ── Dateline ────────────────────────────────────────────────── */
+.tnp-dateline {
+  margin: 0;
+  padding: 14px clamp(16px, 4vw, 48px) 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--t3);
-  border-bottom: 1px solid var(--border);
-  letter-spacing: 0.3px;
 }
-.tnp-meta-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  animation: tnp-pulse 2.5s ease infinite;
-}
-@keyframes tnp-pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-.tnp-meta-ai { margin-left: auto; }
 
 /* ── Main content ────────────────────────────────────────────── */
 .tnp-main {
@@ -227,6 +207,7 @@
   cursor: pointer;
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease);
 }
+.tnp-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .tnp-card::before {
   content: '';
   position: absolute;
@@ -346,18 +327,6 @@
   flex-shrink: 0;
   margin-left: auto;
 }
-
-/* ── AI label ────────────────────────────────────────────────── */
-.tnp-ai-label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--t3);
-  letter-spacing: 0.4px;
-}
-.tnp-ai-label i { color: var(--cyan); font-size: 9px; opacity: 0.7; }
 
 /* ── Skeleton ────────────────────────────────────────────────── */
 @keyframes tnp-shimmer {

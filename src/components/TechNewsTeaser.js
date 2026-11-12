@@ -12,26 +12,25 @@ export default function TechNewsTeaser() {
         <div className="tnt-copy">
           <div className="tnt-eyebrow">
             <span className="tnt-eyebrow-dot" />
-            AI-Powered · Updated Daily
+            Live project
           </div>
 
           <h2 className="tnt-headline">Daily Tech Intel</h2>
 
           <p className="tnt-desc">
-            A daily briefing spanning global AI research, industry moves, and world tech news,
-            automatically filtered to your interests, stack, and research channels.
-            International sources translated to English.
+            A daily briefing of AI research, industry news and global tech, curated around
+            the topics and tools I work with. International sources are translated into English.
           </p>
 
           <div className="tnt-pills">
             <span className="tnt-pill tnt-pill-purple">
-              <i className="fa-solid fa-star" /> For You · AI / LLM
+              <i className="fa-solid fa-star" /> For You
             </span>
             <span className="tnt-pill tnt-pill-green">
-              <i className="fa-solid fa-flask" /> My Stack · Research
+              <i className="fa-solid fa-flask" /> My Stack
             </span>
             <span className="tnt-pill tnt-pill-blue">
-              <i className="fa-solid fa-globe" /> 🌍 Global · Translated
+              <i className="fa-solid fa-globe" /> Around the World
             </span>
           </div>
 
@@ -61,7 +60,7 @@ export default function TechNewsTeaser() {
             <span className="tnt-cs">HuggingFace Blog · 3h ago</span>
           </div>
           <div className="tnt-card tnt-card-3">
-            <span className="tnt-cb tnt-cb-green">🇩🇪 Translated</span>
+            <span className="tnt-cb tnt-cb-green">Translated</span>
             <span className="tnt-ct">EU AI Act Enforcement Begins: What Changes for Developers…</span>
             <span className="tnt-cs">Golem.de · 5h ago</span>
           </div>

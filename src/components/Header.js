@@ -108,7 +108,7 @@ const Header = ({ theme, toggleTheme }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const glass = theme === 'light';
+  const glass = true;   // the glass segmented control is used in both themes
   const lens = useGlassLens({
     keys: navLinks.map(([id]) => id),
     active: section,

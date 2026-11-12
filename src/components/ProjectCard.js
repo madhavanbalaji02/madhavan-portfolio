@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import useTechNewsLink from './useTechNewsLink';
 
 const categoryMeta = {
   ai: { icon: 'fas fa-brain',      accent: 'var(--cyan)' },
@@ -26,8 +27,10 @@ const ProjectCard = ({ project, index, collapsed = false }) => {
     e.stopPropagation();
   };
 
+  const openDemoInPlace = useTechNewsLink(project.demo);   // same tab on phones for on-site demos
   const handleDemoClick = e => {
     e.stopPropagation();
+    openDemoInPlace(e);
   };
 
   return (

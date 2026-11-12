@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from './projectsData';
 import { diagramsBySlug } from './ProjectDiagrams';
+import useTechNewsLink from './useTechNewsLink';
 import { useSeo, fitDescription, SITE_URL } from '../seo';
 
 const ProjectDetail = ({ theme, toggleTheme }) => {
@@ -9,6 +10,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
   const navigate = useNavigate();
   const project = projectsData.find(p => p.slug === projectId);
   const Diagram = project ? diagramsBySlug[project.slug] : null;
+  const openDemoInPlace = useTechNewsLink(project?.demo);   // same tab on phones for on-site demos
 
   const goBackToProjects = () => {
     navigate('/');
@@ -88,6 +90,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
                 rel="noopener noreferrer"
                 className="btn btn-primary pd-gh-btn"
                 aria-label="Live Demo"
+                onClick={openDemoInPlace}
               >
                 <i className="fas fa-external-link-alt" aria-hidden="true"></i>
                 <span className="pd-btn-label">Live Demo</span>
@@ -224,6 +227,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="pd-github-card pd-demo-card"
+                onClick={openDemoInPlace}
               >
                 <i className="fas fa-external-link-alt pd-github-icon"></i>
                 <div>

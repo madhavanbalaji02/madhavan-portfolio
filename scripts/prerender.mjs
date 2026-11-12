@@ -82,6 +82,9 @@ async function main() {
         document.documentElement.removeAttribute('style');
         document.documentElement.classList.remove('js');
         document.body.removeAttribute('style');
+        // Keep the icon stylesheet non-blocking in the static HTML (it switched itself on while rendering)
+        const fa = document.getElementById('fa-css');
+        if (fa) fa.setAttribute('rel', 'preload');
         // Delight.js bookkeeping: the static page shows everything without it
         document.querySelectorAll('[data-watched]').forEach((el) => el.removeAttribute('data-watched'));
         document.querySelectorAll('.in-view').forEach((el) => el.classList.remove('in-view'));

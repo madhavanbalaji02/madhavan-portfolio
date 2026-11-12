@@ -17,7 +17,7 @@ const Hero = () => (
           <div className="hero-img-wrap">
             <picture>
               <source srcSet={process.env.PUBLIC_URL + '/profile.webp'} type="image/webp" />
-              <img src={process.env.PUBLIC_URL + '/profile.jpg'} alt="Madhavan Balaji" width="600" height="800" />
+              <img src={process.env.PUBLIC_URL + '/profile.jpg'} alt="Portrait of Madhavan Balaji, AI and machine learning engineer" width="600" height="800" />
             </picture>
             <div className="hero-img-badge">AI Engineer</div>
           </div>

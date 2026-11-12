@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 export const SITE_URL = 'https://madhavanbalaji.com';
 
 export const DEFAULT_SEO = {
-  title: 'Madhavan Balaji | AI Engineer',
+  title: 'Madhavan Balaji | AI & Machine Learning Engineer Portfolio',
   description:
-    'Madhavan Balaji is an AI Engineer (MS CS, Indiana University) building production LLM pipelines, computer vision models and ML infrastructure.',
+    'Portfolio of Madhavan Balaji, AI and machine learning engineer (MS CS, Indiana University): production LLM agents, computer vision and data pipelines.',
   path: '/',
   image: `${SITE_URL}/og-image.png`,
 };

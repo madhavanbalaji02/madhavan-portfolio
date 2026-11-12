@@ -1,9 +1,10 @@
 import React from 'react';
 
+import scrollToSection from '../scrollToSection';
+
 const scrollTo = (e, id) => {
   e.preventDefault();
-  const el = document.getElementById(id);
-  if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+  scrollToSection(id);
 };
 
 const Hero = () => (
@@ -36,7 +37,7 @@ const Hero = () => (
             </span>
           </div>
 
-          <h1 className="hero-name">Madhavan{' '}<br />Balaji.</h1>
+          <h1 className="hero-name"><span className="hero-line"><span>Madhavan</span></span>{' '}<br /><span className="hero-line"><span>Balaji.</span></span></h1>
           <div className="hero-divider"></div>
 
           <p className="hero-role">AI Engineer · MS CS @ Indiana University</p>

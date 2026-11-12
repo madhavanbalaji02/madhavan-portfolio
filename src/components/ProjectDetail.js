@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from './projectsData';
 import { diagramsBySlug } from './ProjectDiagrams';
 import useTechNewsLink from './useTechNewsLink';
+import scrollToSection from '../scrollToSection';
 import { useSeo, fitDescription, SITE_URL } from '../seo';
 
 const ProjectDetail = ({ theme, toggleTheme }) => {
@@ -15,7 +16,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
   const goBackToProjects = () => {
     navigate('/');
     setTimeout(() => {
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+      scrollToSection('#projects');
     }, 150);
   };
 

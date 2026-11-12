@@ -13,6 +13,13 @@ const facts = [
 ];
 
 
+// A value that starts with a number ("30+ students mentored") counts up when seen
+const FactValue = ({ text }) => {
+  const m = /^(\d+)(.*)$/.exec(text);
+  if (!m) return text;
+  return <><span className="count" data-to={m[1]}>{m[1]}</span>{m[2]}</>;
+};
+
 const About = () => (
   <section id="about" className="section">
     <div className="container">
@@ -58,7 +65,7 @@ const About = () => (
             {facts.map(f => (
               <div className="fact-row" key={f.label}>
                 <span className="fact-label">{f.label}</span>
-                <span className={`fact-value${f.accent ? ' accent' : ''}`}>{f.value}</span>
+                <span className={`fact-value${f.accent ? ' accent' : ''}`}><FactValue text={f.value} /></span>
               </div>
             ))}
           </div>

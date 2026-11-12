@@ -1,9 +1,10 @@
 import React from 'react';
 
+import scrollToSection from '../scrollToSection';
+
 const scrollTo = (e, id) => {
   e.preventDefault();
-  const el = document.querySelector(id);
-  if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+  scrollToSection(id);
 };
 
 const exploreLinks = [

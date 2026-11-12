@@ -52,6 +52,7 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
   const ghosts     = useRef({});
   const drag       = useRef(null);
   const fromDrag   = useRef(false);
+  const lastTouch  = useRef(false);   // was the last press a finger? (for the tap haptic)
   const activeRef  = useRef(active);
   activeRef.current = active;
   // c = lens centre, w = width, s = scale; v* = velocities, t* = targets
@@ -158,7 +159,8 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     if (drag.current?.moved) return undefined;
     if (fromDrag.current) { fromDrag.current = false; return undefined; }  // the release already aimed here
     if (reduced()) { snapTo(r); return undefined; }
-    // A tap: the glass lifts while it travels, then lands
+    // A tap: the glass lifts while it travels, then lands (with a tick on touch screens)
+    if (lastTouch.current) { lastTouch.current = false; haptic(); }
     lift(true);
     animateTo(r.c, r.w, LIFT * 0.92, SPRING.settle);
     const id = setTimeout(() => animateTo(r.c, r.w, 1, SPRING.settle), 160);
@@ -207,6 +209,7 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
   };
 
   const onPointerDown = (e) => {
+    lastTouch.current = e.pointerType === 'touch';
     if (!enabled || active == null || !e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0)) return;
     const a = anim.current, bar = barRef.current;
     const barX = bar.getBoundingClientRect().left + bar.clientLeft;

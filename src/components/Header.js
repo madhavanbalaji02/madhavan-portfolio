@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useTechNewsLink from './useTechNewsLink';
 import useGlassLens from './useGlassLens';
+import scrollToSection from '../scrollToSection';
 
 const Header = ({ theme, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,6 +10,15 @@ const Header = ({ theme, toggleTheme }) => {
   const navigate  = useNavigate();
   const location  = useLocation();
   const openTechNews = useTechNewsLink();
+
+  // A link straight to a section (e.g. madhavanbalaji.com/#projects): land with its
+  // content just under the navbar, like the in-page links do
+  useEffect(() => {
+    const { hash } = window.location;
+    if (!/^#[a-z-]+$/.test(hash) || !document.querySelector(hash)) return undefined;
+    const id = setTimeout(() => scrollToSection(hash, 'auto'), 80);
+    return () => clearTimeout(id);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -28,10 +38,7 @@ const Header = ({ theme, toggleTheme }) => {
     close();
     selectSection(id);
 
-    const doScroll = () => {
-      const el = document.querySelector(id);
-      if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
-    };
+    const doScroll = () => scrollToSection(id);
 
     if (location.pathname !== '/') {
       // On a project detail page: go home first, then scroll

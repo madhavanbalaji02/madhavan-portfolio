@@ -71,6 +71,7 @@ const Projects = () => {
               ))}
             </span>
           </span>
+          {lens.hapticLayer}
         </div>
 
         <div className="proj-grid">

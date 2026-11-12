@@ -286,6 +286,7 @@ function TabBar({ tabs, active, onChange, draggable }) {
           </span>
         </span>
       )}
+      {draggable && lens.hapticLayer}
     </nav>
   );
 }

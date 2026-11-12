@@ -5,6 +5,10 @@
 //   (<input type="checkbox" switch>) plays the system selection haptic. A hidden switch
 //   is clicked to borrow that tick. This is unofficial and may stop working in a future
 //   iOS; where it does nothing, nothing breaks.
+//   From iOS 26.5 Safari only plays it when a real finger tap toggles the switch, not a
+//   click from code. So glass bars on iPhone/iPad cover themselves with an invisible
+//   switch label (see needsTapLayer and useGlassLens): taps tick, but nothing can tick
+//   during a drag, because a drag is not a tap.
 // - Laptops and desktops have no web-accessible haptics, so this is a no-op there.
 
 let iosSwitch = null;
@@ -34,4 +38,11 @@ export default function haptic() {
   } catch {
     /* haptics are a nicety; never let them throw */
   }
+}
+
+// Touch-first device without the Vibration API: iPhone or iPad Safari (any iOS browser)
+export function needsTapLayer() {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
+  if (typeof navigator.vibrate === 'function') return false;
+  return !!window.matchMedia?.('(hover: none) and (pointer: coarse)').matches;
 }

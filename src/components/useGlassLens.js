@@ -1,5 +1,5 @@
-import { useRef, useCallback, useEffect, useLayoutEffect } from 'react';
-import haptic from './haptics';
+import { useRef, useState, useCallback, useEffect, useLayoutEffect } from 'react';
+import haptic, { needsTapLayer } from './haptics';
 
 // A Liquid Glass selection "lens", modelled on the iOS 26 tab bar, shared by the
 // Tech News tabs and the navbar. Touch the selected item and it lifts into clear glass
@@ -53,6 +53,11 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
   const drag       = useRef(null);
   const fromDrag   = useRef(false);
   const lastTouch  = useRef(false);   // was the last press a finger? (for the tap haptic)
+  // iPhone/iPad: taps go through an invisible switch so Safari plays its tick (haptics.js)
+  const [tapLayer, setTapLayer] = useState(false);
+  useEffect(() => { setTapLayer(needsTapLayer()); }, []);
+  const tapLayerOn = useRef(false);
+  tapLayerOn.current = tapLayer;
   const activeRef  = useRef(active);
   activeRef.current = active;
   // c = lens centre, w = width, s = scale; v* = velocities, t* = targets
@@ -160,7 +165,8 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     if (fromDrag.current) { fromDrag.current = false; return undefined; }  // the release already aimed here
     if (reduced()) { snapTo(r); return undefined; }
     // A tap: the glass lifts while it travels, then lands (with a tick on touch screens)
-    if (lastTouch.current) { lastTouch.current = false; haptic(); }
+    // (On iPhone the tap itself already ticked through the tap layer.)
+    if (lastTouch.current) { lastTouch.current = false; if (!tapLayerOn.current) haptic(); }
     lift(true);
     animateTo(r.c, r.w, LIFT * 0.92, SPRING.settle);
     const id = setTimeout(() => animateTo(r.c, r.w, 1, SPRING.settle), 160);
@@ -276,6 +282,29 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     setTimeout(() => window.removeEventListener('click', block, { capture: true }), 80);
   };
 
+  // Tap layer (iPhone/iPad only): the finger's tap lands on an invisible label that
+  // toggles a switch, which is what makes Safari play its haptic tick. The label then
+  // passes the tap on to the item underneath, so it selects exactly as before.
+  const onTapLayerClick = (e) => {
+    e.stopPropagation();
+    if (e.target !== e.currentTarget) return;   // the label's own echo on its switch
+    let hit = null, best = Infinity;
+    for (const key of keys) {
+      const el = items.current[key];
+      if (!el) continue;
+      const r = el.getBoundingClientRect();
+      const inY = e.clientY >= r.top && e.clientY <= r.bottom;
+      const dist = e.clientX < r.left ? r.left - e.clientX : e.clientX > r.right ? e.clientX - r.right : 0;
+      if (inY && dist < best) { best = dist; hit = el; }
+    }
+    hit?.click();
+  };
+  const hapticLayer = tapLayer ? (
+    <label className="glass-tap" aria-hidden="true" onClick={onTapLayerClick}>
+      <input type="checkbox" switch="" tabIndex={-1} />
+    </label>
+  ) : null;
+
   const barProps = {
     ref: barRef,
     onPointerDown,
@@ -292,6 +321,7 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
 
   return {
     barProps,
+    hapticLayer,
     lensRef,
     contentRef,
     itemRef: (key) => (el) => { items.current[key] = el; },

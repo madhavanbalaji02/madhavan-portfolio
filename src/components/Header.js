@@ -162,6 +162,7 @@ const Header = ({ theme, toggleTheme }) => {
                     </span>
                   </span>
                 )}
+                {glass && lens.hapticLayer}
               </div>
             </li>
             <li>

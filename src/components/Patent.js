@@ -23,8 +23,8 @@ const Patent = () => (
     <div className="container">
       <div className="section-header">
         <span className="section-tag">Patent</span>
-        <h2 className="section-title">Patent & Research</h2>
-        <p className="section-subtitle">A published patent application for an IoT system that supports elderly people living at home</p>
+        <h2 className="section-title">An invention, on record.</h2>
+        <p className="section-subtitle">I co-invented a connected system that helps elderly people live safely and independently at home. The Indian Patent Office published it in 2024.</p>
       </div>
 
       <article className="patent fade-in-up">

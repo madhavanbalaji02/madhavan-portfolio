@@ -41,6 +41,7 @@ const Footer = () => {
             />
             <p className="footer-name">Madhavan Balaji</p>
             <p className="footer-role">AI Engineer · MS CS, Indiana University</p>
+            <p className="footer-closer">Thanks for reading this far. The next step is a conversation.</p>
             <a href="#contact" className="footer-status" onClick={(e) => scrollTo(e, '#contact')}>
               <span className="footer-status-dot" aria-hidden="true" />
               Open to full-time AI/ML roles
@@ -87,7 +88,7 @@ const Footer = () => {
           <p>&copy; {currentYear} Madhavan Balaji</p>
           <p className="footer-crafted">
             <span className="footer-crafted-mark" aria-hidden="true">✦</span>
-            Built with passion for detail
+            Designed and built by hand, from first pixel to last
           </p>
         </div>
       </div>

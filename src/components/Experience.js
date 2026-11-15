@@ -33,16 +33,16 @@ const experiences = [
     icon: 'fas fa-chalkboard-teacher',
     bullets: [
       {
-        label: 'Education Contributions',
-        text: 'Designed and delivered weekly technical workshops on Algorithms & Optimization to 30+ students, breaking down complex logic (Dynamic Programming, Graph Theory) into intuitive visual explanations.',
+        label: 'Workshops',
+        text: 'Designed and led weekly workshops on data structures, algorithms and optimization for a cohort of 30+ students, built around live-coding challenges.',
       },
       {
-        label: 'Mentorship',
-        text: 'Guided students in refactoring and optimal design patterns, mirroring Developer Relations (DevRel) responsibilities by debugging user issues and bridging knowledge gaps.',
+        label: 'Leaderboard',
+        text: 'Built a competitive-programming leaderboard that tracked weekly and overall class rankings, making progress visible and keeping students engaged.',
       },
       {
-        label: 'Community Building',
-        text: 'Established a community-first mentorship and peer-review system to drive engagement, demonstrating the ability to build and sustain a technical community.',
+        label: 'Peer Review',
+        text: 'Ran peer-review labs where students compared solutions on efficiency, tricky edge cases and Big-O time and space trade-offs.',
       },
     ],
     skills: ['Algorithms', 'Dynamic Programming', 'Graph Theory', 'Mentorship', 'Curriculum Design'],
@@ -56,16 +56,16 @@ const experiences = [
     icon: 'fas fa-chart-bar',
     bullets: [
       {
-        label: 'Inference Optimization',
-        text: 'Engineered feature extraction pipelines using advanced image processing, reducing latency by 30% for real-time computer vision performance.',
+        label: 'Faster Features',
+        text: 'Cut feature-extraction latency by 30% by profiling bottlenecks and reworking image preprocessing, enabling real-time throughput.',
       },
       {
-        label: 'Model Development',
-        text: 'Developed an end-to-end visual retrieval system achieving 90% accuracy, effectively translating raw visual data into a functional visual search engine.',
+        label: 'Visual Search',
+        text: 'Built a CNN-based fashion retrieval pipeline that turned raw product images into a searchable index, with 90% classification accuracy and sub-second queries.',
       },
       {
         label: 'Recommendations',
-        text: 'Built multi-label classifiers for 1,000+ distinct classes, optimizing personalized style recommendations through deep learning retrieval logic.',
+        text: 'Trained a classifier across 1,000+ clothing categories to power downstream recommendations, lifting simulated engagement by 40%.',
       },
     ],
     skills: ['Python', 'Computer Vision', 'Image Processing', 'Deep Learning', 'Data Analysis'],
@@ -145,8 +145,8 @@ const Experience = () => {
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Experience</span>
-          <h2 className="section-title">Professional Journey</h2>
-          <p className="section-subtitle">Teaching, tutoring, and applied ML work</p>
+          <h2 className="section-title">Where I've built and taught.</h2>
+          <p className="section-subtitle">Applied machine learning in industry, and the classrooms that sharpened it.</p>
         </div>
 
         <div className="exp-cards">

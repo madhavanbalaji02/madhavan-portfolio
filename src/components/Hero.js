@@ -33,7 +33,7 @@ const Hero = () => (
           <div className="hero-eyebrow">
             <span className="hero-status">
               <span className="hero-status-dot"></span>
-              Open to Full-Time AI/ML Roles · Available Now
+              Available now · Open to full-time AI/ML roles
             </span>
           </div>
 
@@ -42,18 +42,25 @@ const Hero = () => (
 
           <p className="hero-role">AI Engineer · MS CS @ Indiana University</p>
 
+          <p className="hero-hook">I build AI you can trust in the real world.</p>
           <p className="hero-desc">
-            I build and ship production AI systems: LLM pipelines, computer vision
-            models, and the ML infrastructure that runs them at scale.
-            Research-backed, engineering-disciplined.
+            Agents that investigate outages and wait for your approval. Vision
+            models that read the words in a photo. Research that asks whether an
+            AI’s reasoning is honest. Every claim measured, every limit stated.
           </p>
 
           <div className="hero-actions">
-            <a href="#projects" className="btn btn-primary" onClick={e => scrollTo(e, 'projects')}>View Work</a>
+            <a href="#projects" className="btn btn-primary" onClick={e => scrollTo(e, 'projects')}>See what I've built</a>
             <a href="/resume.html" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
               Resume ↗
             </a>
           </div>
+
+          <ul className="hero-proof" aria-label="At a glance">
+            <li><strong><span className="count" data-to="14">14</span></strong> projects, each with its own results</li>
+            <li><strong>Published</strong> patent, 2024</li>
+            <li><strong><span className="count" data-to="30">30</span>+</strong> students taught</li>
+          </ul>
 
           <div className="hero-links">
             <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" className="hero-link" aria-label="LinkedIn">
@@ -80,8 +87,8 @@ const Hero = () => (
 
     <div className="hero-marquee">
       <div className="track">
-        <span><b>AI Engineer</b> ✦ Machine Learning ✦ <b>LLMs</b> ✦ Computer Vision ✦ <b>MLOps</b> ✦ Data Science ✦ Research ✦ </span>
-        <span><b>AI Engineer</b> ✦ Machine Learning ✦ <b>LLMs</b> ✦ Computer Vision ✦ <b>MLOps</b> ✦ Data Science ✦ Research ✦ </span>
+        <span><b>AI agents</b> ✦ Human approval built in ✦ <b>Computer vision</b> ✦ Models trained on a supercomputer ✦ <b>Data pipelines</b> ✦ Results you can verify ✦ <b>Published patent</b> ✦ </span>
+        <span><b>AI agents</b> ✦ Human approval built in ✦ <b>Computer vision</b> ✦ Models trained on a supercomputer ✦ <b>Data pipelines</b> ✦ Results you can verify ✦ <b>Published patent</b> ✦ </span>
       </div>
     </div>
   </header>

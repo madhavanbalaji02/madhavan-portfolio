@@ -9,7 +9,7 @@ const facts = [
   { label: 'Status',     value: 'Open to Full-Time Roles', accent: true  },
   { label: 'Patent',     value: 'Published application, 2024', accent: false },
   { label: 'Teaching',   value: '30+ students mentored',  accent: false },
-  { label: 'Projects',   value: '10+ shipped',            accent: false },
+  { label: 'Projects',   value: '14 featured',            accent: false },
 ];
 
 
@@ -25,7 +25,7 @@ const About = () => (
     <div className="container">
       <div className="section-header">
         <span className="section-tag">About</span>
-        <h2 className="section-title">Who I Am</h2>
+        <h2 className="section-title">Engineer. Researcher. Teacher.</h2>
       </div>
 
       <div className="about-wrapper">
@@ -34,19 +34,19 @@ const About = () => (
             <div className="about-text">
               <h3>Background</h3>
               <p>
-                I'm <strong>Madhavan Balaji</strong>, an AI Engineer with a Master's in Computer Science from
-                Indiana University. I build systems that solve real problems, working across machine learning,
-                computer vision, and applied AI to turn raw data into production-ready software.
+                I'm <strong>Madhavan Balaji</strong>, an AI engineer with a Master's in Computer Science from
+                Indiana University. I'm happiest where research meets engineering: taking an idea that works
+                in a notebook and turning it into something people can actually rely on.
               </p>
               <p>
-                From engineering high-accuracy visual retrieval systems and multi-label classifiers to designing
-                end-to-end ML pipelines, I bring both research depth and engineering discipline. I've published
-                findings, filed a patent, and shipped systems that run in production, not just in notebooks.
+                I've built multi-agent systems on AWS that investigate outages and wait for a human to approve
+                the fix, fine-tuned vision-language models on a supercomputer, reproduced and extended a study of
+                how faithfully language models reason, and co-invented a published patent for elderly care.
               </p>
               <p>
-                Beyond building, I care deeply about <strong>knowledge transfer</strong>. As a Technical Instructor
-                at Indiana University, I helped 30+ students work through complex CS concepts with visual
-                explanations and hands-on mentorship. Today I tutor Statistics for AI at MAC IUI.
+                Teaching keeps me honest. As a <strong>Technical Instructor</strong> at Indiana University I led
+                weekly algorithms workshops for 30+ students, and today I tutor Statistics for AI at MAC IUI.
+                If I can't explain something simply, I don't understand it well enough yet.
               </p>
 
               <div className="about-currently">

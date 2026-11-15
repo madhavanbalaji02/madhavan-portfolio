@@ -45,9 +45,10 @@ const Projects = () => {
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Projects</span>
-          <h2 className="section-title">Featured Work</h2>
+          <h2 className="section-title">Things I've built.</h2>
           <p className="section-subtitle">
-            {projectsData.length} projects spanning autonomous agents, computer vision, data pipelines, and production ML
+            {projectsData.length} projects across AI agents, computer vision, data engineering and research.
+            Every number comes from the project&rsquo;s own results.
           </p>
         </div>
 

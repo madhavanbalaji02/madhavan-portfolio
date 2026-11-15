@@ -35,8 +35,8 @@ const Contact = () => {
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Get in touch</span>
-          <h2 className="section-title">Let's Work Together</h2>
-          <p className="section-subtitle">Hiring for an AI/ML role, or want to talk about a project? Send me a note.</p>
+          <h2 className="section-title">Let's build something.</h2>
+          <p className="section-subtitle">Hiring for an AI/ML role, or have a hard problem worth solving? I'd love to hear about it.</p>
         </div>
         <div className="contact-wrapper">
           <div className="contact-info fade-in-up">
@@ -44,8 +44,8 @@ const Contact = () => {
               <span className="availability-dot"></span>
               Available for opportunities
             </div>
-            <h3>Let's Connect</h3>
-            <p>Email is the fastest way to reach me. I usually reply within a day.</p>
+            <h3>One email is all it takes.</h3>
+            <p>Tell me what you're working on. I usually reply within a day.</p>
             <div className="contact-items">
               <a className="contact-item" href="mailto:madhavanbalaji02@gmail.com">
                 <div className="contact-icon">
@@ -62,7 +62,7 @@ const Contact = () => {
                 </div>
                 <div className="contact-details">
                   <h4>LinkedIn</h4>
-                  <span>Connect with me</span>
+                  <span>Let's connect</span>
                 </div>
               </a>
               <a className="contact-item" href="https://github.com/madhavanbalaji02" target="_blank" rel="noopener noreferrer">
@@ -71,7 +71,7 @@ const Contact = () => {
                 </div>
                 <div className="contact-details">
                   <h4>GitHub</h4>
-                  <span>View my code</span>
+                  <span>The code behind every project</span>
                 </div>
               </a>
               <a className="contact-item" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
@@ -80,7 +80,7 @@ const Contact = () => {
                 </div>
                 <div className="contact-details">
                   <h4>Resume</h4>
-                  <span>Download PDF</span>
+                  <span>One page, PDF</span>
                 </div>
               </a>
             </div>

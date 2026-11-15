@@ -44,7 +44,7 @@ const Writing = () => {
           <div className="writing-col">
             <div className="writing-header">
               <span className="section-tag">Writing</span>
-              <h2 className="section-title">Medium Articles</h2>
+              <h2 className="section-title">Ideas, written down.</h2>
               <a
                 href="https://medium.com/@madhavanbalaji02"
                 target="_blank"
@@ -80,7 +80,7 @@ const Writing = () => {
           <div className="writing-col">
             <div className="writing-header">
               <span className="section-tag">Deployed</span>
-              <h2 className="section-title">Hugging Face Spaces</h2>
+              <h2 className="section-title">Try them yourself.</h2>
               <a
                 href="https://huggingface.co/madhavan02"
                 target="_blank"

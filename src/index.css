@@ -1722,20 +1722,6 @@ html:not(.js) .back-to-top{display:none}
 .nav-cmdk:hover{color:var(--t1);background:var(--seg-hover,var(--chip))}
 @media (max-width:560px){.cmdk-foot{display:none}.cmdk-overlay{padding-top:72px}}
 
-/* Project to project: the iOS push. Next slides the new page in fully over the old one,
-   which eases back a little and dims; previous reverses it. Pages never overlap as
-   two half-transparent layers. (projectTransition.js goToProject) */
-html[data-swipe] .pd-hero,html[data-swipe] .pd-title{view-transition-name:none}
-html[data-swipe]::view-transition-old(root),html[data-swipe]::view-transition-new(root){animation-duration:.46s;animation-timing-function:cubic-bezier(.32,.72,0,1);animation-fill-mode:both;mix-blend-mode:normal}
-html[data-swipe="next"]::view-transition-old(root){animation-name:pd-back-l;z-index:1}
-html[data-swipe="next"]::view-transition-new(root){animation-name:pd-in-r;z-index:2;box-shadow:-18px 0 40px -18px rgba(0,0,0,.35)}
-html[data-swipe="prev"]::view-transition-new(root){animation-name:pd-from-l;z-index:1}
-html[data-swipe="prev"]::view-transition-old(root){animation-name:pd-out-r;z-index:2;box-shadow:-18px 0 40px -18px rgba(0,0,0,.35)}
-@keyframes pd-in-r{from{transform:translateX(100%)}to{transform:none}}
-@keyframes pd-back-l{from{transform:none;filter:brightness(1)}to{transform:translateX(-30%);filter:brightness(.9)}}
-@keyframes pd-out-r{from{transform:none}to{transform:translateX(100%)}}
-@keyframes pd-from-l{from{transform:translateX(-30%);filter:brightness(.9)}to{transform:none;filter:brightness(1)}}
-
 /* ── Project pages: swipe, floating bar, reading guide (ProjectNav.js) ─────────── */
 html.on-project{overscroll-behavior-x:none}
 .pd-page{touch-action:pan-y pinch-zoom;padding-bottom:calc(96px + env(safe-area-inset-bottom))}

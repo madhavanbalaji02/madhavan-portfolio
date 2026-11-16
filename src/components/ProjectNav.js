@@ -12,7 +12,7 @@ import haptic from './haptics';
 // Swipes never start at the screen edges (the OS back gesture lives there) or inside
 // something that scrolls sideways itself.
 
-const EDGE = 24;          // px kept free at each screen edge for the OS back gesture
+const EDGE = 32;          // px kept free at each screen edge for the OS back gesture
 const AXIS_LOCK = 10;     // px of movement before deciding horizontal vs vertical
 
 const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;

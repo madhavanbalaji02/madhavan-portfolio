@@ -78,26 +78,46 @@ export function backToProjects(navigate) {
   });
 }
 
-// Next / previous project: the pages slide sideways in the direction of travel, like
-// turning a page. `dir` is 'next' or 'prev'.
-export function goToProject(navigate, slug, dir, prepare) {
+// Next / previous project. The page's own content slides out in the direction of
+// travel and the next project slides in from the other side, animated directly on the
+// element (Web Animations), not through View Transitions: Safari on iPhone can leave a
+// stale image of the old title on screen after a view transition, and this path has no
+// snapshots at all. `dir` is 'next' or 'prev'. Works in every modern browser.
+let moving = false;
+export async function goToProject(navigate, slug, dir, prepare) {
   const to = `/project/${slug}/`;
   lastSlug = slug;
-  if (!canMorph()) { prepare?.(); navigate(to); jump(0); return; }
-  const root = document.documentElement;
-  root.dataset.swipe = dir;
-  // The header must not morph between two different projects: switch its names off on
-  // the elements themselves (inline beats the stylesheet in every browser, Safari
-  // included). The page stays mounted, so the same elements carry this into the new view.
-  const named = [...document.querySelectorAll('.pd-hero, .pd-title')];
-  named.forEach((el) => { el.style.viewTransitionName = 'none'; });
-  const t = document.startViewTransition(() => {
+  const el = document.querySelector('.pd-container');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!el || reducedMotion || typeof el.animate !== 'function') {
+    prepare?.();
+    navigate(to);
+    jump(0);
+    return;
+  }
+  if (moving) return;
+  moving = true;
+  const sign = dir === 'next' ? -1 : 1;
+  const cs = getComputedStyle(el);
+  try {
+    // Continue from wherever a swipe left the content
+    const out = el.animate(
+      [{ transform: cs.transform === 'none' ? 'translate3d(0,0,0)' : cs.transform, opacity: cs.opacity },
+       { transform: `translate3d(${sign * 36}%,0,0)`, opacity: 0 }],
+      { duration: 170, easing: 'cubic-bezier(.4,0,1,1)', fill: 'forwards' },
+    );
+    await out.finished.catch(() => {});
     prepare?.();
     flushSync(() => navigate(to));
     jump(0);
-  });
-  t.finished.finally(() => {
-    delete root.dataset.swipe;
-    document.querySelectorAll('.pd-hero, .pd-title').forEach((el) => { el.style.viewTransitionName = ''; });
-  });
+    const inn = el.animate(
+      [{ transform: `translate3d(${-sign * 36}%,0,0)`, opacity: 0 },
+       { transform: 'translate3d(0,0,0)', opacity: 1 }],
+      { duration: 400, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'backwards' },
+    );
+    out.cancel();
+    await inn.finished.catch(() => {});
+  } finally {
+    moving = false;
+  }
 }

@@ -603,11 +603,11 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 }
 [data-theme] .ptab > a{transition:color .2s ease}
 [data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:17px;line-height:1}
-/* Phone tab bar colours, as in Apple's own apps (the Phone app): unselected tabs are a
-   neutral grey and the selected tab is the system blue. One steady style, no change on
+/* Phone tab bar colours, as in Apple Music: unselected tabs are a neutral grey and the
+   selected tab takes Apple Music's pink-red accent. One steady style, no change on
    scroll, identical on every phone. */
-[data-theme] .ptab{--tab-off:#6e6e73;--tab-on:#007aff}
-[data-theme="dark"] .ptab{--tab-off:#aeaeb2;--tab-on:#0a84ff}
+[data-theme] .ptab{--tab-off:#6e6e73;--tab-on:#fa2d48}
+[data-theme="dark"] .ptab{--tab-off:#aeaeb2;--tab-on:#ff375f}
 [data-theme] .ptab > a,[data-theme] .ptab > a i{color:var(--tab-off)}
 [data-theme] .ptab > a.active,[data-theme] .ptab > a.active i,
 [data-theme] .ptab-ghost,[data-theme] .ptab-ghost i{color:var(--tab-on)}

@@ -8,6 +8,14 @@ import { useEffect, useRef } from 'react';
 // the rendered sky. The tab bar's icons are tinted from it (index.css, .ptab).
 const SKY_BEHIND_BAR = ['#f4f8fb', '#f3f7fb', '#f4f5f7', '#f6f3f0', '#f8f0e9', '#faeee3',
   '#fcecdf', '#fdeadb', '#fde7d7', '#fde5d6', '#fee2d6'];
+// The icon and selected-tab colours for each step: the sky's hue, bright and saturated,
+// precomputed in plain sRGB. (Written in OKLCH they fell outside sRGB, so wide-colour
+// iPhone screens drew them more intensely than Android did. Plain sRGB hex looks the
+// same on every screen.)
+const TAB_ICON = ['#2c95d2', '#4291d7', '#6489db', '#bf7b20', '#c27926', '#d76b00',
+  '#da6800', '#db6800', '#dc6500', '#df6200', '#e55a00'];
+const TAB_TINT = ['#007dc2', '#0178c7', '#476fcc', '#ac5f00', '#af5c00', '#bf4f00',
+  '#c24b00', '#c24a00', '#c44800', '#c74300', '#cc3a00'];
 
 export default function Sky() {
   const skyRef = useRef(null);
@@ -31,6 +39,8 @@ export default function Sky() {
         selectionStep = step;
         root.style.setProperty('--p', (step / 10).toFixed(1));
         root.style.setProperty('--sky-here', SKY_BEHIND_BAR[step]);
+        root.style.setProperty('--tab-icon', TAB_ICON[step]);
+        root.style.setProperty('--tab-tint', TAB_TINT[step]);
       }
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };

@@ -192,7 +192,7 @@ html[data-theme="light"]{background:#f3f6fa}
 }
 
 /* One continuous background: no section bands or seams */
-[data-theme] :is(.hero-bento,#about,.experience-section,#projects,.patent-section,.writing-section,.contact-section,.tnt-section,.footer,.pd-page,.pd-not-found,.tnp-root){background:transparent}
+[data-theme] :is(.hero-bento,#about,.experience-section,#projects,.patent-section,.oss-section,.writing-section,.contact-section,.tnt-section,.footer,.pd-page,.pd-not-found,.tnp-root){background:transparent}
 [data-theme] .tnt-section{border-top:0}
 [data-theme] .footer::before,[data-theme] .footer::after{display:none}
 
@@ -212,7 +212,7 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme] ::-webkit-scrollbar-thumb{background:var(--scroll-thumb)}
 
 /* ----- Content layer: solid cards ----- */
-[data-theme] :is(.proj-card,.skill-category,.patent,.contact-form-wrapper,.about-facts,.pd-diagram,.pd-sidebar-card,.pd-workflow,.tnt-card,.tnp-card,.teaching-callout){
+[data-theme] :is(.proj-card,.skill-category,.patent,.oss,.contact-form-wrapper,.about-facts,.pd-diagram,.pd-sidebar-card,.pd-workflow,.tnt-card,.tnp-card,.teaching-callout){
   background:var(--card);border:1px solid transparent;border-radius:22px;box-shadow:var(--card-shadow)}
 [data-theme] .proj-card:hover{background:var(--card-hover);border-color:transparent;box-shadow:var(--card-shadow-hi)}
 [data-theme] .proj-card-footer{background:transparent;border-radius:0 0 22px 22px;border-top:1px solid var(--divider)}
@@ -229,6 +229,8 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme] .patent-record{background:var(--inset);border-color:transparent}
 [data-theme] .patent-record-row{border-bottom-color:var(--divider)}
 [data-theme] .patent-capabilities li{border-top-color:var(--divider)}
+[data-theme] .oss-side{background:var(--inset);border-color:transparent}
+[data-theme] .oss-values li{border-top-color:var(--divider)}
 
 /* ----- Control layer: glass ----- */
 [data-theme] :is(.navbar,.pd-nav){
@@ -402,7 +404,7 @@ html[data-theme="light"]{background:#f3f6fa}
 
 /* Justified paragraphs for long-form prose, at every screen size. Hyphenation keeps
    the word spacing even, which matters most on narrow phone columns. */
-:is(.about-text p,.hero-desc,.patent-cap-text,.tnp-summary,.teaching-body,.teaching-callout p,.exp-bullet-item p,.patent-description,.pd-body,.pd-step-text,.outcome-text,.tnt-desc,.tnp-modal-full-summary){
+:is(.about-text p,.hero-desc,.patent-cap-text,.tnp-summary,.teaching-body,.teaching-callout p,.exp-bullet-item p,.patent-description,.oss-text,.oss-value-text,.pd-body,.pd-step-text,.outcome-text,.tnt-desc,.tnp-modal-full-summary){
   text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:6 3 2}
 
 /* ----- Delight (Delight.js): hero entrance, tilt and sheen, magnetic buttons, press ----- */
@@ -767,6 +769,34 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .patent-doc-link i{font-size:11px}
 .patent-doc-link:hover{background:color-mix(in srgb,var(--gold) 8%,transparent);border-color:var(--gold)}
 .patent-doc-link:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ----- Open Source ----- */
+.oss-section{background:var(--bg)}
+.oss{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,1fr);gap:clamp(28px,5vw,64px);align-items:start;padding:clamp(24px,4vw,48px);background:var(--bg-card);border:1px solid var(--border);border-radius:8px}
+.oss-kicker{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:13px;font-weight:500;color:var(--t3)}
+.oss-status{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
+.oss-status::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.oss-lead{font-size:clamp(20px,2.6vw,26px);font-weight:700;letter-spacing:-0.01em;line-height:1.3;color:var(--t1);margin:0 0 14px;max-width:30ch}
+.oss-text{font-size:clamp(14px,1.8vw,15px);color:var(--t2);line-height:1.7;margin:0 0 clamp(20px,3vw,28px);max-width:62ch}
+.oss-values{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,24px)}
+.oss-values li{display:flex;flex-direction:column;gap:4px;padding-top:14px;border-top:1px solid var(--border)}
+.oss-value-name{font-size:14px;font-weight:600;color:var(--t1)}
+.oss-value-text{font-size:13px;line-height:1.55;color:var(--t3)}
+.oss-side{display:flex;flex-direction:column;gap:14px;padding:clamp(18px,2.4vw,24px);border-radius:14px;background:var(--bg-alt);border:1px solid var(--border)}
+.oss-side-label{font-size:13px;color:var(--t3)}
+.oss-repo{display:flex;gap:12px;align-items:flex-start;text-decoration:none;color:inherit}
+.oss-repo i{font-size:24px;color:var(--t1);margin-top:2px}
+.oss-repo > span{display:flex;flex-direction:column;gap:3px}
+.oss-repo-name{font-size:16px;font-weight:700;color:var(--t1)}
+.oss-repo:hover .oss-repo-name{color:var(--gold)}
+.oss-repo-about{font-size:13px;line-height:1.5;color:var(--t3)}
+.oss-link{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;padding:11px 16px;border-radius:999px;font-size:14px;font-weight:600;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);text-decoration:none;transition:background .2s,border-color .2s}
+.oss-link i{font-size:11px}
+.oss-link:hover{background:color-mix(in srgb,var(--gold) 8%,transparent);border-color:var(--gold)}
+.oss-link:focus-visible,.oss-repo:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:8px}
+@media(max-width:900px){.oss{grid-template-columns:1fr;gap:28px}}
+@media(max-width:640px){.oss-values{grid-template-columns:1fr}}
+@media(max-width:480px){.oss{padding:20px}}
 
 /* Writing */
 .writing-section{background:var(--bg-alt)}

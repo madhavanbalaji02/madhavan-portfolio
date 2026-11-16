@@ -11,6 +11,7 @@ const exploreLinks = [
   ['#about',      'About'],
   ['#experience', 'Experience'],
   ['#projects',   'Projects'],
+  ['#open-source', 'Open Source'],
   ['#patent',     'Patent'],
   ['#writing',    'Writing'],
   ['#contact',    'Contact'],

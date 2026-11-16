@@ -13,7 +13,7 @@ export const openCommandMenu = () => window.dispatchEvent(new Event('open-comman
 
 const SECTIONS = [
   ['#about', 'About'], ['#experience', 'Experience'], ['#projects', 'Projects'],
-  ['#patent', 'Patent'], ['#writing', 'Writing'], ['#contact', 'Contact'],
+  ['#open-source', 'Open Source'], ['#patent', 'Patent'], ['#writing', 'Writing'], ['#contact', 'Contact'],
 ];
 const EMAIL = 'madhavanbalaji02@gmail.com';
 

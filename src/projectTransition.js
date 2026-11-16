@@ -86,10 +86,18 @@ export function goToProject(navigate, slug, dir, prepare) {
   if (!canMorph()) { prepare?.(); navigate(to); jump(0); return; }
   const root = document.documentElement;
   root.dataset.swipe = dir;
+  // The header must not morph between two different projects: switch its names off on
+  // the elements themselves (inline beats the stylesheet in every browser, Safari
+  // included). The page stays mounted, so the same elements carry this into the new view.
+  const named = [...document.querySelectorAll('.pd-hero, .pd-title')];
+  named.forEach((el) => { el.style.viewTransitionName = 'none'; });
   const t = document.startViewTransition(() => {
     prepare?.();
     flushSync(() => navigate(to));
     jump(0);
   });
-  t.finished.finally(() => { delete root.dataset.swipe; });
+  t.finished.finally(() => {
+    delete root.dataset.swipe;
+    document.querySelectorAll('.pd-hero, .pd-title').forEach((el) => { el.style.viewTransitionName = ''; });
+  });
 }

@@ -77,3 +77,19 @@ export function backToProjects(navigate) {
     if (card) { name(card, ''); name(card.querySelector('.proj-title'), ''); }
   });
 }
+
+// Next / previous project: the pages slide sideways in the direction of travel, like
+// turning a page. `dir` is 'next' or 'prev'.
+export function goToProject(navigate, slug, dir, prepare) {
+  const to = `/project/${slug}/`;
+  lastSlug = slug;
+  if (!canMorph()) { prepare?.(); navigate(to); jump(0); return; }
+  const root = document.documentElement;
+  root.dataset.swipe = dir;
+  const t = document.startViewTransition(() => {
+    prepare?.();
+    flushSync(() => navigate(to));
+    jump(0);
+  });
+  t.finished.finally(() => { delete root.dataset.swipe; });
+}

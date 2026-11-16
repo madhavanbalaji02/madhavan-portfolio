@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from './projectsData';
 import { diagramsBySlug } from './ProjectDiagrams';
 import useTechNewsLink from './useTechNewsLink';
 import ThemeToggle from './ThemeToggle';
-import { backToProjects } from '../projectTransition';
+import { backToProjects, goToProject } from '../projectTransition';
+import { useProjectSwipe, SwipePeek, ProjectBar, ReadingGuide } from './ProjectNav';
 import { useSeo, fitDescription, SITE_URL } from '../seo';
 
 const ProjectDetail = ({ theme, toggleTheme }) => {
@@ -16,6 +17,24 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
 
   // Shrinks back into the card it was opened from (projectTransition.js)
   const goBackToProjects = () => backToProjects(navigate);
+
+  // Previous / next project, wrapping around the list
+  const idx = project ? projectsData.indexOf(project) : -1;
+  const prevProject = idx >= 0 ? projectsData[(idx - 1 + projectsData.length) % projectsData.length] : null;
+  const nextProject = idx >= 0 ? projectsData[(idx + 1) % projectsData.length] : null;
+  const goTo = (dir, prepare) => {
+    const target = dir === 'next' ? nextProject : prevProject;
+    if (target) goToProject(navigate, target.slug, dir, prepare);
+  };
+  const pageRef = useRef(null);
+  const contentRef = useRef(null);
+  const peekRef = useRef(null);
+  useProjectSwipe({ pageRef, contentRef, peekRef, prev: prevProject, next: nextProject, go: goTo });
+  const sections = useMemo(() => [
+    { id: 'background', label: 'Background' },
+    { id: 'how-it-works', label: 'How it works' },
+    { id: 'results', label: 'Results' },
+  ], []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -65,7 +84,9 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
   }
 
   return (
-    <div className="pd-page">
+    <div className="pd-page" ref={pageRef}>
+      <ReadingGuide sections={sections} />
+      <SwipePeek ref={peekRef} />
       {/* Top nav */}
       <nav className="pd-nav">
         <div className="container pd-nav-inner">
@@ -106,7 +127,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
         </div>
       </nav>
 
-      <div className="container pd-container">
+      <div className="container pd-container" ref={contentRef}>
 
         {/* Hero */}
         <div className="pd-hero">
@@ -141,7 +162,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
           <div className="pd-main">
 
             {/* Background */}
-            <section className="pd-section">
+            <section className="pd-section" id="background">
               <h2 className="pd-section-title">
                 <span className="pd-section-num">01</span> Background
               </h2>
@@ -149,7 +170,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
             </section>
 
             {/* Workflow */}
-            <section className="pd-section">
+            <section className="pd-section" id="how-it-works">
               <h2 className="pd-section-title">
                 <span className="pd-section-num">02</span> How It Works
               </h2>
@@ -167,7 +188,7 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
             </section>
 
             {/* Results */}
-            <section className="pd-section">
+            <section className="pd-section" id="results">
               <h2 className="pd-section-title">
                 <span className="pd-section-num">03</span> Results & Impact
               </h2>
@@ -250,14 +271,8 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
           </aside>
         </div>
 
-        {/* Footer nav */}
-        <div className="pd-footer-nav">
-          <button className="btn btn-ghost pd-footer-back" onClick={() => goBackToProjects()}>
-            <i className="fas fa-arrow-left"></i> Back to all projects
-          </button>
-        </div>
-
       </div>
+      <ProjectBar prev={prevProject} next={nextProject} go={(dir) => goTo(dir)} back={goBackToProjects} />
     </div>
   );
 };

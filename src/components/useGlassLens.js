@@ -207,7 +207,40 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     return best;
   };
 
+  // While a finger drags the glass, it covers the very label it is on, so a small
+  // bubble above the finger names the item it will land on (like the iOS key preview).
+  // Skipped when there is no room above the bar (e.g. a navbar at the top edge).
+  const bubbleRef = useRef(null);
+  const labelOf = (el) => {
+    const spans = [...el.querySelectorAll('span')].filter((sp) => sp.offsetWidth > 0 && !sp.querySelector('span'));
+    return (spans[0] || el).textContent.trim();
+  };
+  const showBubble = (key, clientX) => {
+    const bar = barRef.current, item = items.current[key];
+    if (!bar || !item) return;
+    const r = bar.getBoundingClientRect();
+    if (r.top < 64) return;
+    let b = bubbleRef.current;
+    if (!b) {
+      b = document.createElement('div');
+      b.className = 'glass-bubble';
+      b.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(b);
+      bubbleRef.current = b;
+    }
+    const text = labelOf(item);
+    if (b.textContent !== text) b.textContent = text;
+    const half = b.offsetWidth / 2 + 8;
+    const x = Math.max(half, Math.min(window.innerWidth - half, clientX));
+    b.style.left = `${x}px`;
+    b.style.top = `${r.top - 12}px`;
+    b.classList.add('is-on');
+  };
+  const hideBubble = () => bubbleRef.current?.classList.remove('is-on');
+  useEffect(() => () => { bubbleRef.current?.remove(); bubbleRef.current = null; }, []);
+
   const cancel = () => {
+    hideBubble();
     drag.current = null;
     barRef.current?.classList.remove('is-dragging');
     const r = activeRef.current != null ? rectOf(activeRef.current) : null;
@@ -251,6 +284,7 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     const hit = nearest(centre);
     // A light haptic tick each time the glass passes onto another item (touch only)
     if (hit.key !== d.over) { d.over = hit.key; if (d.touch) haptic(); }
+    if (d.touch) showBubble(hit.key, e.clientX);
     // Past either end, resist like a scroll view
     if (centre < first.c) centre = first.c + rubberBand(centre - first.c, RUBBER_BAND);
     else if (centre > last.c) centre = last.c + rubberBand(centre - last.c, RUBBER_BAND);
@@ -261,6 +295,7 @@ export default function useGlassLens({ keys, active, onSelect, enabled }) {
     const d = drag.current;
     if (!d || d.id !== e.pointerId) return;
     if (!d.moved) { cancel(); return; }          // a tap: the item's own click handler selects it
+    hideBubble();
     drag.current = null;
     barRef.current.classList.remove('is-dragging');
 

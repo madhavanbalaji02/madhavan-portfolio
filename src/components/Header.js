@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useTechNewsLink from './useTechNewsLink';
 import useGlassLens from './useGlassLens';
 import ThemeToggle from './ThemeToggle';
+import useSheetDrag from './useSheetDrag';
+import useFidget from './useFidget';
 import { openCommandMenu, commandKeyLabel } from './CommandMenu';
 import scrollToSection from '../scrollToSection';
 
@@ -56,7 +58,12 @@ const Header = ({ theme, toggleTheme }) => {
     };
   }, [isMenuOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const close = () => setIsMenuOpen(false);
+  const close = useCallback(() => setIsMenuOpen(false), []);
+  const sheetRef = useRef(null);
+  const sheetInnerRef = useRef(null);
+  useSheetDrag({ open: isMenuOpen, sheetRef, innerRef: sheetInnerRef, onClose: close });
+  const logoRef = useRef(null);
+  useFidget(logoRef);
 
   const navTo = (e, id) => {
     e?.preventDefault();
@@ -169,7 +176,7 @@ const Header = ({ theme, toggleTheme }) => {
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container">
           <div className="navbar-brand">
-            <a href="#home" onClick={(e) => navTo(e, '#home')} className="navbar-logo-link">
+            <a href="#home" onClick={(e) => navTo(e, '#home')} className="navbar-logo-link" ref={logoRef}>
               <img
                 src={process.env.PUBLIC_URL + '/favicon.svg'}
                 alt="Madhavan Balaji"
@@ -283,6 +290,7 @@ const Header = ({ theme, toggleTheme }) => {
           in the manner of Apple's own mobile menu */}
       <div
         id="mobile-menu"
+        ref={sheetRef}
         className={`mnav ${isMenuOpen ? 'show' : ''}`}
         role="dialog"
         aria-modal="true"
@@ -290,7 +298,7 @@ const Header = ({ theme, toggleTheme }) => {
         aria-hidden={!isMenuOpen}
         onClick={(e) => { if (e.target === e.currentTarget) close(); }}
       >
-        <nav className="mnav-inner" aria-label="Sections">
+        <nav className="mnav-inner" aria-label="Sections" ref={sheetInnerRef}>
           <ul className="mnav-list">
             {navLinks.map(([id, label], i) => (
               <li key={id} className="mnav-item" style={{ '--i': i }}>

@@ -1721,3 +1721,78 @@ html:not(.js) .back-to-top{display:none}
   background:var(--seg-fill,transparent);color:var(--t3);cursor:pointer;font-size:12.5px;transition:color .2s ease,background .2s ease}
 .nav-cmdk:hover{color:var(--t1);background:var(--seg-hover,var(--chip))}
 @media (max-width:560px){.cmdk-foot{display:none}.cmdk-overlay{padding-top:72px}}
+
+/* Project to project: slide sideways (projectTransition.js goToProject) */
+html[data-swipe] .pd-hero,html[data-swipe] .pd-title{view-transition-name:none}
+html[data-swipe]::view-transition-old(root){animation:pd-out .42s cubic-bezier(.32,.72,0,1) both}
+html[data-swipe]::view-transition-new(root){animation:pd-in .42s cubic-bezier(.32,.72,0,1) both}
+html[data-swipe="prev"]::view-transition-old(root){animation-name:pd-out-r}
+html[data-swipe="prev"]::view-transition-new(root){animation-name:pd-in-l}
+@keyframes pd-out{to{transform:translateX(-28%);opacity:0}}
+@keyframes pd-in{from{transform:translateX(28%);opacity:0}}
+@keyframes pd-out-r{to{transform:translateX(28%);opacity:0}}
+@keyframes pd-in-l{from{transform:translateX(-28%);opacity:0}}
+
+/* ── Project pages: swipe, floating bar, reading guide (ProjectNav.js) ─────────── */
+html.on-project{overscroll-behavior-x:none}
+.pd-page{touch-action:pan-y pinch-zoom;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+.pd-container{will-change:auto}
+
+/* Floating bar, centred, within thumb reach on every device */
+.pd-bar{position:fixed;z-index:995;left:50%;bottom:max(14px,env(safe-area-inset-bottom));translate:-50% 0;
+  display:flex;align-items:center;gap:4px;padding:5px;max-width:calc(100vw - 24px);border-radius:999px;
+  background:var(--bar-fill-scrolled,var(--bar-fill,var(--bg-card)));-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-rim,var(--border));box-shadow:var(--bar-shadow,0 10px 30px -14px rgba(0,0,0,.3)),var(--glass-edge,0 0 0 transparent)}
+.pd-bar a,.pd-bar button{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border:0;border-radius:999px;background:transparent;
+  color:var(--t2);font:600 14px/1 var(--font-body);text-decoration:none;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;
+  transition:background .2s ease,color .2s ease,scale .15s ease}
+.pd-bar a:hover,.pd-bar button:hover{background:var(--seg-hover,var(--chip));color:var(--t1)}
+.pd-bar a:active,.pd-bar button:active{scale:.95}
+.pd-bar-prev{width:42px;justify-content:center;padding:0!important}
+.pd-bar-sep{width:1px;height:22px;background:var(--divider,var(--border));margin:0 2px}
+.pd-bar .pd-bar-next{background:var(--t1);color:var(--on-t1,#fff);min-width:0}
+.pd-bar .pd-bar-next:hover{background:var(--t1);color:var(--on-t1,#fff);opacity:.9}
+.pd-bar-k{opacity:.65;font-weight:500}
+.pd-bar-title{overflow:hidden;text-overflow:ellipsis;max-width:220px}
+@media (max-width:420px){.pd-bar-back span{display:none}.pd-bar-title{max-width:140px}}
+@media (max-width:340px){.pd-bar-k{display:none}}
+
+/* Peek: the next project's title slides in from the edge while swiping */
+.pd-peek{position:fixed;z-index:996;top:50%;display:flex;flex-direction:column;gap:3px;padding:12px 16px;border-radius:16px;pointer-events:none;opacity:0;
+  background:var(--bar-fill-scrolled,var(--bg-card));-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-rim,var(--border));box-shadow:var(--bar-shadow,0 10px 30px -14px rgba(0,0,0,.3));max-width:min(240px,60vw);
+  transition:background .2s ease,color .2s ease}
+.pd-peek[data-side="next"]{right:14px;transform:translate(calc((1 - var(--p,0)) * 40px),-50%)}
+.pd-peek[data-side="prev"]{left:14px;transform:translate(calc((var(--p,0) - 1) * 40px),-50%)}
+.pd-peek-k{font-size:11.5px;font-weight:600;color:var(--t3)}
+.pd-peek-t{font-size:15px;font-weight:700;color:var(--t1);letter-spacing:-.01em}
+.pd-peek.is-ready{background:var(--t1);border-color:transparent}
+.pd-peek.is-ready .pd-peek-k,.pd-peek.is-ready .pd-peek-t{color:var(--on-t1,#fff)}
+
+/* Reading guide */
+.pd-progress{position:fixed;z-index:1001;top:0;left:0;right:0;height:3px;pointer-events:none}
+.pd-progress span{display:block;height:100%;background:var(--gold);transform-origin:left;transform:scaleX(0)}
+.pd-rail{display:none}
+@media (min-width:1200px){
+  .pd-rail{position:fixed;z-index:990;right:max(18px,calc((100vw - 1320px) / 2));top:50%;translate:0 -50%;display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+  .pd-rail-dot{position:relative;display:flex;align-items:center;justify-content:flex-end;gap:10px;width:auto;height:14px;padding:0;border:0;background:none;cursor:pointer;color:var(--t3);font:600 12px/1 var(--font-body)}
+  .pd-rail-dot::after{content:'';width:8px;height:8px;border-radius:50%;background:color-mix(in srgb,var(--t3) 45%,transparent);transition:transform .25s ease,background .25s ease}
+  .pd-rail-dot.is-active::after{background:var(--gold);transform:scale(1.4)}
+  .pd-rail-label{opacity:0;translate:6px 0;transition:opacity .2s ease,translate .2s ease;white-space:nowrap}
+  .pd-rail:hover .pd-rail-label,.pd-rail-dot:focus-visible .pd-rail-label,.pd-rail-dot.is-active .pd-rail-label{opacity:1;translate:none}
+  .pd-rail-dot.is-active{color:var(--t1)}
+}
+@media (prefers-reduced-motion:reduce){.pd-rail-label,.pd-rail-dot::after{transition:none}}
+
+/* Fidget logo (useFidget.js) */
+.navbar-logo-link{touch-action:none;-webkit-user-drag:none;user-select:none;-webkit-user-select:none;will-change:transform;cursor:grab}
+.navbar-logo-link.is-fidgeting{cursor:grabbing}
+.navbar-logo-link img{-webkit-user-drag:none;pointer-events:none}
+
+/* Label above the finger while dragging a glass control (useGlassLens.js) */
+.glass-bubble{position:fixed;z-index:3000;left:0;top:0;translate:-50% -100%;padding:8px 14px;border-radius:14px;pointer-events:none;
+  background:var(--t1);color:var(--on-t1,#fff);font:700 15px/1 var(--font-body);letter-spacing:-.01em;white-space:nowrap;
+  box-shadow:0 10px 28px -10px rgba(0,0,0,.45);opacity:0;scale:.85;transform-origin:50% 100%;transition:opacity .12s ease,scale .18s cubic-bezier(.32,.72,0,1)}
+.glass-bubble.is-on{opacity:1;scale:1}
+.glass-bubble::after{content:'';position:absolute;left:50%;bottom:-5px;width:10px;height:10px;background:inherit;translate:-50% 0;rotate:45deg;border-radius:2px}
+@media (prefers-reduced-motion:reduce){.glass-bubble{transition:none}}

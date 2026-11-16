@@ -44,7 +44,7 @@
 /* ================================================================
    LIGHT MODE THEME: SUNSET SKY
    Scrolling moves through the sky: pale afternoon blue at the top, a golden
-   blush midway, a soft rose-and-peach sunset at the bottom. Sections are
+   blush midway, a sunset that runs pink, orange and red at the bottom. Sections are
    transparent, cards are frosted glass. Every text color meets WCAG AA on the sky.
    ================================================================ */
 [data-theme="light"] {
@@ -79,8 +79,8 @@ html[data-theme="light"]{background:#f3f6fa}
 }
 .sky-sunset{
   background:
-    radial-gradient(ellipse 85% 42% at 50% 108%,rgba(255,228,192,.9),rgba(255,214,204,.35) 50%,transparent 75%),
-    linear-gradient(180deg,#ebe5f3 0%,#f6e6ee 35%,#fde7e2 65%,#fee5d3 100%);
+    radial-gradient(ellipse 90% 40% at 50% 110%,rgba(255,204,180,.55),rgba(255,212,192,.22) 55%,transparent 78%),
+    linear-gradient(180deg,#f7e2ee 0%,#fbe1e2 26%,#fde3d3 50%,#fddcc8 72%,#fdd8cf 100%);
   opacity:clamp(0,calc((var(--p,0) - 0.5) * 2.2),1);
 }
 /* Clouds sit on a strip three screens tall and rise at a slower pace than the page */
@@ -99,12 +99,12 @@ html[data-theme="light"]{background:#f3f6fa}
 .sky-clouds-dusk{
   opacity:clamp(0,calc(var(--p,0) * 1.6 - 0.2),1);
   background:
-    radial-gradient(ellipse 34% 100px at 70% 40%,rgba(255,226,232,.8),transparent 70%),
-    radial-gradient(ellipse 40% 120px at 22% 50%,rgba(255,234,214,.8),rgba(255,224,226,.3) 50%,transparent 72%),
-    radial-gradient(ellipse 30% 90px at 80% 61%,rgba(255,236,206,.85),transparent 70%),
-    radial-gradient(ellipse 44% 130px at 34% 71%,rgba(255,222,214,.8),rgba(255,236,214,.3) 50%,transparent 72%),
-    radial-gradient(ellipse 36% 110px at 74% 82%,rgba(255,230,200,.85),transparent 70%),
-    radial-gradient(ellipse 42% 120px at 26% 92%,rgba(255,220,212,.8),transparent 70%);
+    radial-gradient(ellipse 34% 100px at 70% 40%,rgba(255,226,238,.8),transparent 70%),
+    radial-gradient(ellipse 40% 120px at 22% 50%,rgba(255,228,232,.8),rgba(255,226,222,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 30% 90px at 80% 61%,rgba(255,232,206,.85),transparent 70%),
+    radial-gradient(ellipse 44% 130px at 34% 71%,rgba(255,226,200,.8),rgba(255,232,210,.3) 50%,transparent 72%),
+    radial-gradient(ellipse 36% 110px at 74% 82%,rgba(255,218,206,.85),transparent 70%),
+    radial-gradient(ellipse 42% 120px at 26% 92%,rgba(255,212,204,.8),transparent 70%);
 }
 /* Phones: a shorter cloud strip that drifts less, so the moving layer stays small in GPU memory */
 @media (max-width:768px){.sky-clouds{height:150vh;transform:translate3d(0,calc(var(--p,0) * -50vh),0)}}
@@ -204,7 +204,7 @@ html[data-theme="light"]{background:#f3f6fa}
 
 /* Selected text takes the color of the sky where you are: blue near the top, peach at sunset */
 [data-theme="light"] ::selection{background:#f6cfc2;color:var(--t1)}
-[data-theme="light"] ::selection{background:color-mix(in oklab,#bcdaf3,#f8c4b4 calc(var(--p,0) * 100%));color:var(--t1)}
+[data-theme="light"] ::selection{background:color-mix(in oklab,#bcdaf3,#f9bdb0 calc(var(--p,0) * 100%));color:var(--t1)}
 
 /* Scrollbar: thin and neutral */
 [data-theme]{scrollbar-color:var(--scroll-thumb) transparent}

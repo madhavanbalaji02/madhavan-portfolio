@@ -88,7 +88,7 @@ const Footer = () => {
           <p>&copy; {currentYear} Madhavan Balaji</p>
           <p className="footer-crafted">
             <span className="footer-crafted-mark" aria-hidden="true">✦</span>
-            Designed and built by hand, from first pixel to last
+            Designed and built with passion for detail
           </p>
         </div>
       </div>

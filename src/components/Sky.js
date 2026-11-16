@@ -8,15 +8,6 @@ import { useEffect, useRef } from 'react';
 // the rendered sky. The tab bar's icons are tinted from it (index.css, .ptab).
 const SKY_BEHIND_BAR = ['#f4f8fb', '#f3f7fb', '#f4f5f7', '#f6f3f0', '#f8f0e9', '#faeee3',
   '#fcecdf', '#fdeadb', '#fde7d7', '#fde5d6', '#fee2d6'];
-// The icon and selected-tab colours for each step: sky blue at the top, through violet
-// into rose for most of the page, warming to coral at the sunset bottom. The rose
-// (#cc6588) is the colour Android Chrome showed in an earlier version, kept on purpose.
-// All plain sRGB, so every screen (wide-colour iPhone or Android) shows the same shade.
-const TAB_ICON = ['#2c95d2', '#4291d7', '#9f74cd', '#cc6588', '#cc6588', '#cc6588',
-  '#cc6588', '#cc6588', '#cf6579', '#d16669', '#d16858'];
-const TAB_TINT = ['#007dc2', '#0178c7', '#8a59bc', '#b94671', '#b94671', '#b94671',
-  '#b94671', '#b94671', '#bc4660', '#be474e', '#be493a'];
-
 export default function Sky() {
   const skyRef = useRef(null);
 
@@ -33,14 +24,12 @@ export default function Sky() {
       // Only the sky subtree restyles each frame (setting it on <html> would restyle the
       // whole page on every scroll frame, which stutters on phones)
       skyRef.current?.style.setProperty('--p', p.toFixed(4));
-      // Text selection and the tab bar's tint follow the sky too, in coarse steps so they rarely restyle
+      // Text selection follows the sky too, in coarse steps so it rarely restyles
       const step = Math.round(p * 10);
       if (step !== selectionStep) {
         selectionStep = step;
         root.style.setProperty('--p', (step / 10).toFixed(1));
         root.style.setProperty('--sky-here', SKY_BEHIND_BAR[step]);
-        root.style.setProperty('--tab-icon', TAB_ICON[step]);
-        root.style.setProperty('--tab-tint', TAB_TINT[step]);
       }
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };

@@ -402,7 +402,7 @@ html[data-theme="light"]{background:#f3f6fa}
 
 /* Justified paragraphs for long-form prose, at every screen size. Hyphenation keeps
    the word spacing even, which matters most on narrow phone columns. */
-:is(.about-text p,.teaching-body,.teaching-callout p,.exp-bullet-item p,.patent-description,.pd-body,.pd-step-text,.outcome-text,.tnt-desc,.tnp-modal-full-summary){
+:is(.about-text p,.hero-desc,.patent-cap-text,.tnp-summary,.teaching-body,.teaching-callout p,.exp-bullet-item p,.patent-description,.pd-body,.pd-step-text,.outcome-text,.tnt-desc,.tnp-modal-full-summary){
   text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:6 3 2}
 
 /* ----- Delight (Delight.js): hero entrance, tilt and sheen, magnetic buttons, press ----- */

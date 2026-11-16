@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useTechNewsLink from './useTechNewsLink';
 import useGlassLens from './useGlassLens';
 import ThemeToggle from './ThemeToggle';
-import useSheetDrag from './useSheetDrag';
 import useFidget from './useFidget';
 import { openCommandMenu, commandKeyLabel } from './CommandMenu';
 import scrollToSection from '../scrollToSection';
 
 const Header = ({ theme, toggleTheme }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
   const navigate  = useNavigate();
   const location  = useLocation();
@@ -30,44 +28,11 @@ const Header = ({ theme, toggleTheme }) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // While the menu is open: the page stays still, Escape closes it, the sheet starts
-  // just under the navbar, and the section you were reading is marked.
-  const [menuSection, setMenuSection] = useState(null);
-  const [chosen, setChosen] = useState(null);   // tapped menu item, flashed before closing
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle('menu-open', isMenuOpen);
-    if (!isMenuOpen) return undefined;
-    const nav = document.querySelector('.navbar');
-    const navBottom = nav ? nav.getBoundingClientRect().bottom : 72;
-    root.style.setProperty('--mnav-top', `${Math.round(navBottom)}px`);
-    let current = null;
-    document.querySelectorAll('main .section[id], .section[id]').forEach((el) => {
-      if (navLinks.some(([id]) => id === `#${el.id}`) && el.getBoundingClientRect().top <= navBottom + 120) current = `#${el.id}`;
-    });
-    setMenuSection(current);
-    // Lock scrolling on <html>, not <body>: <html> clips horizontally, so a hidden
-    // <body> would become its own scroller and the sticky navbar would jump away.
-    root.style.overflow = 'hidden';
-    const onKey = (e) => { if (e.key === 'Escape') setIsMenuOpen(false); };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      root.style.overflow = '';
-      root.classList.remove('menu-open');
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [isMenuOpen]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const close = useCallback(() => setIsMenuOpen(false), []);
-  const sheetRef = useRef(null);
-  const sheetInnerRef = useRef(null);
-  useSheetDrag({ open: isMenuOpen, sheetRef, innerRef: sheetInnerRef, onClose: close });
   const logoRef = useRef(null);
   useFidget(logoRef);
 
   const navTo = (e, id) => {
     e?.preventDefault();
-    close();
     selectSection(id);
 
     const doScroll = () => scrollToSection(id);
@@ -240,17 +205,6 @@ const Header = ({ theme, toggleTheme }) => {
             </a>
             <ThemeToggle className="theme-toggle mobile-theme-toggle" theme={theme} toggleTheme={toggleTheme} />
 
-            <button
-              className={`hamburger ${isMenuOpen ? 'open' : ''}`}
-              onClick={() => setIsMenuOpen(v => !v)}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              <span className="ham-line"></span>
-              <span className="ham-line"></span>
-              <span className="ham-line"></span>
-            </button>
           </div>
         </div>
       </nav>
@@ -286,55 +240,6 @@ const Header = ({ theme, toggleTheme }) => {
         </div>
       </nav>
 
-      {/* Phone menu: a full-screen frosted sheet under the navbar (the ☰ becomes ✕),
-          in the manner of Apple's own mobile menu */}
-      <div
-        id="mobile-menu"
-        ref={sheetRef}
-        className={`mnav ${isMenuOpen ? 'show' : ''}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu"
-        aria-hidden={!isMenuOpen}
-        onClick={(e) => { if (e.target === e.currentTarget) close(); }}
-      >
-        <nav className="mnav-inner" aria-label="Sections" ref={sheetInnerRef}>
-          <ul className="mnav-list">
-            {navLinks.map(([id, label], i) => (
-              <li key={id} className="mnav-item" style={{ '--i': i }}>
-                <a
-                  href={id}
-                  onClick={(e) => { e.preventDefault(); setChosen(id); setTimeout(() => { setChosen(null); navTo(null, id); }, 130); }}
-                  className={[menuSection === id && 'is-current', chosen === id && 'is-chosen'].filter(Boolean).join(' ') || undefined}
-                  aria-current={menuSection === id ? 'location' : undefined}
-                >
-                  <span>{label}</span>
-                  <i className="fas fa-chevron-right" aria-hidden="true" />
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mnav-group mnav-item" style={{ '--i': navLinks.length }}>
-            <a href="/resume.html" target="_blank" rel="noopener noreferrer" onClick={close}>
-              <span className="mnav-ic"><i className="fas fa-file-lines" aria-hidden="true" /></span>
-              <span className="mnav-gl">Résumé</span>
-              <i className="fas fa-arrow-up-right-from-square mnav-trail" aria-hidden="true" />
-            </a>
-            <a href="mailto:madhavanbalaji02@gmail.com" onClick={close}>
-              <span className="mnav-ic"><i className="fas fa-envelope" aria-hidden="true" /></span>
-              <span className="mnav-gl">Email me</span>
-              <i className="fas fa-chevron-right mnav-trail" aria-hidden="true" />
-            </a>
-          </div>
-
-          <div className="mnav-social mnav-item" style={{ '--i': navLinks.length + 1 }}>
-            <a href="https://github.com/madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/madhavanbalaji/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
-            <a href="https://medium.com/@madhavanbalaji02"         target="_blank" rel="noopener noreferrer" aria-label="Medium"><i className="fab fa-medium"></i></a>
-          </div>
-        </nav>
-      </div>
     </>
   );
 };

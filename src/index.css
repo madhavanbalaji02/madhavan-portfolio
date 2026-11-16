@@ -604,8 +604,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 [data-theme] .ptab > a{color:var(--t2);transition:color .2s ease}
 [data-theme] .ptab > a i,[data-theme] .ptab-ghost i{font-size:17px;line-height:1}
 [data-theme] .ptab > a.active,[data-theme] .ptab-ghost{color:var(--gold)}
-/* Light mode: the tab bar's icons take the hue of the sky just behind it (Sky.js sets
-   --tab-icon and --tab-tint as you scroll): sky blue, then amber, then coral. They are
+/* Light mode: the tab bar's icons change colour as you scroll (Sky.js sets --tab-icon
+   and --tab-tint): sky blue, then violet, rose, and coral at the sunset. They are
    plain sRGB colours so every screen, wide-colour iPhone or Android, shows the same
    shade. Labels stay neutral for reading, as in Apple's tab bars. */
 [data-theme="light"] .ptab > a{color:#48484c}

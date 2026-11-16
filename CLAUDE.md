@@ -60,7 +60,7 @@ In-page section links (`#about`, `#projects`…) use `e.preventDefault()` + manu
 | What | Where |
 |---|---|
 | All projects (full detail) | `src/components/projectsData.js` |
-| Skills grid (5 categories) | `src/components/Skills.js` |
+| Skills grid (6 categories; every skill is used in a repo) | `src/components/Skills.js` |
 | Experience + teaching story | `src/components/Experience.js` |
 | Medium articles + HF Spaces | `src/components/Writing.js` |
 | Patent details | `src/components/Patent.js` |

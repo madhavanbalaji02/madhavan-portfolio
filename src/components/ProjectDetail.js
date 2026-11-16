@@ -4,7 +4,7 @@ import { projectsData } from './projectsData';
 import { diagramsBySlug } from './ProjectDiagrams';
 import useTechNewsLink from './useTechNewsLink';
 import ThemeToggle from './ThemeToggle';
-import scrollToSection from '../scrollToSection';
+import { backToProjects } from '../projectTransition';
 import { useSeo, fitDescription, SITE_URL } from '../seo';
 
 const ProjectDetail = ({ theme, toggleTheme }) => {
@@ -14,12 +14,8 @@ const ProjectDetail = ({ theme, toggleTheme }) => {
   const Diagram = project ? diagramsBySlug[project.slug] : null;
   const openDemoInPlace = useTechNewsLink(project?.demo);   // same tab on phones for on-site demos
 
-  const goBackToProjects = () => {
-    navigate('/');
-    setTimeout(() => {
-      scrollToSection('#projects');
-    }, 150);
-  };
+  // Shrinks back into the card it was opened from (projectTransition.js)
+  const goBackToProjects = () => backToProjects(navigate);
 
   useEffect(() => {
     window.scrollTo(0, 0);

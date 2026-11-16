@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import useTechNewsLink from './useTechNewsLink';
+import { openProject } from '../projectTransition';
 
 const categoryMeta = {
   ai: { icon: 'fas fa-brain',      accent: 'var(--cyan)' },
@@ -19,8 +20,14 @@ const ProjectCard = ({ project, index, collapsed = false }) => {
   const cat  = categoryMeta[project.category] || categoryMeta.ml;
   const lang = langMeta[project.language]      || { icon: 'fas fa-code', color: '#555' };
 
-  const handleCardClick = () => {
-    navigate(`/project/${project.slug}/`);
+  const cardRef = useRef(null);
+  // The card grows into the project page (projectTransition.js)
+  const handleCardClick = () => openProject(navigate, project.slug, cardRef.current);
+  const handleDetailsClick = (e) => {
+    e.stopPropagation();
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;  // new tab: let the link work
+    e.preventDefault();
+    handleCardClick();
   };
 
   const handleGithubClick = e => {
@@ -35,6 +42,8 @@ const ProjectCard = ({ project, index, collapsed = false }) => {
 
   return (
     <div
+      ref={cardRef}
+      data-slug={project.slug}
       className={`proj-card fade-in-up${collapsed ? ' is-collapsed' : ''}`}
       style={{ animationDelay: `${index * 0.08}s` }}
       onClick={handleCardClick}
@@ -68,7 +77,7 @@ const ProjectCard = ({ project, index, collapsed = false }) => {
         <Link
           to={`/project/${project.slug}/`}
           className="proj-details-link"
-          onClick={e => e.stopPropagation()}
+          onClick={handleDetailsClick}
         >
           <i className="fas fa-layer-group"></i>
           View Details

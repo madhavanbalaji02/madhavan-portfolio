@@ -43,17 +43,17 @@ const Arr = ({ x1, y1, x2, y2, m }) => (
 export const SovereignSreDiagram = () => (
   <svg viewBox="0 0 296 110" width="100%" xmlns="http://www.w3.org/2000/svg">
     <defs><Marker id="m-sre" /></defs>
-    <Node x={4} y={8} w={62} label="Monitor" />
+    <Node x={4} y={8} w={62} label="CloudWatch" />
     <Arr x1={66} y1={18} x2={84} y2={18} m="m-sre" />
-    <Node x={84} y={8} w={68} label="AI Agent" />
+    <Node x={84} y={8} w={68} label="AI Agents" />
     <Arr x1={152} y1={18} x2={170} y2={18} m="m-sre" />
     <Node x={170} y={8} w={118} label="Codebase Analysis" />
     <Arr x1={118} y1={28} x2={118} y2={58} m="m-sre" />
     <Node x={84} y={58} w={88} label="Human Gate" />
     <Arr x1={172} y1={68} x2={192} y2={68} m="m-sre" />
-    <Node x={192} y={58} w={78} label="Fix Deploy" />
+    <Node x={192} y={58} w={78} label="Pull Request" />
     <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
-      Prometheus · LangGraph · CrewAI · ArgoCD
+      CloudWatch · Step Functions · LangGraph · CrewAI
     </text>
   </svg>
 );
@@ -70,10 +70,10 @@ export const DocuMindDiagram = () => (
     <Node x={290} y={8} w={78} label="Cited Report" />
     <Arr x1={112} y1={28} x2={92} y2={53} m="m-doc" />
     <Arr x1={130} y1={28} x2={204} y2={53} m="m-doc" />
-    <Node x={40} y={55} w={100} label="Dense / ChromaDB" />
-    <Node x={156} y={55} w={100} label="Sparse / LanceDB" />
+    <Node x={40} y={55} w={100} label="Dense / Qdrant" />
+    <Node x={156} y={55} w={100} label="Keyword / BM25" />
     <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
-      LangGraph · CrewAI · ChromaDB · LanceDB
+      LangGraph · CrewAI · Qdrant · BM25 · RRF
     </text>
   </svg>
 );
@@ -87,11 +87,11 @@ export const VectorGazeDiagram = () => (
     <Arr x1={160} y1={18} x2={178} y2={18} m="m-vg" />
     <Node x={178} y={8} w={88} label="LanceDB Search" />
     <Arr x1={266} y1={18} x2={284} y2={18} m="m-vg" />
-    <Node x={284} y={8} w={52} label="Alert" />
+    <Node x={284} y={8} w={52} label="VLM Check" />
     <Node x={94} y={55} w={66} label="NL Query" />
     <Arr x1={127} y1={55} x2={127} y2={30} m="m-vg" />
     <text x={4} y={104} fontFamily="monospace" style={{ fill: C.label }} fontSize="8">
-      Zero-Shot · Apple Silicon · Moondream2
+      Zero-shot · Moondream2 check · Slack/email alerts
     </text>
   </svg>
 );

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useTechNewsLink from './useTechNewsLink';
 import useGlassLens from './useGlassLens';
 import ThemeToggle from './ThemeToggle';
+import { openCommandMenu, commandKeyLabel } from './CommandMenu';
 import scrollToSection from '../scrollToSection';
 
 const Header = ({ theme, toggleTheme }) => {
@@ -30,6 +31,7 @@ const Header = ({ theme, toggleTheme }) => {
   // While the menu is open: the page stays still, Escape closes it, the sheet starts
   // just under the navbar, and the section you were reading is marked.
   const [menuSection, setMenuSection] = useState(null);
+  const [chosen, setChosen] = useState(null);   // tapped menu item, flashed before closing
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle('menu-open', isMenuOpen);
@@ -204,6 +206,12 @@ const Header = ({ theme, toggleTheme }) => {
                 {glass && lens.hapticLayer}
               </div>
             </li>
+            <li className="nav-cmdk-li">
+              <button type="button" className="nav-cmdk" onClick={openCommandMenu} aria-label="Search the site">
+                <i className="fas fa-magnifying-glass" aria-hidden="true" />
+                <kbd>{commandKeyLabel}</kbd>
+              </button>
+            </li>
             <li>
               <a href="/tech-news/" target="_blank" rel="noopener noreferrer" onClick={openTechNews} className="nav-tech-news-btn">
                 Tech News ↗
@@ -288,8 +296,8 @@ const Header = ({ theme, toggleTheme }) => {
               <li key={id} className="mnav-item" style={{ '--i': i }}>
                 <a
                   href={id}
-                  onClick={(e) => navTo(e, id)}
-                  className={menuSection === id ? 'is-current' : undefined}
+                  onClick={(e) => { e.preventDefault(); setChosen(id); setTimeout(() => { setChosen(null); navTo(null, id); }, 130); }}
+                  className={[menuSection === id && 'is-current', chosen === id && 'is-chosen'].filter(Boolean).join(' ') || undefined}
                   aria-current={menuSection === id ? 'location' : undefined}
                 >
                   <span>{label}</span>

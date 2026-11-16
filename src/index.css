@@ -539,8 +539,8 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .mnav-item{opacity:0;translate:0 -12px;transition:opacity .12s ease,translate 0s linear .22s}
 .mnav.show .mnav-item{
   opacity:1;translate:none;
-  transition:opacity .42s cubic-bezier(.32,.72,0,1) calc(var(--i) * 28ms + 40ms),
-             translate .6s cubic-bezier(.32,.72,0,1) calc(var(--i) * 28ms + 40ms);
+  transition:opacity .24s cubic-bezier(.32,.72,0,1) calc(var(--i) * 14ms),
+             translate .36s cubic-bezier(.32,.72,0,1) calc(var(--i) * 14ms);
 }
 .mnav-list{list-style:none;margin:0;padding:0}
 .mnav-list a{
@@ -553,6 +553,9 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .mnav-list a i{font-size:14px;color:var(--t3);opacity:.45;transition:translate .2s ease}
 .mnav-list a.is-current{color:var(--gold)}
 .mnav-list a.is-current i{color:var(--gold);opacity:.8}
+/* The tapped item flashes the accent before the sheet closes, confirming the choice */
+.mnav-list a.is-chosen,.mnav-list a.is-chosen:active{color:var(--gold);opacity:1}
+.mnav-list a.is-chosen i{color:var(--gold);opacity:1;translate:4px 0}
 .mnav-list a:active{opacity:.45}
 .mnav-list a:active i{translate:3px 0}
 .mnav-group{margin-top:30px;border-radius:18px;background:var(--chip);overflow:hidden}
@@ -1679,3 +1682,42 @@ html:not(.js) .back-to-top{display:none}
   .footer-status{position:relative}
   .footer-status::before{content:'';position:absolute;inset:-6px -2px}
 }
+
+/* Card ⇄ project page morph (projectTransition.js, View Transitions API) */
+.pd-hero{view-transition-name:project-card}
+.pd-title{view-transition-name:project-title}
+::view-transition-group(project-card),::view-transition-group(project-title){animation-duration:.52s;animation-timing-function:cubic-bezier(.32,.72,0,1)}
+::view-transition-old(project-card),::view-transition-new(project-card){height:100%;object-fit:cover;object-position:top left}
+::view-transition-old(project-title),::view-transition-new(project-title){height:100%;width:auto;object-fit:contain;object-position:left center}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.32s;animation-timing-function:ease}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+
+/* ⌘K command menu (CommandMenu.js). No entrance animation, on purpose. */
+.cmdk-overlay{position:fixed;inset:0;z-index:2000;display:flex;justify-content:center;align-items:flex-start;padding:min(16vh,140px) 16px 16px;background:var(--overlay,rgba(0,0,0,.35))}
+.cmdk{width:min(640px,100%);max-height:min(560px,72vh);display:flex;flex-direction:column;border-radius:20px;overflow:hidden;
+  background:var(--modal,var(--bg-card));-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-rim,var(--border));box-shadow:0 30px 80px -20px rgba(0,0,0,.45),0 0 0 .5px rgba(0,0,0,.08)}
+.cmdk-input-row{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--divider,var(--border))}
+.cmdk-input-row>i{color:var(--t3);font-size:15px}
+.cmdk-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--t1);font:500 17px/1.3 var(--font-body);letter-spacing:-.01em}
+.cmdk-input::placeholder{color:var(--t3)}
+.cmdk kbd,.nav-cmdk kbd{font:600 11px/1 var(--font-body);color:var(--t3);padding:4px 6px;border-radius:6px;background:var(--chip);border:1px solid var(--divider,var(--border))}
+.cmdk-list{list-style:none;margin:0;padding:6px 8px 10px;overflow-y:auto;overscroll-behavior:contain}
+.cmdk-group{padding:12px 10px 6px;font-size:11.5px;font-weight:600;letter-spacing:.03em;color:var(--t3)}
+.cmdk-item{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:12px;cursor:pointer;color:var(--t1);font-size:14.5px}
+.cmdk-item.is-active{background:var(--chip)}
+.cmdk-icon{width:18px;text-align:center;color:var(--t3);font-size:14px}
+.cmdk-item.is-active .cmdk-icon{color:var(--gold)}
+.cmdk-label{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.cmdk-hint{font-size:12.5px;color:var(--t3);white-space:nowrap}
+.cmdk-enter{margin-left:4px}
+.cmdk-empty{padding:28px 10px;text-align:center;color:var(--t3);font-size:14px}
+.cmdk-foot{display:flex;gap:18px;padding:10px 18px;border-top:1px solid var(--divider,var(--border));font-size:12px;color:var(--t3)}
+.cmdk-foot kbd{margin-right:4px}
+/* Navbar entry point: only where a keyboard is likely and there is room */
+.nav-cmdk-li{display:none}
+@media (hover:hover) and (pointer:fine) and (min-width:1180px){.nav-cmdk-li{display:flex}}
+.nav-cmdk{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 11px;border-radius:999px;border:1px solid var(--glass-rim,var(--border));
+  background:var(--seg-fill,transparent);color:var(--t3);cursor:pointer;font-size:12.5px;transition:color .2s ease,background .2s ease}
+.nav-cmdk:hover{color:var(--t1);background:var(--seg-hover,var(--chip))}
+@media (max-width:560px){.cmdk-foot{display:none}.cmdk-overlay{padding-top:72px}}

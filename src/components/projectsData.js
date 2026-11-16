@@ -18,7 +18,7 @@ export const projectsData = [
     metric: '2,040 Real Incidents',
     tags: ['LangGraph', 'CrewAI', 'Amazon Bedrock', 'Step Functions'],
     background:
-      "On-call is the least loved job in software. An alarm fires at 3 a.m., someone wakes up, reads logs, searches the code and writes a fix while half asleep. I wanted to see how much of that an AI system could take on safely. Sovereign SRE handles the investigation: a CloudWatch alarm starts a Step Functions workflow, two AI agents work out what broke by searching the actual codebase, and Claude on Amazon Bedrock drafts a patch. Then it stops. An engineer gets an email with approve and reject links, and only an approval lets the fix go forward as a GitHub pull request. To keep it honest, the dashboard is built on real failures: 2,040 incidents parsed from two public AIOps datasets (GAIA and AIOpsArena), not invented examples.",
+      "On-call is the least loved job in software. An alarm fires at 3 a.m., someone wakes up, reads logs, searches the code and writes a fix while half asleep. I wanted to see how much of that an AI system could take on safely. Sovereign SRE handles the investigation: a CloudWatch alarm starts a Step Functions workflow, and two AI agents work out what broke by searching the actual codebase and draft a patch. Then it stops. An engineer gets an email with approve and reject links, and only an approval lets the fix go forward as a GitHub pull request. To keep it honest, the dashboard is built on real failures: 2,040 incidents parsed from two public AIOps datasets (GAIA and AIOpsArena), not invented examples.",
     workflow: [
       {
         title: 'An alarm starts everything',
@@ -26,11 +26,11 @@ export const projectsData = [
       },
       {
         title: 'Two agents investigate',
-        text: 'A LangGraph state machine runs a CrewAI crew: a Senior SRE agent reasons about the failure while a System Researcher agent searches the codebase through LlamaIndex, using BGE-M3 embeddings stored in RDS pgvector.',
+        text: 'A LangGraph state machine runs a CrewAI crew on Llama 3.3 70B via Groq: a Senior SRE agent reasons about the failure while a System Researcher agent searches the codebase through LlamaIndex (ChromaDB locally, RDS pgvector on AWS).',
       },
       {
         title: 'A patch is drafted',
-        text: 'Claude Haiku on Amazon Bedrock writes the root-cause explanation and a targeted code change, with Groq-hosted Llama 3.3 as a fallback if the primary model is unavailable.',
+        text: 'The agents write a root-cause explanation and a targeted code change. The model layer can switch between Groq, Anthropic Claude and xAI Grok, and includes an Amazon Bedrock client that falls back to Groq.',
       },
       {
         title: 'A person decides',
@@ -50,15 +50,15 @@ export const projectsData = [
     ],
     highlights: [
       'Human approval is built into the workflow, not bolted on',
-      'Root-cause analysis grounded in the real codebase through pgvector retrieval',
-      'Claude Haiku on Bedrock, with Groq-hosted Llama 3.3 as a fallback',
+      'Root-cause analysis grounded in the real codebase through retrieval',
+      'Swappable models: Groq Llama 3.3, Anthropic Claude, xAI Grok, Amazon Bedrock',
       'Fixes arrive as reviewable GitHub pull requests with diffs',
       'Live agent reasoning streamed to a Next.js dashboard',
     ],
     techStack: [
       { label: 'AWS', items: ['CloudWatch', 'EventBridge', 'Lambda', 'Step Functions', 'SNS', 'Bedrock', 'RDS pgvector', 'DynamoDB', 'S3'] },
-      { label: 'Agents', items: ['LangGraph', 'CrewAI', 'LlamaIndex'] },
-      { label: 'Models', items: ['Claude Haiku', 'Llama 3.3 (Groq)', 'BGE-M3'] },
+      { label: 'Agents', items: ['LangGraph', 'CrewAI', 'LlamaIndex', 'ChromaDB'] },
+      { label: 'Models', items: ['Llama 3.3 70B (Groq)', 'Claude Haiku', 'BGE-M3'] },
       { label: 'App', items: ['FastAPI', 'WebSockets', 'Next.js 15', 'React 19'] },
     ],
   },
@@ -467,8 +467,8 @@ export const projectsData = [
     id: 7,
     slug: 'dentavision',
     title: 'DentaVision',
-    tagline: 'A photo of your teeth. A screening in a third of a second.',
-    description: 'A team project that screens dental photos for six oral conditions and healthy teeth with a fine-tuned Vision Transformer, at 92.4% accuracy. It runs behind a FastAPI service and a React web app with webcam capture.',
+    tagline: 'A photo of your teeth. A first screening in seconds.',
+    description: 'A team project that screens dental photos for six oral conditions and healthy teeth with a fine-tuned Vision Transformer, at 91.7% accuracy on 3,000 test images. It runs behind a FastAPI service and a React web app with webcam capture.',
     language: 'Jupyter Notebook',
     langIcon: 'fas fa-book-open',
     github: 'https://github.com/raghuveer9303/DentaVision',
@@ -476,14 +476,14 @@ export const projectsData = [
     category: 'cv',
     categoryLabel: 'Computer Vision',
     catIcon: 'fas fa-eye',
-    metric: '92.4% Accuracy',
+    metric: '91.7% Test Accuracy',
     tags: ['Vision Transformer', 'Medical AI', 'FastAPI', 'React'],
     background:
-      "More than 3.5 billion people live with oral disease, and many never get an early screening because specialists are scarce and diagnosis is subjective. With Raghuveer Venkatesh and Vigneshwar Ravi Rao, I built DentaVision to give a fast first look from an ordinary photo. We compared five architectures, from a plain CNN to a Vision Transformer built from scratch, and chose a pretrained ViT that clearly outperformed the rest. We are also open about where it falls short: phone photos in poor light and rare conditions remain hard.",
+      "More than 3.5 billion people live with oral disease, and many never get an early screening because specialists are scarce and diagnosis is subjective. With Raghuveer Venkatesh and Vigneshwar Ravi Rao, I built DentaVision to give a fast first look from an ordinary photo. We compared five architectures, from a plain CNN to a Vision Transformer built from scratch, and chose a pretrained ViT that clearly outperformed the rest. We are also open about where it falls short: it rarely catches calculus, which it tends to mistake for gingivitis, and phone photos in poor light remain hard.",
     workflow: [
       {
         title: 'Prepare the data',
-        text: 'Two public Kaggle datasets cover six oral conditions and healthy teeth. Healthy images were scarce, so augmentation with rotations, flips, crops and colour changes grew them tenfold to balance the classes.',
+        text: 'Two public Kaggle datasets give 15,000 images across six oral conditions and healthy teeth. Healthy images were scarce, so augmentation with rotations, flips, crops and colour changes grew them tenfold to balance the classes.',
       },
       {
         title: 'Compare five models',
@@ -499,9 +499,9 @@ export const projectsData = [
       },
     ],
     results: [
-      '92.4% top-1 accuracy, 8.1 points above the CNN baseline',
-      '310 ms p95 response time on CPU',
-      'Five architectures benchmarked; the from-scratch ViT reached only 19%, showing why pretraining matters',
+      '91.7% accuracy on 3,000 held-out images, against 84% for EfficientNet-B0 and 71% for a plain CNN',
+      'Near-perfect on mouth ulcers and healthy teeth; calculus is the weak spot, caught only 32% of the time',
+      'The Vision Transformer built from scratch reached only 19%, showing why pretraining matters',
       'Deployed with Docker on Render',
     ],
     highlights: [

@@ -6,6 +6,13 @@ const VALUES = [
   ['Leave it better', 'Small, careful improvements that make a tool clearer for the next person.'],
 ];
 
+const AREAS = [
+  ['fas fa-robot', 'AI agent frameworks'],
+  ['fas fa-terminal', 'Command-line tools'],
+  ['fas fa-wand-magic-sparkles', 'Developer experience'],
+  ['fas fa-vial', 'Testing and reliability'],
+];
+
 const OpenSource = () => (
   <section id="open-source" className="section oss-section">
     <div className="container">
@@ -38,19 +45,13 @@ const OpenSource = () => (
           </ul>
         </div>
 
-        <aside className="oss-side" aria-label="Where I contribute">
-          <span className="oss-side-label">Currently contributing to</span>
-          <a className="oss-repo" href="https://github.com/zenera-ai/ZeneraNeo" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-github" aria-hidden="true" />
-            <span>
-              <span className="oss-repo-name">ZeneraNeo</span>
-              <span className="oss-repo-about">A framework for building self-improving AI agent systems</span>
-            </span>
-          </a>
-          <a className="oss-link" href="https://github.com/madhavanbalaji02" target="_blank" rel="noopener noreferrer">
-            Follow along on GitHub
-            <i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
-          </a>
+        <aside className="oss-side" aria-label="What I work on">
+          <span className="oss-side-label">What I work on</span>
+          <ul className="oss-areas">
+            {AREAS.map(([icon, label]) => (
+              <li key={label}><i className={icon} aria-hidden="true" />{label}</li>
+            ))}
+          </ul>
         </aside>
       </article>
     </div>

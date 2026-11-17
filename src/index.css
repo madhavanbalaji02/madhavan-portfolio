@@ -230,7 +230,7 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme] .patent-record-row{border-bottom-color:var(--divider)}
 [data-theme] .patent-capabilities li{border-top-color:var(--divider)}
 [data-theme] .oss-side{background:var(--inset);border-color:transparent}
-[data-theme] .oss-values li{border-top-color:var(--divider)}
+[data-theme] :is(.oss-values li,.oss-areas li){border-top-color:var(--divider)}
 
 /* ----- Control layer: glass ----- */
 [data-theme] :is(.navbar,.pd-nav){
@@ -784,16 +784,10 @@ button{font-family:var(--font-body);cursor:pointer;-webkit-tap-highlight-color:t
 .oss-value-text{font-size:13px;line-height:1.55;color:var(--t3)}
 .oss-side{display:flex;flex-direction:column;gap:14px;padding:clamp(18px,2.4vw,24px);border-radius:14px;background:var(--bg-alt);border:1px solid var(--border)}
 .oss-side-label{font-size:13px;color:var(--t3)}
-.oss-repo{display:flex;gap:12px;align-items:flex-start;text-decoration:none;color:inherit}
-.oss-repo i{font-size:24px;color:var(--t1);margin-top:2px}
-.oss-repo > span{display:flex;flex-direction:column;gap:3px}
-.oss-repo-name{font-size:16px;font-weight:700;color:var(--t1)}
-.oss-repo:hover .oss-repo-name{color:var(--gold)}
-.oss-repo-about{font-size:13px;line-height:1.5;color:var(--t3)}
-.oss-link{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;padding:11px 16px;border-radius:999px;font-size:14px;font-weight:600;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);text-decoration:none;transition:background .2s,border-color .2s}
-.oss-link i{font-size:11px}
-.oss-link:hover{background:color-mix(in srgb,var(--gold) 8%,transparent);border-color:var(--gold)}
-.oss-link:focus-visible,.oss-repo:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:8px}
+.oss-areas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.oss-areas li{display:flex;align-items:center;gap:12px;padding:12px 0;font-size:15px;font-weight:500;color:var(--t1);border-top:1px solid var(--border)}
+.oss-areas li:first-child{border-top:0;padding-top:4px}
+.oss-areas i{width:20px;text-align:center;font-size:15px;color:var(--gold)}
 @media(max-width:900px){.oss{grid-template-columns:1fr;gap:28px}}
 @media(max-width:640px){.oss-values{grid-template-columns:1fr}}
 @media(max-width:480px){.oss{padding:20px}}

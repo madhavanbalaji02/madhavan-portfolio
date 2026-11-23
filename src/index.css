@@ -43,7 +43,7 @@
 
 /* ================================================================
    LIGHT MODE THEME: SUNSET SKY
-   Scrolling moves through the sky: pale afternoon blue at the top, a golden
+   Scrolling moves through the sky: a deeper Weather-app blue at the very top that lightens into pale afternoon blue, a golden
    blush midway, a sunset that runs pink, orange and red at the bottom. Sections are
    transparent, cards are frosted glass. Every text color meets WCAG AA on the sky.
    ================================================================ */
@@ -73,6 +73,11 @@ html[data-theme="light"]{background:#f3f6fa}
 [data-theme="light"] .sky{display:block;position:fixed;top:0;left:0;right:0;height:100vh;height:100lvh;z-index:-1;overflow:hidden;pointer-events:none;contain:strict}
 .sky-layer{position:absolute;inset:0;will-change:opacity}
 .sky-afternoon{background:linear-gradient(180deg,#dbeaf7 0%,#e8f1fa 45%,#f5f8fb 100%)}
+/* The top of the page: a deeper blue that clears to the pale afternoon sky as you scroll */
+.sky-dawn{
+  background:linear-gradient(180deg,#7ea7dd 0%,#9dbde8 28%,#bcd4f0 55%,#d3e4f6 80%,#dfecf8 100%);
+  opacity:clamp(0,calc(1 - var(--p,0) * 11),1);
+}
 .sky-golden{
   background:linear-gradient(180deg,#e4eaf7 0%,#f1edf5 40%,#fbf0e6 78%,#fdecdc 100%);
   opacity:clamp(0,calc((var(--p,0) - 0.12) * 2.4),1);

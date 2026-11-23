@@ -52,6 +52,7 @@ export default function Sky() {
   return (
     <div className="sky" ref={skyRef} aria-hidden="true">
       <div className="sky-layer sky-afternoon" />
+      <div className="sky-layer sky-dawn" />
       <div className="sky-layer sky-golden" />
       <div className="sky-layer sky-sunset" />
       <div className="sky-clouds sky-clouds-day" />

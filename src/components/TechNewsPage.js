@@ -293,19 +293,36 @@ function TabBar({ tabs, active, onChange, draggable }) {
 }
 
 // ── Dateline ───────────────────────────────────────────────────────────────────
-// The briefing's date, like a newspaper dateline. It is shown in the visitor's own
-// time zone (so the day is right for them) but always in English, to match the page.
-// If the briefing isn't from the visitor's today, it says so rather than implying
-// the news is current: "Briefing from Wednesday, November 11".
-function formatDateline(iso, now = new Date()) {
-  const d = iso ? new Date(iso) : null;
-  if (!d || Number.isNaN(d.getTime())) return null;
-  const sameYear = d.getFullYear() === now.getFullYear();
-  const label = d.toLocaleDateString('en-US', {
-    weekday: 'long', month: 'long', day: 'numeric', ...(sameYear ? {} : { year: 'numeric' }),
-  });
-  const isToday = d.toDateString() === now.toDateString();
-  return isToday ? label : `Briefing from ${label}`;
+// Today's date from the visitor's own device clock and time zone, so everyone sees
+// their own day. Always in English, to match the page. It rolls over at the device's
+// midnight and re-checks when the tab comes back into view. (Each story still shows
+// how long ago it was published.)
+function formatToday(now = new Date()) {
+  return now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+}
+
+function useDeviceToday() {
+  const [label, setLabel] = useState(() => formatToday());
+  useEffect(() => {
+    let timer = 0;
+    const tick = () => {
+      setLabel(formatToday());
+      const now = new Date();
+      const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 1);
+      clearTimeout(timer);
+      timer = setTimeout(tick, midnight - now);
+    };
+    const onVisible = () => { if (document.visibilityState === 'visible') tick(); };
+    tick();
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('focus', onVisible);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', onVisible);
+    };
+  }, []);
+  return label;
 }
 
 // ── Main page ──────────────────────────────────────────────────────────────────
@@ -362,7 +379,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
   const accent        = activeTabMeta?.accent ?? 'var(--gold)';
   const articles      = sections[activeTab] ?? [];
 
-  const dateline = formatDateline(meta?.lastUpdated);
+  const dateline = useDeviceToday();
 
   const skeletonCount = 12;
 
@@ -385,7 +402,7 @@ export default function TechNewsPage({ theme, toggleTheme }) {
       <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} draggable />
 
       {/* ── Dateline ── */}
-      {!loading && dateline && <p className="tnp-dateline">{dateline}</p>}
+      <p className="tnp-dateline" suppressHydrationWarning>{dateline}</p>
 
       {/* ── Content ── */}
       <main className="tnp-main">
